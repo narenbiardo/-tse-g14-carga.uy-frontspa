@@ -53,7 +53,11 @@ function App() {
 					></Route>
 					<Route
 						path="/ingresarGuiaDeViaje"
-						element={<IngresarGuiaDeViaje />}
+						element={
+							<ProtectedRoute>
+								<IngresarGuiaDeViaje />
+							</ProtectedRoute>
+						}
 					></Route>
 					<Route
 						path="/usuarioLog"
