@@ -11,14 +11,7 @@ import Login from "./Login";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
 	<BrowserRouter>
-		<Container fluid>
-			<App></App>
-			{/*<Row className="justify-content-center align-items-center">
-				<Col xs={3}>
-					<Login />
-				</Col>
-			</Row>*/}
-		</Container>
+		<App />
 	</BrowserRouter>
 );
 

@@ -14,6 +14,7 @@ import { useState } from "react";
 import { NavBarCustom } from "./Components/NavBarCustom";
 import { IngresarGuiaDeViaje } from "./Components/IngresarGuiaDeViaje";
 import { AxiosPrueba } from "./Services/AxiosPrueba";
+import Footer from "./Components/Footer";
 
 const ProtectedRoute = ({ children }) => {
 	const { isAuthenticated } = useAuth();
@@ -65,6 +66,7 @@ function App() {
 					<Route path="*" element={<h1>Not found</h1>}></Route>
 				</Routes>
 			</div>
+			<Footer></Footer>
 		</AuthProvider>
 	);
 }
