@@ -46,7 +46,7 @@ export const NavBarCustom = () => {
 						{isAuthenticated && (
 							<>
 								<NavLink to="/ingresarGuiaDeViaje" className="nav-link">
-									Guías de Viaje
+									Ingresar Guía de Viaje
 								</NavLink>
 								<NavLink to="/perfil" className="nav-link">
 									Perfil

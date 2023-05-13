@@ -53,76 +53,13 @@ export const IngresarGuiaDeViaje = () => {
 				boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
 			}}
 		>
-			<h2 style={{ color: "#16b7b9" }}>Ingresar Guía de Viaje</h2>
+			<h2 style={{ color: "#16b7b9" }}>Formulario de Registro</h2>
 			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="rubro">Rubro</label>
-				<select
-					name="rubro"
-					form="rubroForm"
-					onChange={handleChangeIgvf}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				>
-					<option value="" selected disabled>
-						Seleccionar rubro
-					</option>
-					<option value={0}>Alimentos, bebida, tabaco</option>
-					<option value={1}>Industria frigorifica</option>
-					<option value={2}>Pesca</option>
-				</select>
-			</div>
-
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="volumen">Volumen</label>
-				<input
-					type="number"
-					name="volumen"
-					step="0.01"
-					onChange={handleChangeIgvf}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				></input>
-			</div>
-
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="fechaHora">Fecha y Hora</label>
-				<input
-					type="datetime-local"
-					name="fechaHora"
-					min={new Date().toISOString().slice(0, 16)}
-					onChange={handleChangeIgvf}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				></input>
-			</div>
-
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="nroEmpresa">Número de la Empresa</label>
+				<label htmlFor="nombre">Nombre:</label>
 				<input
 					type="text"
-					name="nroEmpresa"
-					onChange={handleChangeIgvf}
+					id="nombre"
+					name="nombre"
 					style={{
 						marginLeft: "10px",
 						padding: "5px",
@@ -134,15 +71,12 @@ export const IngresarGuiaDeViaje = () => {
 					}}
 				/>
 			</div>
-
-			<h4 style={{ color: "#16b7b9" }}>Dirección de Origen</h4>
-
 			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="calleOrigen">Calle</label>
+				<label htmlFor="email">Correo Electrónico:</label>
 				<input
-					type="text"
-					name="calleOrigen"
-					onChange={handleChangeDtddpo}
+					type="email"
+					id="email"
+					name="email"
 					style={{
 						marginLeft: "10px",
 						padding: "5px",
@@ -154,13 +88,12 @@ export const IngresarGuiaDeViaje = () => {
 					}}
 				/>
 			</div>
-
 			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="nroPuertaOrigen">Número de Puerta</label>
+				<label htmlFor="telefono">Teléfono:</label>
 				<input
-					type="text"
-					name="nroPuertaOrigen"
-					onChange={handleChangeDtddpo}
+					type="tel"
+					id="telefono"
+					name="telefono"
 					style={{
 						marginLeft: "10px",
 						padding: "5px",
@@ -172,13 +105,13 @@ export const IngresarGuiaDeViaje = () => {
 					}}
 				/>
 			</div>
-
+			<h3 style={{ color: "#16b7b9" }}>Dirección de Origen</h3>
 			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="kmOrigen">Kilómetro</label>
+				<label htmlFor="calle">Calle:</label>
 				<input
 					type="text"
-					name="kmOrigen"
-					onChange={handleChangeDtddpo}
+					id="calle"
+					name="calle"
 					style={{
 						marginLeft: "10px",
 						padding: "5px",
@@ -190,13 +123,63 @@ export const IngresarGuiaDeViaje = () => {
 					}}
 				/>
 			</div>
-
 			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="departamentoOrigen">Departamento</label>
-				<select
-					name="departamentoOrigen"
-					form="departamentoOrigenForm"
-					onChange={handleChangeDtddpo}
+				<label htmlFor="numero">Número:</label>
+				<input
+					type="text"
+					id="numero"
+					name="numero"
+					style={{
+						marginLeft: "10px",
+						padding: "5px",
+						border: "none",
+						borderBottom: "2px solid #16b7b9",
+						width: "100px",
+						fontSize: "16px",
+						color: "#555",
+					}}
+				/>
+			</div>
+			<div style={{ marginBottom: "10px" }}>
+				<label htmlFor="colonia">Colonia:</label>
+				<input
+					type="text"
+					id="colonia"
+					name="colonia"
+					style={{
+						marginLeft: "10px",
+						padding: "5px",
+						border: "none",
+						borderBottom: "2px solid#16b7b9",
+						width: "250px",
+						fontSize: "16px",
+						color: "#555",
+					}}
+				/>
+			</div>
+			<div style={{ marginBottom: "10px" }}>
+				<label htmlFor="cp">Código Postal:</label>
+				<input
+					type="text"
+					id="cp"
+					name="cp"
+					style={{
+						marginLeft: "10px",
+						padding: "5px",
+						border: "none",
+						borderBottom: "2px solid #16b7b9",
+						width: "100px",
+						fontSize: "16px",
+						color: "#555",
+					}}
+				/>
+			</div>
+			<div style={{ marginBottom: "10px" }}>
+				<label htmlFor="ciudad">Ciudad:</label>
+				<input
+					type="text"
+					id="ciudad"
+					name="ciudad"
 					style={{
 						marginLeft: "10px",
 						padding: "5px",
@@ -206,24 +189,32 @@ export const IngresarGuiaDeViaje = () => {
 						fontSize: "16px",
 						color: "#555",
 					}}
-				>
-					<option value="" selected disabled>
-						Seleccionar departamento
-					</option>
-					<option value={0}>Montevideo</option>
-					<option value={1}>Canelones</option>
-					<option value={2}>Rocha</option>
-				</select>
+				/>
 			</div>
-
-			<h4 style={{ color: "#16b7b9" }}>Dirección de Destino</h4>
-
 			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="calleDestino">Calle</label>
+				<label htmlFor="estado">Estado:</label>
 				<input
 					type="text"
+					id="estado"
+					name="estado"
+					style={{
+						marginLeft: "10px",
+						padding: "5px",
+						border: "none",
+						borderBottom: "2px solid #16b7b9",
+						width: "250px",
+						fontSize: "16px",
+						color: "#555",
+					}}
+				/>
+			</div>
+			<h3 style={{ color: "#16b7b9" }}>Dirección de Destino</h3>
+			<div style={{ marginBottom: "10px" }}>
+				<label htmlFor="calleDestino">Calle:</label>
+				<input
+					type="text"
+					id="calleDestino"
 					name="calleDestino"
-					onChange={handleChangeDtddpd}
 					style={{
 						marginLeft: "10px",
 						padding: "5px",
@@ -235,31 +226,29 @@ export const IngresarGuiaDeViaje = () => {
 					}}
 				/>
 			</div>
-
 			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="nroPuertaDestino">Número de Puerta</label>
+				<label htmlFor="numeroDestino">Número:</label>
 				<input
 					type="text"
-					name="nroPuertaDestino"
-					onChange={handleChangeDtddpd}
+					id="numeroDestino"
+					name="numeroDestino"
 					style={{
 						marginLeft: "10px",
 						padding: "5px",
 						border: "none",
 						borderBottom: "2px solid #16b7b9",
-						width: "250px",
+						width: "100px",
 						fontSize: "16px",
 						color: "#555",
 					}}
 				/>
 			</div>
-
 			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="kmDestino">Kilómetro</label>
+				<label htmlFor="coloniaDestino">Colonia:</label>
 				<input
 					type="text"
-					name="kmDestino"
-					onChange={handleChangeDtddpd}
+					id="coloniaDestino"
+					name="coloniaDestino"
 					style={{
 						marginLeft: "10px",
 						padding: "5px",
@@ -271,13 +260,29 @@ export const IngresarGuiaDeViaje = () => {
 					}}
 				/>
 			</div>
-
 			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="departamentoDestino">Departamento</label>
-				<select
-					name="departamentoDestino"
-					form="departamentoDestinoForm"
-					onChange={handleChangeDtddpd}
+				<label htmlFor="cpDestino">Código Postal:</label>
+				<input
+					type="text"
+					id="cpDestino"
+					name="cpDestino"
+					style={{
+						marginLeft: "10px",
+						padding: "5px",
+						border: "none",
+						borderBottom: "2px solid #16b7b9",
+						width: "100px",
+						fontSize: "16px",
+						color: "#555",
+					}}
+				/>
+			</div>
+			<div style={{ marginBottom: "10px" }}>
+				<label htmlFor="ciudadDestino">Ciudad:</label>
+				<input
+					type="text"
+					id="ciudadDestino"
+					name="ciudadDestino"
 					style={{
 						marginLeft: "10px",
 						padding: "5px",
@@ -286,30 +291,42 @@ export const IngresarGuiaDeViaje = () => {
 						width: "250px",
 						fontSize: "16px",
 						color: "#555",
+					}}
+				/>
+			</div>
+			<div style={{ marginBottom: "10px" }}>
+				<label htmlFor="estadoDestino">Estado:</label>
+				<input
+					type="text"
+					id="estadoDestino"
+					name="estadoDestino"
+					style={{
+						marginLeft: "10px",
+						padding: "5px",
+						border: "none",
+						borderBottom: "2px solid #16b7b9",
+						width: "250px",
+						fontSize: "16px",
+						color: "#555",
+					}}
+				/>
+			</div>
+			<div style={{ marginTop: "20px" }}>
+				<button
+					style={{
+						backgroundColor: "#16b7b9",
+						color: "#fff",
+						border: "none",
+						padding: "10px 20px",
+						borderRadius: "5px",
+						fontSize: "16px",
 					}}
 				>
-					<option value="" selected disabled>
-						Seleccionar departamento
-					</option>
-					<option value={0}>Montevideo</option>
-					<option value={1}>Canelones</option>
-					<option value={2}>Rocha</option>
-				</select>
+					Enviar
+				</button>
 			</div>
-
-			<button
-				onClick={() => console.log(igvf)}
-				style={{
-					backgroundColor: "#16b7b9",
-					color: "#fff",
-					border: "none",
-					padding: "10px 20px",
-					borderRadius: "5px",
-					fontSize: "16px",
-				}}
-			>
-				Enviar
-			</button>
 		</div>
 	);
 };
+
+export default IngresarGuiaDeViaje;

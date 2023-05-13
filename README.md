@@ -1,6 +1,19 @@
-# Getting Started with Create React App
+# Frontend Web Project for Java EE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the frontend web project for the Java EE course!
+
+This project is a single-page application (SPA) built with React. It uses several popular libraries including:
+
+- [React Bootstrap](https://react-bootstrap.github.io/): provides pre-built components that make it easy to create a responsive and visually appealing user interface.
+- [React Router](https://reactrouter.com/): allows users to navigate between different pages of the application without the need for a full page refresh.
+- [React Icons](https://react-icons.github.io/react-icons/): offers a vast collection of icons that can be easily integrated into the application.
+- [Axios](https://axios-http.com/): simplifies the process of making HTTP requests to a backend server.
+
+To get started with the project, you can run the following commands:
+
+- `npm install` to install the required dependencies
+- `npm start` to start the development server
+- `npm run build` to create a production build of the application
 
 ## Available Scripts
 
@@ -38,33 +51,3 @@ If you aren't satisfied with the build tool and configuration choices, you can `
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
