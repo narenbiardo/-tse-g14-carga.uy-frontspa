@@ -16,6 +16,7 @@ import { IngresarGuiaDeViaje } from "./Components/IngresarGuiaDeViaje";
 import Footer from "./Components/Footer";
 import { AuthorizationCodeExample } from "./Services/Outh2Prueba";
 import { AsignarGuiaDeViaje } from "./Components/AsignarGuiaDeViaje";
+import { AgregarVehiculo } from "./Components/AgregarVehiculo";
 
 const ProtectedRoute = ({ children }) => {
 	const { isAuthenticated } = useAuth();
@@ -65,6 +66,14 @@ function App() {
 						element={
 							<ProtectedRoute>
 								<AsignarGuiaDeViaje />
+							</ProtectedRoute>
+						}
+					></Route>
+					<Route
+						path="/agregarVehiculo"
+						element={
+							<ProtectedRoute>
+								<AgregarVehiculo />
 							</ProtectedRoute>
 						}
 					></Route>

@@ -51,8 +51,8 @@ export const NavBarCustom = () => {
 								<NavLink to="/asignarGuiaDeViaje" className="nav-link">
 									Asignar Guía de Viaje
 								</NavLink>
-								<NavLink to="/perfil" className="nav-link">
-									Perfil
+								<NavLink to="/agregarVehiculo" className="nav-link">
+									Agregar Vehiculo
 								</NavLink>
 							</>
 						)}

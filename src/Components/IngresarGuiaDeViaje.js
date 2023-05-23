@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 class DtDireccionPostal {
 	constructor(calle, km, nroPuerta) {
@@ -34,7 +34,6 @@ export const IngresarGuiaDeViaje = () => {
 		var insertName = name;
 		insertName = insertName.replace("Origen", "");
 		setDtddpo(prevData => ({ ...prevData, [insertName]: value }));
-		setIgvf(prevData => ({ ...prevData, ["origen"]: dtddpo }));
 	};
 
 	const handleChangeDtddpd = e => {
@@ -42,8 +41,15 @@ export const IngresarGuiaDeViaje = () => {
 		var insertName = name;
 		insertName = insertName.replace("Destino", "");
 		setDtddpd(prevData => ({ ...prevData, [insertName]: value }));
-		setIgvf(prevData => ({ ...prevData, ["destino"]: dtddpd }));
 	};
+
+	useEffect(() => {
+		setIgvf(prevData => ({
+			...prevData,
+			["origen"]: dtddpo,
+			["destino"]: dtddpd,
+		}));
+	}, [dtddpo, dtddpd]);
 
 	return (
 		<div
