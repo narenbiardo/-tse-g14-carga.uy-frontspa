@@ -1,7 +1,11 @@
 import { useState } from "react";
 
 class DtDireccionPostal {
-	//si se le crea un constructor, luego creará objetos dobles. Mejor no crear uno por ahora
+	constructor(calle, km, nroPuerta) {
+		this.calle = calle;
+		this.km = km;
+		this.nroPuerta = nroPuerta;
+	}
 }
 
 class IngresarGuiaViajeForm {
@@ -28,7 +32,7 @@ export const IngresarGuiaDeViaje = () => {
 	const handleChangeDtddpo = e => {
 		const { name, value } = e.target;
 		var insertName = name;
-		insertName.replace("Origen", "");
+		insertName = insertName.replace("Origen", "");
 		setDtddpo(prevData => ({ ...prevData, [insertName]: value }));
 		setIgvf(prevData => ({ ...prevData, ["origen"]: dtddpo }));
 	};
@@ -36,7 +40,7 @@ export const IngresarGuiaDeViaje = () => {
 	const handleChangeDtddpd = e => {
 		const { name, value } = e.target;
 		var insertName = name;
-		insertName.replace("Destino", "");
+		insertName = insertName.replace("Destino", "");
 		setDtddpd(prevData => ({ ...prevData, [insertName]: value }));
 		setIgvf(prevData => ({ ...prevData, ["destino"]: dtddpd }));
 	};

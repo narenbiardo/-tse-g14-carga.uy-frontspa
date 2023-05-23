@@ -13,8 +13,9 @@ import { useAuth, AuthProvider } from "./useAuth";
 import { useState } from "react";
 import { NavBarCustom } from "./Components/NavBarCustom";
 import { IngresarGuiaDeViaje } from "./Components/IngresarGuiaDeViaje";
-import { AxiosPrueba } from "./Services/AxiosPrueba";
 import Footer from "./Components/Footer";
+import { AuthorizationCodeExample } from "./Services/Outh2Prueba";
+import { AsignarGuiaDeViaje } from "./Components/AsignarGuiaDeViaje";
 
 const ProtectedRoute = ({ children }) => {
 	const { isAuthenticated } = useAuth();
@@ -48,14 +49,22 @@ function App() {
 					<Route path="/" element={<Home />}></Route>
 					<Route path="/login" element={<Login />}></Route>
 					<Route
-						path="/axiosPrueba"
-						element={<AxiosPrueba></AxiosPrueba>}
+						path="/outh2Prueba"
+						element={<AuthorizationCodeExample></AuthorizationCodeExample>}
 					></Route>
 					<Route
 						path="/ingresarGuiaDeViaje"
 						element={
 							<ProtectedRoute>
 								<IngresarGuiaDeViaje />
+							</ProtectedRoute>
+						}
+					></Route>
+					<Route
+						path="/asignarGuiaDeViaje"
+						element={
+							<ProtectedRoute>
+								<AsignarGuiaDeViaje />
 							</ProtectedRoute>
 						}
 					></Route>

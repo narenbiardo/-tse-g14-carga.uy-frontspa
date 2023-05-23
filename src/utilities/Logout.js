@@ -14,6 +14,8 @@ export const Logout = () => {
 	const { logout } = useAuth();
 
 	const handleClick = () => {
+		console.log(document.cookie);
+		document.cookie = `JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 		logout();
 		navigate("/login");
 	};
