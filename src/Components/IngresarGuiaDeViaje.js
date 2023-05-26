@@ -1,4 +1,24 @@
 import { useState, useEffect } from "react";
+import { FormDiv } from "../Utilities/FormDiv";
+import { FormH2 } from "../Utilities/FormH2";
+import { FormSelect } from "../Utilities/FormSelect";
+import { FormInputNumber } from "../Utilities/FormInputNumber";
+import { FormInputDate } from "../Utilities/FormInputDate";
+import { FormInputText } from "../Utilities/FormInputText";
+import { FormH4 } from "../Utilities/FromH4";
+import { FormInputSubmit } from "../Utilities/FormInputSubmit";
+
+const rubros = [
+	{ id: "1", nombre: "Alimentos, bebida, tabaco" },
+	{ id: "2", nombre: "Industria frigorifica" },
+	{ id: "3", nombre: "Pesca" },
+];
+
+const departamentos = [
+	{ id: "1", nombre: "Montevideo" },
+	{ id: "2", nombre: "Canelones" },
+	{ id: "3", nombre: "Rocha" },
+];
 
 class DtDireccionPostal {
 	constructor(calle, km, nroPuerta) {
@@ -52,274 +72,112 @@ export const IngresarGuiaDeViaje = () => {
 	}, [dtddpo, dtddpd]);
 
 	return (
-		<div
-			style={{
-				display: "flex",
-				flexDirection: "column",
-				alignItems: "center",
-				padding: "20px",
-				backgroundColor: "#fff",
-				borderRadius: "5px",
-				boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-			}}
-		>
-			<h2 style={{ color: "#16b7b9" }}>Ingresar Guía de Viaje</h2>
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="rubro">Rubro</label>
-				<select
-					name="rubro"
-					form="rubroForm"
-					onChange={handleChangeIgvf}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				>
-					<option value="" selected disabled>
-						Seleccionar rubro
-					</option>
-					<option value={0}>Alimentos, bebida, tabaco</option>
-					<option value={1}>Industria frigorifica</option>
-					<option value={2}>Pesca</option>
-				</select>
-			</div>
+		<FormDiv>
+			<FormH2 text="Ingresar Guía de Viaje" />
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="volumen">Volumen</label>
-				<input
-					type="number"
-					name="volumen"
-					step="0.01"
-					onChange={handleChangeIgvf}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				></input>
-			</div>
+			<FormSelect
+				htmlFor="rubro"
+				label="Rubro"
+				name="rubro"
+				form="rubroForm"
+				onChangeHandler={handleChangeIgvf}
+				optionDisabled="Seleccionar rubro"
+				valueArray={rubros}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="fechaHora">Fecha y Hora</label>
-				<input
-					type="datetime-local"
-					name="fechaHora"
-					min={new Date().toISOString().slice(0, 16)}
-					onChange={handleChangeIgvf}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				></input>
-			</div>
+			<FormInputNumber
+				htmlFor="volumen"
+				label="Volumen"
+				name="volumen"
+				step="0.01"
+				onChangeHandler={handleChangeIgvf}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="nroEmpresa">Número de la Empresa</label>
-				<input
-					type="text"
-					name="nroEmpresa"
-					onChange={handleChangeIgvf}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				/>
-			</div>
+			<FormInputDate
+				htmlFor="fechaHora"
+				label="Fecha y Hora"
+				type="datetime-local"
+				name="fechaHora"
+				min={new Date().toISOString().slice(0, 16)}
+				onChangeHandler={handleChangeIgvf}
+			/>
 
-			<h4 style={{ color: "#16b7b9" }}>Dirección de Origen</h4>
+			<FormInputText
+				htmlFor="nroEmpresa"
+				label="Número de la Empresa"
+				name="nroEmpresa"
+				onChangeHandler={handleChangeIgvf}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="calleOrigen">Calle</label>
-				<input
-					type="text"
-					name="calleOrigen"
-					onChange={handleChangeDtddpo}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				/>
-			</div>
+			<FormH4 text="Dirección de Origen" />
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="nroPuertaOrigen">Número de Puerta</label>
-				<input
-					type="text"
-					name="nroPuertaOrigen"
-					onChange={handleChangeDtddpo}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				/>
-			</div>
+			<FormInputText
+				htmlFor="calleOrigen"
+				label="Calle"
+				name="calleOrigen"
+				onChangeHandler={handleChangeDtddpo}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="kmOrigen">Kilómetro</label>
-				<input
-					type="text"
-					name="kmOrigen"
-					onChange={handleChangeDtddpo}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				/>
-			</div>
+			<FormInputText
+				htmlFor="nroPuertaOrigen"
+				label="Número de Puerta"
+				name="nroPuertaOrigen"
+				onChangeHandler={handleChangeDtddpo}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="departamentoOrigen">Departamento</label>
-				<select
-					name="departamentoOrigen"
-					form="departamentoOrigenForm"
-					onChange={handleChangeDtddpo}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				>
-					<option value="" selected disabled>
-						Seleccionar departamento
-					</option>
-					<option value={0}>Montevideo</option>
-					<option value={1}>Canelones</option>
-					<option value={2}>Rocha</option>
-				</select>
-			</div>
+			<FormInputText
+				htmlFor="kmOrigen"
+				label="Kilómetro"
+				name="kmOrigen"
+				onChangeHandler={handleChangeDtddpo}
+			/>
 
-			<h4 style={{ color: "#16b7b9" }}>Dirección de Destino</h4>
+			<FormSelect
+				htmlFor="departamentoOrigen"
+				label="Departamento"
+				name="departamentoOrigen"
+				form="departamentoOrigenForm"
+				onChangeHandler={handleChangeDtddpo}
+				optionDisabled="Seleccionar Departamento"
+				valueArray={departamentos}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="calleDestino">Calle</label>
-				<input
-					type="text"
-					name="calleDestino"
-					onChange={handleChangeDtddpd}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				/>
-			</div>
+			<FormH4 text="Dirección de Destino" />
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="nroPuertaDestino">Número de Puerta</label>
-				<input
-					type="text"
-					name="nroPuertaDestino"
-					onChange={handleChangeDtddpd}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				/>
-			</div>
+			<FormInputText
+				htmlFor="calleDestino"
+				label="Calle"
+				name="calleDestino"
+				onChangeHandler={handleChangeDtddpd}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="kmDestino">Kilómetro</label>
-				<input
-					type="text"
-					name="kmDestino"
-					onChange={handleChangeDtddpd}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				/>
-			</div>
+			<FormInputText
+				htmlFor="nroPuertaDestino"
+				label="Número de Puerta"
+				name="nroPuertaDestino"
+				onChangeHandler={handleChangeDtddpd}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="departamentoDestino">Departamento</label>
-				<select
-					name="departamentoDestino"
-					form="departamentoDestinoForm"
-					onChange={handleChangeDtddpd}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				>
-					<option value="" selected disabled>
-						Seleccionar departamento
-					</option>
-					<option value={0}>Montevideo</option>
-					<option value={1}>Canelones</option>
-					<option value={2}>Rocha</option>
-				</select>
-			</div>
+			<FormInputText
+				htmlFor="kmDestino"
+				label="Kilómetro"
+				name="kmDestino"
+				onChangeHandler={handleChangeDtddpd}
+			/>
 
-			<button
-				onClick={() => console.log(igvf)}
-				style={{
-					backgroundColor: "#16b7b9",
-					color: "#fff",
-					border: "none",
-					padding: "10px 20px",
-					borderRadius: "5px",
-					fontSize: "16px",
-				}}
-			>
-				Enviar
-			</button>
-		</div>
+			<FormSelect
+				htmlFor="departamentoDestino"
+				label="Departamento"
+				name="departamentoDestino"
+				onChangeHandler={handleChangeDtddpd}
+				optionDisabled="Seleccionar Departamento"
+				valueArray={departamentos}
+			/>
+
+			<FormInputSubmit
+				onClickHandler={() => console.log(igvf)}
+				value="Enviar"
+			/>
+		</FormDiv>
 	);
 };

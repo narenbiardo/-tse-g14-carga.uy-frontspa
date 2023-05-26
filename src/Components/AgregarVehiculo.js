@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
-import TextInput from "react-autocomplete-input";
 import "react-autocomplete-input/dist/bundle.css";
+import { FormDiv } from "../Utilities/FormDiv";
+import { FormInputText } from "../Utilities/FormInputText";
+import { FormInputNumber } from "../Utilities/FormInputNumber";
+import { FormTextInputAutocomplete } from "../Utilities/FormTextInputAutocomplete";
+import { FormH2 } from "../Utilities/FormH2";
+import { FormInputDate } from "../Utilities/FormInputDate";
+import { FormH4 } from "../Utilities/FromH4";
+import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 
 const marcasVehiculos = [
 	"Audi",
@@ -80,212 +87,86 @@ export const AgregarVehiculo = () => {
 	}, [dtpnc]);
 
 	return (
-		<div
-			style={{
-				display: "flex",
-				flexDirection: "column",
-				alignItems: "center",
-				padding: "20px",
-				backgroundColor: "#fff",
-				borderRadius: "5px",
-				boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-			}}
-		>
-			<h2 style={{ color: "#16b7b9" }}>Agregar Vehículo</h2>
+		<FormDiv>
+			<FormH2 text="Agregar Vehículo" />
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="matricula">Matricula</label>
-				<input
-					type="text"
-					name="matricula"
-					onChange={handleChangeAvf}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				/>
-			</div>
+			<FormInputText
+				htmlFor="matricula"
+				label="Matricula"
+				name="matricula"
+				onChangeHandler={handleChangeAvf}
+			/>
 
-			<div style={{ marginBottom: "10px", position: "relative" }}>
-				<label htmlFor="marca">Marca</label>
-				{
-					<TextInput
-						name="marca"
-						form="marcaForm"
-						onChange={handleChangeAvf}
-						options={marcasVehiculos}
-						maxOptions={5}
-						trigger=""
-						Component="input"
-						spacer=""
-						style={{
-							marginLeft: "10px",
-							padding: "5px",
-							border: "none",
-							borderBottom: "2px solid #16b7b9",
-							width: "250px",
-							fontSize: "16px",
-							color: "#555",
-						}}
-					/>
-				}
-			</div>
+			<FormTextInputAutocomplete
+				htmlFor="marca"
+				label="Marca"
+				name="marca"
+				form="marcaForm"
+				onChangeHandler={handleChangeAvf}
+				optionArray={marcasVehiculos}
+				maxOptionNumber={5}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="modelo">Modelo</label>
-				<input
-					type="text"
-					name="modelo"
-					onChange={handleChangeAvf}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				/>
-			</div>
+			<FormInputText
+				htmlFor="modelo"
+				label="Modelo"
+				name="modelo"
+				onChangeHandler={handleChangeAvf}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="peso">Peso</label>
-				<input
-					type="number"
-					name="peso"
-					step="0.01"
-					onChange={handleChangeAvf}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				></input>
-			</div>
+			<FormInputNumber
+				htmlFor="peso"
+				label="Peso"
+				name="peso"
+				step="0.01"
+				onChangeHandler={handleChangeAvf}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="capacidad">Capacidad</label>
-				<input
-					type="number"
-					name="capacidad"
-					step="0.01"
-					onChange={handleChangeAvf}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				></input>
-			</div>
+			<FormInputNumber
+				htmlFor="capacidad"
+				label="Capacidad"
+				name="capacidad"
+				step="0.01"
+				onChangeHandler={handleChangeAvf}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="vencimientoITV">
-					Fecha de Vencimiento de la Inspección Técnica Vehicular
-				</label>
-				<input
-					type="date"
-					name="vencimientoITV"
-					min={new Date().toISOString().slice(0, 16)}
-					onChange={handleChangeAvf}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				></input>
-			</div>
+			<FormInputDate
+				htmlFor="vencimientoITV"
+				label="Fecha de Vencimiento de la Inspección Técnica Vehicular"
+				type="date"
+				name="vencimientoITV"
+				min={new Date().toISOString().split("T")[0]}
+				onChangeHandler={handleChangeAvf}
+			/>
 
-			<h4 style={{ color: "#16b7b9" }}>Permiso Nacional de Circulación</h4>
+			<FormH4 text="Permiso Nacional de Circulación" />
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="numero">Número</label>
-				<input
-					type="number"
-					name="numero"
-					onChange={handleChangeDtpnc}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				></input>
-			</div>
+			<FormInputNumber
+				htmlFor="numero"
+				label="Número"
+				name="numero"
+				onChangeHandler={handleChangeDtpnc}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="fechaEmision">Fecha de Emision</label>
-				<input
-					type="date"
-					name="fechaEmision"
-					max={new Date().toISOString().split("T")[0]}
-					onChange={handleChangeDtpnc}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				></input>
-			</div>
+			<FormInputDate
+				htmlFor="fechaEmision"
+				label="Fecha de Emision"
+				type="date"
+				name="fechaEmision"
+				max={new Date().toISOString().split("T")[0]}
+				onChange={handleChangeDtpnc}
+			/>
 
-			<div style={{ marginBottom: "10px" }}>
-				<label htmlFor="fechaVencimiento">Fecha de Vencimiento</label>
-				<input
-					type="date"
-					name="fechaVencimiento"
-					min={new Date().toISOString().split("T")[0]}
-					onChange={handleChangeDtpnc}
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
-				></input>
-			</div>
+			<FormInputDate
+				htmlFor="fechaVencimiento"
+				label="Fecha de Vencimiento"
+				type="date"
+				name="fechaVencimiento"
+				min={new Date().toISOString().split("T")[0]}
+				onChange={handleChangeDtpnc}
+			/>
 
-			<div>
-				<input
-					onClick={() => console.log(avf)}
-					type="submit"
-					value="Enviar"
-					style={{
-						backgroundColor: "#16b7b9",
-						color: "#fff",
-						border: "none",
-						padding: "10px 20px",
-						borderRadius: "5px",
-						fontSize: "16px",
-					}}
-				/>
-			</div>
-		</div>
+			<FormInputSubmit onClickHandler={() => console.log(avf)} value="Enviar" />
+		</FormDiv>
 	);
 };

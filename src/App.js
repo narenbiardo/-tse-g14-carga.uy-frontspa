@@ -28,9 +28,33 @@ const ProtectedRoute = ({ children }) => {
 	}
 };
 
+const ProtectedRouteEncargado = ({ children }) => {
+	const { isAuthenticated } = useAuth();
+	const { user } = useAuth();
+
+	if (isAuthenticated && user == 1) {
+		return children;
+	} else {
+		return <Navigate to={"/"}></Navigate>;
+	}
+};
+
+const ProtectedRouteFuncionario = ({ children }) => {
+	const { isAuthenticated } = useAuth();
+	const { user } = useAuth();
+
+	if (isAuthenticated && user == 2) {
+		return children;
+	} else {
+		return <Navigate to={"/"}></Navigate>;
+	}
+};
+
 const Home = () => <h1>Home</h1>;
 const Login = () => {
 	const { login } = useAuth();
+	const { loginEncargado } = useAuth();
+	const { loginFuncionario } = useAuth();
 	const navigate = useNavigate();
 
 	const handleClick = () => {
@@ -38,7 +62,23 @@ const Login = () => {
 		navigate("/");
 	};
 
-	return <Button onClick={handleClick}>Login</Button>;
+	const handleClickEncargado = () => {
+		loginEncargado();
+		navigate("/");
+	};
+
+	const handleClickFuncionario = () => {
+		loginFuncionario();
+		navigate("/");
+	};
+
+	return (
+		<>
+			<Button onClick={handleClick}>Login</Button>
+			<Button onClick={handleClickEncargado}>Login Encargado</Button>
+			<Button onClick={handleClickFuncionario}>Login Funcionario</Button>
+		</>
+	);
 };
 
 function App() {
@@ -56,33 +96,25 @@ function App() {
 					<Route
 						path="/ingresarGuiaDeViaje"
 						element={
-							<ProtectedRoute>
+							<ProtectedRouteEncargado>
 								<IngresarGuiaDeViaje />
-							</ProtectedRoute>
+							</ProtectedRouteEncargado>
 						}
 					></Route>
 					<Route
 						path="/asignarGuiaDeViaje"
 						element={
-							<ProtectedRoute>
+							<ProtectedRouteEncargado>
 								<AsignarGuiaDeViaje />
-							</ProtectedRoute>
+							</ProtectedRouteEncargado>
 						}
 					></Route>
 					<Route
 						path="/agregarVehiculo"
 						element={
-							<ProtectedRoute>
+							<ProtectedRouteEncargado>
 								<AgregarVehiculo />
-							</ProtectedRoute>
-						}
-					></Route>
-					<Route
-						path="/usuarioLog"
-						element={
-							<ProtectedRoute>
-								<h1>Usuario logueado</h1>
-							</ProtectedRoute>
+							</ProtectedRouteEncargado>
 						}
 					></Route>
 					<Route path="*" element={<h1>Not found</h1>}></Route>
