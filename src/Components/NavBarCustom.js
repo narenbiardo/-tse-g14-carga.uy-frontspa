@@ -31,22 +31,47 @@ export const NavBarCustom = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="me-auto">
-						{isAuthenticated && user == 1 && (
+						{isAuthenticated &&
+							user === 1 && ( // Encargado
+								<>
+									<NavDropdown title="Guía de Viaje">
+										<NavLink to="/ingresarGuiaDeViaje" className="nav-link">
+											Ingresar Guía de Viaje
+										</NavLink>
+										<NavLink to="/asignarGuiaDeViaje" className="nav-link">
+											Asignar Guía de Viaje
+										</NavLink>
+									</NavDropdown>
+									<NavDropdown title="Vehículo">
+										<NavLink to="/agregarVehiculo" className="nav-link">
+											Agregar Vehiculo
+										</NavLink>
+										<NavLink to="/editarVehiculo" className="nav-link">
+											Editar Vehiculo
+										</NavLink>
+										<NavLink to="/eliminarVehiculo" className="nav-link">
+											Eliminar Vehiculo
+										</NavLink>
+									</NavDropdown>
+									<NavLink to="/empresa" className="nav-link">
+										Empresa
+									</NavLink>
+								</>
+							)}
+						{isAuthenticated &&
+							user === 2 && ( // Funcionario
+								<></>
+							)}
+						{isAuthenticated && ( // Any user
 							<>
-								<NavLink to="/ingresarGuiaDeViaje" className="nav-link">
-									Ingresar Guía de Viaje
-								</NavLink>
-								<NavLink to="/asignarGuiaDeViaje" className="nav-link">
-									Asignar Guía de Viaje
-								</NavLink>
-								<NavLink to="/agregarVehiculo" className="nav-link">
-									Agregar Vehiculo
+								<NavLink to="/perfil" className="nav-link">
+									Perfil
 								</NavLink>
 							</>
 						)}
 					</Nav>
 					<Nav className="ms-auto">
-						{isAuthenticated ? (
+						{isAuthenticated ? ( // Not loged
 							<Logout />
 						) : (
 							<NavLink

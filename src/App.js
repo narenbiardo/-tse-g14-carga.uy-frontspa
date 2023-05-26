@@ -50,6 +50,17 @@ const ProtectedRouteFuncionario = ({ children }) => {
 	}
 };
 
+const ProtectedPerfil = ({ children }) => {
+	const { isAuthenticated } = useAuth();
+	const { user } = useAuth();
+
+	if (isAuthenticated && user == 1) {
+		return <h1>Perfil Encargado</h1>;
+	} else if (isAuthenticated && user == 2) {
+		return <h1>Perfil Funcionario</h1>;
+	}
+};
+
 const Home = () => <h1>Home</h1>;
 const Login = () => {
 	const { login } = useAuth();
@@ -94,6 +105,22 @@ function App() {
 						element={<AuthorizationCodeExample></AuthorizationCodeExample>}
 					></Route>
 					<Route
+						path="/perfil"
+						element={
+							<>
+								<ProtectedPerfil />
+							</>
+						}
+					></Route>
+					<Route
+						path="/empresa"
+						element={
+							<ProtectedRouteEncargado>
+								<h1>Perfil Empresa</h1>
+							</ProtectedRouteEncargado>
+						}
+					></Route>
+					<Route
 						path="/ingresarGuiaDeViaje"
 						element={
 							<ProtectedRouteEncargado>
@@ -114,6 +141,22 @@ function App() {
 						element={
 							<ProtectedRouteEncargado>
 								<AgregarVehiculo />
+							</ProtectedRouteEncargado>
+						}
+					></Route>
+					<Route
+						path="/editarVehiculo"
+						element={
+							<ProtectedRouteEncargado>
+								<h1>Editar Vehículo</h1>
+							</ProtectedRouteEncargado>
+						}
+					></Route>
+					<Route
+						path="/eliminarVehiculo"
+						element={
+							<ProtectedRouteEncargado>
+								<h1>Eliminar Vehículo</h1>
 							</ProtectedRouteEncargado>
 						}
 					></Route>
