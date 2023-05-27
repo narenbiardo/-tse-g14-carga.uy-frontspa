@@ -154,7 +154,7 @@ export const AgregarVehiculo = () => {
 				type="date"
 				name="fechaEmision"
 				max={new Date().toISOString().split("T")[0]}
-				onChange={handleChangeDtpnc}
+				onChangeHandler={handleChangeDtpnc}
 			/>
 
 			<FormInputDate
@@ -163,7 +163,7 @@ export const AgregarVehiculo = () => {
 				type="date"
 				name="fechaVencimiento"
 				min={new Date().toISOString().split("T")[0]}
-				onChange={handleChangeDtpnc}
+				onChangeHandler={handleChangeDtpnc}
 			/>
 
 			<FormInputSubmit onClickHandler={() => console.log(avf)} value="Enviar" />
