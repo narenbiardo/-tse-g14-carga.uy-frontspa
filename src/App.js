@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { Button, Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
+import { useState } from "react";
 import {
 	Route,
 	Routes,
@@ -9,14 +9,15 @@ import {
 	Navigate,
 	useNavigate,
 } from "react-router-dom";
+import { Button, Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import { useAuth, AuthProvider } from "./useAuth";
-import { useState } from "react";
 import { NavBarCustom } from "./Components/NavBarCustom";
 import { IngresarGuiaDeViaje } from "./Components/IngresarGuiaDeViaje";
 import Footer from "./Components/Footer";
 import { AuthorizationCodeExample } from "./Services/Outh2Prueba";
 import { AsignarGuiaDeViaje } from "./Components/AsignarGuiaDeViaje";
 import { AgregarVehiculo } from "./Components/AgregarVehiculo";
+import { EditarVehiculo } from "./Components/EditarVehiculo";
 
 const ProtectedRoute = ({ children }) => {
 	const { isAuthenticated } = useAuth();
@@ -32,7 +33,7 @@ const ProtectedRouteEncargado = ({ children }) => {
 	const { isAuthenticated } = useAuth();
 	const { user } = useAuth();
 
-	if (isAuthenticated && user == 1) {
+	if (isAuthenticated && user === 1) {
 		return children;
 	} else {
 		return <Navigate to={"/"}></Navigate>;
@@ -43,7 +44,7 @@ const ProtectedRouteFuncionario = ({ children }) => {
 	const { isAuthenticated } = useAuth();
 	const { user } = useAuth();
 
-	if (isAuthenticated && user == 2) {
+	if (isAuthenticated && user === 2) {
 		return children;
 	} else {
 		return <Navigate to={"/"}></Navigate>;
@@ -54,10 +55,12 @@ const ProtectedPerfil = ({ children }) => {
 	const { isAuthenticated } = useAuth();
 	const { user } = useAuth();
 
-	if (isAuthenticated && user == 1) {
+	if (isAuthenticated && user === 1) {
 		return <h1>Perfil Encargado</h1>;
-	} else if (isAuthenticated && user == 2) {
+	} else if (isAuthenticated && user === 2) {
 		return <h1>Perfil Funcionario</h1>;
+	} else {
+		return <Navigate to={"/login"}></Navigate>;
 	}
 };
 
@@ -148,7 +151,7 @@ function App() {
 						path="/editarVehiculo"
 						element={
 							<ProtectedRouteEncargado>
-								<h1>Editar Vehículo</h1>
+								<EditarVehiculo />
 							</ProtectedRouteEncargado>
 						}
 					></Route>
