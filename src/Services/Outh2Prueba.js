@@ -18,37 +18,7 @@ export const AuthorizationCodeExample = () => {
 	const [error, setError] = useState(null);
 
 	// You can test this with a GitHub OAuth2 app (provided test server supports GitHub and Spotify)
-	const onSuccess = ({ code }) =>
-		fetch(`${appServerUrl}/oidc/v1/authorize?`, {
-			method: "POST",
-			body: JSON.stringify({ code }),
-			headers: {
-				"content-type": "application/json",
-				"Access-Control-Allow-Origin": "*",
-				response_type: "code",
-				scope: "openid%20personal%20email",
-				client_id: "ID_CLIENTE",
-				state: "=STRING_RANDOM",
-				redirect_uri: "https%3A%2F%2Fclient.org%2F",
-			},
-		})
-			.then(res => res.json())
-			.then(data => {
-				setAccessToken(data.access_token);
-				return data.access_token;
-			})
-			.then(token =>
-				fetch(`${oauthServerUrl}/api/user`, {
-					method: "GET",
-					headers: {
-						accept: "application/json",
-						authorization: `Bearer ${token}`,
-					},
-				})
-			)
-			.then(res => res.json("auth-code-login-btn"))
-			.then(setUser)
-			.catch(setError);
+	const onSuccess = ({ code }) => console.log(code);
 
 	return (
 		<div className="column">
