@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import {
 	Route,
 	Routes,
@@ -10,7 +10,7 @@ import {
 	useNavigate,
 } from "react-router-dom";
 import { Button, Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
-import { useAuth, AuthProvider } from "./useAuth";
+import { useAuth, AuthProvider } from "./Services/useAuth";
 import { NavBarCustom } from "./Components/NavBarCustom";
 import { IngresarGuiaDeViaje } from "./Components/IngresarGuiaDeViaje";
 import Footer from "./Components/Footer";
@@ -18,6 +18,8 @@ import { AuthorizationCodeExample } from "./Services/Outh2Prueba";
 import { AsignarGuiaDeViaje } from "./Components/AsignarGuiaDeViaje";
 import { AgregarVehiculo } from "./Components/AgregarVehiculo";
 import { EditarVehiculo } from "./Components/EditarVehiculo";
+import { Login } from "./Services/LoginGubUy";
+import cookies from "js-cookie";
 
 const ProtectedRoute = ({ children }) => {
 	const { isAuthenticated } = useAuth();
@@ -65,7 +67,7 @@ const ProtectedPerfil = ({ children }) => {
 };
 
 const Home = () => <h1>Home</h1>;
-const Login = () => {
+const LoginOld = () => {
 	const { login } = useAuth();
 	const { loginEncargado } = useAuth();
 	const { loginFuncionario } = useAuth();
@@ -95,14 +97,28 @@ const Login = () => {
 	);
 };
 
+const LoginFromCookie = () => {
+	const { login } = useAuth();
+	const code = cookies.get("code");
+
+	useEffect(() => {
+		if (code) {
+			login(code);
+		}
+
+		console.log(code);
+	}, [code]);
+};
+
 function App() {
 	return (
 		<AuthProvider>
 			<NavBarCustom />
 			<div className="App">
+				<LoginFromCookie />
 				<Routes>
 					<Route path="/" element={<Home />}></Route>
-					<Route path="/login" element={<Login />}></Route>
+					{/*<Route path="/login" element={<Login />}></Route>*/}
 					<Route
 						path="/outh2Prueba"
 						element={<AuthorizationCodeExample></AuthorizationCodeExample>}
@@ -166,7 +182,7 @@ function App() {
 					<Route path="*" element={<h1>Not found</h1>}></Route>
 				</Routes>
 			</div>
-			<Footer></Footer>
+			<Footer />
 		</AuthProvider>
 	);
 }

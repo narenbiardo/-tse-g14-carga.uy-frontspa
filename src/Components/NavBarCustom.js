@@ -8,8 +8,9 @@ import {
 	Navigate,
 	useNavigate,
 } from "react-router-dom";
-import { useAuth, AuthProvider } from "../useAuth";
+import { useAuth, AuthProvider } from "../Services/useAuth";
 import { Logout } from "../Utilities/Logout";
+import { Login } from "../Services/LoginGubUy";
 import { IngresarGuiaDeViaje } from "./IngresarGuiaDeViaje";
 import { SvgLogo } from "../Utilities/SvgLogo";
 import { mainColor } from "../constants";
@@ -136,13 +137,7 @@ export const NavBarCustom = () => {
 						{isAuthenticated ? ( // Not loged
 							<Logout />
 						) : (
-							<NavLink
-								to="/login
-							"
-								className="nav-link"
-							>
-								Ingresar
-							</NavLink>
+							<Login />
 						)}
 					</Nav>
 				</Navbar.Collapse>

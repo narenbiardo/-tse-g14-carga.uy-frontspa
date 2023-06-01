@@ -1,4 +1,5 @@
 import { useState, useContext, createContext } from "react";
+import cookies from "js-cookie";
 
 export const AuthContext = createContext();
 
@@ -11,8 +12,10 @@ export const AuthProvider = ({ children }) => {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const [user, setUser] = useState(0);
 
-	const login = () => {
+	const login = code => {
+		cookies.set("code", code);
 		setIsAuthenticated(true);
+		setUser(1);
 	};
 
 	const loginEncargado = () => {
@@ -26,6 +29,7 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	const logout = () => {
+		cookies.remove("code");
 		setIsAuthenticated(false);
 		setUser(0);
 	};
@@ -36,9 +40,9 @@ export const AuthProvider = ({ children }) => {
 				isAuthenticated,
 				user,
 				login,
+				logout,
 				loginEncargado,
 				loginFuncionario,
-				logout,
 			}}
 		>
 			{children}
