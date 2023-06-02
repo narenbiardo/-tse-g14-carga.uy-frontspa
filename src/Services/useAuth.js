@@ -1,5 +1,6 @@
 import { useState, useContext, createContext } from "react";
 import cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 
 export const AuthContext = createContext();
 
@@ -9,23 +10,26 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
-	const [user, setUser] = useState(0);
+	const alreadyLogged = cookies.get("code") !== undefined; // If the jwt is undefined, the user is not logged
+	const initialUser = alreadyLogged
+		? jwt_decode(cookies.get("code")).iss === "Encargado"
+			? 1
+			: 2
+		: 0;
+
+	const [isAuthenticated, setIsAuthenticated] = useState(alreadyLogged);
+	const [user, setUser] = useState(initialUser);
 
 	const login = code => {
+		const jwtDecoded = jwt_decode(code);
 		cookies.set("code", code);
 		setIsAuthenticated(true);
-		setUser(1);
-	};
 
-	const loginEncargado = () => {
-		setIsAuthenticated(true);
-		setUser(1);
-	};
-
-	const loginFuncionario = () => {
-		setIsAuthenticated(true);
-		setUser(2);
+		if (jwtDecoded.iss === "Encargado") {
+			setUser(1);
+		} else if (jwtDecoded.iss === "Funcionario") {
+			setUser(2);
+		}
 	};
 
 	const logout = () => {
@@ -41,8 +45,6 @@ export const AuthProvider = ({ children }) => {
 				user,
 				login,
 				logout,
-				loginEncargado,
-				loginFuncionario,
 			}}
 		>
 			{children}

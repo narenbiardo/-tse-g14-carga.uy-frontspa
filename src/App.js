@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import {
 	Route,
 	Routes,
@@ -14,12 +14,13 @@ import { useAuth, AuthProvider } from "./Services/useAuth";
 import { NavBarCustom } from "./Components/NavBarCustom";
 import { IngresarGuiaDeViaje } from "./Components/IngresarGuiaDeViaje";
 import Footer from "./Components/Footer";
-import { AuthorizationCodeExample } from "./Services/Outh2Prueba";
 import { AsignarGuiaDeViaje } from "./Components/AsignarGuiaDeViaje";
 import { AgregarVehiculo } from "./Components/AgregarVehiculo";
 import { EditarVehiculo } from "./Components/EditarVehiculo";
-import { Login } from "./Services/LoginGubUy";
+import { Perfil } from "./Components/Perfil";
 import cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
+import { Home } from "./Components/Home";
 
 const ProtectedRoute = ({ children }) => {
 	const { isAuthenticated } = useAuth();
@@ -27,7 +28,7 @@ const ProtectedRoute = ({ children }) => {
 	if (isAuthenticated) {
 		return children;
 	} else {
-		return <Navigate to={"/login"}></Navigate>;
+		return <Navigate to={"/"} />;
 	}
 };
 
@@ -38,7 +39,7 @@ const ProtectedRouteEncargado = ({ children }) => {
 	if (isAuthenticated && user === 1) {
 		return children;
 	} else {
-		return <Navigate to={"/"}></Navigate>;
+		return <Navigate to={"/"} />;
 	}
 };
 
@@ -49,7 +50,7 @@ const ProtectedRouteFuncionario = ({ children }) => {
 	if (isAuthenticated && user === 2) {
 		return children;
 	} else {
-		return <Navigate to={"/"}></Navigate>;
+		return <Navigate to={"/"} />;
 	}
 };
 
@@ -57,57 +58,11 @@ const ProtectedPerfil = ({ children }) => {
 	const { isAuthenticated } = useAuth();
 	const { user } = useAuth();
 
-	if (isAuthenticated && user === 1) {
-		return <h1>Perfil Encargado</h1>;
-	} else if (isAuthenticated && user === 2) {
-		return <h1>Perfil Funcionario</h1>;
+	if (isAuthenticated && (user === 1 || user === 2)) {
+		return children;
 	} else {
-		return <Navigate to={"/login"}></Navigate>;
+		return <Navigate to={"/"} />;
 	}
-};
-
-const Home = () => <h1>Home</h1>;
-const LoginOld = () => {
-	const { login } = useAuth();
-	const { loginEncargado } = useAuth();
-	const { loginFuncionario } = useAuth();
-	const navigate = useNavigate();
-
-	const handleClick = () => {
-		login();
-		navigate("/");
-	};
-
-	const handleClickEncargado = () => {
-		loginEncargado();
-		navigate("/");
-	};
-
-	const handleClickFuncionario = () => {
-		loginFuncionario();
-		navigate("/");
-	};
-
-	return (
-		<>
-			<Button onClick={handleClick}>Login</Button>
-			<Button onClick={handleClickEncargado}>Login Encargado</Button>
-			<Button onClick={handleClickFuncionario}>Login Funcionario</Button>
-		</>
-	);
-};
-
-const LoginFromCookie = () => {
-	const { login } = useAuth();
-	const code = cookies.get("code");
-
-	useEffect(() => {
-		if (code) {
-			login(code);
-		}
-
-		console.log(code);
-	}, [code]);
 };
 
 function App() {
@@ -115,22 +70,17 @@ function App() {
 		<AuthProvider>
 			<NavBarCustom />
 			<div className="App">
-				<LoginFromCookie />
 				<Routes>
 					<Route path="/" element={<Home />}></Route>
 					{/*<Route path="/login" element={<Login />}></Route>*/}
 					<Route
-						path="/outh2Prueba"
-						element={<AuthorizationCodeExample></AuthorizationCodeExample>}
-					></Route>
-					<Route
 						path="/perfil"
 						element={
-							<>
-								<ProtectedPerfil />
-							</>
+							<ProtectedPerfil>
+								<Perfil />
+							</ProtectedPerfil>
 						}
-					></Route>
+					/>
 					<Route
 						path="/empresa"
 						element={
@@ -138,7 +88,7 @@ function App() {
 								<h1>Perfil Empresa</h1>
 							</ProtectedRouteEncargado>
 						}
-					></Route>
+					/>
 					<Route
 						path="/ingresarGuiaDeViaje"
 						element={
@@ -146,7 +96,7 @@ function App() {
 								<IngresarGuiaDeViaje />
 							</ProtectedRouteEncargado>
 						}
-					></Route>
+					/>
 					<Route
 						path="/asignarGuiaDeViaje"
 						element={
@@ -154,7 +104,7 @@ function App() {
 								<AsignarGuiaDeViaje />
 							</ProtectedRouteEncargado>
 						}
-					></Route>
+					/>
 					<Route
 						path="/agregarVehiculo"
 						element={
@@ -162,7 +112,7 @@ function App() {
 								<AgregarVehiculo />
 							</ProtectedRouteEncargado>
 						}
-					></Route>
+					/>
 					<Route
 						path="/editarVehiculo"
 						element={
@@ -170,7 +120,7 @@ function App() {
 								<EditarVehiculo />
 							</ProtectedRouteEncargado>
 						}
-					></Route>
+					/>
 					<Route
 						path="/eliminarVehiculo"
 						element={
@@ -178,8 +128,8 @@ function App() {
 								<h1>Eliminar Vehículo</h1>
 							</ProtectedRouteEncargado>
 						}
-					></Route>
-					<Route path="*" element={<h1>Not found</h1>}></Route>
+					/>
+					<Route path="*" element={<h1>Not found</h1>} />
 				</Routes>
 			</div>
 			<Footer />
