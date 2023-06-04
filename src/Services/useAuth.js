@@ -1,6 +1,7 @@
 import { useState, useContext, createContext } from "react";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
+import { ErrorModalPublicUser } from "../Utilities/Error/ErrorModalPublicUser";
 
 export const AuthContext = createContext();
 
@@ -11,11 +12,14 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
 	const alreadyLogged = cookies.get("code") !== undefined; // If the jwt is undefined, the user is not logged
+	//console.log(cookies.get("code"));
 	const initialUser = alreadyLogged
-		? jwt_decode(cookies.get("code")).iss === "Encargado"
-			? 1
-			: 2
-		: 0;
+		? jwt_decode(cookies.get("code")).rol[0] === "EncargadoEmpresa"
+			? 1 // Encargado
+			: jwt_decode(cookies.get("code")).rol[0] === "Funcionario"
+			? 2 // Funcionario
+			: 0 // Publico
+		: 3; // Not logged
 
 	const [isAuthenticated, setIsAuthenticated] = useState(alreadyLogged);
 	const [user, setUser] = useState(initialUser);
@@ -25,10 +29,12 @@ export const AuthProvider = ({ children }) => {
 		cookies.set("code", code);
 		setIsAuthenticated(true);
 
-		if (jwtDecoded.iss === "Encargado") {
+		if (jwtDecoded.rol[0] === "EncargadoEmpresa") {
 			setUser(1);
-		} else if (jwtDecoded.iss === "Funcionario") {
+		} else if (jwtDecoded.rol[0] === "Funcionario") {
 			setUser(2);
+		} else {
+			setUser(0);
 		}
 	};
 
@@ -39,15 +45,18 @@ export const AuthProvider = ({ children }) => {
 	};
 
 	return (
-		<AuthContext.Provider
-			value={{
-				isAuthenticated,
-				user,
-				login,
-				logout,
-			}}
-		>
-			{children}
-		</AuthContext.Provider>
+		<>
+			<AuthContext.Provider
+				value={{
+					isAuthenticated,
+					user,
+					login,
+					logout,
+				}}
+			>
+				{children}
+			</AuthContext.Provider>
+			<ErrorModalPublicUser user={user} /*When user is Publico*/ />
+		</>
 	);
 };
