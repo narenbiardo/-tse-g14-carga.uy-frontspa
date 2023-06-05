@@ -109,6 +109,8 @@ export const AgregarVehiculo = () => {
 				label="Matricula"
 				name="matricula"
 				onChangeHandler={handleChangeAvf}
+				isValid={avf.matricula?.length === 7}
+				invalidText={"La matrícula es inválida"}
 			/>
 
 			<FormTextInputAutocomplete
@@ -119,6 +121,8 @@ export const AgregarVehiculo = () => {
 				onChangeHandler={handleChangeAvf}
 				optionArray={marcasVehiculos}
 				maxOptionNumber={5}
+				isValid={avf.marca?.length > 0}
+				invalidText={"La marca no puede estar vacía"}
 			/>
 
 			<FormInputText
@@ -126,6 +130,8 @@ export const AgregarVehiculo = () => {
 				label="Modelo"
 				name="modelo"
 				onChangeHandler={handleChangeAvf}
+				isValid={avf.modelo?.length > 0}
+				invalidText={"El modelo no puede estar vacío"}
 			/>
 
 			<FormInputNumber
@@ -134,6 +140,8 @@ export const AgregarVehiculo = () => {
 				name="peso"
 				step="0.01"
 				onChangeHandler={handleChangeAvf}
+				isValid={avf.peso?.length > 0}
+				invalidText={"El peso no puede estar vacío"}
 			/>
 
 			<FormInputNumber
@@ -142,6 +150,8 @@ export const AgregarVehiculo = () => {
 				name="capacidad"
 				step="0.01"
 				onChangeHandler={handleChangeAvf}
+				isValid={avf.capacidad?.length > 0}
+				invalidText={"La capacidad no puede estar vacía"}
 			/>
 
 			<FormInputDate
@@ -151,6 +161,10 @@ export const AgregarVehiculo = () => {
 				name="vencimientoITV"
 				min={new Date().toISOString().split("T")[0]}
 				onChangeHandler={handleChangeAvf}
+				isValid={avf.vencimientoITV?.length > 0}
+				invalidText={
+					"La fecha de vencimiento de la inspección técnica vehicular no puede ser vacía"
+				}
 			/>
 
 			<FormH4 text="Permiso Nacional de Circulación" />
@@ -160,6 +174,10 @@ export const AgregarVehiculo = () => {
 				label="Número"
 				name="numero"
 				onChangeHandler={handleChangeDtpnc}
+				isValid={dtpnc.numero?.length > 0}
+				invalidText={
+					"El número del permiso nacional de circulación no puede estar vacío"
+				}
 			/>
 
 			<FormInputDate
@@ -169,6 +187,10 @@ export const AgregarVehiculo = () => {
 				name="fechaEmision"
 				max={new Date().toISOString().split("T")[0]}
 				onChangeHandler={handleChangeDtpnc}
+				isValid={dtpnc.fechaEmision?.length > 0}
+				invalidText={
+					"La fecha de emisión del permiso nacional de circulación no puede ser vacía"
+				}
 			/>
 
 			<FormInputDate
@@ -178,9 +200,27 @@ export const AgregarVehiculo = () => {
 				name="fechaVencimiento"
 				min={new Date().toISOString().split("T")[0]}
 				onChangeHandler={handleChangeDtpnc}
+				isValid={dtpnc.fechaVencimiento?.length > 0}
+				invalidText={
+					"La fecha de vencimiento del permiso nacional de circulación no puede ser vacía"
+				}
 			/>
 
-			<FormInputSubmit onClickHandler={handlePostVehiculo} value="Enviar" />
+			<FormInputSubmit
+				onClickHandler={handlePostVehiculo}
+				value="Enviar"
+				validForm={
+					avf.matricula?.length === 7 &&
+					avf.marca?.length > 0 &&
+					avf.modelo?.length > 0 &&
+					avf.peso?.length > 0 &&
+					avf.capacidad?.length > 0 &&
+					avf.vencimientoITV?.length > 0 &&
+					dtpnc.numero?.length > 0 &&
+					dtpnc.fechaEmision?.length > 0 &&
+					dtpnc.fechaVencimiento?.length > 0
+				}
+			/>
 		</FormDiv>
 	);
 };
