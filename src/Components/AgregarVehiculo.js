@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import cookies from "js-cookie";
+import axios from "axios";
 import "react-autocomplete-input/dist/bundle.css";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormInputText } from "../Utilities/FormInputText";
@@ -80,6 +82,18 @@ export const AgregarVehiculo = () => {
 	const handleChangeDtpnc = e => {
 		const { name, value } = e.target;
 		setDtpnc(prevData => ({ ...prevData, [name]: value }));
+	};
+
+	const handlePostVehiculo = () => {
+		console.log(avf);
+		axios
+			.get("http://localhost:8080/api/echo/jwt")
+			.then(response => {
+				console.log(response.data);
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	};
 
 	useEffect(() => {
@@ -166,7 +180,7 @@ export const AgregarVehiculo = () => {
 				onChangeHandler={handleChangeDtpnc}
 			/>
 
-			<FormInputSubmit onClickHandler={() => console.log(avf)} value="Enviar" />
+			<FormInputSubmit onClickHandler={handlePostVehiculo} value="Enviar" />
 		</FormDiv>
 	);
 };

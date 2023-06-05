@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 	const logout = () => {
 		cookies.remove("code");
 		setIsAuthenticated(false);
-		setUser(0);
+		setUser(3);
 	};
 
 	return (

@@ -20,7 +20,13 @@ import { EditarVehiculo } from "./Components/EditarVehiculo";
 import { Perfil } from "./Components/Perfil";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
 import { Home } from "./Components/Home";
+
+axios.defaults.headers.common["Authorization"] = cookies.get("code")
+	? `Bearer ${cookies.get("code")}`
+	: "";
+axios.defaults.headers.common["Accept"] = "*/*";
 
 const ProtectedRoute = ({ children }) => {
 	const { isAuthenticated } = useAuth();
