@@ -10,15 +10,12 @@ export const FormInputDate = ({
 	max,
 	min,
 	onChangeHandler,
+	inputValue,
 	isValid,
 	invalidText,
+	firstTime,
+	handleFirstTime,
 }) => {
-	const [firstTime, setFirstTime] = useState(true);
-
-	const handleFirstTime = () => {
-		setFirstTime(false);
-	};
-
 	return (
 		<FormInputDiv>
 			<label htmlFor={htmlFor}>{label}</label>
@@ -29,6 +26,7 @@ export const FormInputDate = ({
 				min={min}
 				onChange={onChangeHandler}
 				onBlur={handleFirstTime}
+				value={inputValue}
 				style={{
 					marginLeft: "10px",
 					padding: "5px",

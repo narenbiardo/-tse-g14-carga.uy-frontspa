@@ -22,6 +22,7 @@ import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { Home } from "./Components/Home";
+import { PerfilEmpresa } from "./Components/PerfilEmpresa";
 
 axios.defaults.headers.common["Authorization"] = cookies.get("code")
 	? `Bearer ${cookies.get("code")}`
@@ -92,7 +93,7 @@ function App() {
 						path="/empresa"
 						element={
 							<ProtectedRouteEncargado>
-								<h1>Perfil Empresa</h1>
+								<PerfilEmpresa />
 							</ProtectedRouteEncargado>
 						}
 					/>

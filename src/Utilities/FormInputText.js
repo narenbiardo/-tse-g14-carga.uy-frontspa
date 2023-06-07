@@ -7,15 +7,12 @@ export const FormInputText = ({
 	label,
 	name,
 	onChangeHandler,
+	inputValue,
 	isValid,
 	invalidText,
+	firstTime,
+	handleFirstTime,
 }) => {
-	const [firstTime, setFirstTime] = useState(true);
-
-	const handleFirstTime = () => {
-		setFirstTime(false);
-	};
-
 	return (
 		<FormInputDiv>
 			<label htmlFor={htmlFor}>{label}</label>
@@ -23,6 +20,7 @@ export const FormInputText = ({
 				type="text"
 				name={name}
 				onChange={onChangeHandler}
+				value={inputValue}
 				onBlur={handleFirstTime}
 				style={{
 					marginLeft: "10px",

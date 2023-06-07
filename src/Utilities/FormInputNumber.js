@@ -8,15 +8,12 @@ export const FormInputNumber = ({
 	name,
 	step,
 	onChangeHandler,
+	inputValue,
 	isValid,
 	invalidText,
+	firstTime,
+	handleFirstTime,
 }) => {
-	const [firstTime, setFirstTime] = useState(true);
-
-	const handleFirstTime = () => {
-		setFirstTime(false);
-	};
-
 	return (
 		<FormInputDiv>
 			<label htmlFor={htmlFor}>{label}</label>
@@ -26,6 +23,7 @@ export const FormInputNumber = ({
 				step={step}
 				min={0}
 				onChange={onChangeHandler}
+				value={inputValue}
 				onBlur={handleFirstTime}
 				style={{
 					marginLeft: "10px",

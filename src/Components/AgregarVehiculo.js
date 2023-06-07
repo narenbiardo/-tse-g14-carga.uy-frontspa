@@ -15,33 +15,7 @@ import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormSelectArray } from "../Utilities/FormSelectArray";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
 
-/*const marcasVehiculosMock = [
-	"Audi",
-	"BMW",
-	"Chevrolet",
-	"Ferrari",
-	"Ford",
-	"Honda",
-	"Hyundai",
-	"Jaguar",
-	"Jeep",
-	"Kia",
-	"Lamborghini",
-	"Land Rover",
-	"Lexus",
-	"Maserati",
-	"Mazda",
-	"Mercedes-Benz",
-	"Nissan",
-	"Porsche",
-	"Subaru",
-	"Tesla",
-	"Toyota",
-	"Volkswagen",
-	"Volvo",
-];*/
 const jwtDecoded = jwt_decode(cookies.get("code"));
-
 class DtPermisoNacionalCirculacion {
 	constructor(numero, fechaEmision, fechaVencimiento) {
 		this.numero = numero;
@@ -71,10 +45,47 @@ class AgregarVehiculoForm {
 	}
 }
 
+class FirstTimeInput {
+	constructor(
+		matricula,
+		marcaVehiculo,
+		modelo,
+		peso,
+		capacidad,
+		numero,
+		fechaEmision,
+		fechaVencimiento,
+		vencimientoITV
+	) {
+		this.matricula = matricula;
+		this.marcaVehiculo = marcaVehiculo;
+		this.modelo = modelo;
+		this.peso = peso;
+		this.capacidad = capacidad;
+		this.numero = numero;
+		this.fechaEmision = fechaEmision;
+		this.fechaVencimiento = fechaVencimiento;
+		this.vencimientoITV = vencimientoITV;
+	}
+}
+
+const fti = new FirstTimeInput( //used to check if the form input is changed for the first time
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true
+);
+
 export const AgregarVehiculo = () => {
 	const [avf, setAvf] = useState(new AgregarVehiculoForm());
 	const [dtpnc, setDtpnc] = useState(new DtPermisoNacionalCirculacion());
 	const [marcasVehiculos, setMarcasVehiculos] = useState([]);
+	const [firstTimeInput, setfirstTimeInput] = useState(fti);
 
 	const handleChangeAvf = e => {
 		if (e.target) {
@@ -103,6 +114,19 @@ export const AgregarVehiculo = () => {
 			});
 	};
 
+	const handleFirstTimeInput = e => {
+		if (e.target) {
+			const { name } = e.target;
+			setfirstTimeInput(prevData => ({ ...prevData, [name]: false }));
+		} else {
+			//e.target will be null in TextInput component
+			setfirstTimeInput(prevData => ({
+				...prevData,
+				["marcaVehiculo"]: false,
+			}));
+		}
+	};
+
 	const handlePostVehiculo = () => {
 		axios
 			.post("http://localhost:8080/api/vehiculosService/agregarVehiculo", {
@@ -121,6 +145,9 @@ export const AgregarVehiculo = () => {
 			})
 			.then(response => {
 				console.log(response.data);
+				setAvf(new AgregarVehiculoForm());
+				setDtpnc(new DtPermisoNacionalCirculacion());
+				setfirstTimeInput(fti);
 			})
 			.catch(error => {
 				console.log(error);
@@ -144,15 +171,18 @@ export const AgregarVehiculo = () => {
 				label="Matricula"
 				name="matricula"
 				onChangeHandler={handleChangeAvf}
+				inputValue={avf.matricula ? avf.matricula : ""}
 				isValid={avf.matricula?.length === 7}
 				invalidText={"La matrícula es inválida"}
+				firstTime={firstTimeInput.matricula}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			<FormInputDiv>
 				<label htmlFor="marcaVehiculo">Marca</label>
 				<select
 					name="marcaVehiculo"
-					form="marcaForm"
+					form="marcaVehiculoForm"
 					onChange={handleChangeAvf}
 					value={avf.marcaVehiculo}
 					defaultValue=""
@@ -183,8 +213,11 @@ export const AgregarVehiculo = () => {
 				label="Modelo"
 				name="modelo"
 				onChangeHandler={handleChangeAvf}
+				inputValue={avf.modelo ? avf.modelo : ""}
 				isValid={avf.modelo?.length > 0}
 				invalidText={"El modelo no puede estar vacío"}
+				firstTime={firstTimeInput.modelo}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			<FormInputNumber
@@ -193,8 +226,11 @@ export const AgregarVehiculo = () => {
 				name="peso"
 				step="0.01"
 				onChangeHandler={handleChangeAvf}
+				inputValue={avf.peso ? avf.peso : ""}
 				isValid={avf.peso?.length > 0}
 				invalidText={"El peso no puede estar vacío"}
+				firstTime={firstTimeInput.peso}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			<FormInputNumber
@@ -203,8 +239,11 @@ export const AgregarVehiculo = () => {
 				name="capacidad"
 				step="0.01"
 				onChangeHandler={handleChangeAvf}
+				inputValue={avf.capacidad ? avf.capacidad : ""}
 				isValid={avf.capacidad?.length > 0}
 				invalidText={"La capacidad no puede estar vacía"}
+				firstTime={firstTimeInput.capacidad}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			<FormInputDate
@@ -214,10 +253,13 @@ export const AgregarVehiculo = () => {
 				name="vencimientoITV"
 				min={new Date().toISOString().split("T")[0]}
 				onChangeHandler={handleChangeAvf}
+				inputValue={avf.vencimientoITV ? avf.vencimientoITV : ""}
 				isValid={avf.vencimientoITV?.length > 0}
 				invalidText={
 					"La fecha de vencimiento de la inspección técnica vehicular no puede ser vacía"
 				}
+				firstTime={firstTimeInput.vencimientoITV}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			<FormH4 text="Permiso Nacional de Circulación" />
@@ -227,10 +269,13 @@ export const AgregarVehiculo = () => {
 				label="Número"
 				name="numero"
 				onChangeHandler={handleChangeDtpnc}
+				inputValue={dtpnc.numero ? dtpnc.numero : ""}
 				isValid={dtpnc.numero?.length > 0}
 				invalidText={
 					"El número del permiso nacional de circulación no puede estar vacío"
 				}
+				firstTime={firstTimeInput.numero}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			<FormInputDate
@@ -240,10 +285,13 @@ export const AgregarVehiculo = () => {
 				name="fechaEmision"
 				max={new Date().toISOString().split("T")[0]}
 				onChangeHandler={handleChangeDtpnc}
+				inputValue={dtpnc.fechaEmision ? dtpnc.fechaEmision : ""}
 				isValid={dtpnc.fechaEmision?.length > 0}
 				invalidText={
 					"La fecha de emisión del permiso nacional de circulación no puede ser vacía"
 				}
+				firstTime={firstTimeInput.fechaEmision}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			<FormInputDate
@@ -253,10 +301,13 @@ export const AgregarVehiculo = () => {
 				name="fechaVencimiento"
 				min={new Date().toISOString().split("T")[0]}
 				onChangeHandler={handleChangeDtpnc}
+				inputValue={dtpnc.fechaVencimiento ? dtpnc.fechaVencimiento : ""}
 				isValid={dtpnc.fechaVencimiento?.length > 0}
 				invalidText={
 					"La fecha de vencimiento del permiso nacional de circulación no puede ser vacía"
 				}
+				firstTime={firstTimeInput.fechaVencimiento}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			<FormInputSubmit
