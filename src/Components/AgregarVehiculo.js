@@ -15,7 +15,6 @@ import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormSelectArray } from "../Utilities/FormSelectArray";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
 
-const jwtDecoded = jwt_decode(cookies.get("code"));
 class DtPermisoNacionalCirculacion {
 	constructor(numero, fechaEmision, fechaVencimiento) {
 		this.numero = numero;
@@ -41,7 +40,7 @@ class AgregarVehiculoForm {
 		this.capacidad = capacidad;
 		this.permisoCirculacion = permisoCirculacion;
 		this.vencimientoITV = vencimientoITV;
-		this.nroEmpresa = jwtDecoded.nroEmpresa;
+		this.nroEmpresa = "";
 	}
 }
 
@@ -134,7 +133,7 @@ export const AgregarVehiculo = () => {
 				marcaVehiculo: avf.marcaVehiculo,
 				matricula: avf.matricula,
 				modelo: avf.modelo,
-				nroEmpresa: avf.nroEmpresa,
+				nroEmpresa: jwt_decode(cookies.get("code")).nroEmpresa,
 				permisoCirculacion: {
 					fechaEmision: avf.permisoCirculacion.fechaEmision,
 					fechaVencimiento: avf.permisoCirculacion.fechaVencimiento,
