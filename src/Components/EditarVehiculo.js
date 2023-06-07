@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ListaVehiculos } from "./ListaVehiculos";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 
 class DtPermisoNacionalCirculacion {
 	constructor(numero, fechaEmision, fechaVencimiento) {
@@ -30,6 +31,7 @@ class AgregarVehiculoForm {
 	}
 }
 
+/*
 const vehiculos = [
 	new AgregarVehiculoForm(
 		"ABC1234",
@@ -59,13 +61,45 @@ const vehiculos = [
 		"2024-11-19"
 	),
 ];
+*/
 
 export const EditarVehiculo = () => {
 	const [matriculaVehiculo, setMatriculaVehiculo] = useState("");
+	const [vehiculos, setvehiculos] = useState([]);
 
 	const handleMatriculaVehiculo = matricula => {
 		setMatriculaVehiculo(matricula);
 	};
+
+	useEffect(() => {
+		axios
+			.get("http://localhost:8080/api/vehiculosService/listarVehiculos")
+			.then(response => {
+				//console.log(response.data);
+				setvehiculos(
+					response.data.map(vehiculo => {
+						const permisoCirculacion = new DtPermisoNacionalCirculacion(
+							vehiculo.permisoCirculacion.numero,
+							vehiculo.permisoCirculacion.fechaEmision,
+							vehiculo.permisoCirculacion.fechaVencimiento
+						);
+
+						return new AgregarVehiculoForm(
+							vehiculo.matricula,
+							vehiculo.marcaVehiculo,
+							vehiculo.modelo,
+							vehiculo.capacidad.toString(),
+							vehiculo.peso.toString(),
+							permisoCirculacion,
+							vehiculo.vencimientoITV
+						);
+					})
+				);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}, []);
 
 	return matriculaVehiculo == "" ? (
 		<ListaVehiculos
