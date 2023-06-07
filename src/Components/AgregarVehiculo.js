@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 import axios from "axios";
 import "react-autocomplete-input/dist/bundle.css";
+import { mainColor } from "../constants";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormInputText } from "../Utilities/FormInputText";
 import { FormInputNumber } from "../Utilities/FormInputNumber";
@@ -10,8 +12,10 @@ import { FormH2 } from "../Utilities/FormH2";
 import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
+import { FormSelectArray } from "../Utilities/FormSelectArray";
+import { FormInputDiv } from "../Utilities/FormInputDiv";
 
-const marcasVehiculos = [
+/*const marcasVehiculosMock = [
 	"Audi",
 	"BMW",
 	"Chevrolet",
@@ -35,7 +39,8 @@ const marcasVehiculos = [
 	"Toyota",
 	"Volkswagen",
 	"Volvo",
-];
+];*/
+const jwtDecoded = jwt_decode(cookies.get("code"));
 
 class DtPermisoNacionalCirculacion {
 	constructor(numero, fechaEmision, fechaVencimiento) {
@@ -48,26 +53,28 @@ class DtPermisoNacionalCirculacion {
 class AgregarVehiculoForm {
 	constructor(
 		matricula,
-		marca,
+		marcaVehiculo,
 		modelo,
 		peso,
 		capacidad,
-		pnc, // DtPermisoNacionalCirculacion
+		permisoCirculacion, // DtPermisoNacionalCirculacion
 		vencimientoITV // Fecha de vencimiento de la inspeccion tecnica vehicular
 	) {
 		this.matricula = matricula;
-		this.marca = marca;
+		this.marcaVehiculo = marcaVehiculo;
 		this.modelo = modelo;
 		this.peso = peso;
 		this.capacidad = capacidad;
-		this.pnc = pnc;
+		this.permisoCirculacion = permisoCirculacion;
 		this.vencimientoITV = vencimientoITV;
+		this.nroEmpresa = jwtDecoded.nroEmpresa;
 	}
 }
 
 export const AgregarVehiculo = () => {
 	const [avf, setAvf] = useState(new AgregarVehiculoForm());
 	const [dtpnc, setDtpnc] = useState(new DtPermisoNacionalCirculacion());
+	const [marcasVehiculos, setMarcasVehiculos] = useState([]);
 
 	const handleChangeAvf = e => {
 		if (e.target) {
@@ -75,7 +82,7 @@ export const AgregarVehiculo = () => {
 			setAvf(prevData => ({ ...prevData, [name]: value }));
 		} else {
 			//e.target will be null in TextInput component
-			setAvf(prevData => ({ ...prevData, ["marca"]: e }));
+			setAvf(prevData => ({ ...prevData, ["marcaVehiculo"]: e }));
 		}
 	};
 
@@ -84,10 +91,34 @@ export const AgregarVehiculo = () => {
 		setDtpnc(prevData => ({ ...prevData, [name]: value }));
 	};
 
-	const handlePostVehiculo = () => {
-		console.log(avf);
+	const handleMarcasVehiculo = () => {
 		axios
-			.get("http://localhost:8080/api/echo/jwt")
+			.get("http://localhost:8080/api/vehiculosService/listaMarcasVehiculos")
+			.then(response => {
+				//console.log(response.data);
+				setMarcasVehiculos(response.data);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+
+	const handlePostVehiculo = () => {
+		axios
+			.post("http://localhost:8080/api/vehiculosService/agregarVehiculo", {
+				capacidad: parseFloat(avf.capacidad),
+				marcaVehiculo: avf.marcaVehiculo,
+				matricula: avf.matricula,
+				modelo: avf.modelo,
+				nroEmpresa: avf.nroEmpresa,
+				permisoCirculacion: {
+					fechaEmision: avf.permisoCirculacion.fechaEmision,
+					fechaVencimiento: avf.permisoCirculacion.fechaVencimiento,
+					numero: avf.permisoCirculacion.numero,
+				},
+				peso: parseFloat(avf.peso),
+				vencimientoITV: avf.vencimientoITV,
+			})
 			.then(response => {
 				console.log(response.data);
 			})
@@ -97,8 +128,12 @@ export const AgregarVehiculo = () => {
 	};
 
 	useEffect(() => {
-		setAvf(prevData => ({ ...prevData, ["pnc"]: dtpnc }));
+		setAvf(prevData => ({ ...prevData, ["permisoCirculacion"]: dtpnc }));
 	}, [dtpnc]);
+
+	useEffect(() => {
+		handleMarcasVehiculo();
+	}, []);
 
 	return (
 		<FormDiv>
@@ -113,17 +148,35 @@ export const AgregarVehiculo = () => {
 				invalidText={"La matrícula es inválida"}
 			/>
 
-			<FormTextInputAutocomplete
-				htmlFor="marca"
-				label="Marca"
-				name="marca"
-				form="marcaForm"
-				onChangeHandler={handleChangeAvf}
-				optionArray={marcasVehiculos}
-				maxOptionNumber={5}
-				isValid={avf.marca?.length > 0}
-				invalidText={"La marca no puede estar vacía"}
-			/>
+			<FormInputDiv>
+				<label htmlFor="marcaVehiculo">Marca</label>
+				<select
+					name="marcaVehiculo"
+					form="marcaForm"
+					onChange={handleChangeAvf}
+					value={avf.marcaVehiculo}
+					defaultValue=""
+					required
+					style={{
+						marginLeft: "10px",
+						padding: "5px",
+						border: "none",
+						borderBottom: "2px solid " + mainColor,
+						width: "250px",
+						fontSize: "16px",
+						color: "#555",
+					}}
+				>
+					<option value="" disabled>
+						Seleccionar Marca
+					</option>
+					{marcasVehiculos.map((element, index) => (
+						<option value={element} key={Math.random()}>
+							{element}
+						</option>
+					))}
+				</select>
+			</FormInputDiv>
 
 			<FormInputText
 				htmlFor="modelo"
@@ -211,7 +264,7 @@ export const AgregarVehiculo = () => {
 				value="Enviar"
 				validForm={
 					avf.matricula?.length === 7 &&
-					avf.marca?.length > 0 &&
+					(avf.marcaVehiculo ? true : false) &&
 					avf.modelo?.length > 0 &&
 					avf.peso?.length > 0 &&
 					avf.capacidad?.length > 0 &&

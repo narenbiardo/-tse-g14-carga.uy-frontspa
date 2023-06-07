@@ -27,6 +27,7 @@ axios.defaults.headers.common["Authorization"] = cookies.get("code")
 	? `Bearer ${cookies.get("code")}`
 	: "";
 axios.defaults.headers.common["Accept"] = "*/*";
+console.log(cookies.get("code"));
 
 const ProtectedRoute = ({ children }) => {
 	const { isAuthenticated } = useAuth();

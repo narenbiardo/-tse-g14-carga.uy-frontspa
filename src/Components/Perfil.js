@@ -5,7 +5,7 @@ export const Perfil = () => {
 	const jwtDecoded = jwt_decode(cookies.get("code"));
 	return (
 		<>
-			<h4>Rol: {jwtDecoded.rol[0]}</h4>
+			<h4>Rol: {jwtDecoded.rol[1]}</h4>
 			<h4>Nombre: {jwtDecoded.iss}</h4>
 			<h4>Email: {jwtDecoded.email}</h4>
 			<h4>Cédula: {jwtDecoded.cedula}</h4>
