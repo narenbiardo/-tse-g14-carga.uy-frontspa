@@ -25,10 +25,10 @@ export const ListaVehiculos = ({
 					<th>Modelo</th>
 					<th>Peso</th>
 					<th>Capacidad</th>
+					<th>Vencimiento ITV</th>
 					<th>#PNC</th>
 					<th>Emisión PNC</th>
 					<th>Vencimiento PNC</th>
-					<th>Vencimiento ITV</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -84,6 +84,13 @@ export const ListaVehiculos = ({
 								color: filaResaltada === index ? "#fff" : "inherit",
 							}}
 						>
+							{v.vencimientoITV}
+						</td>
+						<td
+							style={{
+								color: filaResaltada === index ? "#fff" : "inherit",
+							}}
+						>
 							{v.permisoCirculacion.numero}
 						</td>
 						<td
@@ -99,13 +106,6 @@ export const ListaVehiculos = ({
 							}}
 						>
 							{v.permisoCirculacion.fechaVencimiento}
-						</td>
-						<td
-							style={{
-								color: filaResaltada === index ? "#fff" : "inherit",
-							}}
-						>
-							{v.vencimientoITV}
 						</td>
 					</tr>
 				))}
