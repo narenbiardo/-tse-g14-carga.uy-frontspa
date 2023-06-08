@@ -17,101 +17,99 @@ export const ListaVehiculos = ({
 		setFilaResaltada(null);
 	};
 	return (
-		<FormDiv>
-			<Table size="sm" striped bordered hover responsive>
-				<thead>
-					<tr>
-						<th>Matrícula</th>
-						<th>Marca</th>
-						<th>Modelo</th>
-						<th>Peso</th>
-						<th>Capacidad</th>
-						<th>#PNC</th>
-						<th>Emisión PNC</th>
-						<th>Vencimiento PNC</th>
-						<th>Vencimiento ITV</th>
-					</tr>
-				</thead>
-				<tbody>
-					{vehiculosArray.map((v, index) => (
-						<tr
-							key={v.matricula}
-							onClick={() => onMatriculaVehiculoChange(v.matricula)}
-							onMouseEnter={() => handleMouseEnter(index)}
-							onMouseLeave={handleMouseLeave}
+		<Table size="sm" striped bordered hover responsive>
+			<thead>
+				<tr>
+					<th>Matrícula</th>
+					<th>Marca</th>
+					<th>Modelo</th>
+					<th>Peso</th>
+					<th>Capacidad</th>
+					<th>#PNC</th>
+					<th>Emisión PNC</th>
+					<th>Vencimiento PNC</th>
+					<th>Vencimiento ITV</th>
+				</tr>
+			</thead>
+			<tbody>
+				{vehiculosArray.map((v, index) => (
+					<tr
+						key={v.matricula}
+						onClick={() => onMatriculaVehiculoChange(v)}
+						onMouseEnter={() => handleMouseEnter(index)}
+						onMouseLeave={handleMouseLeave}
+						style={{
+							cursor: "pointer",
+							backgroundColor:
+								filaResaltada === index ? mainColor : "transparent",
+						}}
+					>
+						<td
 							style={{
-								cursor: "pointer",
-								backgroundColor:
-									filaResaltada === index ? mainColor : "transparent",
+								color: filaResaltada === index ? "#fff" : "inherit",
 							}}
 						>
-							<td
-								style={{
-									color: filaResaltada === index ? "#fff" : "inherit",
-								}}
-							>
-								{v.matricula}
-							</td>
-							<td
-								style={{
-									color: filaResaltada === index ? "#fff" : "inherit",
-								}}
-							>
-								{v.marca}
-							</td>
-							<td
-								style={{
-									color: filaResaltada === index ? "#fff" : "inherit",
-								}}
-							>
-								{v.modelo}
-							</td>
-							<td
-								style={{
-									color: filaResaltada === index ? "#fff" : "inherit",
-								}}
-							>
-								{v.peso}
-							</td>
-							<td
-								style={{
-									color: filaResaltada === index ? "#fff" : "inherit",
-								}}
-							>
-								{v.capacidad}
-							</td>
-							<td
-								style={{
-									color: filaResaltada === index ? "#fff" : "inherit",
-								}}
-							>
-								{v.pnc.numero}
-							</td>
-							<td
-								style={{
-									color: filaResaltada === index ? "#fff" : "inherit",
-								}}
-							>
-								{v.pnc.fechaEmision}
-							</td>
-							<td
-								style={{
-									color: filaResaltada === index ? "#fff" : "inherit",
-								}}
-							>
-								{v.pnc.fechaVencimiento}
-							</td>
-							<td
-								style={{
-									color: filaResaltada === index ? "#fff" : "inherit",
-								}}
-							>
-								{v.vencimientoITV}
-							</td>
-						</tr>
-					))}
-				</tbody>
-			</Table>
-		</FormDiv>
+							{v.matricula}
+						</td>
+						<td
+							style={{
+								color: filaResaltada === index ? "#fff" : "inherit",
+							}}
+						>
+							{v.marcaVehiculo}
+						</td>
+						<td
+							style={{
+								color: filaResaltada === index ? "#fff" : "inherit",
+							}}
+						>
+							{v.modelo}
+						</td>
+						<td
+							style={{
+								color: filaResaltada === index ? "#fff" : "inherit",
+							}}
+						>
+							{v.peso}
+						</td>
+						<td
+							style={{
+								color: filaResaltada === index ? "#fff" : "inherit",
+							}}
+						>
+							{v.capacidad}
+						</td>
+						<td
+							style={{
+								color: filaResaltada === index ? "#fff" : "inherit",
+							}}
+						>
+							{v.permisoCirculacion.numero}
+						</td>
+						<td
+							style={{
+								color: filaResaltada === index ? "#fff" : "inherit",
+							}}
+						>
+							{v.permisoCirculacion.fechaEmision}
+						</td>
+						<td
+							style={{
+								color: filaResaltada === index ? "#fff" : "inherit",
+							}}
+						>
+							{v.permisoCirculacion.fechaVencimiento}
+						</td>
+						<td
+							style={{
+								color: filaResaltada === index ? "#fff" : "inherit",
+							}}
+						>
+							{v.vencimientoITV}
+						</td>
+					</tr>
+				))}
+			</tbody>
+		</Table>
 	);
 };
