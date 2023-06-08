@@ -14,9 +14,11 @@ export const AuthProvider = ({ children }) => {
 	const alreadyLogged = cookies.get("code") !== undefined; // If the jwt is undefined, the user is not logged
 	//console.log(cookies.get("code"));
 	const initialUser = alreadyLogged
-		? jwt_decode(cookies.get("code")).rol[1] === "EncargadoEmpresa"
+		? jwt_decode(cookies.get("code")).rol.find(
+				role => role === "EncargadoEmpresa"
+		  )
 			? 1 // Encargado
-			: jwt_decode(cookies.get("code")).rol[1] === "Funcionario"
+			: jwt_decode(cookies.get("code")).rol.find(role => role === "Funcionario")
 			? 2 // Funcionario
 			: 0 // Publico
 		: 3; // Not logged
@@ -25,13 +27,18 @@ export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(initialUser);
 
 	const login = code => {
-		const jwtDecoded = jwt_decode(code);
 		cookies.set("code", code);
 		setIsAuthenticated(true);
 
-		if (jwtDecoded.rol[1] === "EncargadoEmpresa") {
+		if (
+			jwt_decode(cookies.get("code")).rol.find(
+				role => role === "EncargadoEmpresa"
+			)
+		) {
 			setUser(1);
-		} else if (jwtDecoded.rol[1] === "Funcionario") {
+		} else if (
+			jwt_decode(cookies.get("code")).rol.find(role => role === "Funcionario")
+		) {
 			setUser(2);
 		} else {
 			setUser(0);
