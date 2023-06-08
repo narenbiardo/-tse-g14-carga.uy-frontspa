@@ -5,6 +5,12 @@ import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import "react-autocomplete-input/dist/bundle.css";
+import {
+	DtPermisoNacionalCirculacion,
+	AgregarVehiculoForm,
+	FirstTimeInput,
+} from "../classes";
+import { fti } from "../constants";
 import { mainColor } from "../constants";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormInputText } from "../Utilities/FormInputText";
@@ -16,71 +22,6 @@ import { FormH4 } from "../Utilities/FromH4";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormSelectArray } from "../Utilities/FormSelectArray";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
-
-class DtPermisoNacionalCirculacion {
-	constructor(numero, fechaEmision, fechaVencimiento) {
-		this.numero = numero;
-		this.fechaEmision = fechaEmision;
-		this.fechaVencimiento = fechaVencimiento;
-	}
-}
-
-class AgregarVehiculoForm {
-	constructor(
-		matricula,
-		marcaVehiculo,
-		modelo,
-		peso,
-		capacidad,
-		permisoCirculacion, // DtPermisoNacionalCirculacion
-		vencimientoITV // Fecha de vencimiento de la inspeccion tecnica vehicular
-	) {
-		this.matricula = matricula;
-		this.marcaVehiculo = marcaVehiculo;
-		this.modelo = modelo;
-		this.peso = peso;
-		this.capacidad = capacidad;
-		this.permisoCirculacion = permisoCirculacion;
-		this.vencimientoITV = vencimientoITV;
-		this.nroEmpresa = "";
-	}
-}
-
-class FirstTimeInput {
-	constructor(
-		matricula,
-		marcaVehiculo,
-		modelo,
-		peso,
-		capacidad,
-		numero,
-		fechaEmision,
-		fechaVencimiento,
-		vencimientoITV
-	) {
-		this.matricula = matricula;
-		this.marcaVehiculo = marcaVehiculo;
-		this.modelo = modelo;
-		this.peso = peso;
-		this.capacidad = capacidad;
-		this.numero = numero;
-		this.fechaEmision = fechaEmision;
-		this.fechaVencimiento = fechaVencimiento;
-		this.vencimientoITV = vencimientoITV;
-	}
-}
-
-const fti = new FirstTimeInput( //used to check if the form input is changed for the first time
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true,
-	true
-);
 
 export const EditarVehiculo = () => {
 	const [matriculaVehiculo, setMatriculaVehiculo] = useState("");
