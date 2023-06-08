@@ -23,6 +23,7 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { Home } from "./Components/Home";
 import { PerfilEmpresa } from "./Components/PerfilEmpresa";
+import { EliminarVehiculo } from "./Components/EliminarVehiculo";
 
 axios.defaults.headers.common["Authorization"] = cookies.get("code")
 	? `Bearer ${cookies.get("code")}`
@@ -133,7 +134,7 @@ function App() {
 						path="/eliminarVehiculo"
 						element={
 							<ProtectedRouteEncargado>
-								<h1>Eliminar Vehículo</h1>
+								<EliminarVehiculo />
 							</ProtectedRouteEncargado>
 						}
 					/>
