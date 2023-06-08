@@ -50,3 +50,20 @@ export class FirstTimeInput {
 		this.vencimientoITV = vencimientoITV;
 	}
 }
+
+export class DtDireccionEmpresa {
+	constructor(calle, km, nroPuerta) {
+		this.calle = calle;
+		this.km = km;
+		this.nroPuerta = nroPuerta;
+	}
+}
+
+export class EmpresaDto {
+	constructor(direccionEmpresa, nombreEmpresa, nroEmpresa, razonSocial) {
+		this.direccionEmpresa = direccionEmpresa;
+		this.nombreEmpresa = nombreEmpresa;
+		this.nroEmpresa = nroEmpresa;
+		this.razonSocial = razonSocial;
+	}
+}
