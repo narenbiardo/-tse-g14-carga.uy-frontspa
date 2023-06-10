@@ -2,9 +2,9 @@ import axios from "axios";
 import cookies from "js-cookie";
 import { serverURL } from "../constants";
 
-export const axiosHeadersAuth = () =>
+export const axiosHeadersAuth = code =>
 	(axios.defaults.headers.common["Authorization"] = cookies.get("code")
-		? `Bearer ${cookies.get("code")}`
+		? `Bearer ${code ? code : cookies.get("code")}`
 		: "");
 export const axiosHeadersAccept = () =>
 	(axios.defaults.headers.common["Accept"] = "*/*");

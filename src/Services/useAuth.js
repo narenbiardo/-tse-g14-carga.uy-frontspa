@@ -1,6 +1,7 @@
 import { useState, useContext, createContext } from "react";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
+import { axiosHeadersAuth } from "./RestService";
 import { ErrorModalPublicUser } from "../Utilities/Error/ErrorModalPublicUser";
 
 export const AuthContext = createContext();
@@ -29,6 +30,7 @@ export const AuthProvider = ({ children }) => {
 	const login = code => {
 		cookies.set("code", code);
 		setIsAuthenticated(true);
+		axiosHeadersAuth(code);
 
 		if (
 			jwt_decode(cookies.get("code")).rol.find(
