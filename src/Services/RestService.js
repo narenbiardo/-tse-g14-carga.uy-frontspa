@@ -19,6 +19,7 @@ export const RESTEndpoints = {
 	},
 	encargadoService: {
 		getEmpresa: serverURL + "api/encargadoService/getEmpresa",
+		modEmpresa: serverURL + "api/encargadoService/modEmpresa",
 	},
 };
 

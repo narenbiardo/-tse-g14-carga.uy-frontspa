@@ -67,3 +67,14 @@ export class EmpresaDto {
 		this.razonSocial = razonSocial;
 	}
 }
+
+export class FirstTimeInputEmpresaDto {
+	constructor(nroEmpresa, nombreEmpresa, calle, km, nroPuerta, razonSocial) {
+		this.nroEmpresa = nroEmpresa;
+		this.nombreEmpresa = nombreEmpresa;
+		this.calle = calle;
+		this.km = km;
+		this.nroEmpresa = nroPuerta;
+		this.razonSocial = razonSocial;
+	}
+}
