@@ -27,6 +27,28 @@ export class AgregarVehiculoForm {
 	}
 }
 
+export class VehiculoDto {
+	constructor(
+		matricula,
+		nroEmpresa,
+		marcaVehiculo,
+		modelo,
+		peso,
+		capacidad,
+		permisoCirculacion, // DtPermisoNacionalCirculacion
+		vencimientoITV // Fecha de vencimiento de la inspeccion tecnica vehicular
+	) {
+		this.matricula = matricula;
+		this.nroEmpresa = nroEmpresa;
+		this.marcaVehiculo = marcaVehiculo;
+		this.modelo = modelo;
+		this.peso = peso;
+		this.capacidad = capacidad;
+		this.permisoCirculacion = permisoCirculacion;
+		this.vencimientoITV = vencimientoITV;
+	}
+}
+
 export class FirstTimeInput {
 	constructor(
 		matricula,

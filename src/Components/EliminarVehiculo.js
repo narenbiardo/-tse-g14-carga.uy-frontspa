@@ -84,6 +84,7 @@ export const EliminarVehiculo = () => {
 			<ListaVehiculos
 				onMatriculaVehiculoChange={handleMatriculaVehiculo}
 				vehiculosArray={vehiculos}
+				showNroEmpresa={false}
 			/>
 		</FormDiv>
 	);

@@ -6,6 +6,7 @@ import { mainColor } from "../constants";
 export const ListaVehiculos = ({
 	onMatriculaVehiculoChange,
 	vehiculosArray,
+	showNroEmpresa,
 }) => {
 	const [filaResaltada, setFilaResaltada] = useState(null);
 
@@ -20,6 +21,7 @@ export const ListaVehiculos = ({
 		<Table size="sm" striped bordered hover responsive>
 			<thead>
 				<tr>
+					{showNroEmpresa && <th>#Empresa</th>}
 					<th>Matrícula</th>
 					<th>Marca</th>
 					<th>Modelo</th>
@@ -44,6 +46,15 @@ export const ListaVehiculos = ({
 								filaResaltada === index ? mainColor : "transparent",
 						}}
 					>
+						{showNroEmpresa && (
+							<td
+								style={{
+									color: filaResaltada === index ? "#fff" : "inherit",
+								}}
+							>
+								{v.nroEmpresa}
+							</td>
+						)}
 						<td
 							style={{
 								color: filaResaltada === index ? "#fff" : "inherit",

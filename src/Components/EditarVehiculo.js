@@ -151,6 +151,7 @@ export const EditarVehiculo = () => {
 				<ListaVehiculos
 					onMatriculaVehiculoChange={handleMatriculaVehiculo}
 					vehiculosArray={vehiculos}
+					showNroEmpresa={false}
 				/>
 			) : (
 				<>
