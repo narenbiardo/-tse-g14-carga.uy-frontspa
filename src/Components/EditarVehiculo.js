@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { RESTEndpoints } from "../Services/RestService";
 import "react-autocomplete-input/dist/bundle.css";
 import {
 	DtPermisoNacionalCirculacion,
@@ -40,7 +41,7 @@ export const EditarVehiculo = () => {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:8080/api/vehiculosService/listarVehiculos")
+			.get(RESTEndpoints.vehiculosService.listarVehiculos)
 			.then(response => {
 				//console.log(response.data);
 				setvehiculos(
@@ -85,7 +86,7 @@ export const EditarVehiculo = () => {
 
 	const handleMarcasVehiculo = () => {
 		axios
-			.get("http://localhost:8080/api/vehiculosService/listaMarcasVehiculos")
+			.get(RESTEndpoints.vehiculosService.listaMarcasVehiculos)
 			.then(response => {
 				//console.log(response.data);
 				setMarcasVehiculos(response.data);
@@ -110,7 +111,7 @@ export const EditarVehiculo = () => {
 
 	const handlePostVehiculo = () => {
 		axios
-			.post("http://localhost:8080/api/vehiculosService/modVehiculo", {
+			.post(RESTEndpoints.vehiculosService.editarVehiculo, {
 				capacidad: parseFloat(avf.capacidad),
 				marcaVehiculo: avf.marcaVehiculo,
 				matricula: avf.matricula,

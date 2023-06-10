@@ -21,14 +21,13 @@ import { Perfil } from "./Components/Perfil";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { axiosHeadersAuth, axiosHeadersAccept } from "./Services/RestService";
 import { Home } from "./Components/Home";
 import { PerfilEmpresa } from "./Components/PerfilEmpresa";
 import { EliminarVehiculo } from "./Components/EliminarVehiculo";
 
-axios.defaults.headers.common["Authorization"] = cookies.get("code")
-	? `Bearer ${cookies.get("code")}`
-	: "";
-axios.defaults.headers.common["Accept"] = "*/*";
+axiosHeadersAuth();
+axiosHeadersAccept();
 console.log(cookies.get("code"));
 
 const ProtectedRoute = ({ children }) => {

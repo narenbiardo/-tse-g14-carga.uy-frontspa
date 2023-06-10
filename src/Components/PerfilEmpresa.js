@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { RESTEndpoints } from "../Services/RestService";
 import { EmpresaDto, DtDireccionEmpresa } from "../classes";
 
 export const PerfilEmpresa = () => {
@@ -9,7 +10,7 @@ export const PerfilEmpresa = () => {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:8080/api/encargadoService/getEmpresa")
+			.get(RESTEndpoints.encargadoService.getEmpresa)
 			.then(response => {
 				setEmpresa(
 					new EmpresaDto(

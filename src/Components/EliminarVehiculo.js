@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { RESTEndpoints } from "../Services/RestService";
 import "react-autocomplete-input/dist/bundle.css";
 import {
 	DtPermisoNacionalCirculacion,
@@ -35,7 +36,7 @@ export const EliminarVehiculo = () => {
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:8080/api/vehiculosService/listarVehiculos")
+			.get(RESTEndpoints.vehiculosService.listarVehiculos)
 			.then(response => {
 				//console.log(response.data);
 				setvehiculos(

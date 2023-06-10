@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
+import { RESTEndpoints } from "../Services/RestService";
 import "react-autocomplete-input/dist/bundle.css";
 import {
 	DtPermisoNacionalCirculacion,
@@ -44,7 +45,7 @@ export const AgregarVehiculo = () => {
 
 	const handleMarcasVehiculo = () => {
 		axios
-			.get("http://localhost:8080/api/vehiculosService/listaMarcasVehiculos")
+			.get(RESTEndpoints.vehiculosService.listaMarcasVehiculos)
 			.then(response => {
 				//console.log(response.data);
 				setMarcasVehiculos(response.data);
@@ -69,7 +70,7 @@ export const AgregarVehiculo = () => {
 
 	const handlePostVehiculo = () => {
 		axios
-			.post("http://localhost:8080/api/vehiculosService/agregarVehiculo", {
+			.post(RESTEndpoints.vehiculosService.agregarVehiculo, {
 				capacidad: parseFloat(avf.capacidad),
 				marcaVehiculo: avf.marcaVehiculo,
 				matricula: avf.matricula,
