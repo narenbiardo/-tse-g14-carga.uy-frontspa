@@ -20,7 +20,15 @@ import { EditarVehiculo } from "./Components/EditarVehiculo";
 import { Perfil } from "./Components/Perfil";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
+import axios from "axios";
+import { axiosHeadersAuth, axiosHeadersAccept } from "./Services/RestService";
 import { Home } from "./Components/Home";
+import { PerfilEmpresa } from "./Components/PerfilEmpresa";
+import { EliminarVehiculo } from "./Components/EliminarVehiculo";
+
+axiosHeadersAuth();
+axiosHeadersAccept();
+console.log(cookies.get("code"));
 
 const ProtectedRoute = ({ children }) => {
 	const { isAuthenticated } = useAuth();
@@ -85,7 +93,7 @@ function App() {
 						path="/empresa"
 						element={
 							<ProtectedRouteEncargado>
-								<h1>Perfil Empresa</h1>
+								<PerfilEmpresa />
 							</ProtectedRouteEncargado>
 						}
 					/>
@@ -125,7 +133,7 @@ function App() {
 						path="/eliminarVehiculo"
 						element={
 							<ProtectedRouteEncargado>
-								<h1>Eliminar Vehículo</h1>
+								<EliminarVehiculo />
 							</ProtectedRouteEncargado>
 						}
 					/>

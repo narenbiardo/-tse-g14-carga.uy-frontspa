@@ -45,7 +45,7 @@ export const NavBarCustom = () => {
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="me-auto">
 						{isAuthenticated &&
-							user === 1 && ( // Encargado
+							user === 1 && ( // EncargadoEmpresa
 								<>
 									<NavDropdown title="Guía de Viaje">
 										<NavLink
@@ -125,7 +125,8 @@ export const NavBarCustom = () => {
 							user === 2 && ( // Funcionario
 								<></>
 							)}
-						{isAuthenticated && ( // Any user
+						{isAuthenticated && (user === 1 || user === 2) && (
+							// EncargadoEmpresa or Funcionario
 							<>
 								<NavLink to="/perfil" className="nav-link">
 									Perfil
@@ -134,7 +135,7 @@ export const NavBarCustom = () => {
 						)}
 					</Nav>
 					<Nav className="ms-auto">
-						{isAuthenticated ? ( // Not loged
+						{isAuthenticated ? ( // Not logged
 							<Logout />
 						) : (
 							<Login />

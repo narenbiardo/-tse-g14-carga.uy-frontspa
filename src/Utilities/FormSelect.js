@@ -16,6 +16,7 @@ export const FormSelect = ({
 				name={name}
 				form={form}
 				onChange={onChangeHandler}
+				defaultValue=""
 				required
 				style={{
 					marginLeft: "10px",
@@ -27,7 +28,7 @@ export const FormSelect = ({
 					color: "#555",
 				}}
 			>
-				<option value="" selected disabled>
+				<option value="" disabled>
 					{optionDisabled}
 				</option>
 				{valueArray.map(element => (

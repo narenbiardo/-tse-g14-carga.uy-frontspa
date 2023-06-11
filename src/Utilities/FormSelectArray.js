@@ -2,31 +2,33 @@ import { useState } from "react";
 import { mainColor } from "../constants";
 import { FormInputDiv } from "./FormInputDiv";
 
-export const FormInputDate = ({
+export const FormSelectArray = ({
 	htmlFor,
 	label,
-	type,
 	name,
-	max,
-	min,
+	form,
 	onChangeHandler,
-	inputValue,
+	optionDisabled,
+	valueArray,
 	isValid,
 	invalidText,
-	firstTime,
-	handleFirstTime,
 }) => {
+	const [firstTime, setFirstTime] = useState(true);
+
+	const handleFirstTime = () => {
+		setFirstTime(false);
+	};
+
 	return (
 		<FormInputDiv>
 			<label htmlFor={htmlFor}>{label}</label>
-			<input
-				type={type}
+			<select
 				name={name}
-				max={max}
-				min={min}
+				form={form}
 				onChange={onChangeHandler}
 				onBlur={handleFirstTime}
-				value={inputValue}
+				defaultValue=""
+				required
 				style={{
 					marginLeft: "10px",
 					padding: "5px",
@@ -37,7 +39,16 @@ export const FormInputDate = ({
 					fontSize: "16px",
 					color: "#555",
 				}}
-			/>
+			>
+				<option value="" disabled>
+					{optionDisabled}
+				</option>
+				{valueArray.map((element, index) => (
+					<option value={index} key={Math.random()}>
+						{element}
+					</option>
+				))}
+			</select>
 			{!isValid && !firstTime && (
 				<p style={{ color: "red", marginTop: "5px" }}>{invalidText}</p>
 			)}
