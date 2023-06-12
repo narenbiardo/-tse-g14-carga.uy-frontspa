@@ -123,7 +123,14 @@ export const NavBarCustom = () => {
 							)}
 						{isAuthenticated &&
 							user === 2 && ( // Funcionario
-								<></>
+								<>
+									<NavLink to="/empresas" className="nav-link">
+										Empresas
+									</NavLink>
+									<NavLink to="/vehiculos" className="nav-link">
+										Vehículos
+									</NavLink>
+								</>
 							)}
 						{isAuthenticated && (user === 1 || user === 2) && (
 							// EncargadoEmpresa or Funcionario

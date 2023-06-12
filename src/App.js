@@ -25,6 +25,8 @@ import { axiosHeadersAuth, axiosHeadersAccept } from "./Services/RestService";
 import { Home } from "./Components/Home";
 import { PerfilEmpresa } from "./Components/PerfilEmpresa";
 import { EliminarVehiculo } from "./Components/EliminarVehiculo";
+import { Empresas } from "./Components/Empresas";
+import { PermisosVehiculos } from "./Components/PermisosVehıculos";
 
 axiosHeadersAuth();
 axiosHeadersAccept();
@@ -135,6 +137,22 @@ function App() {
 							<ProtectedRouteEncargado>
 								<EliminarVehiculo />
 							</ProtectedRouteEncargado>
+						}
+					/>
+					<Route
+						path="empresas"
+						element={
+							<ProtectedRouteFuncionario>
+								<Empresas />
+							</ProtectedRouteFuncionario>
+						}
+					/>
+					<Route
+						path="vehiculos"
+						element={
+							<ProtectedRouteFuncionario>
+								<PermisosVehiculos />
+							</ProtectedRouteFuncionario>
 						}
 					/>
 					<Route path="*" element={<h1>Not found</h1>} />
