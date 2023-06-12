@@ -1,4 +1,8 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
+import cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
+import { RESTEndpoints } from "../Services/RestService";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormH2 } from "../Utilities/FormH2";
 import { FormSelect } from "../Utilities/FormSelect";
@@ -7,12 +11,15 @@ import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormInputText } from "../Utilities/FormInputText";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
+import { FormInputDiv } from "../Utilities/FormInputDiv";
 
+/*
 const rubros = [
 	{ id: "1", nombre: "Alimentos, bebida, tabaco" },
 	{ id: "2", nombre: "Industria frigorifica" },
 	{ id: "3", nombre: "Pesca" },
 ];
+*/
 
 const departamentos = [
 	{ id: "1", nombre: "Montevideo" },
@@ -43,6 +50,8 @@ export const IngresarGuiaDeViaje = () => {
 	const [igvf, setIgvf] = useState(new IngresarGuiaViajeForm());
 	const [dtddpo, setDtddpo] = useState(new DtDireccionPostal());
 	const [dtddpd, setDtddpd] = useState(new DtDireccionPostal());
+	const [rubros, setRubros] = useState([]);
+	const jwtDecoded = jwt_decode(cookies.get("code"));
 
 	const handleChangeIgvf = e => {
 		const { name, value } = e.target;
@@ -63,6 +72,49 @@ export const IngresarGuiaDeViaje = () => {
 		setDtddpd(prevData => ({ ...prevData, [insertName]: value }));
 	};
 
+	const handlePostGuiaDeViaje = () => {
+		axios
+			.post(RESTEndpoints.encargadoService.ingresarGuiaViaje, {
+				rubro: {
+					nombre: igvf.rubro,
+				},
+				volumenCarga: igvf.volumen,
+				fechaHora: igvf.fechaHora,
+				origen: {
+					calle: igvf.origen.calle,
+					nroPuerta: igvf.origen.nroPuerta,
+					km: igvf.origen.km,
+				},
+				destino: {
+					calle: igvf.destino.calle,
+					nroPuerta: igvf.destino.nroPuerta,
+					km: igvf.destino.km,
+				},
+				estadoViaje: "ASIGNABLE",
+				nroEmpresa: jwtDecoded.nroEmpresa,
+			})
+			.then(response => {
+				console.log(response.data);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+
+	const handleRubros = () => {
+		axios
+			.get(RESTEndpoints.encargadoService.rubros)
+			.then(response => {
+				//console.log(response.data);
+				var rubros = [];
+				response.data.map(element => rubros.push(element));
+				setRubros(response.data);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+
 	useEffect(() => {
 		setIgvf(prevData => ({
 			...prevData,
@@ -71,19 +123,43 @@ export const IngresarGuiaDeViaje = () => {
 		}));
 	}, [dtddpo, dtddpd]);
 
+	useEffect(() => {
+		handleRubros();
+	}, []);
+
 	return (
 		<FormDiv>
 			<FormH2 text="Ingresar Guía de Viaje" />
 
-			<FormSelect
-				htmlFor="rubro"
-				label="Rubro"
-				name="rubro"
-				form="rubroForm"
-				onChangeHandler={handleChangeIgvf}
-				optionDisabled="Seleccionar rubro"
-				valueArray={rubros}
-			/>
+			<FormInputDiv>
+				<label htmlFor="rubro">"Rubro"</label>
+				<select
+					name="rubro"
+					form="rubroForm"
+					onChange={handleChangeIgvf}
+					value={igvf.rubro}
+					defaultValue=""
+					required
+					style={{
+						marginLeft: "10px",
+						padding: "5px",
+						border: "none",
+						borderBottom: "2px solid #16b7b9",
+						width: "250px",
+						fontSize: "16px",
+						color: "#555",
+					}}
+				>
+					<option value="" disabled>
+						Seleccionar rubro
+					</option>
+					{rubros.map(element => (
+						<option value={element.nombre} key={Math.random()}>
+							{element.nombre}
+						</option>
+					))}
+				</select>
+			</FormInputDiv>
 
 			<FormInputNumber
 				htmlFor="volumen"
@@ -99,13 +175,6 @@ export const IngresarGuiaDeViaje = () => {
 				type="datetime-local"
 				name="fechaHora"
 				min={new Date().toISOString().slice(0, 16)}
-				onChangeHandler={handleChangeIgvf}
-			/>
-
-			<FormInputText
-				htmlFor="nroEmpresa"
-				label="Número de la Empresa"
-				name="nroEmpresa"
 				onChangeHandler={handleChangeIgvf}
 			/>
 
@@ -175,7 +244,8 @@ export const IngresarGuiaDeViaje = () => {
 			/>
 
 			<FormInputSubmit
-				onClickHandler={() => console.log(igvf)}
+				onClickHandler={handlePostGuiaDeViaje}
+				validForm={true}
 				value="Enviar"
 			/>
 		</FormDiv>
