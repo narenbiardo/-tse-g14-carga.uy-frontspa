@@ -48,7 +48,9 @@ export const AgregarVehiculo = () => {
 			.get(RESTEndpoints.vehiculosService.listaMarcasVehiculos)
 			.then(response => {
 				//console.log(response.data);
-				setMarcasVehiculos(response.data);
+				var marcas = [];
+				response.data.map(element => marcas.push(element.nombre));
+				setMarcasVehiculos(marcas);
 			})
 			.catch(error => {
 				console.log(error);

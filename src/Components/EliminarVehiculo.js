@@ -49,7 +49,7 @@ export const EliminarVehiculo = () => {
 
 						return new AgregarVehiculoForm(
 							vehiculo.matricula,
-							vehiculo.marcaVehiculo,
+							vehiculo.marcaVehiculo.nombre,
 							vehiculo.modelo,
 							vehiculo.capacidad.toString(),
 							vehiculo.peso.toString(),

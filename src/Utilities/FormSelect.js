@@ -32,7 +32,7 @@ export const FormSelect = ({
 					{optionDisabled}
 				</option>
 				{valueArray.map(element => (
-					<option value={element.id} key={Math.random()}>
+					<option value={element.nombre} key={Math.random()}>
 						{element.nombre}
 					</option>
 				))}

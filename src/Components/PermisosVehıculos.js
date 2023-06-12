@@ -1,18 +1,29 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { RESTEndpoints } from "../Services/RestService";
-import { DtPermisoNacionalCirculacion, VehiculoDto } from "../classes";
-import { ListaVehiculos } from "./ListaVehiculos";
+import { DtPermisoNacionalCirculacion, AgregarVehiculoForm } from "../classes";
 import { FormDiv } from "../Utilities/FormDiv";
-import { FormH4 } from "../Utilities/FromH4";
+import { FormH2 } from "../Utilities/FormH2";
+import { ListaVehiculos } from "./ListaVehiculos";
 
-export const Home = () => {
+export const PermisosVehiculos = () => {
+	const [vehiculo, setVehiculo] = useState("");
 	const [vehiculos, setvehiculos] = useState([]);
+	const [marcasVehiculos, setMarcasVehiculos] = useState([]);
+	const [firstTimeInput, setfirstTimeInput] = useState("fti");
+
+	const handleVehiculo = v => {
+		setVehiculo(v);
+		//setAvf(v);
+		//setDtpnc(v.permisoCirculacion);
+		console.log(v);
+	};
 
 	useEffect(() => {
 		axios
 			.get(RESTEndpoints.vehiculosService.listarVehiculos)
 			.then(response => {
+				//console.log(response.data);
 				setvehiculos(
 					response.data.map(vehiculo => {
 						const permisoCirculacion = new DtPermisoNacionalCirculacion(
@@ -21,10 +32,9 @@ export const Home = () => {
 							vehiculo.permisoCirculacion.fechaVencimiento
 						);
 
-						return new VehiculoDto(
+						return new AgregarVehiculoForm(
 							vehiculo.matricula,
-							vehiculo.nroEmpresa,
-							vehiculo.marcaVehiculo.nombre,
+							vehiculo.marcaVehiculo,
 							vehiculo.modelo,
 							vehiculo.capacidad.toString(),
 							vehiculo.peso.toString(),
@@ -41,9 +51,9 @@ export const Home = () => {
 
 	return (
 		<FormDiv>
-			<FormH4 text={"Vehiculos del Sistema"} />
+			<FormH2 text={"Fiscalización de Permisos y Estado de Vehículos"} />
 			<ListaVehiculos
-				onMatriculaVehiculoChange={() => console.log()}
+				onVChange={handleVehiculo}
 				vehiculosArray={vehiculos}
 				showNroEmpresa={true}
 			/>
