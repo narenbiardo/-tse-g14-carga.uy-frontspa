@@ -54,7 +54,7 @@ export const EditarVehiculo = () => {
 
 						return new AgregarVehiculoForm(
 							vehiculo.matricula,
-							vehiculo.marcaVehiculo,
+							vehiculo.marcaVehiculo.nombre,
 							vehiculo.modelo,
 							vehiculo.capacidad.toString(),
 							vehiculo.peso.toString(),
@@ -88,8 +88,11 @@ export const EditarVehiculo = () => {
 		axios
 			.get(RESTEndpoints.vehiculosService.listaMarcasVehiculos)
 			.then(response => {
-				//console.log(response.data);
-				setMarcasVehiculos(response.data);
+				console.log(response.data);
+				var marcas = [];
+				response.data.map(element => marcas.push(element.nombre));
+				setMarcasVehiculos(marcas);
+				console.log(marcas);
 			})
 			.catch(error => {
 				console.log(error);
@@ -113,7 +116,7 @@ export const EditarVehiculo = () => {
 		axios
 			.post(RESTEndpoints.vehiculosService.editarVehiculo, {
 				capacidad: parseFloat(avf.capacidad),
-				marcaVehiculo: avf.marcaVehiculo,
+				marcaVehiculo: { nombre: avf.marcaVehiculo },
 				matricula: avf.matricula,
 				modelo: avf.modelo,
 				nroEmpresa: jwt_decode(cookies.get("code")).nroEmpresa,

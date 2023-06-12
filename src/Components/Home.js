@@ -24,7 +24,7 @@ export const Home = () => {
 						return new VehiculoDto(
 							vehiculo.matricula,
 							vehiculo.nroEmpresa,
-							vehiculo.marcaVehiculo,
+							vehiculo.marcaVehiculo.nombre,
 							vehiculo.modelo,
 							vehiculo.capacidad.toString(),
 							vehiculo.peso.toString(),

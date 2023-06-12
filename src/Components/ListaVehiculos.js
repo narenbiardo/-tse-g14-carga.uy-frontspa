@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAuth } from "../Services/useAuth";
 import { FormDiv } from "../Utilities/FormDiv";
 import { Table } from "react-bootstrap";
 import { mainColor } from "../constants";
@@ -9,6 +10,7 @@ export const ListaVehiculos = ({
 	showNroEmpresa,
 }) => {
 	const [filaResaltada, setFilaResaltada] = useState(null);
+	const { user } = useAuth();
 
 	const handleMouseEnter = index => {
 		setFilaResaltada(index);
@@ -17,16 +19,21 @@ export const ListaVehiculos = ({
 	const handleMouseLeave = () => {
 		setFilaResaltada(null);
 	};
+
 	return (
 		<Table size="sm" striped bordered hover responsive>
 			<thead>
 				<tr>
 					{showNroEmpresa && <th>#Empresa</th>}
 					<th>Matrícula</th>
-					<th>Marca</th>
-					<th>Modelo</th>
-					<th>Peso</th>
-					<th>Capacidad</th>
+					{user == 1 && (
+						<>
+							<th>Marca</th>
+							<th>Modelo</th>
+							<th>Peso</th>
+							<th>Capacidad</th>
+						</>
+					)}
 					<th>Vencimiento ITV</th>
 					<th>#PNC</th>
 					<th>Emisión PNC</th>
@@ -62,34 +69,38 @@ export const ListaVehiculos = ({
 						>
 							{v.matricula}
 						</td>
-						<td
-							style={{
-								color: filaResaltada === index ? "#fff" : "inherit",
-							}}
-						>
-							{v.marcaVehiculo}
-						</td>
-						<td
-							style={{
-								color: filaResaltada === index ? "#fff" : "inherit",
-							}}
-						>
-							{v.modelo}
-						</td>
-						<td
-							style={{
-								color: filaResaltada === index ? "#fff" : "inherit",
-							}}
-						>
-							{v.peso}
-						</td>
-						<td
-							style={{
-								color: filaResaltada === index ? "#fff" : "inherit",
-							}}
-						>
-							{v.capacidad}
-						</td>
+						{user == 1 && (
+							<>
+								<td
+									style={{
+										color: filaResaltada === index ? "#fff" : "inherit",
+									}}
+								>
+									{v.marcaVehiculo}
+								</td>
+								<td
+									style={{
+										color: filaResaltada === index ? "#fff" : "inherit",
+									}}
+								>
+									{v.modelo}
+								</td>
+								<td
+									style={{
+										color: filaResaltada === index ? "#fff" : "inherit",
+									}}
+								>
+									{v.peso}
+								</td>
+								<td
+									style={{
+										color: filaResaltada === index ? "#fff" : "inherit",
+									}}
+								>
+									{v.capacidad}
+								</td>
+							</>
+						)}
 						<td
 							style={{
 								color: filaResaltada === index ? "#fff" : "inherit",
