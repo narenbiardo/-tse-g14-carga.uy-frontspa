@@ -74,7 +74,7 @@ export const AgregarVehiculo = () => {
 		axios
 			.post(RESTEndpoints.vehiculosService.agregarVehiculo, {
 				capacidad: parseFloat(avf.capacidad),
-				marcaVehiculo: avf.marcaVehiculo,
+				marcaVehiculo: { nombre: avf.marcaVehiculo },
 				matricula: avf.matricula,
 				modelo: avf.modelo,
 				nroEmpresa: jwt_decode(cookies.get("code")).nroEmpresa,
