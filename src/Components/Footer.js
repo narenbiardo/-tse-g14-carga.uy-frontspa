@@ -1,11 +1,12 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { SvgLogo } from "../Utilities/SvgLogo";
+import '../css/styles.css';
 
 const Footer = () => {
 	return (
-		<footer
-			style={{ backgroundColor: "#212529", color: "#fff", padding: "3rem 0" }}
+		<footer className=""
+			style={{ backgroundColor: "#212529", color: "#fff", padding: "3rem 0", marginTop: "auto" }}
 		>
 			<Container>
 				<Row>

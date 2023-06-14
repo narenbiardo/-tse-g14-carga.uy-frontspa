@@ -6,15 +6,9 @@ export const FormInputSubmit = ({ onClickHandler, value, validForm }) => {
 			onClick={onClickHandler}
 			type="submit"
 			value={value}
+			className="btn-principal mt-4"
 			disabled={!validForm}
-			style={{
-				backgroundColor: validForm ? mainColor : "grey",
-				color: "#fff",
-				border: "none",
-				padding: "10px 20px",
-				borderRadius: "5px",
-				fontSize: "16px",
-			}}
+
 		/>
 	);
 };

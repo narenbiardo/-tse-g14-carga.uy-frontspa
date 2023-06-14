@@ -36,6 +36,7 @@ export const Login = () => {
 				clientId={clientId}
 				state={state}
 				redirectUri={redirectUri}
+				className="btn-principal"
 				isCrossOrigin={true}
 				buttonText="Ingresar"
 				onSuccess={onSuccess}

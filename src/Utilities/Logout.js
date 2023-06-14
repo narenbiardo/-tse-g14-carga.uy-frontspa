@@ -11,5 +11,5 @@ export const Logout = () => {
 		navigate("/");
 	};
 
-	return <Button onClick={handleClick}>Cerrar sesión</Button>;
+	return <Button className="btn-principal" onClick={handleClick}>Cerrar sesión</Button>;
 };

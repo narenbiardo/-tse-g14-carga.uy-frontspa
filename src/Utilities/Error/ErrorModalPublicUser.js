@@ -3,19 +3,9 @@ import { Button } from "react-bootstrap";
 import Modal from "react-modal";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
+import '../../css/styles.css';
 
 Modal.setAppElement("#root");
-
-const modalStyle = {
-	content: {
-		top: "50%",
-		left: "50%",
-		right: "auto",
-		bottom: "auto",
-		marginRight: "-50%",
-		transform: "translate(-50%, -50%)",
-	},
-};
 
 export const ErrorModalPublicUser = ({ user }) => {
 	const [show, setShow] = useState(true);
@@ -25,14 +15,14 @@ export const ErrorModalPublicUser = ({ user }) => {
 	return (
 		<Modal
 			isOpen={user === 0 && show}
-			style={modalStyle}
+			className="custom-modal-content"
 			contentLabel="Example Modal"
 		>
-			<div>
+			<div className="mb-3">
 				Para utilizar la aplicación, su cuenta debe tener asignado un rol, por
 				favor contactate con un administrador.
 			</div>
-			<Button onClick={handleClose}>Cerrar</Button>
+			<Button className="btn-secundario" onClick={handleClose}>Cerrar</Button>
 		</Modal>
 	);
 };

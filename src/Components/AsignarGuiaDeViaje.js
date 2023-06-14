@@ -77,24 +77,17 @@ export const AsignarGuiaDeViaje = () => {
 					/>
 
 					<div>
-						<button
-							onClick={() => setAgvf(new AsignarGuiaViajeForm())}
-							style={{
-								marginRight: "100px",
-								backgroundColor: "#16b7b9",
-								color: "#fff",
-								border: "none",
-								padding: "10px 20px",
-								borderRadius: "5px",
-								fontSize: "16px",
-							}}
-						>
-							Volver
-						</button>
 						<FormInputSubmit
 							onClickHandler={() => console.log(agvf)}
 							value="Enviar"
 						/>
+						<button
+							onClick={() => setAgvf(new AsignarGuiaViajeForm())}
+							className="btn-secundario m-3"
+						>
+							Volver
+						</button>
+
 					</div>
 				</>
 			) : (

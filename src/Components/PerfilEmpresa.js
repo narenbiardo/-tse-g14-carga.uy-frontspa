@@ -35,7 +35,7 @@ export const PerfilEmpresa = () => {
 	return editar ? (
 		<FormDiv>
 			<EditarEmpresa empresa={empresa} />
-			<Button onClick={() => setEditar(false)}>Volver</Button>
+			<Button className="btn-secundario mt-2" onClick={() => setEditar(false)}>Volver</Button>
 		</FormDiv>
 	) : (
 		<>
@@ -46,7 +46,7 @@ export const PerfilEmpresa = () => {
 			<h5>Calle: {empresa.direccionEmpresa.calle}</h5>
 			<h5>Kilómetro: {empresa.direccionEmpresa.km}</h5>
 			<h5>Número de puerta: {empresa.direccionEmpresa.nroPuerta}</h5>
-			<Button onClick={() => setEditar(true)}>Editar</Button>
+			<Button className="btn-principal m-4" onClick={() => setEditar(true)}>Editar</Button>
 		</>
 	);
 };
