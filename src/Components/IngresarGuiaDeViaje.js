@@ -132,7 +132,7 @@ export const IngresarGuiaDeViaje = () => {
 			<FormH2 text="Ingresar Guía de Viaje" />
 
 			<FormInputDiv>
-				<label htmlFor="rubro">"Rubro"</label>
+				<label htmlFor="rubro">Rubro</label>
 				<select
 					name="rubro"
 					form="rubroForm"
