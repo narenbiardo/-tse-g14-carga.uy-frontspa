@@ -21,6 +21,9 @@ import { FormH4 } from "../Utilities/FromH4";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormSelectArray } from "../Utilities/FormSelectArray";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const AgregarVehiculo = () => {
 	const [avf, setAvf] = useState(new AgregarVehiculoForm());
@@ -87,13 +90,25 @@ export const AgregarVehiculo = () => {
 				vencimientoITV: avf.vencimientoITV,
 			})
 			.then(response => {
-				console.log(response.data);
+				toast.success("Vehiculo ingresado con exito !", {
+					position: toast.POSITION.TOP_RIGHT,
+					theme: "colored",
+				  });
 				setAvf(new AgregarVehiculoForm());
 				setDtpnc(new DtPermisoNacionalCirculacion());
 				setfirstTimeInput(fti);
 			})
 			.catch(error => {
-				console.log(error);
+				let errorMessage = "ERROR: Ha ocurrido un error al ingresarel vehiculo, vuelva a intentarlo";
+
+				if (error.response && error.response.data) {
+				  errorMessage = `ERROR: ${error.response.data}`
+				}
+			
+				toast.error(errorMessage, {
+				  position: toast.POSITION.TOP_RIGHT,
+				  theme: "colored",
+				});
 			});
 	};
 

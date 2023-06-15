@@ -27,6 +27,8 @@ import { PerfilEmpresa } from "./Components/PerfilEmpresa";
 import { EliminarVehiculo } from "./Components/EliminarVehiculo";
 import { Empresas } from "./Components/Empresas";
 import { PermisosVehiculos } from "./Components/PermisosVehıculos";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 axiosHeadersAuth();
 axiosHeadersAccept();
@@ -77,7 +79,9 @@ const ProtectedPerfil = ({ children }) => {
 
 function App() {
 	return (
+		
 		<AuthProvider>
+			<ToastContainer />
 			<NavBarCustom />
 			<div className="App">
 				<Routes>
