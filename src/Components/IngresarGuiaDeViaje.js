@@ -105,9 +105,6 @@ export const IngresarGuiaDeViaje = () => {
 		axios
 			.get(RESTEndpoints.encargadoService.rubros)
 			.then(response => {
-				//console.log(response.data);
-				var rubros = [];
-				response.data.map(element => rubros.push(element));
 				setRubros(response.data);
 			})
 			.catch(error => {
