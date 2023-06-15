@@ -100,3 +100,53 @@ export class FirstTimeInputEmpresaDto {
 		this.razonSocial = razonSocial;
 	}
 }
+
+export class DtDireccionPostal {
+	constructor(calle, km, nroPuerta, departamento) {
+		this.calle = calle;
+		this.km = km;
+		this.nroPuerta = nroPuerta;
+		this.departamento = departamento;
+	}
+}
+
+export class IngresarGuiaViajeForm {
+	constructor(rubro, volumen, fechaHora, origen, destino, nroEmpresa) {
+		this.rubro = rubro;
+		this.volumen = volumen;
+		this.fechaHora = fechaHora;
+		this.origen = origen;
+		this.destino = destino;
+		this.nroEmpresa = nroEmpresa;
+	}
+}
+
+export class FirstTimeInputIngresarGuiaViajeForm {
+	constructor(
+		rubro,
+		volumen,
+		fechaHora,
+		origen,
+		destino,
+		nroEmpresa,
+		calleOrigen,
+		kmOrigen,
+		nroPuertaOrigen,
+		calleDestino,
+		kmDestino,
+		nroPuertaDestino
+	) {
+		this.rubro = rubro;
+		this.volumen = volumen;
+		this.fechaHora = fechaHora;
+		this.origen = origen;
+		this.destino = destino;
+		this.nroEmpresa = nroEmpresa;
+		this.calleOrigen = calleOrigen;
+		this.kmOrigen = kmOrigen;
+		this.nroPuertaOrigen = nroPuertaOrigen;
+		this.calleDestino = calleDestino;
+		this.kmDestino = kmDestino;
+		this.nroPuertaDestino = nroPuertaDestino;
+	}
+}

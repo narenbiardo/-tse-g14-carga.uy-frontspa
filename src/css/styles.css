@@ -1,64 +1,74 @@
-
 .footer {
-    height: 180px;
-    flex-shrink: 0;
-    padding: 3rem;
-    background-color: #212529;
-    color: #fff;
-  }
+	height: 180px;
+	flex-shrink: 0;
+	padding: 3rem;
+	background-color: #212529;
+	color: #fff;
+}
 
-  .btn-principal{
-    background-color: #16B7B9;
-    border: none;
-    border-radius: 10px;
-    min-width: 100px;
-    height: 35px;
-    font-size: medium;
-    color: white;
-    font-weight: 400;
-    cursor: pointer;
-  }
+.btn-principal {
+	background-color: #16b7b9;
+	border: none;
+	border-radius: 10px;
+	min-width: 100px;
+	height: 35px;
+	font-size: medium;
+	color: white;
+	font-weight: 400;
+	cursor: pointer;
+}
 
-  .btn-principal:hover{
-    background-color: #46d4d6;
-    transition: all 0.2s ease 0s;
-  }
+.btn-principal:hover {
+	background-color: #46d4d6;
+	transition: all 0.2s ease 0s;
+}
 
-  .btn-secundario{
-    padding: 0;
-    background-color: #212529;
-    border: none;
-    border-radius: 10px;
-    min-width: 100px;
-    height: 35px;
-    font-size: medium;
-    color: white;
-    font-weight: 400;
-    cursor: pointer;
-  }
-  
+.btn-secundario {
+	padding: 0;
+	background-color: #212529;
+	border: none;
+	border-radius: 10px;
+	min-width: 100px;
+	height: 35px;
+	font-size: medium;
+	color: white;
+	font-weight: 400;
+	cursor: pointer;
+}
 
-  .btn-secundario:hover{
-    background-color: #47494b;
-    transition: all 0.2s ease 0s;
-  }
+.btn-secundario:hover {
+	background-color: #47494b;
+	transition: all 0.2s ease 0s;
+}
 
-  .custom-modal-content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 3rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.400);
-  }
+.btn-disabled {
+	padding: 0;
+	background-color: #5a5a5a;
+	border: none;
+	border-radius: 10px;
+	min-width: 100px;
+	height: 35px;
+	font-size: medium;
+	color: white;
+	font-weight: 400;
+}
 
-  .custom-link {
-    background-color: transparent;
-    color: inherit;
-  }
-  
-  .custom-link:hover {
-    color: chocolate;
-  }
+.custom-modal-content {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 3rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.custom-link {
+	background-color: transparent;
+	color: inherit;
+}
+
+.custom-link:hover {
+	color: chocolate;
+}
