@@ -6,6 +6,8 @@ import { FormH2 } from "../Utilities/FormH2";
 import { FormSelect } from "../Utilities/FormSelect";
 import { FormTextInputAutocomplete } from "../Utilities/FormTextInputAutocomplete";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
+import { Button } from "react-bootstrap";
+
 
 const vehiculos = [
 	"ABC1111",
@@ -77,18 +79,21 @@ export const AsignarGuiaDeViaje = () => {
 					/>
 
 					<div>
-						<FormInputSubmit
-							onClickHandler={() => console.log(agvf)}
-							value="Enviar"
-						/>
+						<Button type="submit"className="btn-principal submit mt-2 mb-2"> Enviar </Button>
+					</div>
+
+					<div>
+						<Button type="submit"className="btn-secundario submit mt-2 mb-2"> Volver </Button>
+					</div>
+{/* 						
 						<button
 							onClick={() => setAgvf(new AsignarGuiaViajeForm())}
 							className="btn-secundario m-3"
 						>
 							Volver
-						</button>
+						</button> */}
 
-					</div>
+					{/* //</div> */}
 				</>
 			) : (
 				<FormSelect

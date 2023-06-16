@@ -22,7 +22,9 @@ export const FormTextInputAutocomplete = ({
 
 	return (
 		<FormInputDiv>
-			<label htmlFor={htmlFor}>{label}</label>
+			<div>
+				<label htmlFor={htmlFor}>{label}</label>
+			</div>
 
 			<TextInput
 				name={name}
@@ -34,16 +36,8 @@ export const FormTextInputAutocomplete = ({
 				Component="input"
 				spacer=""
 				onBlur={handleFirstTime}
-				style={{
-					marginLeft: "10px",
-					padding: "5px",
-					border: "none",
-					borderBottom:
-						isValid || firstTime ? "2px solid " + mainColor : "2px solid red",
-					width: "250px",
-					fontSize: "16px",
-					color: "#555",
-				}}
+				className={isValid || firstTime ? 'form-input' : 'form-input invalid'}
+
 			/>
 			{!isValid && !firstTime && (
 				<p style={{ color: "red", marginTop: "5px" }}>{invalidText}</p>

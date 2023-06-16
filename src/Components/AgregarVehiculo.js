@@ -94,12 +94,9 @@ export const AgregarVehiculo = () => {
 					position: toast.POSITION.TOP_RIGHT,
 					theme: "colored",
 				  });
-				setAvf(new AgregarVehiculoForm());
-				setDtpnc(new DtPermisoNacionalCirculacion());
-				setfirstTimeInput(fti);
 			})
 			.catch(error => {
-				let errorMessage = "ERROR: Ha ocurrido un error al ingresarel vehiculo, vuelva a intentarlo";
+				let errorMessage = "ERROR: Ha ocurrido un error al ingresar el vehiculo, vuelva a intentarlo";
 
 				if (error.response && error.response.data) {
 				  errorMessage = `ERROR: ${error.response.data}`
@@ -137,7 +134,9 @@ export const AgregarVehiculo = () => {
 			/>
 
 			<FormInputDiv>
-				<label htmlFor="marcaVehiculo">Marca</label>
+				<div>
+					<label htmlFor="marcaVehiculo">Marca</label>
+				</div>
 				<select
 					name="marcaVehiculo"
 					form="marcaVehiculoForm"
@@ -145,15 +144,7 @@ export const AgregarVehiculo = () => {
 					value={avf.marcaVehiculo}
 					defaultValue=""
 					required
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid " + mainColor,
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
+					className="form-input"
 				>
 					<option value="" disabled>
 						Seleccionar Marca

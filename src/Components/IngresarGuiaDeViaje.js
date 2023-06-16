@@ -14,14 +14,10 @@ import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Form, Button, Row, Col } from "react-bootstrap";
+import {useRef} from 'react';
+import { animateScroll as scroll } from "react-scroll";
 
-/*
-const rubros = [
-	{ id: "1", nombre: "Alimentos, bebida, tabaco" },
-	{ id: "2", nombre: "Industria frigorifica" },
-	{ id: "3", nombre: "Pesca" },
-];
-*/
 
 const departamentos = [
 	{ id: "1", nombre: "Montevideo" },
@@ -49,6 +45,7 @@ class IngresarGuiaViajeForm {
 }
 
 export const IngresarGuiaDeViaje = () => {
+	const formRef = useRef(null);
 	const [igvf, setIgvf] = useState(new IngresarGuiaViajeForm());
 	const [dtddpo, setDtddpo] = useState(new DtDireccionPostal());
 	const [dtddpd, setDtddpd] = useState(new DtDireccionPostal());
@@ -74,7 +71,8 @@ export const IngresarGuiaDeViaje = () => {
 		setDtddpd(prevData => ({ ...prevData, [insertName]: value }));
 	};
 
-	const handlePostGuiaDeViaje = async () => {
+	const handlePostGuiaDeViaje = async (event) => {
+		event.preventDefault();
 		try {
 		  const response = await toast.promise(
 			axios.post(RESTEndpoints.encargadoService.ingresarGuiaViaje, {
@@ -100,6 +98,11 @@ export const IngresarGuiaDeViaje = () => {
 				pending: 'Procesando...',
 				success: {
 				  render(){
+					formRef.current.reset()
+					scroll.scrollToTop({
+						duration: 200, // Duración de la animación en milisegundos
+						smooth: "easeInOutQuart", // Curva de aceleración de la animación
+					  });
 					return "La guia fue ingresada con exito!"
 				  },
 				  theme: "colored",
@@ -148,11 +151,13 @@ export const IngresarGuiaDeViaje = () => {
 	}, []);
 
 	return (
-		<FormDiv>
+		<FormDiv referencia={formRef} onSubmit={handlePostGuiaDeViaje}>
 			<FormH2 text="Ingresar Guía de Viaje" />
 
 			<FormInputDiv>
-				<label htmlFor="rubro">Rubro</label>
+				<div>
+					<label htmlFor="rubro">Rubro</label>
+				</div>
 				<select
 					name="rubro"
 					form="rubroForm"
@@ -160,15 +165,7 @@ export const IngresarGuiaDeViaje = () => {
 					value={igvf.rubro}
 					defaultValue=""
 					required
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
+					className="form-input mb-3"
 				>
 					<option value="" disabled>
 						Seleccionar rubro
@@ -189,12 +186,12 @@ export const IngresarGuiaDeViaje = () => {
 				onChangeHandler={handleChangeIgvf}
 			/>
 
+
 			<FormInputDate
 				htmlFor="fechaHora"
 				label="Fecha y Hora"
 				type="datetime-local"
 				name="fechaHora"
-				min={new Date().toISOString().slice(0, 16)}
 				onChangeHandler={handleChangeIgvf}
 			/>
 
@@ -263,11 +260,14 @@ export const IngresarGuiaDeViaje = () => {
 				valueArray={departamentos}
 			/> */}
 
-			<FormInputSubmit
+			<Button type="submit"className="btn-principal submit mt-2 mb-2"> Enviar </Button>
+
+
+			{/* <FormInputSubmit
 				onClickHandler={handlePostGuiaDeViaje}
 				validForm={true}
 				value="Enviar"
-			/>
+			/> */}
 		</FormDiv>
 	);
 };

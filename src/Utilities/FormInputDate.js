@@ -2,6 +2,11 @@ import { useState } from "react";
 import { mainColor } from "../constants";
 import { FormInputDiv } from "./FormInputDiv";
 
+const currentDateTime = new Date();
+currentDateTime.setHours(currentDateTime.getHours() - 3);
+const minDateTime = currentDateTime.toISOString().slice(0, 16);
+
+
 export const FormInputDate = ({
 	htmlFor,
 	label,
@@ -18,25 +23,20 @@ export const FormInputDate = ({
 }) => {
 	return (
 		<FormInputDiv>
-			<label htmlFor={htmlFor}>{label}</label>
+			<div>
+				<label htmlFor={htmlFor}>{label}</label>
+			</div>
 			<input
 				type={type}
 				name={name}
 				max={max}
-				min={min}
+				min={minDateTime} // Le sumo 3 para pasarlo al horario local ya que sino me devuelve +3 horas de la hora actual
+				required
 				onChange={onChangeHandler}
 				onBlur={handleFirstTime}
 				value={inputValue}
-				style={{
-					marginLeft: "10px",
-					padding: "5px",
-					border: "none",
-					borderBottom:
-						isValid || firstTime ? "2px solid " + mainColor : "2px solid red",
-					width: "250px",
-					fontSize: "16px",
-					color: "#555",
-				}}
+				className={isValid || firstTime ? 'form-input' : 'form-input invalid'}
+
 			/>
 			{!isValid && !firstTime && (
 				<p style={{ color: "red", marginTop: "5px" }}>{invalidText}</p>

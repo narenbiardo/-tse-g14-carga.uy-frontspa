@@ -81,8 +81,8 @@ function App() {
 	return (
 		
 		<AuthProvider>
-			<ToastContainer />
-			<NavBarCustom />
+			<ToastContainer/>
+			<NavBarCustom/>
 			<div className="App">
 				<Routes>
 					<Route path="/" element={<Home />}></Route>
