@@ -16,25 +16,19 @@ export const FormInputNumber = ({
 }) => {
 	return (
 		<FormInputDiv>
-			<label htmlFor={htmlFor}>{label}</label>
+			<div>
+				<label htmlFor={htmlFor}>{label}</label>
+			</div>
 			<input
 				type="number"
 				name={name}
 				step={step}
+				required
 				min={0}
 				onChange={onChangeHandler}
 				value={inputValue}
 				onBlur={handleFirstTime}
-				style={{
-					marginLeft: "10px",
-					padding: "5px",
-					border: "none",
-					borderBottom:
-						isValid || firstTime ? "2px solid " + mainColor : "2px solid red",
-					width: "250px",
-					fontSize: "16px",
-					color: "#555",
-				}}
+				className={isValid || firstTime ? 'form-input' : 'form-input invalid'}
 			/>
 			{!isValid && !firstTime && (
 				<p style={{ color: "red", marginTop: "5px" }}>{invalidText}</p>

@@ -11,22 +11,16 @@ export const FormSelect = ({
 }) => {
 	return (
 		<FormInputDiv>
-			<label htmlFor={htmlFor}>{label}</label>
+			<div>
+				<label htmlFor={htmlFor}>{label}</label>
+			</div>
 			<select
 				name={name}
 				form={form}
 				onChange={onChangeHandler}
 				defaultValue=""
 				required
-				style={{
-					marginLeft: "10px",
-					padding: "5px",
-					border: "none",
-					borderBottom: "2px solid #16b7b9",
-					width: "250px",
-					fontSize: "16px",
-					color: "#555",
-				}}
+				className="form-input"
 			>
 				<option value="" disabled>
 					{optionDisabled}

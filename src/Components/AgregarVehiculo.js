@@ -21,6 +21,9 @@ import { FormH4 } from "../Utilities/FromH4";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormSelectArray } from "../Utilities/FormSelectArray";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export const AgregarVehiculo = () => {
 	const [avf, setAvf] = useState(new AgregarVehiculoForm());
@@ -87,13 +90,22 @@ export const AgregarVehiculo = () => {
 				vencimientoITV: avf.vencimientoITV,
 			})
 			.then(response => {
-				console.log(response.data);
-				setAvf(new AgregarVehiculoForm());
-				setDtpnc(new DtPermisoNacionalCirculacion());
-				setfirstTimeInput(fti);
+				toast.success("Vehiculo ingresado con exito !", {
+					position: toast.POSITION.TOP_RIGHT,
+					theme: "colored",
+				  });
 			})
 			.catch(error => {
-				console.log(error);
+				let errorMessage = "ERROR: Ha ocurrido un error al ingresar el vehiculo, vuelva a intentarlo";
+
+				if (error.response && error.response.data) {
+				  errorMessage = `ERROR: ${error.response.data}`
+				}
+			
+				toast.error(errorMessage, {
+				  position: toast.POSITION.TOP_RIGHT,
+				  theme: "colored",
+				});
 			});
 	};
 
@@ -122,7 +134,9 @@ export const AgregarVehiculo = () => {
 			/>
 
 			<FormInputDiv>
-				<label htmlFor="marcaVehiculo">Marca</label>
+				<div>
+					<label htmlFor="marcaVehiculo">Marca</label>
+				</div>
 				<select
 					name="marcaVehiculo"
 					form="marcaVehiculoForm"
@@ -130,15 +144,7 @@ export const AgregarVehiculo = () => {
 					value={avf.marcaVehiculo}
 					defaultValue=""
 					required
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid " + mainColor,
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
+					className="form-input"
 				>
 					<option value="" disabled>
 						Seleccionar Marca

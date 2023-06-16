@@ -12,14 +12,12 @@ import { FormInputText } from "../Utilities/FormInputText";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Form, Button, Row, Col } from "react-bootstrap";
+import {useRef} from 'react';
+import { animateScroll as scroll } from "react-scroll";
 
-/*
-const rubros = [
-	{ id: "1", nombre: "Alimentos, bebida, tabaco" },
-	{ id: "2", nombre: "Industria frigorifica" },
-	{ id: "3", nombre: "Pesca" },
-];
-*/
 
 const departamentos = [
 	{ id: "1", nombre: "Montevideo" },
@@ -47,6 +45,7 @@ class IngresarGuiaViajeForm {
 }
 
 export const IngresarGuiaDeViaje = () => {
+	const formRef = useRef(null);
 	const [igvf, setIgvf] = useState(new IngresarGuiaViajeForm());
 	const [dtddpo, setDtddpo] = useState(new DtDireccionPostal());
 	const [dtddpd, setDtddpd] = useState(new DtDireccionPostal());
@@ -72,35 +71,59 @@ export const IngresarGuiaDeViaje = () => {
 		setDtddpd(prevData => ({ ...prevData, [insertName]: value }));
 	};
 
-	const handlePostGuiaDeViaje = () => {
-		axios
-			.post(RESTEndpoints.encargadoService.ingresarGuiaViaje, {
-				rubro: {
-					nombre: igvf.rubro,
+	const handlePostGuiaDeViaje = async (event) => {
+		event.preventDefault();
+		try {
+		  const response = await toast.promise(
+			axios.post(RESTEndpoints.encargadoService.ingresarGuiaViaje, {
+			  rubro: {
+				nombre: igvf.rubro,
+			  },
+			  volumenCarga: igvf.volumen,
+			  fechaHora: igvf.fechaHora,
+			  origen: {
+				calle: igvf.origen.calle,
+				nroPuerta: igvf.origen.nroPuerta,
+				km: igvf.origen.km,
+			  },
+			  destino: {
+				calle: igvf.destino.calle,
+				nroPuerta: igvf.destino.nroPuerta,
+				km: igvf.destino.km,
+			  },
+			  estadoViaje: "ASIGNABLE",
+			  nroEmpresa: jwtDecoded.nroEmpresa,
+			}),
+			{
+				pending: 'Procesando...',
+				success: {
+				  render(){
+					formRef.current.reset()
+					scroll.scrollToTop({
+						duration: 200, // Duración de la animación en milisegundos
+						smooth: "easeInOutQuart", // Curva de aceleración de la animación
+					  });
+					return "La guia fue ingresada con exito!"
+				  },
+				  theme: "colored",
 				},
-				volumenCarga: igvf.volumen,
-				fechaHora: igvf.fechaHora,
-				origen: {
-					calle: igvf.origen.calle,
-					nroPuerta: igvf.origen.nroPuerta,
-					km: igvf.origen.km,
-				},
-				destino: {
-					calle: igvf.destino.calle,
-					nroPuerta: igvf.destino.nroPuerta,
-					km: igvf.destino.km,
-				},
-				estadoViaje: "ASIGNABLE",
-				nroEmpresa: jwtDecoded.nroEmpresa,
-			})
-			.then(response => {
-				console.log(response.data);
-			})
-			.catch(error => {
-				console.log(error);
-			});
-	};
+			  }
+		  );
+		} 
+		catch (error) {
+			let errorMessage = "ERROR: Ha ocurrido un error al ingresar la guia, vuelva a intentarlo";
 
+			if (error.response && error.response.data) {
+			  errorMessage = `ERROR: ${error.response.data}`
+			}
+		
+			toast.error(errorMessage, {
+			  position: toast.POSITION.TOP_RIGHT,
+			  theme: "colored",
+			});
+		}
+	  };
+	  
 	const handleRubros = () => {
 		axios
 			.get(RESTEndpoints.encargadoService.rubros)
@@ -128,11 +151,13 @@ export const IngresarGuiaDeViaje = () => {
 	}, []);
 
 	return (
-		<FormDiv>
+		<FormDiv referencia={formRef} onSubmit={handlePostGuiaDeViaje}>
 			<FormH2 text="Ingresar Guía de Viaje" />
 
 			<FormInputDiv>
-				<label htmlFor="rubro">Rubro</label>
+				<div>
+					<label htmlFor="rubro">Rubro</label>
+				</div>
 				<select
 					name="rubro"
 					form="rubroForm"
@@ -140,15 +165,7 @@ export const IngresarGuiaDeViaje = () => {
 					value={igvf.rubro}
 					defaultValue=""
 					required
-					style={{
-						marginLeft: "10px",
-						padding: "5px",
-						border: "none",
-						borderBottom: "2px solid #16b7b9",
-						width: "250px",
-						fontSize: "16px",
-						color: "#555",
-					}}
+					className="form-input mb-3"
 				>
 					<option value="" disabled>
 						Seleccionar rubro
@@ -169,12 +186,12 @@ export const IngresarGuiaDeViaje = () => {
 				onChangeHandler={handleChangeIgvf}
 			/>
 
+
 			<FormInputDate
 				htmlFor="fechaHora"
 				label="Fecha y Hora"
 				type="datetime-local"
 				name="fechaHora"
-				min={new Date().toISOString().slice(0, 16)}
 				onChangeHandler={handleChangeIgvf}
 			/>
 
@@ -201,7 +218,7 @@ export const IngresarGuiaDeViaje = () => {
 				onChangeHandler={handleChangeDtddpo}
 			/>
 
-			<FormSelect
+			{/* <FormSelect
 				htmlFor="departamentoOrigen"
 				label="Departamento"
 				name="departamentoOrigen"
@@ -209,7 +226,7 @@ export const IngresarGuiaDeViaje = () => {
 				onChangeHandler={handleChangeDtddpo}
 				optionDisabled="Seleccionar Departamento"
 				valueArray={departamentos}
-			/>
+			/> */}
 
 			<FormH4 text="Dirección de Destino" />
 
@@ -234,20 +251,23 @@ export const IngresarGuiaDeViaje = () => {
 				onChangeHandler={handleChangeDtddpd}
 			/>
 
-			<FormSelect
+			{/* <FormSelect
 				htmlFor="departamentoDestino"
 				label="Departamento"
 				name="departamentoDestino"
 				onChangeHandler={handleChangeDtddpd}
 				optionDisabled="Seleccionar Departamento"
 				valueArray={departamentos}
-			/>
+			/> */}
 
-			<FormInputSubmit
+			<Button type="submit"className="btn-principal submit mt-2 mb-2"> Enviar </Button>
+
+
+			{/* <FormInputSubmit
 				onClickHandler={handlePostGuiaDeViaje}
 				validForm={true}
 				value="Enviar"
-			/>
+			/> */}
 		</FormDiv>
 	);
 };
