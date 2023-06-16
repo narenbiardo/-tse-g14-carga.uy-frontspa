@@ -21,9 +21,8 @@ import { FormH4 } from "../Utilities/FromH4";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormSelectArray } from "../Utilities/FormSelectArray";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const AgregarVehiculo = () => {
 	const [avf, setAvf] = useState(new AgregarVehiculoForm());
@@ -48,7 +47,7 @@ export const AgregarVehiculo = () => {
 
 	const handleMarcasVehiculo = () => {
 		axios
-			.get(RESTEndpoints.vehiculosService.listaMarcasVehiculos)
+			.get(RESTEndpoints.publicService.listaMarcasVehiculos)
 			.then(response => {
 				//console.log(response.data);
 				var marcas = [];
@@ -73,9 +72,10 @@ export const AgregarVehiculo = () => {
 		}
 	};
 
-	const handlePostVehiculo = () => {
+	const handlePostVehiculo = async event => {
+		event.preventDefault();
 		axios
-			.post(RESTEndpoints.vehiculosService.agregarVehiculo, {
+			.post(RESTEndpoints.encargadoService.agregarVehiculo, {
 				capacidad: parseFloat(avf.capacidad),
 				marcaVehiculo: { nombre: avf.marcaVehiculo },
 				matricula: avf.matricula,
@@ -93,18 +93,22 @@ export const AgregarVehiculo = () => {
 				toast.success("Vehiculo ingresado con exito !", {
 					position: toast.POSITION.TOP_RIGHT,
 					theme: "colored",
-				  });
+				});
+				setAvf(new AgregarVehiculoForm());
+				setDtpnc(new DtPermisoNacionalCirculacion());
+				setfirstTimeInput(fti);
 			})
 			.catch(error => {
-				let errorMessage = "ERROR: Ha ocurrido un error al ingresar el vehiculo, vuelva a intentarlo";
+				let errorMessage =
+					"ERROR: Ha ocurrido un error al ingresar el vehiculo, vuelva a intentarlo";
 
 				if (error.response && error.response.data) {
-				  errorMessage = `ERROR: ${error.response.data}`
+					errorMessage = `ERROR: ${error.response.data}`;
 				}
-			
+
 				toast.error(errorMessage, {
-				  position: toast.POSITION.TOP_RIGHT,
-				  theme: "colored",
+					position: toast.POSITION.TOP_RIGHT,
+					theme: "colored",
 				});
 			});
 	};

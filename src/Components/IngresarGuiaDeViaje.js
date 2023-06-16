@@ -91,7 +91,11 @@ export const IngresarGuiaDeViaje = () => {
 						},
 						theme: "colored",
 					},
-				}
+				},
+				setIgvf(new IngresarGuiaViajeForm()),
+				setDtddpo(new DtDireccionPostal()),
+				setDtddpd(new DtDireccionPostal()),
+				setfirstTimeInput(ftiigv)
 			);
 		} catch (error) {
 			let errorMessage =
@@ -110,7 +114,7 @@ export const IngresarGuiaDeViaje = () => {
 
 	const handleRubros = () => {
 		axios
-			.get(RESTEndpoints.encargadoService.rubros)
+			.get(RESTEndpoints.publicService.rubros)
 			.then(response => {
 				setRubros(response.data);
 			})
@@ -281,7 +285,7 @@ export const IngresarGuiaDeViaje = () => {
 				type="submit"
 				className="btn-principal submit mt-2 mb-2"
 				disabled={
-					igvf.rubro
+					!(igvf.rubro
 						? true
 						: false &&
 						  igvf.volumen > 0 &&
@@ -297,7 +301,7 @@ export const IngresarGuiaDeViaje = () => {
 						  dtddpd.km?.length > 0 &&
 						  dtddpd.departamento
 						? true
-						: false
+						: false)
 				}
 			>
 				{" "}
