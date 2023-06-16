@@ -1,4 +1,8 @@
-import { FirstTimeInput, FirstTimeInputEmpresaDto } from "./classes";
+import {
+	FirstTimeInput,
+	FirstTimeInputEmpresaDto,
+	FirstTimeInputIngresarGuiaViajeForm,
+} from "./classes";
 
 export const serverURL = "http://localhost:8080/";
 
@@ -17,6 +21,21 @@ export const fti = new FirstTimeInput( //used to check if the form input is chan
 );
 
 export const ftie = new FirstTimeInputEmpresaDto( //used to check if the form input is changed for the first time in EditarEmpresa
+	true,
+	true,
+	true,
+	true,
+	true,
+	true
+);
+
+export const ftiigv = new FirstTimeInputIngresarGuiaViajeForm(
+	true,
+	true,
+	true,
+	true,
+	true,
+	true,
 	true,
 	true,
 	true,

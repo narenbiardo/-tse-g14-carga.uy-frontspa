@@ -22,6 +22,11 @@ export const RESTEndpoints = {
 		modEmpresa: serverURL + "api/encargadoService/modEmpresa",
 		ingresarGuiaViaje: serverURL + "api/guiasViajesService/ingresarGuiaViaje",
 		rubros: serverURL + "api/encargadoService/rubros",
+		vehiculos: serverURL + "api/encargadoService/vehiculos",
+	},
+	guiasViajesService: {
+		listarGuiasAsignables:
+			serverURL + "api/guiasViajesService/listarGuiasAsignables",
 	},
 };
 

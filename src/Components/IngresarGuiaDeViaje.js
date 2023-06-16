@@ -3,6 +3,8 @@ import axios from "axios";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 import { RESTEndpoints } from "../Services/RestService";
+import { IngresarGuiaViajeForm, DtDireccionPostal } from "../classes";
+import { ftiigv } from "../constants";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormH2 } from "../Utilities/FormH2";
 import { FormSelect } from "../Utilities/FormSelect";
@@ -12,12 +14,11 @@ import { FormInputText } from "../Utilities/FormInputText";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import {useRef} from 'react';
+import { useRef } from "react";
 import { animateScroll as scroll } from "react-scroll";
-
 
 const departamentos = [
 	{ id: "1", nombre: "Montevideo" },
@@ -25,34 +26,17 @@ const departamentos = [
 	{ id: "3", nombre: "Rocha" },
 ];
 
-class DtDireccionPostal {
-	constructor(calle, km, nroPuerta) {
-		this.calle = calle;
-		this.km = km;
-		this.nroPuerta = nroPuerta;
-	}
-}
-
-class IngresarGuiaViajeForm {
-	constructor(rubro, volumen, fechaHora, origen, destino, nroEmpresa) {
-		this.rubro = rubro;
-		this.volumen = volumen;
-		this.fechaHora = fechaHora;
-		this.origen = origen;
-		this.destino = destino;
-		this.nroEmpresa = nroEmpresa;
-	}
-}
-
 export const IngresarGuiaDeViaje = () => {
 	const formRef = useRef(null);
 	const [igvf, setIgvf] = useState(new IngresarGuiaViajeForm());
 	const [dtddpo, setDtddpo] = useState(new DtDireccionPostal());
 	const [dtddpd, setDtddpd] = useState(new DtDireccionPostal());
 	const [rubros, setRubros] = useState([]);
+	const [firstTimeInput, setfirstTimeInput] = useState(ftiigv);
 	const jwtDecoded = jwt_decode(cookies.get("code"));
 
 	const handleChangeIgvf = e => {
+		console.log(dtddpd);
 		const { name, value } = e.target;
 		setIgvf(prevData => ({ ...prevData, [name]: value }));
 	};
@@ -71,71 +55,73 @@ export const IngresarGuiaDeViaje = () => {
 		setDtddpd(prevData => ({ ...prevData, [insertName]: value }));
 	};
 
-	const handlePostGuiaDeViaje = async (event) => {
+	const handlePostGuiaDeViaje = async event => {
 		event.preventDefault();
 		try {
-		  const response = await toast.promise(
-			axios.post(RESTEndpoints.encargadoService.ingresarGuiaViaje, {
-			  rubro: {
-				nombre: igvf.rubro,
-			  },
-			  volumenCarga: igvf.volumen,
-			  fechaHora: igvf.fechaHora,
-			  origen: {
-				calle: igvf.origen.calle,
-				nroPuerta: igvf.origen.nroPuerta,
-				km: igvf.origen.km,
-			  },
-			  destino: {
-				calle: igvf.destino.calle,
-				nroPuerta: igvf.destino.nroPuerta,
-				km: igvf.destino.km,
-			  },
-			  estadoViaje: "ASIGNABLE",
-			  nroEmpresa: jwtDecoded.nroEmpresa,
-			}),
-			{
-				pending: 'Procesando...',
-				success: {
-				  render(){
-					formRef.current.reset()
-					scroll.scrollToTop({
-						duration: 200, // Duración de la animación en milisegundos
-						smooth: "easeInOutQuart", // Curva de aceleración de la animación
-					  });
-					return "La guia fue ingresada con exito!"
-				  },
-				  theme: "colored",
-				},
-			  }
-		  );
-		} 
-		catch (error) {
-			let errorMessage = "ERROR: Ha ocurrido un error al ingresar la guia, vuelva a intentarlo";
+			const response = await toast.promise(
+				axios.post(RESTEndpoints.encargadoService.ingresarGuiaViaje, {
+					rubro: {
+						nombre: igvf.rubro,
+					},
+					volumenCarga: igvf.volumen,
+					fechaHora: igvf.fechaHora,
+					origen: {
+						calle: igvf.origen.calle,
+						nroPuerta: igvf.origen.nroPuerta,
+						km: igvf.origen.km,
+					},
+					destino: {
+						calle: igvf.destino.calle,
+						nroPuerta: igvf.destino.nroPuerta,
+						km: igvf.destino.km,
+					},
+					estadoViaje: "ASIGNABLE",
+					nroEmpresa: jwtDecoded.nroEmpresa,
+				}),
+				{
+					pending: "Procesando...",
+					success: {
+						render() {
+							formRef.current.reset();
+							scroll.scrollToTop({
+								duration: 200, // Duración de la animación en milisegundos
+								smooth: "easeInOutQuart", // Curva de aceleración de la animación
+							});
+							return "La guia fue ingresada con exito!";
+						},
+						theme: "colored",
+					},
+				}
+			);
+		} catch (error) {
+			let errorMessage =
+				"ERROR: Ha ocurrido un error al ingresar la guia, vuelva a intentarlo";
 
 			if (error.response && error.response.data) {
-			  errorMessage = `ERROR: ${error.response.data}`
+				errorMessage = `ERROR: ${error.response.data}`;
 			}
-		
+
 			toast.error(errorMessage, {
-			  position: toast.POSITION.TOP_RIGHT,
-			  theme: "colored",
+				position: toast.POSITION.TOP_RIGHT,
+				theme: "colored",
 			});
 		}
-	  };
-	  
+	};
+
 	const handleRubros = () => {
 		axios
 			.get(RESTEndpoints.encargadoService.rubros)
 			.then(response => {
-				//console.log(response.data);
-				var rubros = [];
-				response.data.map(element => rubros.push(element));
 				setRubros(response.data);
 			})
 			.catch(error => {
 				console.log(error);
 			});
+	};
+
+	const handleFirstTimeInput = e => {
+		const { name } = e.target;
+		setfirstTimeInput(prevData => ({ ...prevData, [name]: false }));
 	};
 
 	useEffect(() => {
@@ -184,8 +170,11 @@ export const IngresarGuiaDeViaje = () => {
 				name="volumen"
 				step="0.01"
 				onChangeHandler={handleChangeIgvf}
+				isValid={igvf.volumen > 0}
+				invalidText={"El volumen no puede ser vacío"}
+				firstTime={firstTimeInput.volumen}
+				handleFirstTime={handleFirstTimeInput}
 			/>
-
 
 			<FormInputDate
 				htmlFor="fechaHora"
@@ -193,6 +182,10 @@ export const IngresarGuiaDeViaje = () => {
 				type="datetime-local"
 				name="fechaHora"
 				onChangeHandler={handleChangeIgvf}
+				isValid={igvf.fechaHora?.length > 0}
+				invalidText={"La fecha de la Guía de Viaje no puede ser vacía"}
+				firstTime={firstTimeInput.fechaHora}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			<FormH4 text="Dirección de Origen" />
@@ -202,6 +195,10 @@ export const IngresarGuiaDeViaje = () => {
 				label="Calle"
 				name="calleOrigen"
 				onChangeHandler={handleChangeDtddpo}
+				isValid={dtddpo.calle?.length > 0}
+				invalidText={"La calle del origen no puede ser vacía"}
+				firstTime={firstTimeInput.calleOrigen}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			<FormInputText
@@ -209,6 +206,10 @@ export const IngresarGuiaDeViaje = () => {
 				label="Número de Puerta"
 				name="nroPuertaOrigen"
 				onChangeHandler={handleChangeDtddpo}
+				isValid={dtddpo.nroPuerta?.length > 0}
+				invalidText={"El número de puerta del origen no puede ser vacío"}
+				firstTime={firstTimeInput.nroPuertaOrigen}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			<FormInputText
@@ -216,6 +217,10 @@ export const IngresarGuiaDeViaje = () => {
 				label="Kilómetro"
 				name="kmOrigen"
 				onChangeHandler={handleChangeDtddpo}
+				isValid={dtddpo.km?.length > 0}
+				invalidText={"El kilómetro del origen no puede ser vacío"}
+				firstTime={firstTimeInput.kmOrigen}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			{/* <FormSelect
@@ -235,6 +240,10 @@ export const IngresarGuiaDeViaje = () => {
 				label="Calle"
 				name="calleDestino"
 				onChangeHandler={handleChangeDtddpd}
+				isValid={dtddpd.calle?.length > 0}
+				invalidText={"La calle del destino no puede ser vacía"}
+				firstTime={firstTimeInput.calleDestino}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			<FormInputText
@@ -242,6 +251,10 @@ export const IngresarGuiaDeViaje = () => {
 				label="Número de Puerta"
 				name="nroPuertaDestino"
 				onChangeHandler={handleChangeDtddpd}
+				isValid={dtddpd.nroPuerta?.length > 0}
+				invalidText={"El número de puerta del destino no puede ser vacío"}
+				firstTime={firstTimeInput.nroPuertaDestino}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			<FormInputText
@@ -249,6 +262,10 @@ export const IngresarGuiaDeViaje = () => {
 				label="Kilómetro"
 				name="kmDestino"
 				onChangeHandler={handleChangeDtddpd}
+				isValid={dtddpd.km?.length > 0}
+				invalidText={"El kilómetro del destino no puede ser vacío"}
+				firstTime={firstTimeInput.kmDestino}
+				handleFirstTime={handleFirstTimeInput}
 			/>
 
 			{/* <FormSelect
@@ -260,14 +277,37 @@ export const IngresarGuiaDeViaje = () => {
 				valueArray={departamentos}
 			/> */}
 
-			<Button type="submit"className="btn-principal submit mt-2 mb-2"> Enviar </Button>
-
+			<Button
+				type="submit"
+				className="btn-principal submit mt-2 mb-2"
+				disabled={
+					igvf.rubro
+						? true
+						: false &&
+						  igvf.volumen > 0 &&
+						  igvf.fechaHora?.length > 0 &&
+						  dtddpo.calle?.length > 0 &&
+						  dtddpo.nroPuerta?.length > 0 &&
+						  dtddpo.km?.length > 0 &&
+						  dtddpo.departamento
+						? true
+						: false &&
+						  dtddpd.calle?.length > 0 &&
+						  dtddpd.nroPuerta?.length > 0 &&
+						  dtddpd.km?.length > 0 &&
+						  dtddpd.departamento
+						? true
+						: false
+				}
+			>
+				{" "}
+				Enviar{" "}
+			</Button>
 
 			{/* <FormInputSubmit
 				onClickHandler={handlePostGuiaDeViaje}
-				validForm={true}
 				value="Enviar"
-			/> */}
+			/>
 		</FormDiv>
 	);
 };

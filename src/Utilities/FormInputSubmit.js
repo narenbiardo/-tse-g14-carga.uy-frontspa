@@ -6,9 +6,8 @@ export const FormInputSubmit = ({ onClickHandler, value, validForm }) => {
 			onClick={onClickHandler}
 			type="submit"
 			value={value}
-			className="btn-principal submit mt-4"
+			className={validForm ? "btn-principal mt-4" : "btn-disabled mt-4"}
 			disabled={!validForm}
-
 		/>
 	);
 };
