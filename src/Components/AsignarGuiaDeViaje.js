@@ -7,6 +7,7 @@ import { FormH2 } from "../Utilities/FormH2";
 import { FormSelect } from "../Utilities/FormSelect";
 import { FormTextInputAutocomplete } from "../Utilities/FormTextInputAutocomplete";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
+import { FormInputDiv } from "../Utilities/FormInputDiv";
 import { Button } from "react-bootstrap";
 
 const vehiculos = [
@@ -102,7 +103,6 @@ export const AsignarGuiaDeViaje = () => {
 						optionDisabled="Seleccionar Chofer"
 						valueArray={choferes}
 					/>
-
 					<FormTextInputAutocomplete
 						htmlFor="matriculaVehiculo"
 						label="Vehículo"
@@ -112,14 +112,12 @@ export const AsignarGuiaDeViaje = () => {
 						optionArray={vehiculos}
 						maxOptionNumber={5}
 					/>
-
 					<div>
 						<Button type="submit" className="btn-principal submit mt-2 mb-2">
 							{" "}
 							Enviar{" "}
 						</Button>
 					</div>
-
 					<div>
 						<Button type="submit" className="btn-secundario submit mt-2 mb-2">
 							{" "}
@@ -132,8 +130,9 @@ export const AsignarGuiaDeViaje = () => {
 							className="btn-secundario m-3"
 						>
 							Volver
+						</button>
+					</div>
 						</button> */}
-
 					{/* //</div> */}
 				</>
 			) : (

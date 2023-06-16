@@ -303,11 +303,6 @@ export const IngresarGuiaDeViaje = () => {
 				{" "}
 				Enviar{" "}
 			</Button>
-
-			{/* <FormInputSubmit
-				onClickHandler={handlePostGuiaDeViaje}
-				value="Enviar"
-			/>
 		</FormDiv>
 	);
 };
