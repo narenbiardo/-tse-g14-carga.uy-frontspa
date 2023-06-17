@@ -31,7 +31,7 @@ export const NavBarCustom = () => {
 	};
 
 	return (
-		<Navbar bg="dark" expand="lg" className="shadow-sm">
+		<Navbar bg="dark" expand="lg" className="shadow-sm" variant="dark">
 			<Container>
 				<Navbar.Brand onClick={handleBrandClick} style={{ cursor: "pointer" }}>
 					<SvgLogo color={mainColor} dataName="Layer 1" />

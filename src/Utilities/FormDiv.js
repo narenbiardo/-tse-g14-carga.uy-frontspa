@@ -1,7 +1,10 @@
+import { Form } from "react-bootstrap";
+
+
 export const FormDiv = ({onSubmit, referencia, children }) => {
 	return (
-		<form ref={referencia} onSubmit={onSubmit} className="form-container shadow-dreamy">
+		<Form ref={referencia} onSubmit={onSubmit}>
 			{children}
-		</form>
+		</Form>
 	);
 };

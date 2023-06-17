@@ -13,19 +13,12 @@ import { FormInputText } from "../Utilities/FormInputText";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
 import "react-toastify/dist/ReactToastify.css";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { useRef } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import Swal from 'sweetalert2';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
-
-
-const departamentos = [
-	{ id: "1", nombre: "Montevideo" },
-	{ id: "2", nombre: "Canelones" },
-	{ id: "3", nombre: "Rocha" },
-];
 
 export const IngresarGuiaDeViaje = () => {
 	const formRef = useRef(null);
@@ -143,6 +136,7 @@ export const IngresarGuiaDeViaje = () => {
 	}, []);
 
 	return (
+		<Container className="form-container shadow-dreamy">
 		<FormDiv referencia={formRef} onSubmit={handlePostGuiaDeViaje}>
 			<FormH2 text="Ingresar Guía de Viaje" />
 
@@ -229,16 +223,6 @@ export const IngresarGuiaDeViaje = () => {
 				handleFirstTime={handleFirstTimeInput}
 			/>
 
-			{/* <FormSelect
-				htmlFor="departamentoOrigen"
-				label="Departamento"
-				name="departamentoOrigen"
-				form="departamentoOrigenForm"
-				onChangeHandler={handleChangeDtddpo}
-				optionDisabled="Seleccionar Departamento"
-				valueArray={departamentos}
-			/> */}
-
 			<FormH4 text="Dirección de Destino" />
 
 			<FormInputText
@@ -274,43 +258,15 @@ export const IngresarGuiaDeViaje = () => {
 				handleFirstTime={handleFirstTimeInput}
 			/>
 
-			{/* <FormSelect
-				htmlFor="departamentoDestino"
-				label="Departamento"
-				name="departamentoDestino"
-				onChangeHandler={handleChangeDtddpd}
-				optionDisabled="Seleccionar Departamento"
-				valueArray={departamentos}
-			/> */}
-
-
-
 			<Button
 				type="submit"
 				className={loading ? 'btn-principal submit mt-2 mb-2 btn-disabled' : 'btn-principal submit mt-2 mb-2'}
 				disabled={loading ? true : false}
-				// disabled={
-				// 	igvf.rubro
-				// 		? false
-				// 		: true &&
-				// 		  igvf.volumen > 0 &&
-				// 		  igvf.fechaHora?.length > 0 &&
-				// 		  dtddpo.calle?.length > 0 &&
-				// 		  dtddpo.nroPuerta?.length > 0 &&
-				// 		  dtddpo.km?.length > 0 &&
-				// 		  dtddpo.departamento
-				// 		? false
-				// 		: true &&
-				// 		  dtddpd.calle?.length > 0 &&
-				// 		  dtddpd.nroPuerta?.length > 0 &&
-				// 		  dtddpd.km?.length > 0 &&
-				// 		  dtddpd.departamento
-				// 		? false
-				// 		: true
-				// }
+
 			>
 				{loading ? <AiOutlineLoading3Quarters className="loading-icon" /> : 'Enviar'}
 			</Button>
 		</FormDiv>
+		</Container>
 	);
 };
