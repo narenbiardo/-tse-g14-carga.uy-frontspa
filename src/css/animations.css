@@ -1,0 +1,58 @@
+@keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes slideDown {
+    0% {
+      transform: translateY(-80%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .fade-in {
+    animation: fade-in 400ms ease-in;
+  }
+  
+  .fade-out {
+    animation: fade-out 400ms ease-in;
+  }
+  
+  .loading-icon {
+    animation: spin 1s linear infinite;
+    font-size: 22px;
+    text-align: center;
+    padding: 0px;
+    color: white;
+  }
+  
+  .slide-down {
+    animation: slideDown 0.8s;
+  }
+  

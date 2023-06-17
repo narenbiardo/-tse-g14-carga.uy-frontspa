@@ -159,27 +159,23 @@ export const EditarVehiculo = () => {
 			) : (
 				<>
 					<FormInputDiv>
-						<label htmlFor="matricula">Matricula</label>
+						<div>
+							<label htmlFor="matricula">Matricula</label>
+						</div>
 						<input
 							type="text"
 							name="matricula"
 							onChangeHandler={handleChangeAvf}
 							value={avf.matricula}
 							disabled
-							style={{
-								marginLeft: "10px",
-								padding: "5px",
-								border: "none",
-								borderBottom: "2px solid " + mainColor,
-								width: "250px",
-								fontSize: "16px",
-								color: "#555",
-							}}
+							className="form-input"
 						/>
 					</FormInputDiv>
 
 					<FormInputDiv>
-						<label htmlFor="marcaVehiculo">Marca</label>
+						<div>
+							<label htmlFor="marcaVehiculo">Marca</label>
+						</div>
 						<select
 							name="marcaVehiculo"
 							form="marcaVehiculoForm"
@@ -187,15 +183,7 @@ export const EditarVehiculo = () => {
 							value={avf.marcaVehiculo}
 							defaultValue=""
 							required
-							style={{
-								marginLeft: "10px",
-								padding: "5px",
-								border: "none",
-								borderBottom: "2px solid " + mainColor,
-								width: "250px",
-								fontSize: "16px",
-								color: "#555",
-							}}
+							className="form-input"
 						>
 							<option value="" disabled>
 								Seleccionar Marca

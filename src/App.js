@@ -29,6 +29,7 @@ import { Empresas } from "./Components/Empresas";
 import { PermisosVehiculos } from "./Components/PermisosVehıculos";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './css/animations.css'
 
 axiosHeadersAuth();
 axiosHeadersAccept();

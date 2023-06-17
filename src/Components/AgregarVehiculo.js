@@ -7,22 +7,22 @@ import "react-autocomplete-input/dist/bundle.css";
 import {
 	DtPermisoNacionalCirculacion,
 	AgregarVehiculoForm,
-	FirstTimeInput,
 } from "../classes";
 import { fti } from "../constants";
-import { mainColor } from "../constants";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormInputText } from "../Utilities/FormInputText";
 import { FormInputNumber } from "../Utilities/FormInputNumber";
-import { FormTextInputAutocomplete } from "../Utilities/FormTextInputAutocomplete";
 import { FormH2 } from "../Utilities/FormH2";
 import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormH4 } from "../Utilities/FromH4";
-import { FormInputSubmit } from "../Utilities/FormInputSubmit";
-import { FormSelectArray } from "../Utilities/FormSelectArray";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Button } from "react-bootstrap";
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import Swal from 'sweetalert2';
+import { animateScroll as scroll } from "react-scroll";
+import { useRef } from "react";
+
+
 
 
 export const AgregarVehiculo = () => {
@@ -30,6 +30,10 @@ export const AgregarVehiculo = () => {
 	const [dtpnc, setDtpnc] = useState(new DtPermisoNacionalCirculacion());
 	const [marcasVehiculos, setMarcasVehiculos] = useState([]);
 	const [firstTimeInput, setfirstTimeInput] = useState(fti);
+	const [loading, setLoading] = useState(false);
+	const formRefAgregarVehiculo = useRef(null);
+	const selectRef = useRef(null)
+
 
 	const handleChangeAvf = e => {
 		if (e.target) {
@@ -73,7 +77,9 @@ export const AgregarVehiculo = () => {
 		}
 	};
 
-	const handlePostVehiculo = () => {
+	const handlePostVehiculo = (event) => {
+		event.preventDefault();
+		setLoading(true);
 		axios
 			.post(RESTEndpoints.vehiculosService.agregarVehiculo, {
 				capacidad: parseFloat(avf.capacidad),
@@ -90,21 +96,36 @@ export const AgregarVehiculo = () => {
 				vencimientoITV: avf.vencimientoITV,
 			})
 			.then(response => {
-				toast.success("Vehiculo ingresado con exito !", {
-					position: toast.POSITION.TOP_RIGHT,
-					theme: "colored",
-				  });
+				setLoading(false)
+				Swal.fire({
+					title: 'Confirmado',
+					timer: 2500,  
+					text: 'El vehiculo fue ingresado con éxito!',
+					icon: 'success',
+					confirmButtonText: 'Aceptar',
+				  }).then(() => {
+					formRefAgregarVehiculo.current.reset();
+					//selectRef.current.selectedIndex = "";
+					scroll.scrollToTop({
+					  duration: 200,
+					  smooth: 'easeInOutQuart',
+					});
+				});
+
 			})
 			.catch(error => {
+				setLoading(false)
 				let errorMessage = "ERROR: Ha ocurrido un error al ingresar el vehiculo, vuelva a intentarlo";
 
 				if (error.response && error.response.data) {
-				  errorMessage = `ERROR: ${error.response.data}`
+				  errorMessage = `${error.response.data}`
 				}
 			
-				toast.error(errorMessage, {
-				  position: toast.POSITION.TOP_RIGHT,
-				  theme: "colored",
+				Swal.fire({
+					text: errorMessage,
+					title: 'Error',
+					icon: 'error',
+					confirmButtonText: 'Aceptar',
 				});
 			});
 	};
@@ -118,7 +139,7 @@ export const AgregarVehiculo = () => {
 	}, []);
 
 	return (
-		<FormDiv>
+		<FormDiv referencia={formRefAgregarVehiculo} onSubmit={handlePostVehiculo}>
 			<FormH2 text="Agregar Vehículo" />
 
 			<FormInputText
@@ -126,9 +147,8 @@ export const AgregarVehiculo = () => {
 				label="Matricula"
 				name="matricula"
 				onChangeHandler={handleChangeAvf}
-				inputValue={avf.matricula ? avf.matricula : ""}
-				isValid={avf.matricula?.length === 7}
-				invalidText={"La matrícula es inválida"}
+				isValid={avf.matricula?.length > 0}
+				invalidText={"La matricula no puede estar vacia"}
 				firstTime={firstTimeInput.matricula}
 				handleFirstTime={handleFirstTimeInput}
 			/>
@@ -138,6 +158,7 @@ export const AgregarVehiculo = () => {
 					<label htmlFor="marcaVehiculo">Marca</label>
 				</div>
 				<select
+					ref={selectRef}
 					name="marcaVehiculo"
 					form="marcaVehiculoForm"
 					onChange={handleChangeAvf}
@@ -162,7 +183,6 @@ export const AgregarVehiculo = () => {
 				label="Modelo"
 				name="modelo"
 				onChangeHandler={handleChangeAvf}
-				inputValue={avf.modelo ? avf.modelo : ""}
 				isValid={avf.modelo?.length > 0}
 				invalidText={"El modelo no puede estar vacío"}
 				firstTime={firstTimeInput.modelo}
@@ -175,7 +195,6 @@ export const AgregarVehiculo = () => {
 				name="peso"
 				step="0.01"
 				onChangeHandler={handleChangeAvf}
-				inputValue={avf.peso ? avf.peso : ""}
 				isValid={avf.peso?.length > 0}
 				invalidText={"El peso no puede estar vacío"}
 				firstTime={firstTimeInput.peso}
@@ -188,7 +207,6 @@ export const AgregarVehiculo = () => {
 				name="capacidad"
 				step="0.01"
 				onChangeHandler={handleChangeAvf}
-				inputValue={avf.capacidad ? avf.capacidad : ""}
 				isValid={avf.capacidad?.length > 0}
 				invalidText={"La capacidad no puede estar vacía"}
 				firstTime={firstTimeInput.capacidad}
@@ -197,15 +215,14 @@ export const AgregarVehiculo = () => {
 
 			<FormInputDate
 				htmlFor="vencimientoITV"
-				label="Fecha de Vencimiento de la Inspección Técnica Vehicular"
+				label="Fecha de Vencimiento ITV"
 				type="date"
 				name="vencimientoITV"
 				min={new Date().toISOString().split("T")[0]}
 				onChangeHandler={handleChangeAvf}
-				inputValue={avf.vencimientoITV ? avf.vencimientoITV : ""}
 				isValid={avf.vencimientoITV?.length > 0}
 				invalidText={
-					"La fecha de vencimiento de la inspección técnica vehicular no puede ser vacía"
+					"La fecha de vencimiento de la ITV no puede ser vacía"
 				}
 				firstTime={firstTimeInput.vencimientoITV}
 				handleFirstTime={handleFirstTimeInput}
@@ -215,13 +232,12 @@ export const AgregarVehiculo = () => {
 
 			<FormInputNumber
 				htmlFor="numero"
-				label="Número"
+				label="Número de Permiso"
 				name="numero"
 				onChangeHandler={handleChangeDtpnc}
-				inputValue={dtpnc.numero ? dtpnc.numero : ""}
 				isValid={dtpnc.numero?.length > 0}
 				invalidText={
-					"El número del permiso nacional de circulación no puede estar vacío"
+					"El número del permiso no puede estar vacío"
 				}
 				firstTime={firstTimeInput.numero}
 				handleFirstTime={handleFirstTimeInput}
@@ -234,10 +250,9 @@ export const AgregarVehiculo = () => {
 				name="fechaEmision"
 				max={new Date().toISOString().split("T")[0]}
 				onChangeHandler={handleChangeDtpnc}
-				inputValue={dtpnc.fechaEmision ? dtpnc.fechaEmision : ""}
 				isValid={dtpnc.fechaEmision?.length > 0}
 				invalidText={
-					"La fecha de emisión del permiso nacional de circulación no puede ser vacía"
+					"La fecha de emisión del permiso no puede ser vacía"
 				}
 				firstTime={firstTimeInput.fechaEmision}
 				handleFirstTime={handleFirstTimeInput}
@@ -250,30 +265,22 @@ export const AgregarVehiculo = () => {
 				name="fechaVencimiento"
 				min={new Date().toISOString().split("T")[0]}
 				onChangeHandler={handleChangeDtpnc}
-				inputValue={dtpnc.fechaVencimiento ? dtpnc.fechaVencimiento : ""}
 				isValid={dtpnc.fechaVencimiento?.length > 0}
 				invalidText={
-					"La fecha de vencimiento del permiso nacional de circulación no puede ser vacía"
+					"La fecha de vencimiento del permiso no puede ser vacía"
 				}
 				firstTime={firstTimeInput.fechaVencimiento}
 				handleFirstTime={handleFirstTimeInput}
 			/>
 
-			<FormInputSubmit
-				onClickHandler={handlePostVehiculo}
-				value="Enviar"
-				validForm={
-					avf.matricula?.length === 7 &&
-					(avf.marcaVehiculo ? true : false) &&
-					avf.modelo?.length > 0 &&
-					avf.peso?.length > 0 &&
-					avf.capacidad?.length > 0 &&
-					avf.vencimientoITV?.length > 0 &&
-					dtpnc.numero?.length > 0 &&
-					dtpnc.fechaEmision?.length > 0 &&
-					dtpnc.fechaVencimiento?.length > 0
-				}
-			/>
+			<Button
+				type="submit"
+				className={loading ? 'btn-principal submit mt-2 mb-2 btn-disabled' : 'btn-principal submit mt-2 mb-2'}
+				disabled={loading ? true : false}
+			>
+				{loading ? <AiOutlineLoading3Quarters className="loading-icon" /> : 'Enviar'}
+			</Button>
+
 		</FormDiv>
 	);
 };

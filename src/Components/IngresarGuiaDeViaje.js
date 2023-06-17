@@ -7,18 +7,19 @@ import { IngresarGuiaViajeForm, DtDireccionPostal } from "../classes";
 import { ftiigv } from "../constants";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormH2 } from "../Utilities/FormH2";
-import { FormSelect } from "../Utilities/FormSelect";
 import { FormInputNumber } from "../Utilities/FormInputNumber";
 import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormInputText } from "../Utilities/FormInputText";
 import { FormH4 } from "../Utilities/FromH4";
-import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useRef } from "react";
 import { animateScroll as scroll } from "react-scroll";
+import Swal from 'sweetalert2';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+
+
 
 const departamentos = [
 	{ id: "1", nombre: "Montevideo" },
@@ -33,6 +34,7 @@ export const IngresarGuiaDeViaje = () => {
 	const [dtddpd, setDtddpd] = useState(new DtDireccionPostal());
 	const [rubros, setRubros] = useState([]);
 	const [firstTimeInput, setfirstTimeInput] = useState(ftiigv);
+	const [loading, setLoading] = useState(false);
 	const jwtDecoded = jwt_decode(cookies.get("code"));
 
 	const handleChangeIgvf = e => {
@@ -57,56 +59,60 @@ export const IngresarGuiaDeViaje = () => {
 
 	const handlePostGuiaDeViaje = async event => {
 		event.preventDefault();
+		setLoading(true);
 		try {
-			const response = await toast.promise(
-				axios.post(RESTEndpoints.encargadoService.ingresarGuiaViaje, {
-					rubro: {
-						nombre: igvf.rubro,
-					},
-					volumenCarga: igvf.volumen,
-					fechaHora: igvf.fechaHora,
-					origen: {
-						calle: igvf.origen.calle,
-						nroPuerta: igvf.origen.nroPuerta,
-						km: igvf.origen.km,
-					},
-					destino: {
-						calle: igvf.destino.calle,
-						nroPuerta: igvf.destino.nroPuerta,
-						km: igvf.destino.km,
-					},
-					estadoViaje: "ASIGNABLE",
-					nroEmpresa: jwtDecoded.nroEmpresa,
-				}),
-				{
-					pending: "Procesando...",
-					success: {
-						render() {
-							formRef.current.reset();
-							scroll.scrollToTop({
-								duration: 200, // Duración de la animación en milisegundos
-								smooth: "easeInOutQuart", // Curva de aceleración de la animación
-							});
-							return "La guia fue ingresada con exito!";
-						},
-						theme: "colored",
-					},
-				}
-			);
-		} catch (error) {
-			let errorMessage =
-				"ERROR: Ha ocurrido un error al ingresar la guia, vuelva a intentarlo";
+		  const response = await axios.post(RESTEndpoints.encargadoService.ingresarGuiaViaje, {
+			rubro: {
+			  nombre: igvf.rubro,
+			},
+			volumenCarga: igvf.volumen,
+			fechaHora: igvf.fechaHora,
+			origen: {
+			  calle: igvf.origen.calle,
+			  nroPuerta: igvf.origen.nroPuerta,
+			  km: igvf.origen.km,
+			},
+			destino: {
+			  calle: igvf.destino.calle,
+			  nroPuerta: igvf.destino.nroPuerta,
+			  km: igvf.destino.km,
+			},
+			estadoViaje: "ASIGNABLE",
+			nroEmpresa: jwtDecoded.nroEmpresa,
+		  });
 
-			if (error.response && error.response.data) {
-				errorMessage = `ERROR: ${error.response.data}`;
-			}
-
-			toast.error(errorMessage, {
-				position: toast.POSITION.TOP_RIGHT,
-				theme: "colored",
+		  setLoading(false);
+		  Swal.fire({
+			title: 'Confirmado',
+			timer: 2500,  
+			text: 'La guia fue ingresada con éxito!',
+			icon: 'success',
+			confirmButtonText: 'Aceptar',
+		  }).then(() => {
+			formRef.current.reset();
+			scroll.scrollToTop({
+			  duration: 200,
+			  smooth: 'easeInOutQuart',
 			});
+		  });
+		} 
+		catch (error) {
+			setLoading(false);
+			let errorMessage = 'Ha ocurrido un error al ingresar la guia, vuelva a intentarlo';
+	  
+		  if (error.response && error.response.data) {
+			errorMessage = `${error.response.data}`;
+		  }
+	  
+		  Swal.fire({
+ 			text: errorMessage,
+			title: 'Error',
+			icon: 'error',
+			confirmButtonText: 'Aceptar',
+		  });
 		}
-	};
+	  };
+	  
 
 	const handleRubros = () => {
 		axios
@@ -277,31 +283,33 @@ export const IngresarGuiaDeViaje = () => {
 				valueArray={departamentos}
 			/> */}
 
+
+
 			<Button
 				type="submit"
-				className="btn-principal submit mt-2 mb-2"
-				disabled={
-					igvf.rubro
-						? true
-						: false &&
-						  igvf.volumen > 0 &&
-						  igvf.fechaHora?.length > 0 &&
-						  dtddpo.calle?.length > 0 &&
-						  dtddpo.nroPuerta?.length > 0 &&
-						  dtddpo.km?.length > 0 &&
-						  dtddpo.departamento
-						? true
-						: false &&
-						  dtddpd.calle?.length > 0 &&
-						  dtddpd.nroPuerta?.length > 0 &&
-						  dtddpd.km?.length > 0 &&
-						  dtddpd.departamento
-						? true
-						: false
-				}
+				className={loading ? 'btn-principal submit mt-2 mb-2 btn-disabled' : 'btn-principal submit mt-2 mb-2'}
+				disabled={loading ? true : false}
+				// disabled={
+				// 	igvf.rubro
+				// 		? false
+				// 		: true &&
+				// 		  igvf.volumen > 0 &&
+				// 		  igvf.fechaHora?.length > 0 &&
+				// 		  dtddpo.calle?.length > 0 &&
+				// 		  dtddpo.nroPuerta?.length > 0 &&
+				// 		  dtddpo.km?.length > 0 &&
+				// 		  dtddpo.departamento
+				// 		? false
+				// 		: true &&
+				// 		  dtddpd.calle?.length > 0 &&
+				// 		  dtddpd.nroPuerta?.length > 0 &&
+				// 		  dtddpd.km?.length > 0 &&
+				// 		  dtddpd.departamento
+				// 		? false
+				// 		: true
+				// }
 			>
-				{" "}
-				Enviar{" "}
+				{loading ? <AiOutlineLoading3Quarters className="loading-icon" /> : 'Enviar'}
 			</Button>
 		</FormDiv>
 	);

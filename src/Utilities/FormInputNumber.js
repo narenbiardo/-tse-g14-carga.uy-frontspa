@@ -30,6 +30,7 @@ export const FormInputNumber = ({
 				onBlur={handleFirstTime}
 				className={isValid || firstTime ? 'form-input' : 'form-input invalid'}
 			/>
+			{/* {console.log("FirstTime:" + firstTime + "  IsValida: " + isValid)} */}
 			{!isValid && !firstTime && (
 				<p style={{ color: "red", marginTop: "5px" }}>{invalidText}</p>
 			)}
