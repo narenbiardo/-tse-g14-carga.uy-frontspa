@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ListaVehiculos } from "./ListaVehiculos";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
@@ -21,7 +21,6 @@ import { FormH2 } from "../Utilities/FormH2";
 import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
-import { FormSelectArray } from "../Utilities/FormSelectArray";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
 
 export const EditarVehiculo = () => {
@@ -148,6 +147,7 @@ export const EditarVehiculo = () => {
 	}, []);
 
 	return (
+		<Container className="form-container shadow-dreamy">
 		<FormDiv>
 			<FormH2 text="Editar Vehículo" />
 			{matriculaVehiculo == "" ? (
@@ -318,5 +318,7 @@ export const EditarVehiculo = () => {
 				</>
 			)}
 		</FormDiv>
+		</Container>
+
 	);
 };

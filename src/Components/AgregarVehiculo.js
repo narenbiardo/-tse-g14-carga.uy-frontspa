@@ -16,7 +16,7 @@ import { FormH2 } from "../Utilities/FormH2";
 import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import Swal from 'sweetalert2';
 import { animateScroll as scroll } from "react-scroll";
@@ -139,6 +139,7 @@ export const AgregarVehiculo = () => {
 	}, []);
 
 	return (
+		<Container className="form-container shadow-dreamy">
 		<FormDiv referencia={formRefAgregarVehiculo} onSubmit={handlePostVehiculo}>
 			<FormH2 text="Agregar Vehículo" />
 
@@ -282,5 +283,7 @@ export const AgregarVehiculo = () => {
 			</Button>
 
 		</FormDiv>
+		</Container>
+
 	);
 };
