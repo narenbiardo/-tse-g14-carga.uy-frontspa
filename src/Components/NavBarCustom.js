@@ -141,10 +141,11 @@ export const NavBarCustom = () => {
 											<Logout />
 										</NavDropdown.Item>
 									</NavDropdown>
-
-									<Avatar sx={{ bgcolor: "#FF5B31" }}>
-										{jwt_decode(cookies.get("code")).nombre[0] + jwt_decode(cookies.get("code")).apellido[0]}
-									</Avatar>
+									<div className="d-none d-lg-block">
+										<Avatar sx={{ bgcolor: "#FF5B31" }} >
+											{jwt_decode(cookies.get("code")).nombre[0] + jwt_decode(cookies.get("code")).apellido[0]}
+										</Avatar>
+									</div>
 								</>
 							)}
 					</Nav>
