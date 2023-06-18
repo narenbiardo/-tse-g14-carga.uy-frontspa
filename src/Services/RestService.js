@@ -20,13 +20,26 @@ export const RESTEndpoints = {
 	encargadoService: {
 		getEmpresa: serverURL + "api/encargadoService/getEmpresa",
 		modEmpresa: serverURL + "api/encargadoService/modEmpresa",
-		ingresarGuiaViaje: serverURL + "api/guiasViajesService/ingresarGuiaViaje",
+		/*NEW*/ ingresarGuiaViaje:
+			serverURL + "api/encargadoService/ingresarGuiaViaje",
 		rubros: serverURL + "api/encargadoService/rubros",
 		vehiculos: serverURL + "api/encargadoService/vehiculos",
+		/*NEW*/ agregarVehiculo: serverURL + "api/encargadoService/agregarVehiculo",
+		/*NEW*/ listarGuiasAsignables:
+			serverURL + "api/encargadoService/listarGuiasAsignables",
+		/*NEW*/ listarVehiculos: serverURL + "api/encargadoService/listarVehiculos",
+		/*NEW*/ modVehiculo: serverURL + "api/encargadoService/modVehiculo",
+		/*NEW*/ eliminarVehiculo:
+			serverURL + "api/encargadoService/eliminarVehiculo/",
 	},
 	guiasViajesService: {
 		listarGuiasAsignables:
 			serverURL + "api/guiasViajesService/listarGuiasAsignables",
+	},
+	publicService: {
+		/*NEW*/ listaMarcasVehiculos:
+			serverURL + "api/publicService/listaMarcasVehiculos",
+		/*NEW*/ rubros: serverURL + "api/publicService/rubros",
 	},
 };
 

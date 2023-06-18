@@ -109,7 +109,7 @@ export const IngresarGuiaDeViaje = () => {
 
 	const handleRubros = () => {
 		axios
-			.get(RESTEndpoints.encargadoService.rubros)
+			.get(RESTEndpoints.publicService.rubros)
 			.then(response => {
 				setRubros(response.data);
 			})

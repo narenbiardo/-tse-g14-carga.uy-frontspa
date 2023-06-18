@@ -21,6 +21,8 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import Swal from 'sweetalert2';
 import { animateScroll as scroll } from "react-scroll";
 import { useRef } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -52,7 +54,7 @@ export const AgregarVehiculo = () => {
 
 	const handleMarcasVehiculo = () => {
 		axios
-			.get(RESTEndpoints.vehiculosService.listaMarcasVehiculos)
+			.get(RESTEndpoints.publicService.listaMarcasVehiculos)
 			.then(response => {
 				//console.log(response.data);
 				var marcas = [];
@@ -81,7 +83,7 @@ export const AgregarVehiculo = () => {
 		event.preventDefault();
 		setLoading(true);
 		axios
-			.post(RESTEndpoints.vehiculosService.agregarVehiculo, {
+			.post(RESTEndpoints.encargadoService.agregarVehiculo, {
 				capacidad: parseFloat(avf.capacidad),
 				marcaVehiculo: { nombre: avf.marcaVehiculo },
 				matricula: avf.matricula,
