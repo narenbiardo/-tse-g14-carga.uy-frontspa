@@ -12,6 +12,11 @@ import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
 import { Button } from "react-bootstrap";
 import { CustomToolbar } from "../Utilities/CustomToolbar";
+import {
+	columnsVehiculos,
+	columnsGuiasDeViaje,
+	columnsChoferes,
+} from "../constants";
 
 /*
 const vehiculos = [
@@ -38,26 +43,6 @@ const guiasDeViaje = [
 	{ id: "3", nombre: "Guia 3" },
 ];
 */
-
-const columnsVehiculos = [
-	{ field: "matricula", headerName: "Matricula", width: 100 },
-	{ field: "marca", headerName: "Marca", width: 150 },
-	{ field: "modelo", headerName: "Modelo", width: 100 },
-];
-
-const columnsGuiasDeViaje = [
-	{ field: "id", headerName: "Id", width: 10 },
-	{ field: "rubro", headerName: "Rubro", width: 150 },
-	{ field: "kmOrigen", headerName: "Km Origen", width: 100 },
-	{ field: "kmDestino", headerName: "Km Destino", width: 100 },
-	{ field: "fecha", headerName: "Fecha", width: 90 },
-	{ field: "hora", headerName: "Hora", width: 80 },
-];
-
-const columnsChoferes = [
-	{ field: "id", headerName: "Id", width: 10 },
-	{ field: "nombre", headerName: "Nombre", width: 150 },
-];
 
 class AsignarGuiaViajeForm {
 	constructor(idGuiaViaje, cedulaChofer, matriculaVehiculo) {
@@ -196,7 +181,7 @@ export const AsignarGuiaDeViaje = () => {
 							items: [
 								{
 									id: 1,
-									field: "rubro",
+									field: "nombre",
 									operator: "contains",
 									value: quickFilterRubroValue,
 								},

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ListaVehiculos } from "./ListaVehiculos";
 import { Button } from "react-bootstrap";
 import cookies from "js-cookie";
@@ -11,7 +11,7 @@ import {
 	AgregarVehiculoForm,
 	FirstTimeInput,
 } from "../classes";
-import { fti } from "../constants";
+import { fti, columnsVehiculosFull } from "../constants";
 import { mainColor } from "../constants";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormInputText } from "../Utilities/FormInputText";
@@ -23,6 +23,8 @@ import { FormH4 } from "../Utilities/FromH4";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormSelectArray } from "../Utilities/FormSelectArray";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
+import { DataGrid } from "@mui/x-data-grid";
+import { CustomToolbar } from "../Utilities/CustomToolbar";
 
 export const EditarVehiculo = () => {
 	const [matriculaVehiculo, setMatriculaVehiculo] = useState("");
@@ -31,6 +33,8 @@ export const EditarVehiculo = () => {
 	const [dtpnc, setDtpnc] = useState(new DtPermisoNacionalCirculacion());
 	const [marcasVehiculos, setMarcasVehiculos] = useState([]);
 	const [firstTimeInput, setfirstTimeInput] = useState(fti);
+	const [quickFilterMatriculaValue, setQuickFilterMatriculaValue] =
+		useState("");
 
 	const handleMatriculaVehiculo = v => {
 		setMatriculaVehiculo(v);
@@ -41,7 +45,7 @@ export const EditarVehiculo = () => {
 
 	useEffect(() => {
 		axios
-			.get(RESTEndpoints.vehiculosService.listarVehiculos)
+			.get(RESTEndpoints.encargadoService.listarVehiculos)
 			.then(response => {
 				//console.log(response.data);
 				setvehiculos(
@@ -86,7 +90,7 @@ export const EditarVehiculo = () => {
 
 	const handleMarcasVehiculo = () => {
 		axios
-			.get(RESTEndpoints.vehiculosService.listaMarcasVehiculos)
+			.get(RESTEndpoints.publicService.listaMarcasVehiculos)
 			.then(response => {
 				console.log(response.data);
 				var marcas = [];
@@ -114,7 +118,7 @@ export const EditarVehiculo = () => {
 
 	const handlePostVehiculo = () => {
 		axios
-			.post(RESTEndpoints.vehiculosService.editarVehiculo, {
+			.put(RESTEndpoints.encargadoService.modVehiculo, {
 				capacidad: parseFloat(avf.capacidad),
 				marcaVehiculo: { nombre: avf.marcaVehiculo },
 				matricula: avf.matricula,
@@ -139,6 +143,17 @@ export const EditarVehiculo = () => {
 			});
 	};
 
+	const getRowIdVehiculos = row => {
+		return Math.random().toString();
+	};
+
+	const handleQuickFilterMatriculaValue = useCallback(
+		value => {
+			setQuickFilterMatriculaValue(value);
+		},
+		[quickFilterMatriculaValue]
+	);
+
 	useEffect(() => {
 		setAvf(prevData => ({ ...prevData, ["permisoCirculacion"]: dtpnc }));
 	}, [dtpnc]);
@@ -151,12 +166,46 @@ export const EditarVehiculo = () => {
 		<FormDiv>
 			<FormH2 text="Editar Vehículo" />
 			{matriculaVehiculo == "" ? (
-				<ListaVehiculos
+				<DataGrid
+					rows={vehiculos}
+					columns={columnsVehiculosFull}
+					checkboxSelection={false}
+					hideFooterSelectedRowCount={true}
+					onRowClick={p => handleMatriculaVehiculo(p.row)}
+					getRowId={getRowIdVehiculos}
+					initialState={{
+						pagination: { paginationModel: { pageSize: 10 } },
+					}}
+					components={{
+						Toolbar: CustomToolbar,
+					}}
+					componentsProps={{
+						toolbar: {
+							setQuickFilter: handleQuickFilterMatriculaValue,
+							placeholder: "Buscar por matricula",
+						},
+					}}
+					filterModel={{
+						items: [
+							{
+								id: 1,
+								field: "matricula",
+								operator: "contains",
+								value: quickFilterMatriculaValue,
+							},
+						],
+					}}
+					density="compact"
+					autoHeight
+
+					/*DISABLED pageSizeOptions={[10, 25, 50]}*/
+				/>
+			) : (
+				/*<ListaVehiculos
 					onMatriculaVehiculoChange={handleMatriculaVehiculo}
 					vehiculosArray={vehiculos}
 					showNroEmpresa={false}
-				/>
-			) : (
+				/>*/
 				<>
 					<FormInputDiv>
 						<label htmlFor="matricula">Matricula</label>

@@ -25,8 +25,7 @@ export const FormInputText = ({
 				value={inputValue}
 				required
 				onBlur={handleFirstTime}
-				className={isValid || firstTime ? 'form-input' : 'form-input invalid'}
-
+				className={isValid || firstTime ? "form-input" : "form-input invalid"}
 			/>
 			{!isValid && !firstTime && (
 				<p style={{ color: "red", marginTop: "5px" }}>{invalidText}</p>
