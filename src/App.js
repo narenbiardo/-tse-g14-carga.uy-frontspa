@@ -29,6 +29,7 @@ import './css/animations.css'
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 
 axiosHeadersAuth();
 axiosHeadersAccept();
@@ -80,7 +81,7 @@ const ProtectedPerfil = ({ children }) => {
 const defaultTheme = createTheme();
 
 
-function App() {
+function App() {	
 	return (
 		<ThemeProvider theme={defaultTheme}>
 		<Box

@@ -8,13 +8,24 @@ import { SvgLogo } from "../Utilities/SvgLogo";
 import { mainColor } from "../constants";
 import jwt_decode from "jwt-decode";
 import cookies from "js-cookie";
-import Avatar from '@mui/material/Avatar';
+import Avatar from '@mui/material/Avatar'
+import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Perfil } from "./Perfil";
 
 export const NavBarCustom = () => {
 	const { isAuthenticated } = useAuth();
 	const { user } = useAuth();
 	const [dropdownHovered, setDropdownHovered] = useState(null);
 	const [navLinkHovered, setNavLinkHovered] = useState(null);
+	const [isOpen, setIsOpen] = useState(false);
+
+	const openDialog = () => {
+	setIsOpen(true);
+	};
+
+	const closeDialog = () => {
+	setIsOpen(false);
+	};
 
 	const navigate = useNavigate();
 
@@ -135,6 +146,26 @@ export const NavBarCustom = () => {
 											>
 												Perfil
 											</NavLink>
+											{/* <Button variant="contained" onClick={openDialog}>Perfil</Button>
+											<Dialog
+												open={isOpen}
+												onClose={closeDialog}
+												maxWidth="md"
+												fullWidth
+												PaperProps={{
+													style: {
+													  maxHeight: '100vh', // Ajusta la altura según tus necesidades
+													},
+												  }}
+												>
+												<DialogTitle>Perfil</DialogTitle>
+												<DialogContent>
+													<Perfil/>
+												</DialogContent>
+												<DialogActions>
+													<Button onClick={closeDialog} color="secondary">Cerrar</Button>
+												</DialogActions>
+												</Dialog> */}
 										</NavDropdown.Item>
 
 										<NavDropdown.Item className="nav-link item">
