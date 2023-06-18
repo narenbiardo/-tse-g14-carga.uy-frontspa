@@ -20,7 +20,7 @@ export const CustomToolbar = props => {
 		<div>
 			<GridToolbarContainer>
 				<SearchContainer>
-					<IconButton disabled>
+					<IconButton disabled /*Disabled to prevent mouse hover 'hand'*/>
 						<SearchIcon />
 					</IconButton>
 					<CustomTextField

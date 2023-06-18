@@ -54,6 +54,11 @@ const columnsGuiasDeViaje = [
 	{ field: "hora", headerName: "Hora", width: 80 },
 ];
 
+const columnsChoferes = [
+	{ field: "id", headerName: "Id", width: 10 },
+	{ field: "nombre", headerName: "Nombre", width: 150 },
+];
+
 class AsignarGuiaViajeForm {
 	constructor(idGuiaViaje, cedulaChofer, matriculaVehiculo) {
 		this.idGuiaViaje = idGuiaViaje;
@@ -137,6 +142,10 @@ export const AsignarGuiaDeViaje = () => {
 		return Math.random().toString();
 	};
 
+	const getRowIdChoferes = row => {
+		return Math.random().toString();
+	};
+
 	const handleSetQuickFilterMatricula = useCallback(
 		value => {
 			setQuickFilterMatriculaValue(value);
@@ -162,14 +171,41 @@ export const AsignarGuiaDeViaje = () => {
 
 			{agvf.idGuiaViaje ? (
 				<>
-					<FormSelect
-						htmlFor="cedulaChofer"
-						label="Chofer"
-						name="cedulaChofer"
-						form="cedulaChoferForm"
-						onChangeHandler={console.log("choferseleccionado")}
-						optionDisabled="Seleccionar Chofer"
-						valueArray={choferes}
+					<label>Chofer</label>
+
+					<DataGrid
+						rows={choferes}
+						columns={columnsChoferes}
+						checkboxSelection={false}
+						hideFooterSelectedRowCount={true}
+						onRowClick={p => handleChangeAgvf(p.row)}
+						getRowId={getRowIdChoferes}
+						initialState={{
+							pagination: { paginationModel: { pageSize: 10 } },
+						}}
+						components={{
+							Toolbar: CustomToolbar,
+						}}
+						componentsProps={{
+							toolbar: {
+								setQuickFilter: handleSetQuickFilterRubro,
+								placeholder: "Buscar por nombre",
+							},
+						}}
+						filterModel={{
+							items: [
+								{
+									id: 1,
+									field: "rubro",
+									operator: "contains",
+									value: quickFilterRubroValue,
+								},
+							],
+						}}
+						density="compact"
+						autoHeight
+
+						/*DISABLED pageSizeOptions={[10, 25, 50]}*/
 					/>
 
 					<label>Vehículo</label>
