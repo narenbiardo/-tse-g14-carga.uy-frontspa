@@ -1,12 +1,14 @@
 .footer {
-	height: 180px;
-	flex-shrink: 0;
-	padding: 3rem;
+	margin-top: auto;
+	padding: 3rem 0;
 	background-color: #212529;
 	color: #fff;
 }
 
 .btn-principal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	background-color: #16b7b9;
 	border: none;
 	border-radius: 10px;
@@ -19,7 +21,7 @@
 }
 
 .btn-principal:hover {
-	background-color: #2a8b8d;
+	background-color: #309b9c;
 	transition: all 0.2s ease 0s;
 }
 
@@ -33,6 +35,9 @@
 	font-size: 20px;
 	height: 40px;
 	font-weight: 500;
+}
+.btn-disabled{
+	background-color: #cfcfcf !important;
 }
 
 .btn-secundario {
@@ -83,23 +88,59 @@
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.form-container {
+.perfil{
 	display: flex;
-	margin: 20px 0px;
-	width: 50%;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	padding: 20px;
 	border-radius: 10px;
 	background-color: #ffffff;
+	margin: 20px auto;
+	width: 950px;
+	@media (max-width: 768px) {
+		width: 100%;
+	  }
+
 }
+
+.perfil-image{
+	width: 150px !important;
+	height: 150 !important;
+	box-shadow: 0 0 6px 5px rgba(0, 215, 142, .7);
+	
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	border-radius: 10px;
+	background-color: #ffffff;
+	margin: 20px auto;
+	width: 50%;
+  
+	@media (max-width: 768px) {
+	  width: 90%;
+	}
+  }
 
 .shadow-dreamy {
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
 		0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07),
 		0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
 }
+
+.shadow-4{box-shadow:0 1px 1px rgba(0,0,0,0.15),0 2px 2px rgba(0,0,0,0.15),0 4px 4px rgba(0,0,0,0.15),0 8px 8px rgba(0,0,0,0.15)}
+.shadow-5{box-shadow:0 1px 1px rgba(0,0,0,0.12),0 2px 2px rgba(0,0,0,0.12),0 4px 4px rgba(0,0,0,0.12),0 8px 8px rgba(0,0,0,0.12),0 16px 16px rgba(0,0,0,0.12)}
+.shadow-6{box-shadow:0 1px 1px rgba(0,0,0,0.11),0 2px 2px rgba(0,0,0,0.11),0 4px 4px rgba(0,0,0,0.11),0 8px 8px rgba(0,0,0,0.11),0 16px 16px rgba(0,0,0,0.11),0 32px 32px rgba(0,0,0,0.11)}
+.shadow-sharp{box-shadow:0 1px 1px rgba(0,0,0,0.25),0 2px 2px rgba(0,0,0,0.2),0 4px 4px rgba(0,0,0,0.15),0 8px 8px rgba(0,0,0,0.1),0 16px 16px rgba(0,0,0,0.05)}
+.shadow-diffuse{box-shadow:0 1px 1px rgba(0,0,0,0.08),0 2px 2px rgba(0,0,0,0.12),0 4px 4px rgba(0,0,0,0.16),0 8px 8px rgba(0,0,0,0.2)}
+.shadow-shorter{box-shadow:0 1px 1px rgba(0,0,0,0.11),0 2px 2px rgba(0,0,0,0.11),0 4px 4px rgba(0,0,0,0.11),0 6px 8px rgba(0,0,0,0.11),0 8px 16px rgba(0,0,0,0.11)}
+.shadow-longer{box-shadow:0 2px 1px rgba(0,0,0,0.09),0 4px 2px rgba(0,0,0,0.09),0 8px 4px rgba(0,0,0,0.09),0 16px 8px rgba(0,0,0,0.09),0 32px 16px rgba(0,0,0,0.09)}
+
 
 .form-input {
 	padding: 5px;
@@ -108,7 +149,7 @@
 	border-bottom: 2px solid #16b7b9;
 	width: 400px;
 	font-size: 16px;
-	color: #555;
+	color: #47494b;
 }
 
 .invalid {
@@ -117,35 +158,19 @@
 
 .forms-header {
 	color: #16b7b9;
-	margin: 10px 0px 15px 0px;
+	margin: 15px 0px 10px 0px;
 }
 
 .forms-sub-header {
 	color: #16b7b9;
-	margin: 25px 0px 15px 0px;
+	margin: 15px 0px 5px 0px;
 }
 
-.btn-principal:hover {
-	background-color: #46d4d6;
-	transition: all 0.2s ease 0s;
-}
+.btn-link{
+	background-color: none;
 
-.btn-secundario {
-	padding: 0;
-	background-color: #212529;
-	border: none;
-	border-radius: 10px;
-	min-width: 100px;
-	height: 35px;
-	font-size: medium;
-	color: white;
-	font-weight: 400;
-	cursor: pointer;
-}
-
-.btn-secundario:hover {
-	background-color: #47494b;
-	transition: all 0.2s ease 0s;
+	align-items: end;
+	justify-content: end;
 }
 
 .btn-disabled {
@@ -160,22 +185,18 @@
 	font-weight: 400;
 }
 
-.custom-modal-content {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: #fff;
-	padding: 3rem;
-	border-radius: 8px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+.nav-link {
+	color: white !important;
 }
 
-.custom-link {
-	background-color: transparent;
-	color: inherit;
+.nav-link:hover {
+	color: #cacaca !important;
 }
 
-.custom-link:hover {
-	color: chocolate;
+.nav-link.item{
+	color: black !important;
+}
+
+.nav-link.item:hover{
+	background-color: #ebebeb;
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ListaVehiculos } from "./ListaVehiculos";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
@@ -21,7 +21,6 @@ import { FormH2 } from "../Utilities/FormH2";
 import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
-import { FormSelectArray } from "../Utilities/FormSelectArray";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
 
 export const EditarVehiculo = () => {
@@ -148,6 +147,7 @@ export const EditarVehiculo = () => {
 	}, []);
 
 	return (
+		<Container className="form-container shadow-dreamy">
 		<FormDiv>
 			<FormH2 text="Editar Vehículo" />
 			{matriculaVehiculo == "" ? (
@@ -159,27 +159,23 @@ export const EditarVehiculo = () => {
 			) : (
 				<>
 					<FormInputDiv>
-						<label htmlFor="matricula">Matricula</label>
+						<div>
+							<label htmlFor="matricula">Matricula</label>
+						</div>
 						<input
 							type="text"
 							name="matricula"
 							onChangeHandler={handleChangeAvf}
 							value={avf.matricula}
 							disabled
-							style={{
-								marginLeft: "10px",
-								padding: "5px",
-								border: "none",
-								borderBottom: "2px solid " + mainColor,
-								width: "250px",
-								fontSize: "16px",
-								color: "#555",
-							}}
+							className="form-input"
 						/>
 					</FormInputDiv>
 
 					<FormInputDiv>
-						<label htmlFor="marcaVehiculo">Marca</label>
+						<div>
+							<label htmlFor="marcaVehiculo">Marca</label>
+						</div>
 						<select
 							name="marcaVehiculo"
 							form="marcaVehiculoForm"
@@ -187,15 +183,7 @@ export const EditarVehiculo = () => {
 							value={avf.marcaVehiculo}
 							defaultValue=""
 							required
-							style={{
-								marginLeft: "10px",
-								padding: "5px",
-								border: "none",
-								borderBottom: "2px solid " + mainColor,
-								width: "250px",
-								fontSize: "16px",
-								color: "#555",
-							}}
+							className="form-input"
 						>
 							<option value="" disabled>
 								Seleccionar Marca
@@ -330,5 +318,7 @@ export const EditarVehiculo = () => {
 				</>
 			)}
 		</FormDiv>
+		</Container>
+
 	);
 };

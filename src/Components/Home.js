@@ -5,6 +5,8 @@ import { DtPermisoNacionalCirculacion, VehiculoDto } from "../classes";
 import { ListaVehiculos } from "./ListaVehiculos";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormH4 } from "../Utilities/FromH4";
+import { Container } from "react-bootstrap";
+
 
 export const Home = () => {
 	const [vehiculos, setvehiculos] = useState([]);
@@ -49,4 +51,6 @@ export const Home = () => {
 			/>
 		</FormDiv>
 	);
+
+
 };

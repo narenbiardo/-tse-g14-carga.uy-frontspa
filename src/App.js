@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import {
 	Route,
 	Routes,
-	Link,
 	NavLink,
 	Navigate,
 	useNavigate,
@@ -19,16 +18,18 @@ import { AgregarVehiculo } from "./Components/AgregarVehiculo";
 import { EditarVehiculo } from "./Components/EditarVehiculo";
 import { Perfil } from "./Components/Perfil";
 import cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
-import axios from "axios";
 import { axiosHeadersAuth, axiosHeadersAccept } from "./Services/RestService";
 import { Home } from "./Components/Home";
 import { PerfilEmpresa } from "./Components/PerfilEmpresa";
 import { EliminarVehiculo } from "./Components/EliminarVehiculo";
 import { Empresas } from "./Components/Empresas";
 import { PermisosVehiculos } from "./Components/PermisosVehıculos";
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './css/animations.css'
+import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 
 axiosHeadersAuth();
 axiosHeadersAccept();
@@ -77,11 +78,21 @@ const ProtectedPerfil = ({ children }) => {
 	}
 };
 
-function App() {
+const defaultTheme = createTheme();
+
+
+function App() {	
 	return (
-		
-		<AuthProvider>
-			<ToastContainer/>
+		<ThemeProvider theme={defaultTheme}>
+		<Box
+		  sx={{
+			display: 'flex',
+			flexDirection: 'column',
+			minHeight: '100vh',
+		  }}
+		>
+		  <CssBaseline />
+		  <AuthProvider>
 			<NavBarCustom/>
 			<div className="App">
 				<Routes>
@@ -157,13 +168,31 @@ function App() {
 							<ProtectedRouteFuncionario>
 								<PermisosVehiculos />
 							</ProtectedRouteFuncionario>
-						}
+						} 
 					/>
 					<Route path="*" element={<h1>Not found</h1>} />
 				</Routes>
 			</div>
-			<Footer />
 		</AuthProvider>
+		
+		<Box
+			component="footer"
+			sx={{
+			  py: 3,
+			  px: 2,
+			  mt: 'auto',
+			  backgroundColor: '#212529',
+
+			}}
+		  >
+			<Container maxWidth="sm">
+				<Footer/>
+			</Container>
+		  </Box>
+		</Box>
+	  </ThemeProvider>
+  
+		
 	);
 }
 
