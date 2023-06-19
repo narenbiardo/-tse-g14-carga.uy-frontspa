@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { ListaVehiculos } from "./ListaVehiculos";
-import { Button, Container } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
@@ -9,21 +8,19 @@ import "react-autocomplete-input/dist/bundle.css";
 import {
 	DtPermisoNacionalCirculacion,
 	AgregarVehiculoForm,
-	FirstTimeInput,
 } from "../classes";
 import { fti, columnsVehiculosFull } from "../constants";
-import { mainColor } from "../constants";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormInputText } from "../Utilities/FormInputText";
 import { FormInputNumber } from "../Utilities/FormInputNumber";
-import { FormTextInputAutocomplete } from "../Utilities/FormTextInputAutocomplete";
 import { FormH2 } from "../Utilities/FormH2";
 import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
-import { DataGrid } from "@mui/x-data-grid";
 import { CustomToolbar } from "../Utilities/CustomToolbar";
+import Container from '@mui/material/Container';
+import { StripedDataGrid } from "./StrippedDataGrid";
 
 export const EditarVehiculo = () => {
 	const [matriculaVehiculo, setMatriculaVehiculo] = useState("");
@@ -165,42 +162,29 @@ export const EditarVehiculo = () => {
 		<Container className="form-container shadow-dreamy">
 		<FormDiv>
 			<FormH2 text="Editar Vehículo" />
-			{matriculaVehiculo == "" ? (
-				<DataGrid
-					rows={vehiculos}
-					columns={columnsVehiculosFull}
-					checkboxSelection={false}
-					hideFooterSelectedRowCount={true}
-					onRowClick={p => handleMatriculaVehiculo(p.row)}
-					getRowId={getRowIdVehiculos}
-					initialState={{
-						pagination: { paginationModel: { pageSize: 10 } },
-					}}
-					components={{
-						Toolbar: CustomToolbar,
-					}}
-					componentsProps={{
-						toolbar: {
-							setQuickFilter: handleQuickFilterMatriculaValue,
-							placeholder: "Buscar por matricula",
-						},
-					}}
-					filterModel={{
-						items: [
-							{
-								id: 1,
-								field: "matricula",
-								operator: "contains",
-								value: quickFilterMatriculaValue,
-							},
-						],
-					}}
-					density="compact"
-					autoHeight
-
-					/*DISABLED pageSizeOptions={[10, 25, 50]}*/
-				/>
-			) : (
+			{matriculaVehiculo === "" ? (
+				<StripedDataGrid
+				rows={vehiculos}
+				columns={columnsVehiculosFull}
+				checkboxSelection={false}
+				hideFooterSelectedRowCount={true}
+				onRowClick={(p) => handleMatriculaVehiculo(p.row)}
+				getRowId={getRowIdVehiculos}
+				initialState={{
+				pagination: { paginationModel: { pageSize: 10 } },
+				}}
+				components={{
+				Toolbar: CustomToolbar,
+				}}
+				componentsProps={{
+				toolbar: {
+					setQuickFilter: handleQuickFilterMatriculaValue,
+					placeholder: 'Buscar por matricula',
+				},
+				}}
+				className="striped-row"
+				autoHeight
+			/>		  ) : (
 				/*<ListaVehiculos
 					onMatriculaVehiculoChange={handleMatriculaVehiculo}
 					vehiculosArray={vehiculos}

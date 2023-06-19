@@ -121,7 +121,7 @@
 	background-color: #ffffff;
 	margin: 20px auto;
 	width: 50%;
-  
+	height: 100vh;
 	@media (max-width: 768px) {
 	  width: 90%;
 	}
@@ -200,3 +200,22 @@
 .nav-link.item:hover{
 	background-color: #ebebeb;
 }
+
+.striped-row-even {
+    background-color: #F5F5F5;
+}
+
+.striped-row-odd {
+    background-color: #FFFFFF;
+ }
+
+ .edit-icon{
+	cursor: pointer;
+	color: #212529;
+	
+ }
+
+ .edit-icon:hover{
+	color: #FF5B31;
+	transition: all 0.2s ease 0s;
+ }

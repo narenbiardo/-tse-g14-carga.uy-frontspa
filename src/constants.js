@@ -3,6 +3,8 @@ import {
 	FirstTimeInputEmpresaDto,
 	FirstTimeInputIngresarGuiaViajeForm,
 } from "./classes";
+import EditIcon from '@mui/icons-material/Edit';
+
 
 export const serverURL = "http://localhost:8080/";
 
@@ -66,30 +68,40 @@ export const columnsChoferes = [
 ];
 
 export const columnsVehiculosFull = [
-	{ field: "matricula", headerName: "Matricula", width: 90 },
-	{ field: "marcaVehiculo", headerName: "Marca", width: 110 },
-	{ field: "modelo", headerName: "Modelo", width: 80 },
-	{ field: "capacidad", headerName: "Capacidad", width: 70 },
-	{ field: "peso", headerName: "Peso", width: 70 },
-	{ field: "vencimientoITV", headerName: "ITV Venc.", width: 100 },
+	{ field: "matricula", headerName: "Matricula", width: 120 },
+	{ field: "marcaVehiculo", headerName: "Marca", width: 120 },
+	{ field: "modelo", headerName: "Modelo", width: 120 },
+	{ field: "capacidad", headerName: "Capacidad", width: 120 },
+	{ field: "peso", headerName: "Peso", width: 120 },
+	{ field: "vencimientoITV", headerName: "ITV Venc.", width: 120 },
 	{
 		field: "permisoCirculacionNumero",
-		headerName: "PC Nº",
-		width: 10,
+		headerName: "Nº Permiso",
+		width: 120,
 		valueGetter: params => params.row.permisoCirculacion.numero,
 	},
 	{
 		field: "permisoCirculacionFechaEmision",
-		headerName: "PC Emision",
-		width: 100,
+		headerName: "Emision Permiso",
+		width: 120,
 		valueGetter: params => params.row.permisoCirculacion.fechaEmision,
 	},
 	{
 		field: "permisoCirculacionFechaVencimiento",
-		headerName: "PC Venc.",
-		width: 100,
+		headerName: "Venc. Permiso",
+		width: 120,
 		valueGetter: params => params.row.permisoCirculacion.fechaVencimiento,
 	},
+	{
+		field: 'actions',
+		headerName: '',
+		width: 20,
+		renderCell: (params) => {
+		  return (
+			  <EditIcon className="edit-icon"/>
+		  );
+		},
+	  },
 ];
 
 /*
