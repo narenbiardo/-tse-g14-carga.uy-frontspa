@@ -104,6 +104,10 @@ export const columnsVehiculosFull = [
 	  },
 ];
 
+export const columnsEmpresas = [
+	{ field: "nombre", headerName: "Nombre", width: 150 },
+];
+
 /*
 const permisoCirculacion = new DtPermisoNacionalCirculacion(
 	vehiculo.permisoCirculacion.numero,
