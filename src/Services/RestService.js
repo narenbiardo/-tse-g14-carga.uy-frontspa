@@ -42,6 +42,8 @@ export const RESTEndpoints = {
 		/*NEW*/ rubros: serverURL + "api/publicService/rubros",
 		/*NEW*/ validarEmpresas: serverURL + "api/publicService/validarEmpresas",
 		/*NEW*/ viajesEnCurso: serverURL + "api/publicService/viajesEnCurso",
+		/*NEW*/ choferesRegistrados:
+			serverURL + "api/publicService/choferesRegistrados",
 	},
 };
 
