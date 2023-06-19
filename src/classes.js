@@ -150,3 +150,31 @@ export class FirstTimeInputIngresarGuiaViajeForm {
 		this.nroPuertaDestino = nroPuertaDestino;
 	}
 }
+
+export class DireccionEmpresa {
+	constructor(calle, nroPuerta, km) {
+		this.calle = calle;
+		this.nroPuerta = nroPuerta;
+		this.km = km;
+	}
+}
+
+export class AñadirEmpresaForm {
+	constructor(nroEmpresa, razonSocial, nombreEmpresa, direccionEmpresa) {
+		this.nroEmpresa = nroEmpresa;
+		this.razonSocial = razonSocial;
+		this.nombreEmpresa = nombreEmpresa;
+		this.direccionEmpresa = direccionEmpresa;
+	}
+}
+
+export class FirstTimeInputAñadirEmpresaForm {
+	constructor(nroEmpresa, razonSocial, nombreEmpresa, calle, nroPuerta, km) {
+		this.nroEmpresa = nroEmpresa;
+		this.razonSocial = razonSocial;
+		this.nombreEmpresa = nombreEmpresa;
+		this.calle = calle;
+		this.nroPuerta = nroPuerta;
+		this.km = km;
+	}
+}

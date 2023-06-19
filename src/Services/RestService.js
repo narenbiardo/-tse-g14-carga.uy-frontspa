@@ -45,6 +45,9 @@ export const RESTEndpoints = {
 		/*NEW*/ choferesRegistrados:
 			serverURL + "api/publicService/choferesRegistrados",
 	},
+	funcionarioService: {
+		/*NEW*/ addEmpresa: serverURL + "api/funcionarioService/addEmpresa",
+	},
 };
 
 /*	GET request example

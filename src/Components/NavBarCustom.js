@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { Button, Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
-import { Route, Routes, Link, NavLink, Navigate, useNavigate } from "react-router-dom";
+import {
+	Route,
+	Routes,
+	Link,
+	NavLink,
+	Navigate,
+	useNavigate,
+} from "react-router-dom";
 import { useAuth, AuthProvider } from "../Services/useAuth";
 import { Logout } from "../Utilities/Logout";
 import { Login } from "../Services/LoginGubUy";
@@ -8,8 +15,13 @@ import { SvgLogo } from "../Utilities/SvgLogo";
 import { mainColor } from "../constants";
 import jwt_decode from "jwt-decode";
 import cookies from "js-cookie";
-import Avatar from '@mui/material/Avatar'
-import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import Avatar from "@mui/material/Avatar";
+import {
+	Dialog,
+	DialogTitle,
+	DialogContent,
+	DialogActions,
+} from "@mui/material";
 import { Perfil } from "./Perfil";
 
 export const NavBarCustom = () => {
@@ -20,11 +32,11 @@ export const NavBarCustom = () => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const openDialog = () => {
-	setIsOpen(true);
+		setIsOpen(true);
 	};
 
 	const closeDialog = () => {
-	setIsOpen(false);
+		setIsOpen(false);
 	};
 
 	const navigate = useNavigate();
@@ -50,8 +62,8 @@ export const NavBarCustom = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="me-auto">
-						{isAuthenticated && user === 1 &&
-							( // EncargadoEmpresa
+						{isAuthenticated &&
+							user === 1 && ( // EncargadoEmpresa
 								<>
 									<NavDropdown title="Guia de Viaje" id="nav-dropdown">
 										<NavDropdown.Item className="nav-link item">
@@ -79,12 +91,12 @@ export const NavBarCustom = () => {
 									<NavDropdown title="Vehículo">
 										<NavDropdown.Item className="nav-link item">
 											<NavLink
-												to="/agregarVehiculo"
+												to="/añadirVehiculo"
 												className="nav-link item"
 												onMouseEnter={() => handleNavLinkEnter(2)}
 												onMouseLeave={handleNavLinkLeave}
 											>
-												Agregar Vehiculo
+												Añadir Vehiculo
 											</NavLink>
 										</NavDropdown.Item>
 
@@ -100,14 +112,14 @@ export const NavBarCustom = () => {
 										</NavDropdown.Item>
 
 										<NavDropdown.Item className="nav-link item">
-												<NavLink
-													to="/eliminarVehiculo"
-													className="nav-link item"
-													onMouseEnter={() => handleNavLinkEnter(4)}
-													onMouseLeave={handleNavLinkLeave}
-												>
-													Eliminar Vehiculo
-												</NavLink>
+											<NavLink
+												to="/eliminarVehiculo"
+												className="nav-link item"
+												onMouseEnter={() => handleNavLinkEnter(4)}
+												onMouseLeave={handleNavLinkLeave}
+											>
+												Eliminar Vehiculo
+											</NavLink>
 										</NavDropdown.Item>
 									</NavDropdown>
 									<NavLink to="/empresa" className="nav-link">
@@ -115,12 +127,37 @@ export const NavBarCustom = () => {
 									</NavLink>
 								</>
 							)}
-						{isAuthenticated && user === 2 &&
-							( // Funcionario
+						{isAuthenticated &&
+							user === 2 && ( // Funcionario
 								<>
-									<NavLink to="/empresas" className="nav-link">
-										Empresas
-									</NavLink>
+									<NavDropdown title="Empresa">
+										<NavDropdown.Item className="nav-link item">
+											<NavLink
+												to="/añadirEmpresa"
+												className="nav-link item"
+												onMouseEnter={() => handleNavLinkEnter(5)}
+												onMouseLeave={handleNavLinkLeave}
+											>
+												Añadir Empresa
+											</NavLink>
+											<NavLink
+												to="/modificarEmpresa"
+												className="nav-link item"
+												onMouseEnter={() => handleNavLinkEnter(6)}
+												onMouseLeave={handleNavLinkLeave}
+											>
+												Modificar Empresa
+											</NavLink>
+											<NavLink
+												to="/eliminarEmpresa"
+												className="nav-link item"
+												onMouseEnter={() => handleNavLinkEnter(7)}
+												onMouseLeave={handleNavLinkLeave}
+											>
+												Eliminar Empresa
+											</NavLink>
+										</NavDropdown.Item>
+									</NavDropdown>
 									<NavLink to="/vehiculos" className="nav-link">
 										Vehículos
 									</NavLink>
@@ -129,24 +166,25 @@ export const NavBarCustom = () => {
 					</Nav>
 					<Nav className="ms-auto">
 						{!isAuthenticated && <Login />}
-						{isAuthenticated && (user === 1 || user === 2) &&
-							(
-								<>
-									<NavDropdown
-										title={`Bienvenido, ${jwt_decode(cookies.get("code")).nombre}`}
-										id="nav-dropdown-perfil"
-										className="ml-auto"
-									>
-										<NavDropdown.Item className="nav-link item">
-											<NavLink
-												to="/perfil"
-												className="nav-link item"
-												onMouseEnter={() => handleNavLinkEnter(0)}
-												onMouseLeave={handleNavLinkLeave}
-											>
-												Perfil
-											</NavLink>
-											{/* <Button variant="contained" onClick={openDialog}>Perfil</Button>
+						{isAuthenticated && (user === 1 || user === 2) && (
+							<>
+								<NavDropdown
+									title={`Bienvenido, ${
+										jwt_decode(cookies.get("code")).nombre
+									}`}
+									id="nav-dropdown-perfil"
+									className="ml-auto"
+								>
+									<NavDropdown.Item className="nav-link item">
+										<NavLink
+											to="/perfil"
+											className="nav-link item"
+											onMouseEnter={() => handleNavLinkEnter(0)}
+											onMouseLeave={handleNavLinkLeave}
+										>
+											Perfil
+										</NavLink>
+										{/* <Button variant="contained" onClick={openDialog}>Perfil</Button>
 											<Dialog
 												open={isOpen}
 												onClose={closeDialog}
@@ -166,19 +204,20 @@ export const NavBarCustom = () => {
 													<Button onClick={closeDialog} color="secondary">Cerrar</Button>
 												</DialogActions>
 												</Dialog> */}
-										</NavDropdown.Item>
+									</NavDropdown.Item>
 
-										<NavDropdown.Item className="nav-link item">
-											<Logout />
-										</NavDropdown.Item>
-									</NavDropdown>
-									<div className="d-none d-lg-block">
-										<Avatar sx={{ bgcolor: "#FF5B31" }} >
-											{jwt_decode(cookies.get("code")).nombre[0] + jwt_decode(cookies.get("code")).apellido[0]}
-										</Avatar>
-									</div>
-								</>
-							)}
+									<NavDropdown.Item className="nav-link item">
+										<Logout />
+									</NavDropdown.Item>
+								</NavDropdown>
+								<div className="d-none d-lg-block">
+									<Avatar sx={{ bgcolor: "#FF5B31" }}>
+										{jwt_decode(cookies.get("code")).nombre[0] +
+											jwt_decode(cookies.get("code")).apellido[0]}
+									</Avatar>
+								</div>
+							</>
+						)}
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

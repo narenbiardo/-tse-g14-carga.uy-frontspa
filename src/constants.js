@@ -2,9 +2,9 @@ import {
 	FirstTimeInput,
 	FirstTimeInputEmpresaDto,
 	FirstTimeInputIngresarGuiaViajeForm,
+	FirstTimeInputAñadirEmpresaForm,
 } from "./classes";
-import EditIcon from '@mui/icons-material/Edit';
-
+import EditIcon from "@mui/icons-material/Edit";
 
 export const serverURL = "http://localhost:8080/";
 
@@ -39,6 +39,15 @@ export const ftiigv = new FirstTimeInputIngresarGuiaViajeForm(
 	true,
 	true,
 	true,
+	true,
+	true,
+	true,
+	true,
+	true,
+	true
+);
+
+export const ftiaef = new FirstTimeInputAñadirEmpresaForm( //used to check if the form input is changed for the first time in AñadirEmpresa
 	true,
 	true,
 	true,
@@ -93,15 +102,13 @@ export const columnsVehiculosFull = [
 		valueGetter: params => params.row.permisoCirculacion.fechaVencimiento,
 	},
 	{
-		field: 'actions',
-		headerName: '',
+		field: "actions",
+		headerName: "",
 		width: 20,
-		renderCell: (params) => {
-		  return (
-			  <EditIcon className="edit-icon"/>
-		  );
+		renderCell: params => {
+			return <EditIcon className="edit-icon" />;
 		},
-	  },
+	},
 ];
 
 export const columnsEmpresas = [
