@@ -4,7 +4,7 @@ import {
 	FirstTimeInputIngresarGuiaViajeForm,
 } from "./classes";
 import EditIcon from '@mui/icons-material/Edit';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const serverURL = "http://localhost:8080/";
 
@@ -68,9 +68,9 @@ export const columnsChoferes = [
 ];
 
 export const columnsVehiculosFull = [
-	{ field: "matricula", headerName: "Matricula", width: 120 },
-	{ field: "marcaVehiculo", headerName: "Marca", width: 120 },
-	{ field: "modelo", headerName: "Modelo", width: 120 },
+	{ field: "matricula", headerName: "Matricula", width: 110 },
+	{ field: "marcaVehiculo", headerName: "Marca", width: 110 },
+	{ field: "modelo", headerName: "Modelo", width: 110 },
 	{ field: "capacidad", headerName: "Capacidad", width: 120 },
 	{ field: "peso", headerName: "Peso", width: 120 },
 	{ field: "vencimientoITV", headerName: "ITV Venc.", width: 120 },
@@ -93,15 +93,25 @@ export const columnsVehiculosFull = [
 		valueGetter: params => params.row.permisoCirculacion.fechaVencimiento,
 	},
 	{
-		field: 'actions',
+		field: 'edit',
 		headerName: '',
-		width: 20,
+		width: 10,
 		renderCell: (params) => {
 		  return (
 			  <EditIcon className="edit-icon"/>
 		  );
 		},
 	  },
+	{
+		field: 'delete',
+		headerName: '',
+		width: 10,
+		renderCell: (params) => {
+		  return (
+			  <DeleteIcon className="delete-icon"/>
+		  );
+		},
+	}, 
 ];
 
 export const columnsEmpresas = [

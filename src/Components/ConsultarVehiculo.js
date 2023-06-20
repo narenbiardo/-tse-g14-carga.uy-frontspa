@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import { ListaVehiculos } from "./ListaVehiculos";
 import { Button } from "react-bootstrap";
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
@@ -9,18 +8,14 @@ import "react-autocomplete-input/dist/bundle.css";
 import {
 	DtPermisoNacionalCirculacion,
 	AgregarVehiculoForm,
-	FirstTimeInput,
 } from "../classes";
 import { fti, columnsVehiculosFull } from "../constants";
-import { mainColor } from "../constants";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormInputText } from "../Utilities/FormInputText";
 import { FormInputNumber } from "../Utilities/FormInputNumber";
-import { FormTextInputAutocomplete } from "../Utilities/FormTextInputAutocomplete";
 import { FormH2 } from "../Utilities/FormH2";
 import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormH4 } from "../Utilities/FromH4";
-import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
 import { DataGrid } from "@mui/x-data-grid";
 import { CustomToolbar } from "../Utilities/CustomToolbar";
@@ -31,7 +26,8 @@ import Swal from 'sweetalert2';
 
 
 
-export const EditarVehiculo = () => {
+export const ConsultarVehiculo = () => {	
+
 	const [loading, setLoading] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(null);
@@ -45,32 +41,58 @@ export const EditarVehiculo = () => {
 	const [quickFilterMatriculaValue, setQuickFilterMatriculaValue] =
 		useState("");
 
-	// const handleMatriculaVehiculo = (params) => {
-	// 	setIsOpen(true);
-	// 	setMatriculaVehiculo(params.row.matricula);
-	// 	setAvf(params.row);
-	// 	setDtpnc(params.row.permisoCirculacion);
+	const handleEditClick = (event, params) => {
+		event.stopPropagation();
+		setMatriculaVehiculo(params.matricula);
+		setAvf(params);
+		setDtpnc(params.permisoCirculacion);
 
-
-	// 	console.log(params.row);
-
-
-		
-	// };
-
-	const handleRowClick = (params) => {
-		setMatriculaVehiculo(params.row.matricula);
-		setAvf(params.row);
-		setDtpnc(params.row.permisoCirculacion);
-
-		setSelectedItem(params.row);
-		setSelectedItemData(params.row);
+		setSelectedItem(params);
+		setSelectedItemData(params);
 		setIsOpen(true);
-		console.log(params.row)
+	};
+
+	const handleDeleteClick = (event, params) => {
+		setMatriculaVehiculo(params.matricula);
+		Swal.fire({
+			title: '¿Estas seguro?',
+			text: `El vehiculo de matricula ${params.matricula} sera eliminado definitivamente`,
+			icon: 'warning',
+			showCancelButton: true,
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, borrar',
+			cancelButtonText: 'Caneclar'
+		  })
+		  .then((result) => {
+			if (result.isConfirmed) {
+				handleDeleteVehiculo(params.matricula);
+			}
+
+		  })
 	};
 
 	const handleCloseDialog = () => {
 		setIsOpen(false);
+	};
+
+	const handleDeleteVehiculo = matricula => {
+		setLoading(true)
+		axios
+			.delete(RESTEndpoints.encargadoService.eliminarVehiculo + matricula)
+			.then(response => {
+				Swal.fire({
+					title: 'Borrado!',
+					text: 'El vehiculo fue borrado',
+					icon: 'success',
+					willClose: () => {
+					  setLoading(false);
+					},
+				  });
+			
+			})
+			.catch(error => {
+				console.log(error);
+			});
 	};
 	
 
@@ -78,7 +100,7 @@ export const EditarVehiculo = () => {
 		axios
 			.get(RESTEndpoints.encargadoService.listarVehiculos)
 			.then(response => {
-				//console.log(response.data);
+				console.log("Entre al effect");
 				setvehiculos(
 					response.data.map(vehiculo => {
 						const permisoCirculacion = new DtPermisoNacionalCirculacion(
@@ -100,6 +122,8 @@ export const EditarVehiculo = () => {
 				);
 			})
 			.catch(error => {
+				if(error.response.data === 'No existen vehiculos registrados en el sistema')
+					setvehiculos([])
 				console.log(error);
 			});
 	}, [loading]);
@@ -226,7 +250,14 @@ export const EditarVehiculo = () => {
 			columns={columnsVehiculosFull}
 			checkboxSelection={false}
 			hideFooterSelectedRowCount={true}
-			onRowClick={handleRowClick}
+			onRowClick={(params, event) => {
+				if (event.target.classList.contains('edit-icon')) {
+				  handleEditClick(event, params.row);
+				}
+				else if (event.target.classList.contains('delete-icon')) {
+					handleDeleteClick(event, params.row);
+				  }
+			  }}
 			getRowId={getRowIdVehiculos}
 			initialState={{
 			pagination: { paginationModel: { pageSize: 10 } },

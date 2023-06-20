@@ -15,7 +15,7 @@ import { IngresarGuiaDeViaje } from "./Components/IngresarGuiaDeViaje";
 import Footer from "./Components/Footer";
 import { AsignarGuiaDeViaje } from "./Components/AsignarGuiaDeViaje";
 import { AgregarVehiculo } from "./Components/AgregarVehiculo";
-import { EditarVehiculo } from "./Components/EditarVehiculo";
+import { ConsultarVehiculo } from "./Components/ConsultarVehiculo";
 import { Perfil } from "./Components/Perfil";
 import cookies from "js-cookie";
 import { axiosHeadersAuth, axiosHeadersAccept } from "./Services/RestService";
@@ -139,10 +139,10 @@ function App() {
 						}
 					/>
 					<Route
-						path="/editarVehiculo"
+						path="/consultarVehiculo"
 						element={
 							<ProtectedRouteEncargado>
-								<EditarVehiculo />
+								<ConsultarVehiculo />
 							</ProtectedRouteEncargado>
 						}
 					/>

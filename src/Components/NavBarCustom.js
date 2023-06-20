@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Button, Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
-import { Route, Routes, Link, NavLink, Navigate, useNavigate } from "react-router-dom";
-import { useAuth, AuthProvider } from "../Services/useAuth";
+import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../Services/useAuth";
 import { Logout } from "../Utilities/Logout";
 import { Login } from "../Services/LoginGubUy";
 import { SvgLogo } from "../Utilities/SvgLogo";
@@ -9,8 +9,6 @@ import { mainColor } from "../constants";
 import jwt_decode from "jwt-decode";
 import cookies from "js-cookie";
 import Avatar from '@mui/material/Avatar'
-import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
-import { Perfil } from "./Perfil";
 
 export const NavBarCustom = () => {
 	const { isAuthenticated } = useAuth();
@@ -90,25 +88,15 @@ export const NavBarCustom = () => {
 
 										<NavDropdown.Item className="nav-link item">
 											<NavLink
-												to="/editarVehiculo"
+												to="/consultarVehiculo"
 												className="nav-link item"
 												onMouseEnter={() => handleNavLinkEnter(3)}
 												onMouseLeave={handleNavLinkLeave}
 											>
-												Editar Vehiculo
+												Consultar Vehiculos
 											</NavLink>
 										</NavDropdown.Item>
 
-										<NavDropdown.Item className="nav-link item">
-												<NavLink
-													to="/eliminarVehiculo"
-													className="nav-link item"
-													onMouseEnter={() => handleNavLinkEnter(4)}
-													onMouseLeave={handleNavLinkLeave}
-												>
-													Eliminar Vehiculo
-												</NavLink>
-										</NavDropdown.Item>
 									</NavDropdown>
 									<NavLink to="/empresa" className="nav-link">
 										Empresa

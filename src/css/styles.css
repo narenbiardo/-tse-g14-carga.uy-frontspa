@@ -225,3 +225,14 @@
 	color: #FF5B31;
 	transition: all 0.2s ease 0s;
  }
+
+ .delete-icon{
+	cursor: pointer;
+	color: #212529;
+	
+ }
+
+ .delete-icon:hover{
+	color: red;
+	transition: all 0.2s ease 0s;
+ }
