@@ -199,7 +199,7 @@ function App() {
 						backgroundColor: "#212529",
 					}}
 				>
-					<Container maxWidth="sm">
+					<Container maxwidth="sm">
 						<Footer />
 					</Container>
 				</Box>

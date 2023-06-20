@@ -1,13 +1,6 @@
 import { useState } from "react";
 import { Button, Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
-import {
-	Route,
-	Routes,
-	Link,
-	NavLink,
-	Navigate,
-	useNavigate,
-} from "react-router-dom";
+import { Route, Routes, Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth, AuthProvider } from "../Services/useAuth";
 import { Logout } from "../Utilities/Logout";
 import { Login } from "../Services/LoginGubUy";
@@ -62,107 +55,101 @@ export const NavBarCustom = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="me-auto">
-						{isAuthenticated &&
-							user === 1 && ( // EncargadoEmpresa
-								<>
-									<NavDropdown title="Guia de Viaje" id="nav-dropdown">
-										<NavDropdown.Item className="nav-link item">
-											<NavLink
-												to="/ingresarGuiaDeViaje"
-												className="nav-link item"
-												onMouseEnter={() => handleNavLinkEnter(0)}
-												onMouseLeave={handleNavLinkLeave}
-											>
-												Ingresar Guía de Viaje
-											</NavLink>
-										</NavDropdown.Item>
+						{isAuthenticated && user === 1 && (
+							<>
+								<NavDropdown title="Guia de Viaje" id="nav-dropdown">
+									<NavDropdown.Item
+										as={Link}
+										to="/ingresarGuiaDeViaje"
+										className="nav-link item"
+										onMouseEnter={() => handleNavLinkEnter(0)}
+										onMouseLeave={handleNavLinkLeave}
+									>
+										Ingresar Guía de Viaje
+									</NavDropdown.Item>
 
-										<NavDropdown.Item className="nav-link item">
-											<NavLink
-												to="/asignarGuiaDeViaje"
-												className="nav-link item"
-												onMouseEnter={() => handleNavLinkEnter(1)}
-												onMouseLeave={handleNavLinkLeave}
-											>
-												Asignar Guía de Viaje
-											</NavLink>
-										</NavDropdown.Item>
-									</NavDropdown>
-									<NavDropdown title="Vehículo">
-										<NavDropdown.Item className="nav-link item">
-											<NavLink
-												to="/añadirVehiculo"
-												className="nav-link item"
-												onMouseEnter={() => handleNavLinkEnter(2)}
-												onMouseLeave={handleNavLinkLeave}
-											>
-												Añadir Vehiculo
-											</NavLink>
-										</NavDropdown.Item>
+									<NavDropdown.Item
+										as={Link}
+										to="/asignarGuiaDeViaje"
+										className="nav-link item"
+										onMouseEnter={() => handleNavLinkEnter(1)}
+										onMouseLeave={handleNavLinkLeave}
+									>
+										Asignar Guía de Viaje
+									</NavDropdown.Item>
+								</NavDropdown>
+								<NavDropdown title="Vehículo">
+									<NavDropdown.Item
+										as={Link}
+										to="/añadirVehiculo"
+										className="nav-link item"
+										onMouseEnter={() => handleNavLinkEnter(2)}
+										onMouseLeave={handleNavLinkLeave}
+									>
+										Añadir Vehiculo
+									</NavDropdown.Item>
 
-										<NavDropdown.Item className="nav-link item">
-											<NavLink
-												to="/editarVehiculo"
-												className="nav-link item"
-												onMouseEnter={() => handleNavLinkEnter(3)}
-												onMouseLeave={handleNavLinkLeave}
-											>
-												Editar Vehiculo
-											</NavLink>
-										</NavDropdown.Item>
+									<NavDropdown.Item
+										as={Link}
+										to="/editarVehiculo"
+										className="nav-link item"
+										onMouseEnter={() => handleNavLinkEnter(3)}
+										onMouseLeave={handleNavLinkLeave}
+									>
+										Editar Vehiculo
+									</NavDropdown.Item>
 
-										<NavDropdown.Item className="nav-link item">
-											<NavLink
-												to="/eliminarVehiculo"
-												className="nav-link item"
-												onMouseEnter={() => handleNavLinkEnter(4)}
-												onMouseLeave={handleNavLinkLeave}
-											>
-												Eliminar Vehiculo
-											</NavLink>
-										</NavDropdown.Item>
-									</NavDropdown>
-									<NavLink to="/empresa" className="nav-link">
-										Empresa
-									</NavLink>
-								</>
-							)}
-						{isAuthenticated &&
-							user === 2 && ( // Funcionario
-								<>
-									<NavDropdown title="Empresa">
-										<NavDropdown.Item className="nav-link item">
-											<NavLink
-												to="/añadirEmpresa"
-												className="nav-link item"
-												onMouseEnter={() => handleNavLinkEnter(5)}
-												onMouseLeave={handleNavLinkLeave}
-											>
-												Añadir Empresa
-											</NavLink>
-											<NavLink
-												to="/modificarEmpresa"
-												className="nav-link item"
-												onMouseEnter={() => handleNavLinkEnter(6)}
-												onMouseLeave={handleNavLinkLeave}
-											>
-												Modificar Empresa
-											</NavLink>
-											<NavLink
-												to="/eliminarEmpresa"
-												className="nav-link item"
-												onMouseEnter={() => handleNavLinkEnter(7)}
-												onMouseLeave={handleNavLinkLeave}
-											>
-												Eliminar Empresa
-											</NavLink>
-										</NavDropdown.Item>
-									</NavDropdown>
-									<NavLink to="/vehiculos" className="nav-link">
-										Vehículos
-									</NavLink>
-								</>
-							)}
+									<NavDropdown.Item
+										as={Link}
+										to="/eliminarVehiculo"
+										className="nav-link item"
+										onMouseEnter={() => handleNavLinkEnter(4)}
+										onMouseLeave={handleNavLinkLeave}
+									>
+										Eliminar Vehiculo
+									</NavDropdown.Item>
+								</NavDropdown>
+								<Link to="/empresa" className="nav-link">
+									Empresa
+								</Link>
+							</>
+						)}
+						{isAuthenticated && user === 2 && (
+							<>
+								<NavDropdown title="Empresa">
+									<NavDropdown.Item
+										as={Link}
+										to="/añadirEmpresa"
+										className="nav-link item"
+										onMouseEnter={() => handleNavLinkEnter(5)}
+										onMouseLeave={handleNavLinkLeave}
+									>
+										Añadir Empresa
+									</NavDropdown.Item>
+									<NavDropdown.Item
+										as={Link}
+										to="/modificarEmpresa"
+										className="nav-link item"
+										onMouseEnter={() => handleNavLinkEnter(6)}
+										onMouseLeave={handleNavLinkLeave}
+									>
+										Modificar Empresa
+									</NavDropdown.Item>
+									<NavDropdown.Item
+										as={Link}
+										to="/eliminarEmpresa"
+										className="nav-link item"
+										onMouseEnter={() => handleNavLinkEnter(7)}
+										onMouseLeave={handleNavLinkLeave}
+									>
+										Eliminar Empresa
+									</NavDropdown.Item>
+								</NavDropdown>
+								<Link to="/vehiculos" className="nav-link">
+									Vehículos
+								</Link>
+							</>
+						)}
 					</Nav>
 					<Nav className="ms-auto">
 						{!isAuthenticated && <Login />}
@@ -175,40 +162,16 @@ export const NavBarCustom = () => {
 									id="nav-dropdown-perfil"
 									className="ml-auto"
 								>
-									<NavDropdown.Item className="nav-link item">
-										<NavLink
-											to="/perfil"
-											className="nav-link item"
-											onMouseEnter={() => handleNavLinkEnter(0)}
-											onMouseLeave={handleNavLinkLeave}
-										>
-											Perfil
-										</NavLink>
-										{/* <Button variant="contained" onClick={openDialog}>Perfil</Button>
-											<Dialog
-												open={isOpen}
-												onClose={closeDialog}
-												maxWidth="md"
-												fullWidth
-												PaperProps={{
-													style: {
-													  maxHeight: '100vh', // Ajusta la altura según tus necesidades
-													},
-												  }}
-												>
-												<DialogTitle>Perfil</DialogTitle>
-												<DialogContent>
-													<Perfil/>
-												</DialogContent>
-												<DialogActions>
-													<Button onClick={closeDialog} color="secondary">Cerrar</Button>
-												</DialogActions>
-												</Dialog> */}
+									<NavDropdown.Item
+										as={Link}
+										to="/perfil"
+										className="nav-link item"
+										onMouseEnter={() => handleNavLinkEnter(0)}
+										onMouseLeave={handleNavLinkLeave}
+									>
+										Perfil
 									</NavDropdown.Item>
-
-									<NavDropdown.Item className="nav-link item">
-										<Logout />
-									</NavDropdown.Item>
+									<Logout />
 								</NavDropdown>
 								<div className="d-none d-lg-block">
 									<Avatar sx={{ bgcolor: "#FF5B31" }}>
