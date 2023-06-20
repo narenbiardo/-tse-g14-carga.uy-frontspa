@@ -121,8 +121,7 @@ export const Home = () => {
 							}}
 							density="compact"
 							autoHeight
-
-							/*DISABLED pageSizeOptions={[10, 25, 50]}*/
+							pageSizeOptions={[10, 25, 50]} // Agregado pageSizeOptions con tamaño de página 10
 						/>
 					</Col>
 					<Col
