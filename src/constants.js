@@ -72,7 +72,7 @@ export const columnsGuiasDeViaje = [
 ];
 
 export const columnsChoferes = [
-	{ field: "id", headerName: "Id", width: 10 },
+	{ field: "cedula", headerName: "Cedula", width: 150 },
 	{ field: "nombre", headerName: "Nombre", width: 150 },
 ];
 

@@ -1,15 +1,13 @@
 import { useState, useEffect, useCallback } from "react";
+import cookies from "js-cookie";
+import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { RESTEndpoints } from "../Services/RestService";
 import "react-autocomplete-input/dist/bundle.css";
+import { AsignarGuiaViajeForm } from "../classes";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormH2 } from "../Utilities/FormH2";
-import { FormSelect } from "../Utilities/FormSelect";
-import { FormTextInputAutocomplete } from "../Utilities/FormTextInputAutocomplete";
 import { DataGrid } from "@mui/x-data-grid";
-import { createDataGridTheme } from "@mui/x-data-grid-generator";
-import { FormInputSubmit } from "../Utilities/FormInputSubmit";
-import { FormInputDiv } from "../Utilities/FormInputDiv";
 import { Button } from "react-bootstrap";
 import { CustomToolbar } from "../Utilities/CustomToolbar";
 import {
@@ -18,61 +16,30 @@ import {
 	columnsChoferes,
 } from "../constants";
 
-/*
-const vehiculos = [
-	"ABC1111",
-	"ABC2222",
-	"ABC3333",
-	"ABC4444",
-	"ABC5555",
-	"ABC6666",
-	"ABC7777",
-];
-*/
-
-const choferes = [
-	{ id: "123", nombre: "Marcos" },
-	{ id: "456", nombre: "Gabriel" },
-	{ id: "789", nombre: "Lucas" },
-];
-
-/*
-const guiasDeViaje = [
-	{ id: "1", nombre: "Guia 1" },
-	{ id: "2", nombre: "Guia 2" },
-	{ id: "3", nombre: "Guia 3" },
-];
-*/
-
-class AsignarGuiaViajeForm {
-	constructor(idGuiaViaje, cedulaChofer, matriculaVehiculo) {
-		this.idGuiaViaje = idGuiaViaje;
-		this.cedulaChofer = cedulaChofer;
-		this.matriculaVehiculo = matriculaVehiculo;
-	}
-}
-
 export const AsignarGuiaDeViaje = () => {
 	const [agvf, setAgvf] = useState(new AsignarGuiaViajeForm());
 	const [guiasDeViaje, setGuiasDeViaje] = useState([]);
+	const [choferes, setChoferes] = useState([]);
 	const [vehiculos, setVehiculos] = useState([]);
 	const [quickFilterMatriculaValue, setQuickFilterMatriculaValue] =
 		useState("");
 	const [quickFilterRubroValue, setQuickFilterRubroValue] = useState("");
 
 	const handleChangeAgvf = row => {
-		/*if (e.target) {
-			const { name, value } = e.target;
-			setAgvf(prevData => ({ ...prevData, [name]: value }));
-		} else {
-			//e.target will be null in TextInput component
-			setAgvf(prevData => ({ ...prevData, ["matriculaVehiculo"]: e }));
-		}*/
-		console.log(row);
 		if (row.id) {
 			setAgvf(prevData => ({ ...prevData, ["idGuiaViaje"]: row.id }));
+		} else if (row.matricula) {
+			setAgvf(prevData => ({
+				...prevData,
+				["matriculaVehiculo"]: row.matricula,
+			}));
+		} else if (row.cedula) {
+			setAgvf(prevData => ({
+				...prevData,
+				["cedulaChofer"]: row.cedula,
+			}));
 		} else {
-			console.log("No Rubro");
+			console.log("Error setting agvf");
 		}
 	};
 
@@ -80,7 +47,6 @@ export const AsignarGuiaDeViaje = () => {
 		axios
 			.get(RESTEndpoints.encargadoService.listarGuiasAsignables)
 			.then(response => {
-				//console.log(response.data);
 				let gdv = [];
 				response.data.map(guia => {
 					gdv.push({
@@ -93,6 +59,17 @@ export const AsignarGuiaDeViaje = () => {
 					});
 				});
 				setGuiasDeViaje(gdv);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+
+	const handleChoferes = () => {
+		axios
+			.get(RESTEndpoints.encargadoService.listarChoferes)
+			.then(response => {
+				setChoferes(response.data);
 			})
 			.catch(error => {
 				console.log(error);
@@ -112,7 +89,24 @@ export const AsignarGuiaDeViaje = () => {
 					});
 				});
 				setVehiculos(vList);
-				console.log(vList);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+
+	const handlePostAsignarGuiaDeViaje = event => {
+		console.log(agvf);
+		event.preventDefault();
+		axios
+			.post(RESTEndpoints.encargadoService.asignarGuiaViaje, {
+				idGuiaViaje: agvf.idGuiaViaje,
+				nroEmpresa: jwt_decode(cookies.get("code")).nroEmpresa,
+				cedulaChofer: agvf.cedulaChofer,
+				matriculaVehiculo: agvf.matriculaVehiculo,
+			})
+			.then(response => {
+				console.log(response.data);
 			})
 			.catch(error => {
 				console.log(error);
@@ -147,6 +141,7 @@ export const AsignarGuiaDeViaje = () => {
 
 	useEffect(() => {
 		handleGuiasDeViaje();
+		handleChoferes();
 		handleVehiculos();
 	}, []);
 
@@ -200,7 +195,7 @@ export const AsignarGuiaDeViaje = () => {
 						columns={columnsVehiculos}
 						checkboxSelection={false}
 						hideFooterSelectedRowCount={true}
-						onRowClick={p => console.log(p)}
+						onRowClick={p => handleChangeAgvf(p.row)}
 						getRowId={getRowIdVehiculo}
 						initialState={{
 							pagination: { paginationModel: { pageSize: 10 } },
@@ -225,41 +220,23 @@ export const AsignarGuiaDeViaje = () => {
 							],
 						}}
 						density="compact"
+						autoHeight
 
 						/*DISABLED pageSizeOptions={[10, 25, 50]}*/
 					/>
 
-					{/*<FormTextInputAutocomplete
-						htmlFor="matriculaVehiculo"
-						label="Vehículo"
-						name="matriculaVehiculo"
-						form="vehiculoForm"
-						onChangeHandler={handleChangeAgvf}
-						optionArray={vehiculos.map(v => v.matricula)}
-						maxOptionNumber={5}
-					/>*/}
-					<div>
-						<Button type="submit" className="btn-principal submit mt-2 mb-2">
-							{" "}
-							Enviar{" "}
-						</Button>
-					</div>
-					<div>
-						<Button type="submit" className="btn-secundario submit mt-2 mb-2">
-							{" "}
-							Volver{" "}
-						</Button>
-					</div>
-					{/* 						
-						<button
-							onClick={() => setAgvf(new AsignarGuiaViajeForm())}
-							className="btn-secundario m-3"
-						>
-							Volver
-						</button>
-					</div>
-						</button> */}
-					{/* //</div> */}
+					<Button
+						type="submit"
+						className="btn-principal submit mt-2 mb-2"
+						onClick={handlePostAsignarGuiaDeViaje}
+					>
+						Enviar
+					</Button>
+
+					<Button type="submit" className="btn-secundario submit mt-2 mb-2">
+						{" "}
+						Volver{" "}
+					</Button>
 				</>
 			) : (
 				<>
@@ -299,52 +276,6 @@ export const AsignarGuiaDeViaje = () => {
 						/*DISABLED pageSizeOptions={[10, 25, 50]}*/
 					/>
 				</>
-				/*<FormInputDiv>
-					<label htmlFor="idGuiaViaje">Guía de Viaje</label>
-					
-					<select
-						name="idGuiaViaje"
-						form="idGuiaViajeForm"
-						onChange={handleChangeAgvf}
-						defaultValue=""
-						required
-						style={{
-							marginLeft: "10px",
-							padding: "5px",
-							border: "none",
-							borderBottom: "2px solid #16b7b9",
-							width: "250px",
-							fontSize: "16px",
-							color: "#555",
-						}}
-					>
-						<option value="" disabled>
-							"Seleccionar Guía de Viaje"
-						</option>
-
-						{guiasDeViaje.map(gv => (
-							<option value={gv.idGuiaViaje} key={Math.random()}>
-								{"Calle: " +
-									gv.destino.calle +
-									", Km: " +
-									gv.destino.km +
-									", Nº Puerta: " +
-									gv.destino.nroPuerta +
-									", Fecha: " +
-									new Date(gv.fechaHora).toLocaleString()}
-							</option>
-						))}
-						</select>
-				</FormInputDiv>*/
-				/*<FormSelect
-					htmlFor="idGuiaViaje"
-					label="Guía de Viaje"
-					name="idGuiaViaje"
-					form="idGuiaViajeForm"
-					onChangeHandler={handleChangeAgvf}
-					optionDisabled="Seleccionar Guía de Viaje"
-					valueArray={guiasDeViaje}
-				/>*/
 			)}
 		</FormDiv>
 	);

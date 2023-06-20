@@ -31,6 +31,9 @@ export const RESTEndpoints = {
 		/*NEW*/ modVehiculo: serverURL + "api/encargadoService/modVehiculo",
 		/*NEW*/ eliminarVehiculo:
 			serverURL + "api/encargadoService/eliminarVehiculo/",
+		/*NEW*/ listarChoferes: serverURL + "api/encargadoService/listarChoferes/",
+		/*NEW*/ asignarGuiaViaje:
+			serverURL + "api/encargadoService/asignarGuiaViaje/",
 	},
 	guiasViajesService: {
 		listarGuiasAsignables:

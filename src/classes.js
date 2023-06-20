@@ -178,3 +178,10 @@ export class FirstTimeInputAñadirEmpresaForm {
 		this.km = km;
 	}
 }
+export class AsignarGuiaViajeForm {
+	constructor(idGuiaViaje, cedulaChofer, matriculaVehiculo) {
+		this.idGuiaViaje = idGuiaViaje;
+		this.cedulaChofer = cedulaChofer;
+		this.matriculaVehiculo = matriculaVehiculo;
+	}
+}
