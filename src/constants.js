@@ -2,9 +2,9 @@ import {
 	FirstTimeInput,
 	FirstTimeInputEmpresaDto,
 	FirstTimeInputIngresarGuiaViajeForm,
+	FirstTimeInputAñadirEmpresaForm,
 } from "./classes";
-import EditIcon from '@mui/icons-material/Edit';
-
+import EditIcon from "@mui/icons-material/Edit";
 
 export const serverURL = "http://localhost:8080/";
 
@@ -47,6 +47,15 @@ export const ftiigv = new FirstTimeInputIngresarGuiaViajeForm(
 	true
 );
 
+export const ftiaef = new FirstTimeInputAñadirEmpresaForm( //used to check if the form input is changed for the first time in AñadirEmpresa
+	true,
+	true,
+	true,
+	true,
+	true,
+	true
+);
+
 export const columnsVehiculos = [
 	{ field: "matricula", headerName: "Matricula", width: 100 },
 	{ field: "marca", headerName: "Marca", width: 150 },
@@ -63,7 +72,7 @@ export const columnsGuiasDeViaje = [
 ];
 
 export const columnsChoferes = [
-	{ field: "id", headerName: "Id", width: 10 },
+	{ field: "cedula", headerName: "Cedula", width: 150 },
 	{ field: "nombre", headerName: "Nombre", width: 150 },
 ];
 
@@ -93,19 +102,17 @@ export const columnsVehiculosFull = [
 		valueGetter: params => params.row.permisoCirculacion.fechaVencimiento,
 	},
 	{
-		field: 'actions',
-		headerName: '',
+		field: "actions",
+		headerName: "",
 		width: 20,
-		renderCell: (params) => {
-		  return (
-			  <EditIcon className="edit-icon"/>
-		  );
+		renderCell: params => {
+			return <EditIcon className="edit-icon" />;
 		},
-	  },
+	},
 ];
 
 export const columnsEmpresas = [
-	{ field: "nombre", headerName: "Nombre", width: 150 },
+	{ field: "nombre", headerName: "Nombre", width: 500 },
 ];
 
 /*

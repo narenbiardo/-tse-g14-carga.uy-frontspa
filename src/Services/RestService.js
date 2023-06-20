@@ -31,6 +31,9 @@ export const RESTEndpoints = {
 		/*NEW*/ modVehiculo: serverURL + "api/encargadoService/modVehiculo",
 		/*NEW*/ eliminarVehiculo:
 			serverURL + "api/encargadoService/eliminarVehiculo/",
+		/*NEW*/ listarChoferes: serverURL + "api/encargadoService/listarChoferes/",
+		/*NEW*/ asignarGuiaViaje:
+			serverURL + "api/encargadoService/asignarGuiaViaje/",
 	},
 	guiasViajesService: {
 		listarGuiasAsignables:
@@ -44,6 +47,9 @@ export const RESTEndpoints = {
 		/*NEW*/ viajesEnCurso: serverURL + "api/publicService/viajesEnCurso",
 		/*NEW*/ choferesRegistrados:
 			serverURL + "api/publicService/choferesRegistrados",
+	},
+	funcionarioService: {
+		/*NEW*/ addEmpresa: serverURL + "api/funcionarioService/addEmpresa",
 	},
 };
 
