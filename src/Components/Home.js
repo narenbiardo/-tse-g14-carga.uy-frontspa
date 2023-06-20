@@ -106,7 +106,7 @@ export const Home = () => {
 							componentsProps={{
 								toolbar: {
 									setQuickFilter: handleQuickFilterEmpresaValue,
-									placeholder: "Buscar por empresa",
+									placeholder: "Buscar por nombre",
 								},
 							}}
 							filterModel={{

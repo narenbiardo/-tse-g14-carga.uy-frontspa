@@ -112,7 +112,7 @@ export const columnsVehiculosFull = [
 ];
 
 export const columnsEmpresas = [
-	{ field: "nombre", headerName: "Nombre", width: 150 },
+	{ field: "nombre", headerName: "Nombre", width: 500 },
 ];
 
 /*
