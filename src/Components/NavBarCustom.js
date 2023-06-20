@@ -88,7 +88,7 @@ export const NavBarCustom = () => {
 
 										<NavDropdown.Item className="nav-link item">
 											<NavLink
-												to="/consultarVehiculo"
+												to="/consultarVehiculos"
 												className="nav-link item"
 												onMouseEnter={() => handleNavLinkEnter(3)}
 												onMouseLeave={handleNavLinkLeave}
@@ -97,16 +97,6 @@ export const NavBarCustom = () => {
 											</NavLink>
 										</NavDropdown.Item>
 
-										<NavDropdown.Item className="nav-link item">
-												<NavLink
-													to="/eliminarVehiculo"
-													className="nav-link item"
-													onMouseEnter={() => handleNavLinkEnter(4)}
-													onMouseLeave={handleNavLinkLeave}
-												>
-													Eliminar Vehiculo
-												</NavLink>
-										</NavDropdown.Item>
 									</NavDropdown>
 									<NavLink to="/empresa" className="nav-link">
 										Empresa

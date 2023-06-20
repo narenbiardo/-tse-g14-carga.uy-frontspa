@@ -21,8 +21,7 @@ import cookies from "js-cookie";
 import { axiosHeadersAuth, axiosHeadersAccept } from "./Services/RestService";
 import { Home } from "./Components/Home";
 import { PerfilEmpresa } from "./Components/PerfilEmpresa";
-import { EliminarVehiculo } from "./Components/EliminarVehiculo";
-import { AñadirEmpresa, Empresas } from "./Components/AñadirEmpresa";
+import { AñadirEmpresa } from "./Components/AñadirEmpresa";
 import { PermisosVehiculos } from "./Components/PermisosVehıculos";
 import 'react-toastify/dist/ReactToastify.css';
 import './css/animations.css'
@@ -139,18 +138,10 @@ function App() {
 						}
 					/>
 					<Route
-						path="/editarVehiculo"
+						path="/consultarVehiculos"
 						element={
 							<ProtectedRouteEncargado>
-								<EditarVehiculo />
-							</ProtectedRouteEncargado>
-						}
-					/>
-					<Route
-						path="/eliminarVehiculo"
-						element={
-							<ProtectedRouteEncargado>
-								<EliminarVehiculo />
+								<ConsultarVehiculo />
 							</ProtectedRouteEncargado>
 						}
 					/>
@@ -158,7 +149,7 @@ function App() {
 						path="empresas"
 						element={
 							<ProtectedRouteFuncionario>
-								<Empresas />
+								<AñadirEmpresa />
 							</ProtectedRouteFuncionario>
 						}
 					/>
