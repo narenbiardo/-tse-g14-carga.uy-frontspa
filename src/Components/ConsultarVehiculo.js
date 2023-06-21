@@ -256,8 +256,9 @@ export const ConsultarVehiculo = () => {
 	  };
 
 	return (
-<Container className="form-container shadow-dreamy border">
-			<FormH4 text={"Vehículos"} />			<DataGrid
+		<Container className="form-container shadow-dreamy">
+			<FormH4 text={"Vehículos"} />
+			<DataGrid
 			getRowClassName={getRowClassName}
 			rows={vehiculos}
 			columns={columnsVehiculosFull}
