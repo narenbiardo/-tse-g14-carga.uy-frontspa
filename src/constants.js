@@ -103,19 +103,19 @@ export const columnsVehiculosFull = [
 		valueGetter: params => params.row.permisoCirculacion.fechaVencimiento,
 	},
 	{
-		field: "edit",
+		field: "editButton",
 		headerName: "",
 		width: 10,
 		renderCell: params => {
-			return <EditIcon className="edit-icon" />;
+			return params.row.editButton;
 		},
 	},
 	{
-		field: "delete",
+		field: "deleteButton",
 		headerName: "",
 		width: 10,
 		renderCell: params => {
-			return <DeleteIcon className="delete-icon" />;
+			return params.row.deleteButton;
 		},
 	},
 ];

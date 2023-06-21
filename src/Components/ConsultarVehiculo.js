@@ -10,6 +10,7 @@ import {
 	DtPermisoNacionalCirculacion,
 	AgregarVehiculoForm,
 	FirstTimeInput,
+	CVehiculo,
 } from "../classes";
 import { fti, columnsVehiculosFull } from "../constants";
 import { mainColor } from "../constants";
@@ -33,6 +34,8 @@ import {
 } from "@mui/material";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Swal from "sweetalert2";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export const ConsultarVehiculo = () => {
 	const [loading, setLoading] = useState(false);
@@ -48,15 +51,14 @@ export const ConsultarVehiculo = () => {
 	const [quickFilterMatriculaValue, setQuickFilterMatriculaValue] =
 		useState("");
 
-	// const handleMatriculaVehiculo = (params) => {
-	// 	setIsOpen(true);
-	// 	setMatriculaVehiculo(params.row.matricula);
-	// 	setAvf(params.row);
-	// 	setDtpnc(params.row.permisoCirculacion);
-
-	// 	console.log(params.row);
-
-	// };
+	/*
+	const handleMatriculaVehiculo = (params) => {
+	setIsOpen(true);
+	setMatriculaVehiculo(params.row.matricula);
+	setAvf(params.row);
+	setDtpnc(params.row.permisoCirculacion);
+	console.log(params.row);
+	};
 
 	const handleRowClick = params => {
 		setMatriculaVehiculo(params.row.matricula);
@@ -68,12 +70,9 @@ export const ConsultarVehiculo = () => {
 		setIsOpen(true);
 		console.log(params.row);
 	};
+	*/
 
-	const handleCloseDialog = () => {
-		setIsOpen(false);
-	};
-
-	useEffect(() => {
+	const handleListaVehiculos = () => {
 		axios
 			.get(RESTEndpoints.encargadoService.listarVehiculos)
 			.then(response => {
@@ -86,14 +85,26 @@ export const ConsultarVehiculo = () => {
 							vehiculo.permisoCirculacion.fechaVencimiento
 						);
 
-						return new AgregarVehiculoForm(
+						return new CVehiculo(
 							vehiculo.matricula,
 							vehiculo.marcaVehiculo.nombre,
 							vehiculo.modelo,
 							vehiculo.capacidad.toString(),
 							vehiculo.peso.toString(),
 							permisoCirculacion,
-							vehiculo.vencimientoITV
+							vehiculo.vencimientoITV,
+							(
+								<EditIcon
+									className="edit-icon"
+									onClick={() => handleEditarVehiculo(vehiculo)}
+								/>
+							),
+							(
+								<DeleteIcon
+									className="delete-icon"
+									onClick={() => handleDeleteVehiculo(vehiculo.matricula)}
+								/>
+							)
 						);
 					})
 				);
@@ -101,6 +112,36 @@ export const ConsultarVehiculo = () => {
 			.catch(error => {
 				console.log(error);
 			});
+	};
+
+	const handleEditarVehiculo = v => {
+		setMatriculaVehiculo(v.matricula);
+		setAvf(v);
+		setDtpnc(v.permisoCirculacion);
+
+		setSelectedItem(v);
+		setSelectedItemData(v);
+		setIsOpen(true);
+	};
+
+	const handleDeleteVehiculo = matricula => {
+		axios
+			.delete(RESTEndpoints.encargadoService.eliminarVehiculo + matricula)
+			.then(response => {
+				console.log(response.data);
+				handleListaVehiculos();
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+
+	const handleCloseDialog = () => {
+		setIsOpen(false);
+	};
+
+	useEffect(() => {
+		handleListaVehiculos();
 	}, [loading]);
 
 	const handleChangeAvf = e => {
@@ -231,7 +272,7 @@ export const ConsultarVehiculo = () => {
 				columns={columnsVehiculosFull}
 				checkboxSelection={false}
 				hideFooterSelectedRowCount={true}
-				onRowClick={handleRowClick}
+				//onRowClick={handleRowClick}
 				getRowId={getRowIdVehiculos}
 				initialState={{
 					pagination: { paginationModel: { pageSize: 10 } },
