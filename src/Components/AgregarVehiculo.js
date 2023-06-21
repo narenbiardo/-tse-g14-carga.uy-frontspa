@@ -138,7 +138,7 @@ export const AgregarVehiculo = () => {
 				referencia={formRefAgregarVehiculo}
 				onSubmit={handlePostVehiculo}
 			>
-				<FormH2 text="Añadir Vehículo" />
+				<FormH2 text="Agregar Vehículo" />
 
 				<FormInputText
 					htmlFor="matricula"
@@ -153,7 +153,7 @@ export const AgregarVehiculo = () => {
 
 				<FormInputDiv>
 					<div>
-						<label htmlFor="marcaVehiculo">Marca</label>
+						<label htmlFor="marcaVehiculo" className="main-font">Marca</label>
 					</div>
 					<select
 						ref={selectRef}

@@ -306,7 +306,7 @@ export const ConsultarVehiculo = () => {
 					<>
 						<FormInputDiv>
 							<div>
-								<label htmlFor="matricula">Matricula</label>
+								<label htmlFor="matricula" className="main-font">Matricula</label>
 							</div>
 							<input
 								type="text"
@@ -320,7 +320,7 @@ export const ConsultarVehiculo = () => {
 
 						<FormInputDiv>
 							<div>
-								<label htmlFor="marcaVehiculo">Marca</label>
+								<label htmlFor="marcaVehiculo" className="main-font">Marca</label>
 							</div>
 							<select
 								name="marcaVehiculo"

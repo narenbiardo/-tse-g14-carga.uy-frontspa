@@ -8,12 +8,9 @@ import {
 	clientId,
 	state,
 	redirectUri,
-	appServerUrl,
-	oauthServerUrl,
 } from "./settings-code.js";
 import { useAuth } from "./useAuth";
 import { useNavigate } from "react-router-dom";
-import cookies from "js-cookie";
 
 export const Login = () => {
 	const [error, setError] = useState(null);

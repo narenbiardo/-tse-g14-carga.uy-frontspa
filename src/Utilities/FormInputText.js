@@ -16,7 +16,7 @@ export const FormInputText = ({
 	return (
 		<FormInputDiv>
 			<div>
-				<label htmlFor={htmlFor}>{label}</label>
+				<label htmlFor={htmlFor} className="main-font">{label}</label>
 			</div>
 			<input
 				type="text"

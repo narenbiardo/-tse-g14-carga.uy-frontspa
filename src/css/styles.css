@@ -1,8 +1,10 @@
+
 .footer {
 	margin-top: auto;
 	padding: 3rem 0;
 	background-color: #212529;
 	color: #fff;
+	font-family: quicksand, sans-serif;
 }
 
 .btn-principal {
@@ -17,6 +19,7 @@
 	font-size: medium;
 	color: white;
 	font-weight: 400;
+	font-family: quicksand, sans-serif;
 	cursor: pointer;
 }
 
@@ -35,6 +38,7 @@
 	font-size: 20px;
 	height: 40px;
 	font-weight: 500;
+	margin-top: 20px !important;
 }
 .btn-disabled {
 	background-color: #cfcfcf !important;
@@ -50,6 +54,7 @@
 	font-size: medium;
 	color: white;
 	font-weight: 400;
+	font-family: quicksand, sans-serif;
 	cursor: pointer;
 }
 
@@ -71,6 +76,7 @@
 	height: 40px;
 	font-weight: 500;
 	color: #16b7b9;
+	
 }
 
 .btn-secundario.submit:hover {
@@ -137,15 +143,24 @@
 	align-items: center;
 }
 
+.dialog-title{
+	font-family: quicksand, sans-serif !important;
+	font-size: x-large !important;
+	color: #5a5a5a !important;
+}
+
 .dialog-subtitle{
 	margin: 20px 0px 10px 0px;
 	color: #FF5B31;
+	font-family: quicksand, sans-serif;
+	
 }
 
 .dialog-confirm-btn{
 	margin: 10px 10px 10px 0px !important;
 	background-color: #FF5B31 !important;
 	letter-spacing: 1px !important;
+	font-family: quicksand, sans-serif !important;
 }
 
 .dialog-close-btn{
@@ -153,6 +168,7 @@
 	letter-spacing: 1px !important;
 	border: 1px solid #212529 !important;
 	color: #212529 !important;
+	font-family: quicksand, sans-serif !important;
 }
 
 .z-index-0{
@@ -181,6 +197,7 @@
 	border-bottom: 2px solid #16b7b9;
 	width: 400px;
 	font-size: 16px;
+	font-family: quicksand, sans-serif;
 	color: #47494b;
 }
 
@@ -189,18 +206,21 @@
 }
 
 .forms-header {
+	font-family: Quicksand, sans-serif;
+	font-weight: 500;
 	color: #16b7b9;
 	margin: 15px 0px 10px 0px;
 }
 
 .forms-sub-header {
+	font-family: Quicksand, sans-serif;
+	font-weight: 500;
 	color: #16b7b9;
-	margin: 15px 0px 5px 0px;
+	margin: 35px 0px 5px 0px;
 }
 
 .btn-link{
 	background-color: none;
-
 	align-items: end;
 	justify-content: end;
 }
@@ -219,6 +239,7 @@
 
 .nav-link {
 	color: white !important;
+	font-family: quicksand, sans-serif !important;
 }
 
 .nav-link:hover {
@@ -236,13 +257,11 @@
 .striped-row-even {
     background-color: #F5F5F5;
 	cursor: pointer;
-	outline: none !important;
 }
 
 .striped-row-odd {
     background-color: #FFFFFF;
 	cursor: pointer;
-	outline: none !important;
 
  }
 
@@ -273,6 +292,7 @@
 	color: #FF5B31 !important;
 	font-weight: 500 !important;
 	letter-spacing: 1px !important;
+	font-family: quicksand, sans-serif !important;
 	
  }
 
@@ -288,4 +308,8 @@
 
 .Mui-selected{
 	background-color: #ff5a3113 !important;
+}
+
+.main-font{
+	font-family: quicksand, sans-serif;
 }

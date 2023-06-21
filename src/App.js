@@ -1,6 +1,4 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { useState, useEffect } from "react";
 import {
 	Route,
 	Routes,
@@ -8,7 +6,7 @@ import {
 	Navigate,
 	useNavigate,
 } from "react-router-dom";
-import { Button, Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useAuth, AuthProvider } from "./Services/useAuth";
 import { NavBarCustom } from "./Components/NavBarCustom";
 import { IngresarGuiaDeViaje } from "./Components/IngresarGuiaDeViaje";

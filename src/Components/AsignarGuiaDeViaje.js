@@ -5,8 +5,6 @@ import axios from "axios";
 import { RESTEndpoints } from "../Services/RestService";
 import "react-autocomplete-input/dist/bundle.css";
 import { AsignarGuiaViajeForm } from "../classes";
-import { FormDiv } from "../Utilities/FormDiv";
-import { FormH2 } from "../Utilities/FormH2";
 import { DataGrid } from "@mui/x-data-grid";
 import Button from '@mui/material/Button';
 import { CustomToolbar } from "../Utilities/CustomToolbar";
@@ -20,6 +18,7 @@ import { Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import Swal from "sweetalert2";
+import { FormH4 } from "../Utilities/FromH4";
 
 
 export const AsignarGuiaDeViaje = () => {
@@ -200,7 +199,7 @@ export const AsignarGuiaDeViaje = () => {
 
   return (
     <Container className="form-container shadow-dreamy">
-      <p className="dialog-subtitle">Guías de Viaje</p>
+		<FormH4 text="Guias de Viaje" />
       <DataGrid
         getRowClassName={getRowClassName}
         rows={guiasDeViaje}
@@ -247,7 +246,7 @@ export const AsignarGuiaDeViaje = () => {
           fullWidth
 			 className="z-index-0"
         >
-			<DialogTitle> Asignar Guia de Viaje</DialogTitle>
+			<DialogTitle className="dialog-title"> Asignar Guia de Viaje</DialogTitle>
           <DialogContent >
 				
             <p className="dialog-subtitle">Seleccione un Chofer</p>
