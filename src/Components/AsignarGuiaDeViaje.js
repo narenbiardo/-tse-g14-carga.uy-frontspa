@@ -323,10 +323,10 @@ export const AsignarGuiaDeViaje = () => {
             />
           </DialogContent>
 			 <DialogActions>
-					<Button variant="contained" size="large" className="dialog-confirm-btn" startIcon={<CheckIcon />} onClick={handlePostAsignarGuiaDeViaje}>
+					<Button variant="contained" size="medium" className="dialog-confirm-btn" startIcon={<CheckIcon />} onClick={handlePostAsignarGuiaDeViaje}>
 						ASIGNAR
 					</Button>
-					<Button variant="outlined" size="large" className="dialog-close-btn" startIcon={<CloseIcon />} onClick={handleCloseDialog}>
+					<Button variant="outlined" size="medium" className="dialog-close-btn" startIcon={<CloseIcon />} onClick={handleCloseDialog}>
 						CERRAR
 					</Button>
 				</DialogActions>
