@@ -44,7 +44,7 @@ export const ConsultarVehiculo = () => {
 	const [selectedItemData, setSelectedItemData] = useState(null);
 	const [matriculaVehiculo, setMatriculaVehiculo] = useState("");
 	const [vehiculos, setvehiculos] = useState([]);
-	const [avf, setAvf] = useState(new AgregarVehiculoForm());
+	const [avf, setAvf] = useState(new CVehiculo());
 	const [dtpnc, setDtpnc] = useState(new DtPermisoNacionalCirculacion());
 	const [marcasVehiculos, setMarcasVehiculos] = useState([]);
 	const [firstTimeInput, setfirstTimeInput] = useState(fti);
