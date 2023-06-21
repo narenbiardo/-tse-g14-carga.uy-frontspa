@@ -8,275 +8,330 @@ import { AsignarGuiaViajeForm } from "../classes";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormH2 } from "../Utilities/FormH2";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button } from "react-bootstrap";
+import Button from '@mui/material/Button';
 import { CustomToolbar } from "../Utilities/CustomToolbar";
 import {
-	columnsVehiculos,
-	columnsGuiasDeViaje,
-	columnsChoferes,
+  columnsVehiculos,
+  columnsGuiasDeViaje,
+  columnsChoferes,
 } from "../constants";
+import Container from "@mui/material/Container";
+import { Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import Swal from "sweetalert2";
+
 
 export const AsignarGuiaDeViaje = () => {
-	const [agvf, setAgvf] = useState(new AsignarGuiaViajeForm());
-	const [guiasDeViaje, setGuiasDeViaje] = useState([]);
-	const [choferes, setChoferes] = useState([]);
-	const [vehiculos, setVehiculos] = useState([]);
-	const [quickFilterMatriculaValue, setQuickFilterMatriculaValue] =
-		useState("");
-	const [quickFilterRubroValue, setQuickFilterRubroValue] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [agvf, setAgvf] = useState(new AsignarGuiaViajeForm());
+  const [guiasDeViaje, setGuiasDeViaje] = useState([]);
+  const [choferes, setChoferes] = useState([]);
+  const [vehiculos, setVehiculos] = useState([]);
+  const [quickFilterMatriculaValue, setQuickFilterMatriculaValue] = useState("");
+  const [quickFilterRubroValue, setQuickFilterRubroValue] = useState("");
 
-	const handleChangeAgvf = row => {
-		if (row.id) {
-			setAgvf(prevData => ({ ...prevData, ["idGuiaViaje"]: row.id }));
-		} else if (row.matricula) {
-			setAgvf(prevData => ({
-				...prevData,
-				["matriculaVehiculo"]: row.matricula,
-			}));
-		} else if (row.cedula) {
-			setAgvf(prevData => ({
-				...prevData,
-				["cedulaChofer"]: row.cedula,
-			}));
-		} else {
-			console.log("Error setting agvf");
-		}
-	};
+  const handleCloseDialog = () => {
+    setIsOpen(false);
+  };
 
-	const handleGuiasDeViaje = () => {
-		axios
-			.get(RESTEndpoints.encargadoService.listarGuiasAsignables)
-			.then(response => {
-				let gdv = [];
-				response.data.map(guia => {
-					gdv.push({
-						id: guia.idGuiaViaje,
-						rubro: guia.rubro.nombre,
-						kmOrigen: guia.origen.km,
-						kmDestino: guia.destino.km,
-						fecha: new Date(guia.fechaHora).toLocaleDateString(),
-						hora: new Date(guia.fechaHora).toLocaleTimeString(),
-					});
-				});
-				setGuiasDeViaje(gdv);
-			})
-			.catch(error => {
-				console.log(error);
-			});
-	};
+  const handleChangeAgvf = (row) => {
+    setSelectedItem(row);
+    setIsOpen(true);
+    if (row.id) {
+      setAgvf((prevData) => ({ ...prevData, ["idGuiaViaje"]: row.id }));
+    } else if (row.matricula) {
+      setAgvf((prevData) => ({
+        ...prevData,
+        ["matriculaVehiculo"]: row.matricula,
+      }));
+    } else if (row.cedula) {
+      setAgvf((prevData) => ({
+        ...prevData,
+        ["cedulaChofer"]: row.cedula,
+      }));
+    } else {
+      console.log("Error setting agvf");
+    }
+  };
 
-	const handleChoferes = () => {
-		axios
-			.get(RESTEndpoints.encargadoService.listarChoferes)
-			.then(response => {
-				setChoferes(response.data);
-			})
-			.catch(error => {
-				console.log(error);
-			});
-	};
+  const handleGuiasDeViaje = () => {
+    axios
+      .get(RESTEndpoints.encargadoService.listarGuiasAsignables)
+      .then((response) => {
+        console.log(response);
+        let gdv = [];
+        response.data.map((guia) => {
+          gdv.push({
+            id: guia.idGuiaViaje,
+            rubro: guia.rubro.nombre,
+            origen: `${guia.origen.calle} ${guia.origen.nroPuerta}, km ${guia.origen.km}`,
+            destino: `${guia.destino.calle} ${guia.destino.nroPuerta}, km ${guia.destino.km} `,
+            fecha: new Date(guia.fechaHora).toLocaleDateString(),
+            hora: new Date(guia.fechaHora).toLocaleTimeString(),
+            estadoViaje: guia.estadoViaje,
+            volumenCarga: `${guia.volumenCarga} Kg`,
+          });
+        });
+        setGuiasDeViaje(gdv);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-	const handleVehiculos = () => {
-		axios
-			.get(RESTEndpoints.encargadoService.listarVehiculos)
-			.then(response => {
-				let vList = [];
-				response.data.map(v => {
-					vList.push({
-						matricula: v.matricula,
-						marca: v.marcaVehiculo.nombre,
-						modelo: v.modelo,
-					});
-				});
-				setVehiculos(vList);
-			})
-			.catch(error => {
-				console.log(error);
-			});
-	};
+  const handleChoferes = () => {
+    axios
+      .get(RESTEndpoints.encargadoService.listarChoferes)
+      .then((response) => {
+        console.log(response);
+        setChoferes(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-	const handlePostAsignarGuiaDeViaje = event => {
-		console.log(agvf);
-		event.preventDefault();
+  const handleVehiculos = () => {
+    axios
+      .get(RESTEndpoints.encargadoService.listarVehiculos)
+      .then((response) => {
+        console.log(response);
+        let vList = [];
+        response.data.map((v) => {
+          vList.push({
+            matricula: v.matricula,
+            marca: v.marcaVehiculo.nombre,
+            modelo: v.modelo,
+            capacidad: `${v.capacidad} Kg`,
+          });
+        });
+        setVehiculos(vList);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handlePostAsignarGuiaDeViaje = (event) => {
+    console.log(agvf);
+	 setLoading(true)
+	 if(agvf.cedulaChofer === undefined || agvf.matriculaVehiculo === undefined){
+		Swal.fire({
+			text: "Debe seleccionar un chofer y un vehiculo",
+			title: "Error",
+			icon: "error",
+			confirmButtonText: "Aceptar",
+		});
+	 }
+	 else{
 		axios
 			.post(RESTEndpoints.encargadoService.asignarGuiaViaje, {
-				idGuiaViaje: agvf.idGuiaViaje,
-				nroEmpresa: jwt_decode(cookies.get("code")).nroEmpresa,
-				cedulaChofer: agvf.cedulaChofer,
-				matriculaVehiculo: agvf.matriculaVehiculo,
+			idGuiaViaje: agvf.idGuiaViaje,
+			nroEmpresa: jwt_decode(cookies.get("code")).nroEmpresa,
+			cedulaChofer: agvf.cedulaChofer,
+			matriculaVehiculo: agvf.matriculaVehiculo,
 			})
-			.then(response => {
-				console.log(response.data);
+			.then((response) => {
+				handleCloseDialog()
+				Swal.fire({
+					title: "Confirmado",
+					timer: 2500,
+					text: "La guia fue asignada con éxito!",
+					icon: "success",
+					confirmButtonText: "Aceptar",
+				});
+				setLoading(false)
+			console.log(response.data);
 			})
-			.catch(error => {
-				console.log(error);
+			.catch((error) => {
+				let errorMessage =
+						"ERROR: Ha ocurrido un error al ingresar el vehiculo, vuelva a intentarlo";
+
+					if (error.response && error.response.data) {
+						errorMessage = `${error.response.data}`;
+					}
+
+					Swal.fire({
+						text: errorMessage,
+						title: "Error",
+						icon: "error",
+						confirmButtonText: "Aceptar",
+					});
+			console.log(error);
+			setLoading(false)
 			});
-	};
+	}
+  };
 
-	const getRowIdVehiculo = row => {
-		return row.matricula + row.modelo;
-	};
+  const getRowIdVehiculo = (row) => {
+    return row.matricula + row.modelo;
+  };
 
-	const getRowIdGuiaDeViaje = row => {
-		return Math.random().toString();
-	};
+  const getRowIdGuiaDeViaje = (row) => {
+    return Math.random().toString();
+  };
 
-	const getRowIdChoferes = row => {
-		return Math.random().toString();
-	};
+  const getRowIdChoferes = (row) => {
+    return Math.random().toString();
+  };
 
-	const handleSetQuickFilterMatricula = useCallback(
-		value => {
-			setQuickFilterMatriculaValue(value);
-		},
-		[setQuickFilterMatriculaValue]
-	);
+  const handleSetQuickFilterMatricula = useCallback((value) => {
+    setQuickFilterMatriculaValue(value);
+  }, [setQuickFilterMatriculaValue]);
 
-	const handleSetQuickFilterRubro = useCallback(
-		value => {
-			setQuickFilterRubroValue(value);
-		},
-		[setQuickFilterRubroValue]
-	);
+  const handleSetQuickFilterRubro = useCallback((value) => {
+    setQuickFilterRubroValue(value);
+  }, [setQuickFilterRubroValue]);
 
-	useEffect(() => {
-		handleGuiasDeViaje();
-		handleChoferes();
-		handleVehiculos();
-	}, []);
+  useEffect(() => {
+    handleGuiasDeViaje();
+    handleChoferes();
+    handleVehiculos();
+  }, [loading]);
 
-	return (
-		<FormDiv>
-			<FormH2 text="Asignar Guía de Viaje" />
+  const getRowClassName = (params) => {
+    return params.indexRelativeToCurrentPage % 2 === 0
+      ? "striped-row-even"
+      : "striped-row-odd";
+  };
 
-			{agvf.idGuiaViaje ? (
-				<>
-					<label>Chofer</label>
+  return (
+    <Container className="form-container shadow-dreamy">
+      <p className="dialog-subtitle">Guías de Viaje</p>
+      <DataGrid
+        getRowClassName={getRowClassName}
+        rows={guiasDeViaje}
+        columns={columnsGuiasDeViaje}
+        checkboxSelection={false}
+        hideFooterSelectedRowCount={true}
+        onRowClick={(p, event) => {
+          if (event.target.classList.contains("asignar-btn")) {
+            handleChangeAgvf(p.row);
+          }
+        }}
+        getRowId={getRowIdGuiaDeViaje}
+        initialState={{
+          pagination: { paginationModel: { pageSize: 10 } },
+        }}
+        components={{
+          Toolbar: CustomToolbar,
+        }}
+        componentsProps={{
+          toolbar: {
+            setQuickFilter: handleSetQuickFilterRubro,
+            placeholder: "Buscar por rubro",
+          },
+        }}
+        filterModel={{
+          items: [
+            {
+              id: 1,
+              field: "rubro",
+              operator: "contains",
+              value: quickFilterRubroValue,
+            },
+          ],
+        }}
+        density="compact"
+        autoHeight
+      />
 
-					<DataGrid
-						rows={choferes}
-						columns={columnsChoferes}
-						checkboxSelection={false}
-						hideFooterSelectedRowCount={true}
-						onRowClick={p => handleChangeAgvf(p.row)}
-						getRowId={getRowIdChoferes}
-						initialState={{
-							pagination: { paginationModel: { pageSize: 10 } },
-						}}
-						components={{
-							Toolbar: CustomToolbar,
-						}}
-						componentsProps={{
-							toolbar: {
-								setQuickFilter: handleSetQuickFilterRubro,
-								placeholder: "Buscar por nombre",
-							},
-						}}
-						filterModel={{
-							items: [
-								{
-									id: 1,
-									field: "nombre",
-									operator: "contains",
-									value: quickFilterRubroValue,
-								},
-							],
-						}}
-						density="compact"
-						autoHeight
+      {selectedItem && (
+        <Dialog
+          open={isOpen}
+          onClose={handleCloseDialog}
+          maxWidth="md"
+          fullWidth
+			 className="z-index-0"
+        >
+			<DialogTitle> Asignar Guia de Viaje</DialogTitle>
+          <DialogContent >
+				
+            <p className="dialog-subtitle">Seleccione un Chofer</p>
 
-						/*DISABLED pageSizeOptions={[10, 25, 50]}*/
-					/>
+            <DataGrid
+              getRowClassName={getRowClassName}
+              rows={choferes}
+              columns={columnsChoferes}
+              checkboxSelection={false}
+              hideFooterSelectedRowCount={true}
+              onRowClick={(p) => handleChangeAgvf(p.row)}
+              getRowId={getRowIdChoferes}
+              initialState={{
+                pagination: { paginationModel: { pageSize: 10 } },
+              }}
+              components={{
+                Toolbar: CustomToolbar,
+              }}
+              componentsProps={{
+                toolbar: {
+                  setQuickFilter: handleSetQuickFilterRubro,
+                  placeholder: "Buscar por nombre",
+                },
+              }}
+              filterModel={{
+                items: [
+                  {
+                    id: 1,
+                    field: "nombre",
+                    operator: "contains",
+                    value: quickFilterRubroValue,
+                  },
+                ],
+              }}
+              density="compact"
+              autoHeight
+            />
 
-					<label>Vehículo</label>
+            <p className="dialog-subtitle">Seleccione un Vehiculo</p>
 
-					<DataGrid
-						rows={vehiculos}
-						columns={columnsVehiculos}
-						checkboxSelection={false}
-						hideFooterSelectedRowCount={true}
-						onRowClick={p => handleChangeAgvf(p.row)}
-						getRowId={getRowIdVehiculo}
-						initialState={{
-							pagination: { paginationModel: { pageSize: 10 } },
-						}}
-						components={{
-							Toolbar: CustomToolbar,
-						}}
-						componentsProps={{
-							toolbar: {
-								setQuickFilter: handleSetQuickFilterMatricula,
-								placeholder: "Buscar por matricula",
-							},
-						}}
-						filterModel={{
-							items: [
-								{
-									id: 1,
-									field: "matricula",
-									operator: "contains",
-									value: quickFilterMatriculaValue,
-								},
-							],
-						}}
-						density="compact"
-						autoHeight
-
-						/*DISABLED pageSizeOptions={[10, 25, 50]}*/
-					/>
-
-					<Button
-						type="submit"
-						className="btn-principal submit mt-2 mb-2"
-						onClick={handlePostAsignarGuiaDeViaje}
-					>
-						Enviar
+            <DataGrid
+              getRowClassName={getRowClassName}
+              rows={vehiculos}
+              columns={columnsVehiculos}
+              checkboxSelection={false}
+              hideFooterSelectedRowCount={true}
+              onRowClick={(p) => handleChangeAgvf(p.row)}
+              getRowId={getRowIdVehiculo}
+              initialState={{
+                pagination: { paginationModel: { pageSize: 10 } },
+              }}
+              components={{
+                Toolbar: CustomToolbar,
+              }}
+              componentsProps={{
+                toolbar: {
+                  setQuickFilter: handleSetQuickFilterMatricula,
+                  placeholder: "Buscar por matricula",
+                },
+              }}
+              filterModel={{
+                items: [
+                  {
+                    id: 1,
+                    field: "matricula",
+                    operator: "contains",
+                    value: quickFilterMatriculaValue,
+                  },
+                ],
+              }}
+              density="compact"
+              autoHeight
+            />
+          </DialogContent>
+			 <DialogActions>
+					<Button variant="contained" size="medium" className="dialog-confirm-btn" startIcon={<CheckIcon />} onClick={handlePostAsignarGuiaDeViaje}>
+						ASIGNAR
 					</Button>
-
-					<Button type="submit" className="btn-secundario submit mt-2 mb-2">
-						{" "}
-						Volver{" "}
+					<Button variant="outlined" size="medium" className="dialog-close-btn" startIcon={<CloseIcon />} onClick={handleCloseDialog}>
+						CERRAR
 					</Button>
-				</>
-			) : (
-				<>
-					<label>Guía de Viaje</label>
-					<DataGrid
-						rows={guiasDeViaje}
-						columns={columnsGuiasDeViaje}
-						checkboxSelection={false}
-						hideFooterSelectedRowCount={true}
-						onRowClick={p => handleChangeAgvf(p.row)}
-						getRowId={getRowIdGuiaDeViaje}
-						initialState={{
-							pagination: { paginationModel: { pageSize: 10 } },
-						}}
-						components={{
-							Toolbar: CustomToolbar,
-						}}
-						componentsProps={{
-							toolbar: {
-								setQuickFilter: handleSetQuickFilterRubro,
-								placeholder: "Buscar por rubro",
-							},
-						}}
-						filterModel={{
-							items: [
-								{
-									id: 1,
-									field: "rubro",
-									operator: "contains",
-									value: quickFilterRubroValue,
-								},
-							],
-						}}
-						density="compact"
-						autoHeight
-
-						/*DISABLED pageSizeOptions={[10, 25, 50]}*/
-					/>
-				</>
-			)}
-		</FormDiv>
-	);
+				</DialogActions>
+        </Dialog>
+      )}
+    </Container>
+  );
 };
