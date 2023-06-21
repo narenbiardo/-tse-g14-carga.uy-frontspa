@@ -86,7 +86,7 @@ export const NavBarCustom = () => {
 									<NavDropdown title="Vehículo">
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
-												to="/añadirVehiculo"
+												to="/agregarVehiculo"
 												className="nav-link item ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(2)}
 												onMouseLeave={handleNavLinkLeave}

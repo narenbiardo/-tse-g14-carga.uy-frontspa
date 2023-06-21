@@ -79,89 +79,114 @@ const ProtectedPerfil = ({ children }) => {
 
 const defaultTheme = createTheme();
 
-function App() {
+function App() {	
 	return (
 		<ThemeProvider theme={defaultTheme}>
-			<div>
-				<CssBaseline />
-				<AuthProvider>
-					<NavBarCustom />
-					<div className="App min-vh-100 bg-light">
-						<Routes>
-							<Route path="/" element={<Home />}></Route>
-							{/*<Route path="/login" element={<Login />}></Route>*/}
-							<Route
-								path="/perfil"
-								element={
-									<ProtectedPerfil>
-										<Perfil />
-									</ProtectedPerfil>
-								}
-							/>
-							<Route
-								path="/empresa"
-								element={
-									<ProtectedRouteEncargado>
-										<PerfilEmpresa />
-									</ProtectedRouteEncargado>
-								}
-							/>
-							<Route
-								path="/ingresarGuiaDeViaje"
-								element={
-									<ProtectedRouteEncargado>
-										<IngresarGuiaDeViaje />
-									</ProtectedRouteEncargado>
-								}
-							/>
-							<Route
-								path="/asignarGuiaDeViaje"
-								element={
-									<ProtectedRouteEncargado>
-										<AsignarGuiaDeViaje />
-									</ProtectedRouteEncargado>
-								}
-							/>
-							<Route
-								path="/añadirVehiculo"
-								element={
-									<ProtectedRouteEncargado>
-										<AgregarVehiculo />
-									</ProtectedRouteEncargado>
-								}
-							/>
-							<Route
-								path="/consultarVehiculos"
-								element={
-									<ProtectedRouteEncargado>
-										<ConsultarVehiculo />
-									</ProtectedRouteEncargado>
-								}
-							/>
-							<Route
-								path="empresas"
-								element={
-									<ProtectedRouteFuncionario>
-										<AñadirEmpresa />
-									</ProtectedRouteFuncionario>
-								}
-							/>
-							<Route
-								path="vehiculos"
-								element={
-									<ProtectedRouteFuncionario>
-										<PermisosVehiculos />
-									</ProtectedRouteFuncionario>
-								}
-							/>
-							<Route path="*" element={<h1>Not found</h1>} />
-						</Routes>
-						<Footer />
-					</div>
-				</AuthProvider>
+		<Box
+		  sx={{
+			display: 'flex',
+			flexDirection: 'column',
+			minHeight: '100vh',
+		  }}
+		>
+		  <CssBaseline />
+		  <AuthProvider>
+			<NavBarCustom/>
+			<div className="App">
+				<Routes>
+					<Route path="/" element={<Home />}></Route>
+					{/*<Route path="/login" element={<Login />}></Route>*/}
+					<Route
+						path="/perfil"
+						element={
+							<ProtectedPerfil>
+								<Perfil />
+							</ProtectedPerfil>
+						}
+					/>
+					<Route
+						path="/empresa"
+						element={
+							<ProtectedRouteEncargado>
+								<PerfilEmpresa />
+							</ProtectedRouteEncargado>
+						}
+					/>
+					<Route
+						path="/ingresarGuiaDeViaje"
+						element={
+							<ProtectedRouteEncargado>
+								<IngresarGuiaDeViaje />
+							</ProtectedRouteEncargado>
+						}
+					/>
+					<Route
+						path="/asignarGuiaDeViaje"
+						element={
+							<ProtectedRouteEncargado>
+								<AsignarGuiaDeViaje />
+							</ProtectedRouteEncargado>
+						}
+					/>
+					<Route
+						path="/agregarVehiculo"
+						element={
+							<ProtectedRouteEncargado>
+								<AgregarVehiculo />
+							</ProtectedRouteEncargado>
+						}
+					/>
+					<Route
+						path="/consultarVehiculos"
+						element={
+							<ProtectedRouteEncargado>
+								<ConsultarVehiculo />
+							</ProtectedRouteEncargado>
+						}
+					/>
+					<Route
+						path="empresas"
+						element={
+							<ProtectedRouteFuncionario>
+								<AñadirEmpresa />
+							</ProtectedRouteFuncionario>
+						}
+					/>
+					<Route
+						path="vehiculos"
+						element={
+							<ProtectedRouteFuncionario>
+								<PermisosVehiculos />
+							</ProtectedRouteFuncionario>
+						} 
+					/>
+					<Route path="*" element={<h1>Not found</h1>} />
+				</Routes>
 			</div>
-		</ThemeProvider>
+		</AuthProvider>
+		
+		<Box
+			component="footer"
+			sx={{
+			  py: 3,
+			  px: 2,
+			  mt: 'auto',
+			  backgroundColor: '#212529',
+
+			}}
+		  >
+			<Container maxWidth="sm">
+				<Footer/>
+			</Container>
+		  </Box>
+		</Box>
+	  </ThemeProvider>
+  
+		
 	);
 }
 
 export default App;
+
+
+

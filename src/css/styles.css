@@ -118,7 +118,7 @@
 	background-color: #ffffff;
 	margin: 20px auto;
 	width: 50%;
-	height: 100vh;
+	min-height: 50vh;
 	@media (max-width: 768px) {
 		width: 90%;
 	}
