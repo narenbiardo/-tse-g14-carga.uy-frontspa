@@ -224,7 +224,7 @@ export const AgregarVehiculo = () => {
 					handleFirstTime={handleFirstTimeInput}
 				/>
 
-				<FormH4 text="Permiso Nacional de Circulación" />
+				<FormH4 text="Permiso de Circulación" />
 
 				<FormInputNumber
 					htmlFor="numero"

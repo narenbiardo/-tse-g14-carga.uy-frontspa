@@ -5,7 +5,7 @@ import "../css/styles.css";
 
 const Footer = () => {
 	return (
-		<footer className="footer py-3 fixed-bottom">
+		<footer className="footer py-3">
 			<Container>
 				<Row className="align-items-center">
 					<Col md={3} className="text-center">
