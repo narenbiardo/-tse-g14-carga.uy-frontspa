@@ -2,10 +2,10 @@ import {
 	FirstTimeInput,
 	FirstTimeInputEmpresaDto,
 	FirstTimeInputIngresarGuiaViajeForm,
-	FirstTimeInputAñadirEmpresaForm
+	FirstTimeInputAñadirEmpresaForm,
 } from "./classes";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export const serverURL = "http://localhost:8080/";
 
@@ -81,13 +81,13 @@ export const columnsVehiculosFull = [
 	{ field: "matricula", headerName: "Matricula", width: 110 },
 	{ field: "marcaVehiculo", headerName: "Marca", width: 110 },
 	{ field: "modelo", headerName: "Modelo", width: 110 },
-	{ field: "capacidad", headerName: "Capacidad", width: 120 },
-	{ field: "peso", headerName: "Peso", width: 120 },
+	{ field: "capacidad", headerName: "Capacidad", width: 100 },
+	{ field: "peso", headerName: "Peso", width: 100 },
 	{ field: "vencimientoITV", headerName: "ITV Venc.", width: 120 },
 	{
 		field: "permisoCirculacionNumero",
-		headerName: "Nº Permiso",
-		width: 120,
+		headerName: "Nº Per.",
+		width: 80,
 		valueGetter: params => params.row.permisoCirculacion.numero,
 	},
 	{
@@ -103,25 +103,21 @@ export const columnsVehiculosFull = [
 		valueGetter: params => params.row.permisoCirculacion.fechaVencimiento,
 	},
 	{
-		field: 'edit',
-		headerName: '',
+		field: "edit",
+		headerName: "",
 		width: 10,
-		renderCell: (params) => {
-		  return (
-			  <EditIcon className="edit-icon"/>
-		  );
+		renderCell: params => {
+			return <EditIcon className="edit-icon" />;
 		},
-	  },
+	},
 	{
-		field: 'delete',
-		headerName: '',
+		field: "delete",
+		headerName: "",
 		width: 10,
-		renderCell: (params) => {
-		  return (
-			  <DeleteIcon className="delete-icon"/>
-		  );
+		renderCell: params => {
+			return <DeleteIcon className="delete-icon" />;
 		},
-	}, 
+	},
 ];
 
 export const columnsEmpresas = [

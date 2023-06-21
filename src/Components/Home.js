@@ -72,22 +72,25 @@ export const Home = () => {
 	return (
 		<Container>
 			<Row>
-				<Col xs={3} />
-				<Col xs={6}>
+				<Col md={3} />
+				<Col md={6}>
 					<Lottie animationData={truckAnimation} />
 				</Col>
-				<Col xs={3} />
+				<Col md={3} />
 			</Row>
-			<Row>
+			<Row className="pb-5">
 				<Col
-					xs={12}
+					md={12}
 					className="d-flex align-items-center justify-content-center"
 				>
 					<h2>{cantViajesEnCurso} viajes en curso</h2>
 				</Col>
 			</Row>
 			<Row>
-				<Col xs={6}>
+				<Col
+					md={6}
+					className="py-4 bg-white rounded-4 border border-secondary-subtle"
+				>
 					<FormH4 text={"Empresas"} />
 					<DataGrid
 						rows={empresas}
@@ -124,11 +127,17 @@ export const Home = () => {
 					/>
 				</Col>
 				<Col
-					xs={4}
+					md={5}
 					className="d-flex align-items-center justify-content-center"
 				>
-					<Lottie animationData={manAnimation} />
-					<h4>{cantchoferes} choferes registrados</h4>
+					<Row>
+						<Col xs={5} sm={6}>
+							<Lottie animationData={manAnimation} />
+						</Col>
+						<Col className="d-flex align-items-center justify-content-center">
+							<h4>{cantchoferes} choferes registrados</h4>
+						</Col>
+					</Row>
 				</Col>
 			</Row>
 		</Container>
