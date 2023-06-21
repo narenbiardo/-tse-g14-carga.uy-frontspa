@@ -91,8 +91,22 @@ export const ConsultarVehiculo = () => {
 			
 			})
 			.catch(error => {
-				console.log(error);
-			});
+				setLoading(false);
+				handleCloseDialog()
+				let errorMessage = 'Ha ocurrido un error, vuelva a intentarlo';
+		  
+				if (error.response.data === 'jakarta.transaction.RollbackException: ARJUNA016053: Could not commit transaction.') {
+					errorMessage = 'El vehiculo se encuentra asociado a una guia de viaje, no puede ser eliminado';
+			  	}
+		  
+			  Swal.fire({
+				text: errorMessage,
+				title: 'Error',
+				icon: 'error',
+				confirmButtonText: 'Aceptar',
+			  });
+			  console.log(error)
+			})
 	};
 	
 
@@ -100,7 +114,6 @@ export const ConsultarVehiculo = () => {
 		axios
 			.get(RESTEndpoints.encargadoService.listarVehiculos)
 			.then(response => {
-				console.log("Entre al effect");
 				setvehiculos(
 					response.data.map(vehiculo => {
 						const permisoCirculacion = new DtPermisoNacionalCirculacion(
@@ -244,6 +257,7 @@ export const ConsultarVehiculo = () => {
 
 	return (
 		<Container className="form-container shadow-dreamy">
+			<FormH4 text={"Vehículos"} />
 			<DataGrid
 			getRowClassName={getRowClassName}
 			rows={vehiculos}
@@ -382,7 +396,7 @@ export const ConsultarVehiculo = () => {
 							handleFirstTime={handleFirstTimeInput}
 						/>
 
-						<FormH4 text="Permiso Nacional de Circulación" />
+						<FormH4 text="Permiso de Circulación" />
 
 						<FormInputNumber
 							htmlFor="numero"

@@ -101,7 +101,7 @@ export const columnsVehiculosFull = [
 	{ field: "marcaVehiculo", headerName: "Marca", width: 110 },
 	{ field: "modelo", headerName: "Modelo", width: 110 },
 	{ field: "capacidad", headerName: "Capacidad", width: 120 },
-	{ field: "peso", headerName: "Peso", width: 120 },
+	{ field: "peso", headerName: "Peso", width: 110 },
 	{ field: "vencimientoITV", headerName: "ITV Venc.", width: 120 },
 	{
 		field: "permisoCirculacionNumero",
@@ -124,7 +124,7 @@ export const columnsVehiculosFull = [
 	{
 		field: 'edit',
 		headerName: '',
-		width: 10,
+		width: 8,
 		renderCell: (params) => {
 		  return (
 			  <EditIcon className="edit-icon"/>
@@ -134,7 +134,7 @@ export const columnsVehiculosFull = [
 	{
 		field: 'delete',
 		headerName: '',
-		width: 10,
+		width: 8,
 		renderCell: (params) => {
 		  return (
 			  <DeleteIcon className="delete-icon"/>

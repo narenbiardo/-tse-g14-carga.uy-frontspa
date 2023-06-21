@@ -23,12 +23,12 @@ import { Home } from "./Components/Home";
 import { PerfilEmpresa } from "./Components/PerfilEmpresa";
 import { AñadirEmpresa } from "./Components/AñadirEmpresa";
 import { PermisosVehiculos } from "./Components/PermisosVehıculos";
-import 'react-toastify/dist/ReactToastify.css';
-import './css/animations.css'
-import CssBaseline from '@mui/material/CssBaseline';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import '@fortawesome/fontawesome-svg-core/styles.css';
+import "react-toastify/dist/ReactToastify.css";
+import "./css/animations.css";
+import CssBaseline from "@mui/material/CssBaseline";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 
 axiosHeadersAuth();
 axiosHeadersAccept();
@@ -78,7 +78,6 @@ const ProtectedPerfil = ({ children }) => {
 };
 
 const defaultTheme = createTheme();
-
 
 function App() {	
 	return (
@@ -188,3 +187,6 @@ function App() {
 }
 
 export default App;
+
+
+
