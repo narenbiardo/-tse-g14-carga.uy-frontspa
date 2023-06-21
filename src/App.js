@@ -82,17 +82,11 @@ const defaultTheme = createTheme();
 function App() {
 	return (
 		<ThemeProvider theme={defaultTheme}>
-			<Box
-				sx={{
-					display: "flex",
-					flexDirection: "column",
-					minHeight: "100vh",
-				}}
-			>
+			<div>
 				<CssBaseline />
 				<AuthProvider>
 					<NavBarCustom />
-					<div className="App">
+					<div className="App min-vh-100 bg-light">
 						<Routes>
 							<Route path="/" element={<Home />}></Route>
 							{/*<Route path="/login" element={<Login />}></Route>*/}
@@ -129,7 +123,7 @@ function App() {
 								}
 							/>
 							<Route
-								path="/agregarVehiculo"
+								path="/añadirVehiculo"
 								element={
 									<ProtectedRouteEncargado>
 										<AgregarVehiculo />
@@ -162,23 +156,10 @@ function App() {
 							/>
 							<Route path="*" element={<h1>Not found</h1>} />
 						</Routes>
+						<Footer />
 					</div>
 				</AuthProvider>
-
-				<Box
-					component="footer"
-					sx={{
-						py: 3,
-						px: 2,
-						mt: "auto",
-						backgroundColor: "#212529",
-					}}
-				>
-					<Container maxWidth="sm">
-						<Footer />
-					</Container>
-				</Box>
-			</Box>
+			</div>
 		</ThemeProvider>
 	);
 }

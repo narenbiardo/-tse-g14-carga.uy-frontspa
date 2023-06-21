@@ -34,7 +34,7 @@ import {
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Swal from "sweetalert2";
 
-export const EditarVehiculo = () => {
+export const ConsultarVehiculo = () => {
 	const [loading, setLoading] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedItem, setSelectedItem] = useState(null);

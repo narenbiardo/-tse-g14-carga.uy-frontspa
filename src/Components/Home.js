@@ -70,69 +70,67 @@ export const Home = () => {
 	}, []);
 
 	return (
-		<FormDiv>
-			<Container>
-				<Row>
-					<Col xs={3} />
-					<Col xs={6}>
-						<Lottie animationData={truckAnimation} />
-					</Col>
-					<Col xs={3} />
-				</Row>
-				<Row>
-					<Col
-						xs={12}
-						className="d-flex align-items-center justify-content-center"
-					>
-						<h2>{cantViajesEnCurso} viajes en curso</h2>
-					</Col>
-				</Row>
-				<Row>
-					<Col xs={6}>
-						<FormH4 text={"Empresas"} />
-						<DataGrid
-							rows={empresas}
-							columns={columnsEmpresas}
-							checkboxSelection={false}
-							hideFooterSelectedRowCount={true}
-							onRowClick={p => console.log(p.row)}
-							getRowId={getRowIdEmpresas}
-							initialState={{
-								pagination: { paginationModel: { pageSize: 10 } },
-							}}
-							components={{
-								Toolbar: CustomToolbar,
-							}}
-							componentsProps={{
-								toolbar: {
-									setQuickFilter: handleQuickFilterEmpresaValue,
-									placeholder: "Buscar por nombre",
+		<Container>
+			<Row>
+				<Col xs={3} />
+				<Col xs={6}>
+					<Lottie animationData={truckAnimation} />
+				</Col>
+				<Col xs={3} />
+			</Row>
+			<Row>
+				<Col
+					xs={12}
+					className="d-flex align-items-center justify-content-center"
+				>
+					<h2>{cantViajesEnCurso} viajes en curso</h2>
+				</Col>
+			</Row>
+			<Row>
+				<Col xs={6}>
+					<FormH4 text={"Empresas"} />
+					<DataGrid
+						rows={empresas}
+						columns={columnsEmpresas}
+						checkboxSelection={false}
+						hideFooterSelectedRowCount={true}
+						onRowClick={p => console.log(p.row)}
+						getRowId={getRowIdEmpresas}
+						initialState={{
+							pagination: { paginationModel: { pageSize: 10 } },
+						}}
+						components={{
+							Toolbar: CustomToolbar,
+						}}
+						componentsProps={{
+							toolbar: {
+								setQuickFilter: handleQuickFilterEmpresaValue,
+								placeholder: "Buscar por nombre",
+							},
+						}}
+						filterModel={{
+							items: [
+								{
+									id: 1,
+									field: "nombre",
+									operator: "contains",
+									value: quickFilterEmpresaValue,
 								},
-							}}
-							filterModel={{
-								items: [
-									{
-										id: 1,
-										field: "nombre",
-										operator: "contains",
-										value: quickFilterEmpresaValue,
-									},
-								],
-							}}
-							density="compact"
-							autoHeight
-							pageSizeOptions={[10, 25, 50]} // Agregado pageSizeOptions con tamaño de página 10
-						/>
-					</Col>
-					<Col
-						xs={4}
-						className="d-flex align-items-center justify-content-center"
-					>
-						<Lottie animationData={manAnimation} />
-						<h4>{cantchoferes} choferes registrados</h4>
-					</Col>
-				</Row>
-			</Container>
-		</FormDiv>
+							],
+						}}
+						density="compact"
+						autoHeight
+						pageSizeOptions={[10, 25, 50]} // Agregado pageSizeOptions con tamaño de página 10
+					/>
+				</Col>
+				<Col
+					xs={4}
+					className="d-flex align-items-center justify-content-center"
+				>
+					<Lottie animationData={manAnimation} />
+					<h4>{cantchoferes} choferes registrados</h4>
+				</Col>
+			</Row>
+		</Container>
 	);
 };

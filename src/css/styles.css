@@ -1,6 +1,5 @@
 .footer {
 	margin-top: auto;
-	padding: 3rem 0;
 	background-color: #212529;
 	color: #fff;
 }
@@ -36,7 +35,7 @@
 	height: 40px;
 	font-weight: 500;
 }
-.btn-disabled{
+.btn-disabled {
 	background-color: #cfcfcf !important;
 }
 
@@ -88,7 +87,7 @@
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.perfil{
+.perfil {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -100,15 +99,13 @@
 	width: 950px;
 	@media (max-width: 768px) {
 		width: 100%;
-	  }
-
+	}
 }
 
-.perfil-image{
+.perfil-image {
 	width: 150px !important;
 	height: 150 !important;
-	box-shadow: 0 0 6px 5px rgba(0, 215, 142, .7);
-	
+	box-shadow: 0 0 6px 5px rgba(0, 215, 142, 0.7);
 }
 
 .form-container {
@@ -123,15 +120,15 @@
 	width: 50%;
 	height: 100vh;
 	@media (max-width: 768px) {
-	  width: 90%;
+		width: 90%;
 	}
-  }
+}
 
-  .dialog {
+.dialog {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-  }
+}
 
 .shadow-dreamy {
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
@@ -139,14 +136,39 @@
 		0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
 }
 
-.shadow-4{box-shadow:0 1px 1px rgba(0,0,0,0.15),0 2px 2px rgba(0,0,0,0.15),0 4px 4px rgba(0,0,0,0.15),0 8px 8px rgba(0,0,0,0.15)}
-.shadow-5{box-shadow:0 1px 1px rgba(0,0,0,0.12),0 2px 2px rgba(0,0,0,0.12),0 4px 4px rgba(0,0,0,0.12),0 8px 8px rgba(0,0,0,0.12),0 16px 16px rgba(0,0,0,0.12)}
-.shadow-6{box-shadow:0 1px 1px rgba(0,0,0,0.11),0 2px 2px rgba(0,0,0,0.11),0 4px 4px rgba(0,0,0,0.11),0 8px 8px rgba(0,0,0,0.11),0 16px 16px rgba(0,0,0,0.11),0 32px 32px rgba(0,0,0,0.11)}
-.shadow-sharp{box-shadow:0 1px 1px rgba(0,0,0,0.25),0 2px 2px rgba(0,0,0,0.2),0 4px 4px rgba(0,0,0,0.15),0 8px 8px rgba(0,0,0,0.1),0 16px 16px rgba(0,0,0,0.05)}
-.shadow-diffuse{box-shadow:0 1px 1px rgba(0,0,0,0.08),0 2px 2px rgba(0,0,0,0.12),0 4px 4px rgba(0,0,0,0.16),0 8px 8px rgba(0,0,0,0.2)}
-.shadow-shorter{box-shadow:0 1px 1px rgba(0,0,0,0.11),0 2px 2px rgba(0,0,0,0.11),0 4px 4px rgba(0,0,0,0.11),0 6px 8px rgba(0,0,0,0.11),0 8px 16px rgba(0,0,0,0.11)}
-.shadow-longer{box-shadow:0 2px 1px rgba(0,0,0,0.09),0 4px 2px rgba(0,0,0,0.09),0 8px 4px rgba(0,0,0,0.09),0 16px 8px rgba(0,0,0,0.09),0 32px 16px rgba(0,0,0,0.09)}
-
+.shadow-4 {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 2px 2px rgba(0, 0, 0, 0.15),
+		0 4px 4px rgba(0, 0, 0, 0.15), 0 8px 8px rgba(0, 0, 0, 0.15);
+}
+.shadow-5 {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.12),
+		0 4px 4px rgba(0, 0, 0, 0.12), 0 8px 8px rgba(0, 0, 0, 0.12),
+		0 16px 16px rgba(0, 0, 0, 0.12);
+}
+.shadow-6 {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.11), 0 2px 2px rgba(0, 0, 0, 0.11),
+		0 4px 4px rgba(0, 0, 0, 0.11), 0 8px 8px rgba(0, 0, 0, 0.11),
+		0 16px 16px rgba(0, 0, 0, 0.11), 0 32px 32px rgba(0, 0, 0, 0.11);
+}
+.shadow-sharp {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25), 0 2px 2px rgba(0, 0, 0, 0.2),
+		0 4px 4px rgba(0, 0, 0, 0.15), 0 8px 8px rgba(0, 0, 0, 0.1),
+		0 16px 16px rgba(0, 0, 0, 0.05);
+}
+.shadow-diffuse {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.12),
+		0 4px 4px rgba(0, 0, 0, 0.16), 0 8px 8px rgba(0, 0, 0, 0.2);
+}
+.shadow-shorter {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.11), 0 2px 2px rgba(0, 0, 0, 0.11),
+		0 4px 4px rgba(0, 0, 0, 0.11), 0 6px 8px rgba(0, 0, 0, 0.11),
+		0 8px 16px rgba(0, 0, 0, 0.11);
+}
+.shadow-longer {
+	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.09), 0 4px 2px rgba(0, 0, 0, 0.09),
+		0 8px 4px rgba(0, 0, 0, 0.09), 0 16px 8px rgba(0, 0, 0, 0.09),
+		0 32px 16px rgba(0, 0, 0, 0.09);
+}
 
 .form-input {
 	padding: 5px;
@@ -172,7 +194,7 @@
 	margin: 15px 0px 5px 0px;
 }
 
-.btn-link{
+.btn-link {
 	background-color: none;
 
 	align-items: end;
@@ -199,40 +221,38 @@
 	color: #cacaca !important;
 }
 
-.nav-link.item{
+.nav-link.item {
 	color: black !important;
 }
 
-.nav-link.item:hover{
+.nav-link.item:hover {
 	background-color: #ebebeb;
 }
 
 .striped-row-even {
-    background-color: #F5F5F5;
+	background-color: #f5f5f5;
 }
 
 .striped-row-odd {
-    background-color: #FFFFFF;
- }
+	background-color: #ffffff;
+}
 
- .edit-icon{
+.edit-icon {
 	cursor: pointer;
 	color: #212529;
-	
- }
+}
 
- .edit-icon:hover{
-	color: #FF5B31;
+.edit-icon:hover {
+	color: #ff5b31;
 	transition: all 0.2s ease 0s;
- }
+}
 
- .delete-icon{
+.delete-icon {
 	cursor: pointer;
 	color: #212529;
-	
- }
+}
 
- .delete-icon:hover{
+.delete-icon:hover {
 	color: red;
 	transition: all 0.2s ease 0s;
- }
+}

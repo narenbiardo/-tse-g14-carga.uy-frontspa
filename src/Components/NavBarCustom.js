@@ -39,10 +39,48 @@ export const NavBarCustom = () => {
 		setNavLinkHovered(null);
 	};
 
+	function stringToColor(string) {
+		let hash = 0;
+		let i;
+
+		/* eslint-disable no-bitwise */
+		for (i = 0; i < string.length; i += 1) {
+			hash = string.charCodeAt(i) + ((hash << 5) - hash);
+		}
+
+		let color = "#";
+
+		for (i = 0; i < 3; i += 1) {
+			const value = (hash >> (i * 8)) & 0xff;
+			color += `00${value.toString(16)}`.slice(-2);
+		}
+		/* eslint-enable no-bitwise */
+
+		return color;
+	}
+
+	function stringAvatar(name) {
+		return {
+			sx: {
+				bgcolor: stringToColor(name),
+			},
+			children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+		};
+	}
+
 	return (
-		<Navbar bg="dark" expand="lg" className="shadow-sm" variant="dark">
-			<Container>
-				<Navbar.Brand onClick={handleBrandClick} style={{ cursor: "pointer" }}>
+		<Navbar
+			bg="dark"
+			expand="lg"
+			className="shadow-sm fixed-top"
+			variant="dark"
+		>
+			<Container className="mt-2 mb-1">
+				<Navbar.Brand
+					onClick={handleBrandClick}
+					style={{ cursor: "pointer" }}
+					className="mb-2"
+				>
 					<SvgLogo color={mainColor} dataName="Layer 1" />
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -52,10 +90,10 @@ export const NavBarCustom = () => {
 							user === 1 && ( // EncargadoEmpresa
 								<>
 									<NavDropdown title="Guia de Viaje" id="nav-dropdown">
-										<NavDropdown.Item className="nav-link item">
+										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/ingresarGuiaDeViaje"
-												className="nav-link item"
+												className="nav-link item ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(0)}
 												onMouseLeave={handleNavLinkLeave}
 											>
@@ -63,10 +101,10 @@ export const NavBarCustom = () => {
 											</NavLink>
 										</NavDropdown.Item>
 
-										<NavDropdown.Item className="nav-link item">
+										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/asignarGuiaDeViaje"
-												className="nav-link item"
+												className="nav-link item ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(1)}
 												onMouseLeave={handleNavLinkLeave}
 											>
@@ -75,10 +113,10 @@ export const NavBarCustom = () => {
 										</NavDropdown.Item>
 									</NavDropdown>
 									<NavDropdown title="Vehículo">
-										<NavDropdown.Item className="nav-link item">
+										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/añadirVehiculo"
-												className="nav-link item"
+												className="nav-link item ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(2)}
 												onMouseLeave={handleNavLinkLeave}
 											>
@@ -86,25 +124,14 @@ export const NavBarCustom = () => {
 											</NavLink>
 										</NavDropdown.Item>
 
-										<NavDropdown.Item className="nav-link item">
+										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
-												to="/editarVehiculo"
-												className="nav-link item"
+												to="/consultarVehiculos"
+												className="nav-link item ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(3)}
 												onMouseLeave={handleNavLinkLeave}
 											>
-												Editar Vehiculo
-											</NavLink>
-										</NavDropdown.Item>
-
-										<NavDropdown.Item className="nav-link item">
-											<NavLink
-												to="/eliminarVehiculo"
-												className="nav-link item"
-												onMouseEnter={() => handleNavLinkEnter(4)}
-												onMouseLeave={handleNavLinkLeave}
-											>
-												Eliminar Vehiculo
+												Consultar Vehiculo
 											</NavLink>
 										</NavDropdown.Item>
 									</NavDropdown>
@@ -117,10 +144,10 @@ export const NavBarCustom = () => {
 							user === 2 && ( // Funcionario
 								<>
 									<NavDropdown title="Empresa">
-										<NavDropdown.Item className="nav-link item">
+										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/añadirEmpresa"
-												className="nav-link item"
+												className="nav-link item ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(5)}
 												onMouseLeave={handleNavLinkLeave}
 											>
@@ -128,7 +155,7 @@ export const NavBarCustom = () => {
 											</NavLink>
 											<NavLink
 												to="/modificarEmpresa"
-												className="nav-link item"
+												className="nav-link item ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(6)}
 												onMouseLeave={handleNavLinkLeave}
 											>
@@ -136,7 +163,7 @@ export const NavBarCustom = () => {
 											</NavLink>
 											<NavLink
 												to="/eliminarEmpresa"
-												className="nav-link item"
+												className="nav-link item ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(7)}
 												onMouseLeave={handleNavLinkLeave}
 											>
@@ -161,43 +188,23 @@ export const NavBarCustom = () => {
 									id="nav-dropdown-perfil"
 									className="ml-auto"
 								>
-									<NavDropdown.Item className="nav-link item">
+									<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 										<NavLink
 											to="/perfil"
-											className="nav-link item"
+											className="nav-link item ps-2 px-md-2"
 											onMouseEnter={() => handleNavLinkEnter(0)}
 											onMouseLeave={handleNavLinkLeave}
 										>
 											Perfil
 										</NavLink>
-										{/* <Button variant="contained" onClick={openDialog}>Perfil</Button>
-											<Dialog
-												open={isOpen}
-												onClose={closeDialog}
-												maxWidth="md"
-												fullWidth
-												PaperProps={{
-													style: {
-													  maxHeight: '100vh', // Ajusta la altura según tus necesidades
-													},
-												  }}
-												>
-												<DialogTitle>Perfil</DialogTitle>
-												<DialogContent>
-													<Perfil/>
-												</DialogContent>
-												<DialogActions>
-													<Button onClick={closeDialog} color="secondary">Cerrar</Button>
-												</DialogActions>
-												</Dialog> */}
 									</NavDropdown.Item>
 
-									<NavDropdown.Item className="nav-link item">
+									<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 										<Logout />
 									</NavDropdown.Item>
 								</NavDropdown>
 								<div className="d-none d-lg-block">
-									<Avatar sx={{ bgcolor: "#FF5B31" }}>
+									<Avatar {...stringAvatar("ab213c as12321d")}>
 										{jwt_decode(cookies.get("code")).nombre[0] +
 											jwt_decode(cookies.get("code")).apellido[0]}
 									</Avatar>
