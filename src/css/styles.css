@@ -122,16 +122,43 @@
 	margin: 20px auto;
 	width: 50%;
 	height: 100vh;
+	overflow-x: auto;
 	@media (max-width: 768px) {
 	  width: 90%;
 	}
   }
 
-  .dialog {
+.form-container.fluid{
+	width: 50% !important;
+}
+
+.dialog {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-  }
+}
+
+.dialog-subtitle{
+	margin: 20px 0px 10px 0px;
+	color: #FF5B31;
+}
+
+.dialog-confirm-btn{
+	margin: 10px 10px 10px 0px !important;
+	background-color: #FF5B31 !important;
+	letter-spacing: 1px !important;
+}
+
+.dialog-close-btn{
+	margin: 10px 15px 10px 0px !important; 
+	letter-spacing: 1px !important;
+	border: 1px solid #212529 !important;
+	color: #212529 !important;
+}
+
+.z-index-0{
+	z-index: 0 !important;
+}
 
 .shadow-dreamy {
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
@@ -209,10 +236,15 @@
 
 .striped-row-even {
     background-color: #F5F5F5;
+	cursor: pointer;
+	outline: none !important;
 }
 
 .striped-row-odd {
     background-color: #FFFFFF;
+	cursor: pointer;
+	outline: none !important;
+
  }
 
  .edit-icon{
@@ -236,3 +268,25 @@
 	color: red;
 	transition: all 0.2s ease 0s;
  }
+
+ .asignar-btn{
+	cursor: pointer;
+	color: #FF5B31 !important;
+	font-weight: 500 !important;
+	letter-spacing: 1px !important;
+	
+ }
+
+ .asignar-btn:hover{
+	font-weight: bold !important;
+	transition: all 0.2s ease 0s;
+	background-color: transparent !important;
+ }
+
+.MuiDataGrid-cell {
+	outline: none !important;
+  }
+
+.Mui-selected{
+	background-color: #ff5a3113 !important;
+}
