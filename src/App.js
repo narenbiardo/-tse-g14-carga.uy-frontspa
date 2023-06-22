@@ -27,6 +27,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { ConsultarEmpresa } from "./Components/ConsultarEmpresa";
 
 axiosHeadersAuth();
 axiosHeadersAccept();
@@ -77,114 +78,116 @@ const ProtectedPerfil = ({ children }) => {
 
 const defaultTheme = createTheme();
 
-function App() {	
+function App() {
 	return (
 		<ThemeProvider theme={defaultTheme}>
-		<Box
-		  sx={{
-			display: 'flex',
-			flexDirection: 'column',
-			minHeight: '100vh',
-		  }}
-		>
-		  <CssBaseline />
-		  <AuthProvider>
-			<NavBarCustom/>
-			<div className="App">
-				<Routes>
-					<Route path="/" element={<Home />}></Route>
-					{/*<Route path="/login" element={<Login />}></Route>*/}
-					<Route
-						path="/perfil"
-						element={
-							<ProtectedPerfil>
-								<Perfil />
-							</ProtectedPerfil>
-						}
-					/>
-					<Route
-						path="/empresa"
-						element={
-							<ProtectedRouteEncargado>
-								<PerfilEmpresa />
-							</ProtectedRouteEncargado>
-						}
-					/>
-					<Route
-						path="/ingresarGuiaDeViaje"
-						element={
-							<ProtectedRouteEncargado>
-								<IngresarGuiaDeViaje />
-							</ProtectedRouteEncargado>
-						}
-					/>
-					<Route
-						path="/asignarGuiaDeViaje"
-						element={
-							<ProtectedRouteEncargado>
-								<AsignarGuiaDeViaje />
-							</ProtectedRouteEncargado>
-						}
-					/>
-					<Route
-						path="/agregarVehiculo"
-						element={
-							<ProtectedRouteEncargado>
-								<AgregarVehiculo />
-							</ProtectedRouteEncargado>
-						}
-					/>
-					<Route
-						path="/consultarVehiculos"
-						element={
-							<ProtectedRouteEncargado>
-								<ConsultarVehiculo />
-							</ProtectedRouteEncargado>
-						}
-					/>
-					<Route
-						path="empresas"
-						element={
-							<ProtectedRouteFuncionario>
-								<AñadirEmpresa />
-							</ProtectedRouteFuncionario>
-						}
-					/>
-					<Route
-						path="vehiculos"
-						element={
-							<ProtectedRouteFuncionario>
-								<PermisosVehiculos />
-							</ProtectedRouteFuncionario>
-						} 
-					/>
-					<Route path="*" element={<h1>Not found</h1>} />
-				</Routes>
-			</div>
-		</AuthProvider>
-		
-		<Box
-			component="footer"
-			sx={{
-			  py: 3,
-			  px: 2,
-			  mt: 'auto',
-			  backgroundColor: '#212529',
+			<Box
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					minHeight: "100vh",
+				}}
+			>
+				<CssBaseline />
+				<AuthProvider>
+					<NavBarCustom />
+					<div className="App">
+						<Routes>
+							<Route path="/" element={<Home />}></Route>
+							{/*<Route path="/login" element={<Login />}></Route>*/}
+							<Route
+								path="/perfil"
+								element={
+									<ProtectedPerfil>
+										<Perfil />
+									</ProtectedPerfil>
+								}
+							/>
+							<Route
+								path="/empresa"
+								element={
+									<ProtectedRouteEncargado>
+										<PerfilEmpresa />
+									</ProtectedRouteEncargado>
+								}
+							/>
+							<Route
+								path="/ingresarGuiaDeViaje"
+								element={
+									<ProtectedRouteEncargado>
+										<IngresarGuiaDeViaje />
+									</ProtectedRouteEncargado>
+								}
+							/>
+							<Route
+								path="/asignarGuiaDeViaje"
+								element={
+									<ProtectedRouteEncargado>
+										<AsignarGuiaDeViaje />
+									</ProtectedRouteEncargado>
+								}
+							/>
+							<Route
+								path="/agregarVehiculo"
+								element={
+									<ProtectedRouteEncargado>
+										<AgregarVehiculo />
+									</ProtectedRouteEncargado>
+								}
+							/>
+							<Route
+								path="/consultarVehiculos"
+								element={
+									<ProtectedRouteEncargado>
+										<ConsultarVehiculo />
+									</ProtectedRouteEncargado>
+								}
+							/>
+							<Route
+								path="AñadirEmpresa"
+								element={
+									<ProtectedRouteFuncionario>
+										<AñadirEmpresa />
+									</ProtectedRouteFuncionario>
+								}
+							/>
+							<Route
+								path="ConsultarEmpresa"
+								element={
+									<ProtectedRouteFuncionario>
+										<ConsultarEmpresa />
+									</ProtectedRouteFuncionario>
+								}
+							/>
+							<Route
+								path="vehiculos"
+								element={
+									<ProtectedRouteFuncionario>
+										<PermisosVehiculos />
+									</ProtectedRouteFuncionario>
+								}
+							/>
+							<Route path="*" element={<h1>Not found</h1>} />
+						</Routes>
+					</div>
+				</AuthProvider>
 
-			}}
-		  >
-			<Container maxWidth="sm">
-				<Footer/>
-			</Container>
-		  </Box>
-		</Box>
-	  </ThemeProvider>
-  
-		
+				<Box
+					component="footer"
+					sx={{
+						py: 3,
+						px: 2,
+						mt: "auto",
+						backgroundColor: "#212529",
+					}}
+				>
+					<Container maxWidth="sm">
+						<Footer />
+					</Container>
+				</Box>
+			</Box>
+		</ThemeProvider>
 	);
 }
 
 export default App;
-
-
-

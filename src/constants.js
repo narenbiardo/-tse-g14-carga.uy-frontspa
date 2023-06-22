@@ -2,11 +2,11 @@ import {
 	FirstTimeInput,
 	FirstTimeInputEmpresaDto,
 	FirstTimeInputIngresarGuiaViajeForm,
-	FirstTimeInputAñadirEmpresaForm
+	FirstTimeInputAñadirEmpresaForm,
 } from "./classes";
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Button from '@mui/material/Button';
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Button from "@mui/material/Button";
 
 export const serverURL = "http://localhost:8080/";
 
@@ -59,41 +59,39 @@ export const ftiaef = new FirstTimeInputAñadirEmpresaForm( //used to check if t
 );
 
 export const columnsVehiculos = [
-	{ field: "matricula", headerName: "Matricula", flex:1 },
-	{ field: "marca", headerName: "Marca", flex:1 },
-	{ field: "modelo", headerName: "Modelo", flex:1 },
-	{ field: "capacidad", headerName: "Capacidad", flex:1 },
+	{ field: "matricula", headerName: "Matricula", flex: 1 },
+	{ field: "marca", headerName: "Marca", flex: 1 },
+	{ field: "modelo", headerName: "Modelo", flex: 1 },
+	{ field: "capacidad", headerName: "Capacidad", flex: 1 },
 ];
 
 export const columnsGuiasDeViaje = [
-	{ field: "id", headerName: "Id", flex:1},
-	{ field: "rubro", headerName: "Rubro", flex:1 },
-	{ field: "origen", headerName: "Origen", flex:1 },
-	{ field: "destino", headerName: "Destino", flex:1 },
-	{ field: "fecha", headerName: "Fecha", flex:1 },
-	{ field: "hora", headerName: "Hora", flex:1 },
-	{ field: "estadoViaje", headerName: "Estado", flex:1 },
-	{ field: "volumenCarga", headerName: "Volumen Carga", flex:1 },
+	{ field: "id", headerName: "Id", flex: 1 },
+	{ field: "rubro", headerName: "Rubro", flex: 1 },
+	{ field: "origen", headerName: "Origen", flex: 1 },
+	{ field: "destino", headerName: "Destino", flex: 1 },
+	{ field: "fecha", headerName: "Fecha", flex: 1 },
+	{ field: "hora", headerName: "Hora", flex: 1 },
+	{ field: "estadoViaje", headerName: "Estado", flex: 1 },
+	{ field: "volumenCarga", headerName: "Volumen Carga", flex: 1 },
 	{
-		field: 'asignar',
-		headerName: '',
-		flex:1,
-		renderCell: (params) => (
-		  <Button variant="text" className="asignar-btn"
-		  >
-			ASIGNAR
-		  </Button>
+		field: "asignar",
+		headerName: "",
+		flex: 1,
+		renderCell: params => (
+			<Button variant="text" className="asignar-btn">
+				ASIGNAR
+			</Button>
 		),
-	  },
-
+	},
 ];
 
 export const columnsChoferes = [
-	{ field: "nombre", headerName: "Nombre", flex:1 },
-	{ field: "apellido", headerName: "Apellido", flex:1 },
-	{ field: "cedula", headerName: "Cedula", flex:1 },
-	{ field: "email", headerName: "Email", flex:1 },
-	{ field: "vencimientoLicencia", headerName: "Venc. Licencia", flex:1 },
+	{ field: "nombre", headerName: "Nombre", flex: 1 },
+	{ field: "apellido", headerName: "Apellido", flex: 1 },
+	{ field: "cedula", headerName: "Cedula", flex: 1 },
+	{ field: "email", headerName: "Email", flex: 1 },
+	{ field: "vencimientoLicencia", headerName: "Venc. Licencia", flex: 1 },
 ];
 
 export const columnsVehiculosFull = [
@@ -122,29 +120,65 @@ export const columnsVehiculosFull = [
 		valueGetter: params => params.row.permisoCirculacion.fechaVencimiento,
 	},
 	{
-		field: 'edit',
-		headerName: '',
+		field: "edit",
+		headerName: "",
 		width: 8,
-		renderCell: (params) => {
-		  return (
-			  <EditIcon className="edit-icon"/>
-		  );
+		renderCell: params => {
+			return <EditIcon className="edit-icon" />;
 		},
-	  },
+	},
 	{
-		field: 'delete',
-		headerName: '',
+		field: "delete",
+		headerName: "",
 		width: 8,
-		renderCell: (params) => {
-		  return (
-			  <DeleteIcon className="delete-icon"/>
-		  );
+		renderCell: params => {
+			return <DeleteIcon className="delete-icon" />;
 		},
-	}, 
+	},
 ];
 
 export const columnsEmpresas = [
 	{ field: "nombre", headerName: "Nombre", width: 150 },
+];
+
+export const columnsEmpresasFull = [
+	{ field: "nroEmpresa", headerName: "Nº", width: 150 },
+	{ field: "nombreEmpresa", headerName: "Nombre", width: 150 },
+	{ field: "razonSocial", headerName: "Razón Social", width: 150 },
+	{
+		field: "calle",
+		headerName: "Calle",
+		width: 150,
+		valueGetter: params => params.row.direccionEmpresa.calle,
+	},
+	{
+		field: "km",
+		headerName: "Km",
+		width: 150,
+		valueGetter: params => params.row.direccionEmpresa.km,
+	},
+	{
+		field: "nroPuerta",
+		headerName: "Nº Puerta",
+		width: 150,
+		valueGetter: params => params.row.direccionEmpresa.nroPuerta,
+	},
+	{
+		field: "edit",
+		headerName: "",
+		width: 8,
+		renderCell: params => {
+			return <EditIcon className="edit-icon" />;
+		},
+	},
+	{
+		field: "delete",
+		headerName: "",
+		width: 8,
+		renderCell: params => {
+			return <DeleteIcon className="delete-icon" />;
+		},
+	},
 ];
 
 /*
