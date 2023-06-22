@@ -17,6 +17,7 @@ import {
 } from "../constants";
 import { FormH4 } from "../Utilities/FromH4";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import Swal from "sweetalert2";
 
 export const AsignarGuiaDeViaje = () => {
 	const [agvf, setAgvf] = useState(new AsignarGuiaViajeForm());
@@ -26,6 +27,7 @@ export const AsignarGuiaDeViaje = () => {
 	const [quickFilterMatriculaValue, setQuickFilterMatriculaValue] =
 		useState("");
 	const [quickFilterRubroValue, setQuickFilterRubroValue] = useState("");
+	const [loading, setLoading] = useState(false);
 
 	const handleChangeAgvf = e => {
 		if (e.idGuiaViaje) {
@@ -105,21 +107,65 @@ export const AsignarGuiaDeViaje = () => {
 	};
 
 	const handlePostAsignarGuiaDeViaje = event => {
-		console.log(agvf);
 		event.preventDefault();
-		axios
-			.post(RESTEndpoints.encargadoService.asignarGuiaViaje, {
-				idGuiaViaje: agvf.idGuiaViaje,
-				nroEmpresa: jwt_decode(cookies.get("code")).nroEmpresa,
-				cedulaChofer: agvf.cedulaChofer,
-				matriculaVehiculo: agvf.matriculaVehiculo,
-			})
-			.then(response => {
-				console.log(response.data);
-			})
-			.catch(error => {
-				console.log(error);
+		setLoading(true);
+
+		try {
+			axios
+				.post(RESTEndpoints.encargadoService.asignarGuiaViaje, {
+					idGuiaViaje: agvf.idGuiaViaje,
+					nroEmpresa: jwt_decode(cookies.get("code")).nroEmpresa,
+					cedulaChofer: agvf.cedulaChofer,
+					matriculaVehiculo: agvf.matriculaVehiculo,
+				})
+				.then(response => {
+					setAgvf([]);
+					Swal.fire({
+						title: "Confirmado",
+						timer: 2500,
+						text:
+							"El chofer con CI: " +
+							agvf.cedulaChofer +
+							" fue asignado a la Guia de Viaje con éxito!",
+						icon: "success",
+						confirmButtonText: "Aceptar",
+					});
+				})
+				.catch(error => {
+					console.log(error);
+
+					let errorMessage = "Ha ocurrido un error, vuelva a intentarlo";
+
+					if (error.response && error.response.data) {
+						errorMessage = `${error.response.data}`;
+					}
+
+					Swal.fire({
+						text: errorMessage,
+						title: "Error",
+						icon: "error",
+						confirmButtonText: "Aceptar",
+					});
+				})
+				.finally(() => {
+					setLoading(false);
+				});
+		} catch (error) {
+			setLoading(false);
+
+			let errorMessage = "Ha ocurrido un error, vuelva a intentarlo";
+
+			if (error.response && error.response.data) {
+				errorMessage = `${error.response.data}`;
+			}
+
+			Swal.fire({
+				text: errorMessage,
+				title: "Error",
+				icon: "error",
+				confirmButtonText: "Aceptar",
 			});
+		}
 	};
 
 	const getRowIdVehiculo = row => {
