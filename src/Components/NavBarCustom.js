@@ -91,7 +91,7 @@ export const NavBarCustom = () => {
 												onMouseEnter={() => handleNavLinkEnter(2)}
 												onMouseLeave={handleNavLinkLeave}
 											>
-												Añadir Vehiculo
+												Agregar Vehiculo
 											</NavLink>
 										</NavDropdown.Item>
 
@@ -125,20 +125,12 @@ export const NavBarCustom = () => {
 												Añadir Empresa
 											</NavLink>
 											<NavLink
-												to="/modificarEmpresa"
+												to="/ConsultarEmpresa"
 												className="nav-link item ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(6)}
 												onMouseLeave={handleNavLinkLeave}
 											>
-												Modificar Empresa
-											</NavLink>
-											<NavLink
-												to="/eliminarEmpresa"
-												className="nav-link item ps-2 px-md-2"
-												onMouseEnter={() => handleNavLinkEnter(7)}
-												onMouseLeave={handleNavLinkLeave}
-											>
-												Eliminar Empresa
+												Consultar Empresa
 											</NavLink>
 										</NavDropdown.Item>
 									</NavDropdown>

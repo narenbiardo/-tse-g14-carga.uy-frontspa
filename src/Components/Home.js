@@ -4,12 +4,13 @@ import axios from "axios";
 import { RESTEndpoints } from "../Services/RestService";
 import Lottie from "lottie-react";
 import { FormDiv } from "../Utilities/FormDiv";
-import { FormH4 } from "../Utilities/FromH4";
+import { FormH2 } from "../Utilities/FormH2";
 import { DataGrid } from "@mui/x-data-grid";
 import { CustomToolbar } from "../Utilities/CustomToolbar";
 import { columnsEmpresas } from "../constants";
 import truckAnimation from "../css/truck-day-night.json";
 import manAnimation from "../css/man-account-icon.json";
+import { FormH4 } from "../Utilities/FromH4";
 
 export const Home = () => {
 	const [cantViajesEnCurso, setCantViajesEnCurso] = useState(0);
