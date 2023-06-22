@@ -22,12 +22,25 @@ import {
 	MDBListGroup,
 	MDBListGroupItem,
 } from "mdb-react-ui-kit";
+import { FormH2 } from "../Utilities/FormH2";
 
 export const PerfilEmpresa = () => {
 	const [empresa, setEmpresa] = useState(
 		new EmpresaDto(new DtDireccionEmpresa("", "", ""), "", "", "")
 	);
 	const [editar, setEditar] = useState(false);
+
+	const handleEditEmpresa = edto => {
+		axios
+			.put(RESTEndpoints.encargadoService.modEmpresa, edto)
+			.then(response => {
+				console.log(response.data);
+				setEditar(false);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
 
 	useEffect(() => {
 		if (!editar) {
@@ -50,14 +63,18 @@ export const PerfilEmpresa = () => {
 	}, [editar]);
 
 	return editar ? (
-		<FormDiv>
-			<EditarEmpresa empresa={empresa} />
+		<Container className="form-container py-4 bg-white rounded-4 border border-secondary-subtle">
+			<EditarEmpresa
+				empresa={empresa}
+				handleEditEmpresa={edto => handleEditEmpresa(edto)}
+			/>
 			<Button className="btn-secundario mt-2" onClick={() => setEditar(false)}>
 				Volver
 			</Button>
-		</FormDiv>
+		</Container>
 	) : (
-		<>
+		<Container className="py-4 bg-white rounded-4 border border-secondary-subtle">
+			<FormH2 text={"Empresa"}></FormH2>
 			<MDBCol lg="12">
 				<MDBCard className="mb-4">
 					<MDBCardBody>
@@ -143,6 +160,6 @@ export const PerfilEmpresa = () => {
 			<Button className="btn-principal m-4" onClick={() => setEditar(true)}>
 				Editar
 			</Button>
-		</>
+		</Container>
 	);
 };

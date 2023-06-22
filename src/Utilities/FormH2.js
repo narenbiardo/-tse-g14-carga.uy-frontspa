@@ -1,3 +1,3 @@
 export const FormH2 = ({ text }) => {
-	return <h2 className="forms-header">{text}</h2>;
+	return <h2 className="forms-sub-header fw-bold">{text}</h2>;
 };

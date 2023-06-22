@@ -133,7 +133,7 @@ export const AgregarVehiculo = () => {
 	}, []);
 
 	return (
-		<Container className="form-container shadow-dreamy">
+		<Container className="form-container py-4 bg-white rounded-4 border border-secondary-subtle">
 			<FormDiv
 				referencia={formRefAgregarVehiculo}
 				onSubmit={handlePostVehiculo}

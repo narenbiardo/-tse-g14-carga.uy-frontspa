@@ -4,7 +4,7 @@ import axios from "axios";
 import { RESTEndpoints } from "../Services/RestService";
 import Lottie from "lottie-react";
 import { FormDiv } from "../Utilities/FormDiv";
-import { FormH4 } from "../Utilities/FromH4";
+import { FormH2 } from "../Utilities/FormH2";
 import { DataGrid } from "@mui/x-data-grid";
 import { CustomToolbar } from "../Utilities/CustomToolbar";
 import { columnsEmpresas } from "../constants";
@@ -91,7 +91,7 @@ export const Home = () => {
 					md={6}
 					className="py-4 bg-white rounded-4 border border-secondary-subtle"
 				>
-					<FormH4 text={"Empresas"} />
+					<FormH2 text={"Empresas"} />
 					<DataGrid
 						rows={empresas}
 						columns={columnsEmpresas}
