@@ -264,7 +264,7 @@ export const IngresarGuiaDeViaje = () => {
 				disabled={loading ? true : false}
 
 			>
-				{loading ? <AiOutlineLoading3Quarters className="loading-icon" /> : 'Enviar'}
+				{loading ? <AiOutlineLoading3Quarters className="loading-icon" /> : 'Ingresar'}
 			</Button>
 		</FormDiv>
 		</Container>

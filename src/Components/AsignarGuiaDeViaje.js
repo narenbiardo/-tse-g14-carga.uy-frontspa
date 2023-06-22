@@ -19,6 +19,8 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import Swal from "sweetalert2";
 import { FormH4 } from "../Utilities/FromH4";
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 
 export const AsignarGuiaDeViaje = () => {
@@ -124,6 +126,7 @@ export const AsignarGuiaDeViaje = () => {
 			icon: "error",
 			confirmButtonText: "Aceptar",
 		});
+		setLoading(false)
 	 }
 	 else{
 		axios
@@ -147,7 +150,7 @@ export const AsignarGuiaDeViaje = () => {
 			})
 			.catch((error) => {
 				let errorMessage =
-						"ERROR: Ha ocurrido un error al ingresar el vehiculo, vuelva a intentarlo";
+						"Ha ocurrido un error al ingresar el vehiculo, vuelva a intentarlo";
 
 					if (error.response && error.response.data) {
 						errorMessage = `${error.response.data}`;
@@ -245,9 +248,10 @@ export const AsignarGuiaDeViaje = () => {
           maxWidth="md"
           fullWidth
 			 className="z-index-0"
+			 classes={{ paper: 'border-14' }}
         >
 			<DialogTitle className="dialog-title"> Asignar Guia de Viaje</DialogTitle>
-          <DialogContent >
+          <DialogContent className="dialog">
 				
             <p className="dialog-subtitle">Seleccione un Chofer</p>
 
@@ -322,10 +326,24 @@ export const AsignarGuiaDeViaje = () => {
             />
           </DialogContent>
 			 <DialogActions>
-					<Button variant="contained" size="medium" className="dialog-confirm-btn" startIcon={<CheckIcon />} onClick={handlePostAsignarGuiaDeViaje}>
+
+					<Button 
+						variant="contained" 
+						size="medium" 
+						className="dialog-confirm-btn" 
+						startIcon={loading ? <CircularProgress size={20} /> : <CheckIcon />} 
+						disabled={loading}
+						onClick={handlePostAsignarGuiaDeViaje}
+					>
 						ASIGNAR
 					</Button>
-					<Button variant="outlined" size="medium" className="dialog-close-btn" startIcon={<CloseIcon />} onClick={handleCloseDialog}>
+					<Button 
+						variant="outlined" 
+						size="medium" 
+						className="dialog-close-btn" 
+						startIcon={<CloseIcon />} 
+						onClick={handleCloseDialog}
+					>
 						CERRAR
 					</Button>
 				</DialogActions>

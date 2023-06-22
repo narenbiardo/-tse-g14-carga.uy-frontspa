@@ -131,7 +131,7 @@ export const Perfil = () => {
               <MDBCol lg="12">
                 <MDBCard className="mb-4 mb-md-0">
                   <MDBCardBody>
-                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Estadisticas personaoles</span> </MDBCardText>
+                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">Estadisticas persoales</span> </MDBCardText>
                     <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>Guias ingresadas</MDBCardText>
                     <MDBProgress className="rounded">
                       <MDBProgressBar width={80} valuemin={0} valuemax={100} />

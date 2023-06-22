@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Button } from "react-bootstrap";
+import Button from '@mui/material/Button';
 import cookies from "js-cookie";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
@@ -20,9 +20,12 @@ import { FormInputDiv } from "../Utilities/FormInputDiv";
 import { DataGrid } from "@mui/x-data-grid";
 import { CustomToolbar } from "../Utilities/CustomToolbar";
 import Container from '@mui/material/Container';
-import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+import { Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
 import Swal from 'sweetalert2';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 
 
@@ -299,10 +302,11 @@ export const ConsultarVehiculo = () => {
 		/>
 			
 		{selectedItem && (
-        <Dialog open={isOpen} onClose={handleCloseDialog} maxWidth="md" fullWidth >
+        <Dialog open={isOpen} onClose={handleCloseDialog} maxWidth="sm" fullWidth classes={{ paper: 'border-14' }}>
+		<DialogTitle className="dialog-title">Editar Vehiculo</DialogTitle>
           <DialogContent className="dialog">
-			<FormDiv onSubmit={handlePostVehiculo}>
-				<FormH2 text="Editar Vehículo" />
+		  <p className="dialog-subtitle">Datos Vehiculo</p>
+			<FormDiv onSubmit={handlePostVehiculo} id="editar-vehiculo-form">
 					<>
 						<FormInputDiv>
 							<div>
@@ -396,7 +400,7 @@ export const ConsultarVehiculo = () => {
 							handleFirstTime={handleFirstTimeInput}
 						/>
 
-						<FormH4 text="Permiso de Circulación" />
+						<p className="dialog-subtitle">Permiso de Circulacion</p>
 
 						<FormInputNumber
 							htmlFor="numero"
@@ -444,18 +448,33 @@ export const ConsultarVehiculo = () => {
 							handleFirstTime={handleFirstTimeInput}
 						/>
 
-						<Button
-							type="submit"
-							className={loading ? 'btn-principal submit mt-2 mb-2 btn-disabled' : 'btn-principal submit mt-2 mb-2'}
-							disabled={loading ? true : false}
-						>
-							{loading ? <AiOutlineLoading3Quarters className="loading-icon" /> : 'Enviar'}
-						</Button>
-
-						<Button onClick={handleCloseDialog} className="btn-secundario submit">Volver</Button>
+						<DialogActions>
+							<Button 
+								type="submit" 
+								variant="contained" 
+								size="medium" 
+								className="dialog-confirm-btn" 
+								startIcon={loading ? <CircularProgress size={20} /> : <CheckIcon />} 
+								disabled={loading}
+								id="editar-vehiculo-form"
+							>
+								EDITAR
+							</Button>
+							<Button 
+								variant="outlined" 
+								size="medium" 
+								className="dialog-close-btn" 
+								startIcon={<CloseIcon /> } 
+								onClick={handleCloseDialog}
+							>
+								CERRAR
+							</Button>
+						</DialogActions>						
 					</>
 			</FormDiv>
           </DialogContent>
+
+
         </Dialog>
       )}	
 	</Container>
