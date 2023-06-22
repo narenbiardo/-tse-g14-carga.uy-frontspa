@@ -290,7 +290,7 @@ export const ConsultarVehiculo = () => {
 
 	return (
 		<Container className="mx-3 mx-md-auto py-4 bg-white rounded-4 border border-secondary-subtle">
-			<FormH4 text={"Vehículos"} />
+			<FormH2 text={"Vehículos"} />
 
 			<DataGrid
 				getRowClassName={getRowClassName}
