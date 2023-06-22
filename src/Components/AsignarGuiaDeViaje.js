@@ -16,6 +16,7 @@ import {
 	columnsChoferes,
 } from "../constants";
 import { FormH4 } from "../Utilities/FromH4";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 
 export const AsignarGuiaDeViaje = () => {
 	const [agvf, setAgvf] = useState(new AsignarGuiaViajeForm());
@@ -26,18 +27,18 @@ export const AsignarGuiaDeViaje = () => {
 		useState("");
 	const [quickFilterRubroValue, setQuickFilterRubroValue] = useState("");
 
-	const handleChangeAgvf = row => {
-		if (row.id) {
-			setAgvf(prevData => ({ ...prevData, ["idGuiaViaje"]: row.id }));
-		} else if (row.matricula) {
+	const handleChangeAgvf = e => {
+		if (e.idGuiaViaje) {
+			setAgvf(prevData => ({ ...prevData, ["idGuiaViaje"]: e.idGuiaViaje }));
+		} else if (e.matricula) {
 			setAgvf(prevData => ({
 				...prevData,
-				["matriculaVehiculo"]: row.matricula,
+				["matriculaVehiculo"]: e.matricula,
 			}));
-		} else if (row.cedula) {
+		} else if (e.cedula) {
 			setAgvf(prevData => ({
 				...prevData,
-				["cedulaChofer"]: row.cedula,
+				["cedulaChofer"]: e.cedula,
 			}));
 		} else {
 			console.log("Error setting agvf");
@@ -53,10 +54,17 @@ export const AsignarGuiaDeViaje = () => {
 					gdv.push({
 						id: guia.idGuiaViaje,
 						rubro: guia.rubro.nombre,
+						volumenCarga: guia.volumenCarga,
 						kmOrigen: guia.origen.km,
 						kmDestino: guia.destino.km,
 						fecha: new Date(guia.fechaHora).toLocaleDateString(),
 						hora: new Date(guia.fechaHora).toLocaleTimeString(),
+						assignButton: (
+							<AssignmentIcon
+								className="edit-icon"
+								onClick={() => handleChangeAgvf(guia)}
+							/>
+						),
 					});
 				});
 				setGuiasDeViaje(gdv);
@@ -144,7 +152,7 @@ export const AsignarGuiaDeViaje = () => {
 		handleGuiasDeViaje();
 		handleChoferes();
 		handleVehiculos();
-	}, []);
+	}, [agvf.idGuiaViaje]);
 
 	return (
 		<Container className="py-4 bg-white rounded-4 border border-secondary-subtle">
@@ -234,7 +242,10 @@ export const AsignarGuiaDeViaje = () => {
 						Enviar
 					</Button>
 
-					<Button type="submit" className="btn-secundario submit mt-2 mb-2">
+					<Button
+						className="btn-secundario submit mt-2 mb-2"
+						onClick={() => setAgvf([])}
+					>
 						{" "}
 						Volver{" "}
 					</Button>
@@ -246,7 +257,7 @@ export const AsignarGuiaDeViaje = () => {
 						columns={columnsGuiasDeViaje}
 						checkboxSelection={false}
 						hideFooterSelectedRowCount={true}
-						onRowClick={p => handleChangeAgvf(p.row)}
+						//onRowClick={p => handleChangeAgvf(p.row)}
 						getRowId={getRowIdGuiaDeViaje}
 						initialState={{
 							pagination: { paginationModel: { pageSize: 10 } },

@@ -4,8 +4,6 @@ import {
 	FirstTimeInputIngresarGuiaViajeForm,
 	FirstTimeInputAñadirEmpresaForm,
 } from "./classes";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 export const serverURL = "http://localhost:8080/";
 
@@ -66,10 +64,19 @@ export const columnsVehiculos = [
 export const columnsGuiasDeViaje = [
 	{ field: "id", headerName: "Id", width: 10 },
 	{ field: "rubro", headerName: "Rubro", width: 150 },
-	{ field: "kmOrigen", headerName: "Km Origen", width: 100 },
-	{ field: "kmDestino", headerName: "Km Destino", width: 100 },
+	{ field: "volumenCarga", headerName: "Carga", width: 100 },
+	{ field: "kmOrigen", headerName: "Km Origen", width: 150 },
+	{ field: "kmDestino", headerName: "Km Destino", width: 150 },
 	{ field: "fecha", headerName: "Fecha", width: 90 },
 	{ field: "hora", headerName: "Hora", width: 80 },
+	{
+		field: "assignButton",
+		headerName: "",
+		width: 10,
+		renderCell: params => {
+			return params.row.assignButton;
+		},
+	},
 ];
 
 export const columnsChoferes = [
