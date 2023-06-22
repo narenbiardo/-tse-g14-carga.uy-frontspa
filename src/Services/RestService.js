@@ -19,7 +19,7 @@ export const RESTEndpoints = {
 	},
 	encargadoService: {
 		getEmpresa: serverURL + "api/encargadoService/getEmpresa",
-		modEmpresa: serverURL + "api/encargadoService/modEmpresa",
+		/*NEW*/ modEmpresa: serverURL + "api/encargadoService/modEmpresa",
 		/*NEW*/ ingresarGuiaViaje:
 			serverURL + "api/encargadoService/ingresarGuiaViaje",
 		rubros: serverURL + "api/encargadoService/rubros",

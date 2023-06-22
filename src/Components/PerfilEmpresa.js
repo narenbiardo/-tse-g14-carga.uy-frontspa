@@ -30,6 +30,18 @@ export const PerfilEmpresa = () => {
 	);
 	const [editar, setEditar] = useState(false);
 
+	const handleEditEmpresa = edto => {
+		axios
+			.put(RESTEndpoints.encargadoService.modEmpresa, edto)
+			.then(response => {
+				console.log(response.data);
+				setEditar(false);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	};
+
 	useEffect(() => {
 		if (!editar) {
 			axios
@@ -52,7 +64,10 @@ export const PerfilEmpresa = () => {
 
 	return editar ? (
 		<Container className="form-container py-4 bg-white rounded-4 border border-secondary-subtle">
-			<EditarEmpresa empresa={empresa} />
+			<EditarEmpresa
+				empresa={empresa}
+				handleEditEmpresa={edto => handleEditEmpresa(edto)}
+			/>
 			<Button className="btn-secundario mt-2" onClick={() => setEditar(false)}>
 				Volver
 			</Button>

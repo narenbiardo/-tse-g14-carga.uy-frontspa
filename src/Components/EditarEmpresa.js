@@ -12,7 +12,7 @@ import { FormInputNumber } from "../Utilities/FormInputNumber";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
 import { Button } from "react-bootstrap";
 
-export const EditarEmpresa = () => {
+export const EditarEmpresa = ({ empresa, handleEditEmpresa }) => {
 	const [edto, setEdto] = useState(
 		new EmpresaDto(new DtDireccionEmpresa("", "", ""), "", "", "")
 	);
@@ -55,17 +55,6 @@ export const EditarEmpresa = () => {
 	const handleFirstTimeInput = e => {
 		const { name } = e.target;
 		setfirstTimeInput(prevData => ({ ...prevData, [name]: false }));
-	};
-
-	const handleEditEmpresa = () => {
-		axios
-			.post(RESTEndpoints.encargadoService.modEmpresa, edto)
-			.then(response => {
-				console.log(response.data);
-			})
-			.catch(error => {
-				console.log(error);
-			});
 	};
 
 	useEffect(() => {
@@ -172,7 +161,7 @@ export const EditarEmpresa = () => {
 			/>
 
 			<FormInputSubmit
-				onClickHandler={handleEditEmpresa}
+				onClickHandler={() => handleEditEmpresa(edto)}
 				value="Enviar"
 				validForm={
 					edto.nombreEmpresa !== "" &&
