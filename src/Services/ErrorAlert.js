@@ -1,5 +1,13 @@
-import React from "react";
+import Swal from 'sweetalert2';
+
 
 export default function ErrorAlert({ error }) {
-	return <div className="ErrorAlert">{error && error.message}</div>;
+		
+	Swal.fire({
+		text: error && error.message,
+		title: 'ERROR',
+		icon: 'error',
+		confirmButtonText: 'Aceptar',
+		});
+	
 }
