@@ -10,6 +10,7 @@ import { CustomToolbar } from "../Utilities/CustomToolbar";
 import { columnsEmpresas } from "../constants";
 import truckAnimation from "../css/truck-day-night.json";
 import manAnimation from "../css/man-account-icon.json";
+import { FormH4 } from "../Utilities/FromH4";
 
 export const Home = () => {
 	const [cantViajesEnCurso, setCantViajesEnCurso] = useState(0);
@@ -91,7 +92,7 @@ export const Home = () => {
 					md={6}
 					className="py-4 bg-white rounded-4 border border-secondary-subtle"
 				>
-					<FormH2 text={"Empresas"} />
+					<FormH4 text={"Empresas"} />
 					<DataGrid
 						rows={empresas}
 						columns={columnsEmpresas}

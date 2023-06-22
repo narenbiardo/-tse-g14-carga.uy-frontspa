@@ -23,6 +23,7 @@ import {
 	MDBListGroupItem,
 } from "mdb-react-ui-kit";
 import { FormH2 } from "../Utilities/FormH2";
+import { FormH4 } from "../Utilities/FromH4";
 
 export const PerfilEmpresa = () => {
 	const [empresa, setEmpresa] = useState(
@@ -63,7 +64,7 @@ export const PerfilEmpresa = () => {
 	}, [editar]);
 
 	return editar ? (
-		<Container className="form-container py-4 bg-white rounded-4 border border-secondary-subtle">
+		<Container className="form-container shadow-dreamy">
 			<EditarEmpresa
 				empresa={empresa}
 				handleEditEmpresa={edto => handleEditEmpresa(edto)}
@@ -73,8 +74,8 @@ export const PerfilEmpresa = () => {
 			</Button>
 		</Container>
 	) : (
-		<Container className="py-4 bg-white rounded-4 border border-secondary-subtle">
-			<FormH2 text={"Empresa"}></FormH2>
+		<Container className="form-container shadow-dreamy">
+			<FormH4 text={"Empresa"} />
 			<MDBCol lg="12">
 				<MDBCard className="mb-4">
 					<MDBCardBody>

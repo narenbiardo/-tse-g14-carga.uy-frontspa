@@ -139,7 +139,7 @@ export const IngresarGuiaDeViaje = () => {
 	return (
 		<Container className="form-container shadow-dreamy">
 			<FormDiv referencia={formRef} onSubmit={handlePostGuiaDeViaje}>
-				<FormH2 text="Ingresar Guía de Viaje" />
+				<FormH4 text="Ingresar Guía de Viaje" />
 
 				<FormInputDiv>
 					<div>

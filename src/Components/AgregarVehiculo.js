@@ -133,12 +133,12 @@ export const AgregarVehiculo = () => {
 	}, []);
 
 	return (
-		<Container className="form-container py-4 bg-white rounded-4 border border-secondary-subtle">
+		<Container className="form-container shadow-dreamy">
 			<FormDiv
 				referencia={formRefAgregarVehiculo}
 				onSubmit={handlePostVehiculo}
 			>
-				<FormH2 text="Agregar Vehículo" />
+				<FormH4 text="Agregar Vehículo" />
 
 				<FormInputText
 					htmlFor="matricula"
@@ -153,7 +153,9 @@ export const AgregarVehiculo = () => {
 
 				<FormInputDiv>
 					<div>
-						<label htmlFor="marcaVehiculo" className="main-font">Marca</label>
+						<label htmlFor="marcaVehiculo" className="main-font">
+							Marca
+						</label>
 					</div>
 					<select
 						ref={selectRef}

@@ -91,7 +91,7 @@ export const NavBarCustom = () => {
 												onMouseEnter={() => handleNavLinkEnter(2)}
 												onMouseLeave={handleNavLinkLeave}
 											>
-												Añadir Vehiculo
+												Agregar Vehiculo
 											</NavLink>
 										</NavDropdown.Item>
 
