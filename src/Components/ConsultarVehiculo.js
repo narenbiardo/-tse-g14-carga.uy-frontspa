@@ -128,7 +128,7 @@ export const ConsultarVehiculo = () => {
 							(
 								<DeleteIcon
 									className="delete-icon"
-									onClick={() => handleDeleteVehiculo(vehiculo.matricula)}
+									onClick={() => handleDeleteClick(vehiculo.matricula)}
 								/>
 							)
 						);
@@ -150,6 +150,61 @@ export const ConsultarVehiculo = () => {
 		setIsOpen(true);
 	};
 
+	const handleDeleteClick = matricula => {
+		setMatriculaVehiculo(matricula);
+		Swal.fire({
+			title: "¿Estas seguro?",
+			text: `El vehiculo de matricula ${matricula} sera eliminado definitivamente`,
+			icon: "warning",
+			showCancelButton: true,
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Si, borrar",
+			cancelButtonText: "Caneclar",
+		}).then(result => {
+			if (result.isConfirmed) {
+				handleDeleteVehiculo(matricula);
+			}
+		});
+	};
+
+	const handleDeleteVehiculo = matricula => {
+		setLoading(true);
+		axios
+			.delete(RESTEndpoints.encargadoService.eliminarVehiculo + matricula)
+			.then(response => {
+				Swal.fire({
+					title: "Borrado!",
+					text: "El vehiculo fue borrado",
+					icon: "success",
+					willClose: () => {
+						setLoading(false);
+					},
+				});
+			})
+			.catch(error => {
+				setLoading(false);
+				handleCloseDialog();
+				let errorMessage = "Ha ocurrido un error, vuelva a intentarlo";
+
+				if (
+					error.response.data ===
+					"jakarta.transaction.RollbackException: ARJUNA016053: Could not commit transaction."
+				) {
+					errorMessage =
+						"El vehiculo se encuentra asociado a una guia de viaje, no puede ser eliminado";
+				}
+
+				Swal.fire({
+					text: errorMessage,
+					title: "Error",
+					icon: "error",
+					confirmButtonText: "Aceptar",
+				});
+				console.log(error);
+			});
+	};
+
+	/*
 	const handleDeleteVehiculo = matricula => {
 		axios
 			.delete(RESTEndpoints.encargadoService.eliminarVehiculo + matricula)
@@ -161,6 +216,7 @@ export const ConsultarVehiculo = () => {
 				console.log(error);
 			});
 	};
+	*/
 
 	const handleCloseDialog = () => {
 		setIsOpen(false);
