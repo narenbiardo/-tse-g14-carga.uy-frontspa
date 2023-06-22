@@ -10,6 +10,7 @@ import { FormInputText } from "../Utilities/FormInputText";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputNumber } from "../Utilities/FormInputNumber";
 import { FormInputSubmit } from "../Utilities/FormInputSubmit";
+import { Button } from "react-bootstrap";
 
 export const EditarEmpresa = () => {
 	const [edto, setEdto] = useState(

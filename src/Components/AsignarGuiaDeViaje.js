@@ -8,13 +8,14 @@ import { AsignarGuiaViajeForm } from "../classes";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormH2 } from "../Utilities/FormH2";
 import { DataGrid } from "@mui/x-data-grid";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { CustomToolbar } from "../Utilities/CustomToolbar";
 import {
 	columnsVehiculos,
 	columnsGuiasDeViaje,
 	columnsChoferes,
 } from "../constants";
+import { FormH4 } from "../Utilities/FromH4";
 
 export const AsignarGuiaDeViaje = () => {
 	const [agvf, setAgvf] = useState(new AsignarGuiaViajeForm());
@@ -146,12 +147,12 @@ export const AsignarGuiaDeViaje = () => {
 	}, []);
 
 	return (
-		<FormDiv>
+		<Container className="py-4 bg-white rounded-4 border border-secondary-subtle">
 			<FormH2 text="Asignar Guía de Viaje" />
 
 			{agvf.idGuiaViaje ? (
 				<>
-					<label>Chofer</label>
+					<FormH4 text={"Chofer"} />
 
 					<DataGrid
 						rows={choferes}
@@ -188,7 +189,7 @@ export const AsignarGuiaDeViaje = () => {
 						/*DISABLED pageSizeOptions={[10, 25, 50]}*/
 					/>
 
-					<label>Vehículo</label>
+					<FormH4 text={"Vehículo"} />
 
 					<DataGrid
 						rows={vehiculos}
@@ -240,7 +241,6 @@ export const AsignarGuiaDeViaje = () => {
 				</>
 			) : (
 				<>
-					<label>Guía de Viaje</label>
 					<DataGrid
 						rows={guiasDeViaje}
 						columns={columnsGuiasDeViaje}
@@ -277,6 +277,6 @@ export const AsignarGuiaDeViaje = () => {
 					/>
 				</>
 			)}
-		</FormDiv>
+		</Container>
 	);
 };

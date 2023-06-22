@@ -81,8 +81,8 @@ export const columnsVehiculosFull = [
 	{ field: "matricula", headerName: "Matricula", width: 110 },
 	{ field: "marcaVehiculo", headerName: "Marca", width: 110 },
 	{ field: "modelo", headerName: "Modelo", width: 110 },
-	{ field: "capacidad", headerName: "Capacidad", width: 100 },
 	{ field: "peso", headerName: "Peso", width: 100 },
+	{ field: "capacidad", headerName: "Capacidad", width: 100 },
 	{ field: "vencimientoITV", headerName: "ITV Venc.", width: 120 },
 	{
 		field: "permisoCirculacionNumero",

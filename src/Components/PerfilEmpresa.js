@@ -51,12 +51,12 @@ export const PerfilEmpresa = () => {
 	}, [editar]);
 
 	return editar ? (
-		<FormDiv>
+		<Container className="form-container py-4 bg-white rounded-4 border border-secondary-subtle">
 			<EditarEmpresa empresa={empresa} />
 			<Button className="btn-secundario mt-2" onClick={() => setEditar(false)}>
 				Volver
 			</Button>
-		</FormDiv>
+		</Container>
 	) : (
 		<Container className="py-4 bg-white rounded-4 border border-secondary-subtle">
 			<FormH2 text={"Empresa"}></FormH2>
