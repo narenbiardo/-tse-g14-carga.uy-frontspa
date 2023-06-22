@@ -89,14 +89,40 @@ export const ConsultarVehiculo = () => {
 							vehiculo.matricula,
 							vehiculo.marcaVehiculo.nombre,
 							vehiculo.modelo,
-							vehiculo.capacidad.toString(),
 							vehiculo.peso.toString(),
+							vehiculo.capacidad.toString(),
 							permisoCirculacion,
 							vehiculo.vencimientoITV,
 							(
 								<EditIcon
 									className="edit-icon"
-									onClick={() => handleEditarVehiculo(vehiculo)}
+									onClick={() =>
+										handleEditarVehiculo(
+											new CVehiculo(
+												vehiculo.matricula,
+												vehiculo.marcaVehiculo.nombre,
+												vehiculo.modelo,
+												vehiculo.peso.toString(),
+												vehiculo.capacidad.toString(),
+												permisoCirculacion,
+												vehiculo.vencimientoITV,
+												(
+													<EditIcon
+														className="edit-icon"
+														onClick={() => handleEditarVehiculo(vehiculo)}
+													/>
+												),
+												(
+													<DeleteIcon
+														className="delete-icon"
+														onClick={() =>
+															handleDeleteVehiculo(vehiculo.matricula)
+														}
+													/>
+												)
+											)
+										)
+									}
 								/>
 							),
 							(
