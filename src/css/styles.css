@@ -152,6 +152,27 @@
 	width: 0em; /* Ancho del scroll, ajusta según sea necesario */
   }
 
+  /* width */
+::-webkit-scrollbar {
+	width: 7px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #555;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #47494b;
+	cursor: pointer;
+  }
+
 .dialog-title{
 	font-family: quicksand, sans-serif !important;
 	font-size: x-large !important;
