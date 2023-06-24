@@ -448,31 +448,32 @@ export const ConsultarVehiculo = () => {
 							handleFirstTime={handleFirstTimeInput}
 						/>
 
-						<DialogActions>
-							<Button 
-								type="submit" 
-								variant="contained" 
-								size="medium" 
-								className="dialog-confirm-btn" 
-								startIcon={loading ? <CircularProgress size={20} /> : <CheckIcon />} 
-								disabled={loading}
-								id="editar-vehiculo-form"
-							>
-								EDITAR
-							</Button>
-							<Button 
-								variant="outlined" 
-								size="medium" 
-								className="dialog-close-btn" 
-								startIcon={<CloseIcon /> } 
-								onClick={handleCloseDialog}
-							>
-								CERRAR
-							</Button>
-						</DialogActions>						
 					</>
 			</FormDiv>
+			
           </DialogContent>
+		  <DialogActions>
+			<Button 
+				type="submit" 
+				variant="contained" 
+				size="medium" 
+				className="dialog-confirm-btn" 
+				startIcon={loading ? <CircularProgress size={20} /> : <CheckIcon />} 
+				disabled={loading}
+				form="editar-vehiculo-form"
+			>
+				EDITAR
+			</Button>
+			<Button 
+				variant="outlined" 
+				size="medium" 
+				className="dialog-close-btn" 
+				startIcon={<CloseIcon /> } 
+				onClick={handleCloseDialog}
+			>
+				CERRAR
+			</Button>
+		</DialogActions>						
 
 
         </Dialog>
