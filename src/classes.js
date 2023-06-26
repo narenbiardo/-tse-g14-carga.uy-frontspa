@@ -121,7 +121,7 @@ export class FirstTimeInputEmpresaDto {
 		this.nombreEmpresa = nombreEmpresa;
 		this.calle = calle;
 		this.km = km;
-		this.nroEmpresa = nroPuerta;
+		this.nroPuerta = nroPuerta;
 		this.razonSocial = razonSocial;
 	}
 }

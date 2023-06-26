@@ -19,6 +19,9 @@ import Swal from "sweetalert2";
 import { animateScroll as scroll } from "react-scroll";
 import { useRef } from "react";
 import "react-toastify/dist/ReactToastify.css";
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
+
 
 export const AgregarVehiculo = () => {
 	const [avf, setAvf] = useState(new AgregarVehiculoForm());
@@ -152,30 +155,34 @@ export const AgregarVehiculo = () => {
 				/>
 
 				<FormInputDiv>
-					<div>
-						<label htmlFor="marcaVehiculo" className="main-font">
-							Marca
-						</label>
-					</div>
-					<select
+					
+					<TextField
 						ref={selectRef}
 						name="marcaVehiculo"
 						form="marcaVehiculoForm"
-						onChange={handleChangeAvf}
+						label={avf.marcaVehiculo ? "Marca" : "Seleccionar marca"}
+						variant="outlined" 
+						fullWidth 
 						value={avf.marcaVehiculo}
+						select
+						onChange={handleChangeAvf}
 						defaultValue=""
 						required
-						className="form-input"
-					>
-						<option value="" disabled>
-							Seleccionar Marca
-						</option>
+						margin="dense"
+						size="small"
+						color="success"
+						>
 						{marcasVehiculos.map((element, index) => (
-							<option value={element} key={Math.random()}>
+							<MenuItem 
+								key={Math.random()} 
+								value={element}
+							>
 								{element}
-							</option>
+							</MenuItem>
 						))}
-					</select>
+
+				</TextField>
+					
 				</FormInputDiv>
 
 				<FormInputText

@@ -18,6 +18,9 @@ import { useRef } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import Swal from "sweetalert2";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
+
 
 export const IngresarGuiaDeViaje = () => {
 	const formRef = useRef(null);
@@ -142,27 +145,33 @@ export const IngresarGuiaDeViaje = () => {
 				<FormH4 text="Ingresar Guía de Viaje" />
 
 				<FormInputDiv>
-					<div>
-						<label htmlFor="rubro">Rubro</label>
-					</div>
-					<select
+
+					<TextField
 						name="rubro"
 						form="rubroForm"
-						onChange={handleChangeIgvf}
+						label={igvf.rubro ? "Rubro" : "Seleccionar rubro"}
+						variant="outlined" 
+						fullWidth 
 						value={igvf.rubro}
+						select
+						onChange={handleChangeIgvf}
 						defaultValue=""
 						required
-						className="form-input mb-3"
+						margin="dense"
+						size="small"
+						color="success"
 					>
-						<option value="" disabled>
-							Seleccionar rubro
-						</option>
-						{rubros.map(element => (
-							<option value={element.nombre} key={Math.random()}>
+						{rubros.map((element) => (
+							<MenuItem 
+								key={Math.random()} 
+								value={element.nombre}
+							>
 								{element.nombre}
-							</option>
+							</MenuItem>
 						))}
-					</select>
+
+					</TextField>
+
 				</FormInputDiv>
 
 				<FormInputNumber
