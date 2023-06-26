@@ -101,7 +101,7 @@ export const AñadirEmpresa = () => {
 	return (
 		<Container className="py-4 bg-white rounded-4 border border-secondary-subtle">
 			<FormDiv referencia={formRefAñadirEmpresa} onSubmit={handlePostEmpresa}>
-				<FormH2 text="Añadir Empresa" />
+				<FormH4 text="Añadir Empresa" />
 
 				<FormInputText
 					htmlFor="nroEmpresa"

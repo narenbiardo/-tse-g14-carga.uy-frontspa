@@ -2,80 +2,93 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { RESTEndpoints } from "../Services/RestService";
 import { EmpresaDto, DtDireccionEmpresa } from "../classes";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import Button from '@mui/material/Button';
 import { EditarEmpresa } from "./EditarEmpresa";
-import { FormDiv } from "../Utilities/FormDiv";
 import {
 	MDBCol,
-	MDBContainer,
 	MDBRow,
 	MDBCard,
 	MDBCardText,
 	MDBCardBody,
-	MDBCardImage,
-	MDBBtn,
-	MDBBreadcrumb,
-	MDBBreadcrumbItem,
-	MDBProgress,
-	MDBProgressBar,
-	MDBIcon,
-	MDBListGroup,
-	MDBListGroupItem,
 } from "mdb-react-ui-kit";
-import { FormH2 } from "../Utilities/FormH2";
 import { FormH4 } from "../Utilities/FromH4";
+import { Dialog, DialogTitle, DialogContent, DialogActions } from "@mui/material";
+import Swal from 'sweetalert2';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import CircularProgress from '@mui/material/CircularProgress';
+import EditIcon from "@mui/icons-material/Edit";
 
 export const PerfilEmpresa = () => {
 	const [empresa, setEmpresa] = useState(
 		new EmpresaDto(new DtDireccionEmpresa("", "", ""), "", "", "")
 	);
-	const [editar, setEditar] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
+	const [loading, setLoading] = useState(false);
 
-	const handleEditEmpresa = edto => {
+	const handleCloseDialog = () => {
+		setIsOpen(false);
+	};
+
+	const handleEditEmpresa = (event, edto) => {
+		event.preventDefault();
+		setLoading(true);
 		axios
 			.put(RESTEndpoints.encargadoService.modEmpresa, edto)
 			.then(response => {
-				console.log(response.data);
-				setEditar(false);
+				setLoading(false);
+				handleCloseDialog();
+				Swal.fire({
+					title: 'Confirmado',
+					timer: 2500,
+					text: 'La empresa fue modificada con éxito!',
+					icon: 'success',
+					confirmButtonText: 'Aceptar',
+				});
 			})
 			.catch(error => {
-				console.log(error);
+				setLoading(false);
+				handleCloseDialog();
+				let errorMessage = 'Ha ocurrido un error, vuelva a intentarlo';
+
+				if (error.response && error.response.data) {
+					errorMessage = `${error.response.data}`;
+				}
+
+				Swal.fire({
+					text: errorMessage,
+					title: 'Error',
+					icon: 'error',
+					confirmButtonText: 'Aceptar',
+				});
 			});
 	};
 
 	useEffect(() => {
-		if (!editar) {
-			axios
-				.get(RESTEndpoints.encargadoService.getEmpresa)
-				.then(response => {
-					setEmpresa(
-						new EmpresaDto(
-							response.data.direccionEmpresa,
-							response.data.nombreEmpresa,
-							response.data.nroEmpresa,
-							response.data.razonSocial
-						)
-					);
-				})
-				.catch(error => {
-					console.log(error);
-				});
-		}
-	}, [editar]);
+		axios
+			.get(RESTEndpoints.encargadoService.getEmpresa)
+			.then(response => {
+				setEmpresa(
+					new EmpresaDto(
+						response.data.direccionEmpresa,
+						response.data.nombreEmpresa,
+						response.data.nroEmpresa,
+						response.data.razonSocial
+					)
+				);
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}, [loading]);
 
-	return editar ? (
-		<Container className="form-container shadow-dreamy">
-			<EditarEmpresa
-				empresa={empresa}
-				handleEditEmpresa={edto => handleEditEmpresa(edto)}
-			/>
-			<Button className="btn-secundario mt-2" onClick={() => setEditar(false)}>
-				Volver
-			</Button>
-		</Container>
-	) : (
-		<Container className="form-container shadow-dreamy">
-			<FormH4 text={"Empresa"} />
+	return (
+		<Container className="form-container shadow-dreamy align-items-start">
+			<div className="d-inline-flex">
+				<FormH4 text={"Empresa"} />
+				<EditIcon onClick={() => setIsOpen(true)} className="mt-5 mx-3 edit-icon"/>
+			</div>
 			<MDBCol lg="12">
 				<MDBCard className="mb-4">
 					<MDBCardBody>
@@ -112,7 +125,6 @@ export const PerfilEmpresa = () => {
 							</MDBCol>
 						</MDBRow>
 						<hr />
-
 						<MDBRow>
 							<MDBCol sm="3">
 								<MDBCardText>Calle</MDBCardText>
@@ -124,7 +136,6 @@ export const PerfilEmpresa = () => {
 							</MDBCol>
 						</MDBRow>
 						<hr />
-
 						<MDBRow>
 							<MDBCol sm="3">
 								<MDBCardText>Kilómetro</MDBCardText>
@@ -136,7 +147,6 @@ export const PerfilEmpresa = () => {
 							</MDBCol>
 						</MDBRow>
 						<hr />
-
 						<MDBRow>
 							<MDBCol sm="3">
 								<MDBCardText>Número de puerta</MDBCardText>
@@ -151,16 +161,39 @@ export const PerfilEmpresa = () => {
 				</MDBCard>
 			</MDBCol>
 
-			{/*<h4>Número: {empresa.nroEmpresa}</h4>
-			<h4>Nombre: {empresa.nombreEmpresa}</h4>
-			<h4>Razón social: {empresa.razonSocial}</h4>
-			<h4>Dirección</h4>
-			<h5>Calle: {empresa.direccionEmpresa.calle}</h5>
-			<h5>Kilómetro: {empresa.direccionEmpresa.km}</h5>
-			<h5>Número de puerta: {empresa.direccionEmpresa.nroPuerta}</h5>*/}
-			<Button className="btn-principal m-4" onClick={() => setEditar(true)}>
-				Editar
-			</Button>
+			{isOpen && (
+				<Dialog open={isOpen} onClose={handleCloseDialog} maxWidth="sm" fullWidth classes={{ paper: 'border-14' }}>
+					<DialogTitle className="dialog-title">Editar Empresa</DialogTitle>
+					<DialogContent className="dialog">
+						<EditarEmpresa
+							empresa={empresa}
+							handleEditEmpresa={(event, edto) => handleEditEmpresa(event, edto)}
+						/>
+					</DialogContent>
+					<DialogActions>
+							<Button
+								type="submit"
+								variant="contained"
+								size="medium"
+								className="dialog-confirm-btn"
+								startIcon={loading ? <CircularProgress size={20} /> : <CheckIcon />}
+								disabled={loading}
+								form="editar-empresa-form"
+							>
+								EDITAR
+							</Button>
+							<Button
+								variant="outlined"
+								size="medium"
+								className="dialog-close-btn"
+								startIcon={<CloseIcon />}
+								onClick={handleCloseDialog}
+							>
+								CERRAR
+							</Button>
+						</DialogActions>
+				</Dialog>
+			)}
 		</Container>
 	);
 };

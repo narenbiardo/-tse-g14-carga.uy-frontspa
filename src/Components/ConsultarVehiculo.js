@@ -13,7 +13,6 @@ import { fti, columnsVehiculosFull } from "../constants";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormInputText } from "../Utilities/FormInputText";
 import { FormInputNumber } from "../Utilities/FormInputNumber";
-import { FormH2 } from "../Utilities/FormH2";
 import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
@@ -25,6 +24,8 @@ import Swal from 'sweetalert2';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import CircularProgress from '@mui/material/CircularProgress';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 
 
 
@@ -261,224 +262,227 @@ export const ConsultarVehiculo = () => {
 	return (
 		<Container className="form-container shadow-dreamy">
 			<FormH4 text={"Vehículos"} />
-			<DataGrid
-			getRowClassName={getRowClassName}
-			rows={vehiculos}
-			columns={columnsVehiculosFull}
-			checkboxSelection={false}
-			hideFooterSelectedRowCount={true}
-			onRowClick={(params, event) => {
-				if (event.target.classList.contains('edit-icon')) {
-				  handleEditClick(event, params.row);
-				}
-				else if (event.target.classList.contains('delete-icon')) {
-					handleDeleteClick(event, params.row);
-				  }
-			  }}
-			getRowId={getRowIdVehiculos}
-			initialState={{
-			pagination: { paginationModel: { pageSize: 10 } },
-			}}
-			slots={{
-				toolbar: CustomToolbar,
+				<DataGrid
+				getRowClassName={getRowClassName}
+				rows={vehiculos}
+				columns={columnsVehiculosFull}
+				checkboxSelection={false}
+				hideFooterSelectedRowCount={true}
+				onRowClick={(params, event) => {
+					if (event.target.classList.contains('edit-icon')) {
+					handleEditClick(event, params.row);
+					}
+					else if (event.target.classList.contains('delete-icon')) {
+						handleDeleteClick(event, params.row);
+					}
 				}}
-			slotProps={{
-			toolbar: {
-				setQuickFilter: handleQuickFilterMatriculaValue,
-				placeholder: 'Buscar por matricula',
-			},
-			}}
-			filterModel={{
-			items: [
-				{
-				id: 1,
-				field: 'matricula',
-				operator: 'contains',
-				value: quickFilterMatriculaValue,
+				getRowId={getRowIdVehiculos}
+				initialState={{
+				pagination: { paginationModel: { pageSize: 10 } },
+				}}
+				slots={{
+					toolbar: CustomToolbar,
+					}}
+				slotProps={{
+				toolbar: {
+					setQuickFilter: handleQuickFilterMatriculaValue,
+					placeholder: 'Buscar por matricula',
 				},
-			],
-			}}
-			autoHeight
-		/>
+				}}
+				filterModel={{
+				items: [
+					{
+					id: 1,
+					field: 'matricula',
+					operator: 'contains',
+					value: quickFilterMatriculaValue,
+					},
+				],
+				}}
+				autoHeight
+				/>
 			
-		{selectedItem && (
-        <Dialog open={isOpen} onClose={handleCloseDialog} maxWidth="sm" fullWidth classes={{ paper: 'border-14' }}>
-		<DialogTitle className="dialog-title">Editar Vehiculo</DialogTitle>
-          <DialogContent className="dialog">
-		  <p className="dialog-subtitle">Datos Vehiculo</p>
-			<FormDiv onSubmit={handlePostVehiculo} id="editar-vehiculo-form">
-					<>
-						<FormInputDiv>
-							<div>
-								<label htmlFor="matricula" className="main-font">Matricula</label>
-							</div>
-							<input
-								type="text"
-								name="matricula"
-								onChangeHandler={handleChangeAvf}
-								value={matriculaVehiculo}
-								disabled
-								className="form-input"
-							/>
-						</FormInputDiv>
+			{selectedItem && (
+			<Dialog open={isOpen} onClose={handleCloseDialog} maxWidth="sm" fullWidth classes={{ paper: 'border-14' }}>
+			<DialogTitle className="dialog-title">Editar Vehiculo</DialogTitle>
+			<DialogContent className="dialog">
+			<p className="dialog-subtitle">Datos Vehiculo</p>
+				<FormDiv onSubmit={handlePostVehiculo} id="editar-vehiculo-form">
+						<>
+							<FormInputDiv>
+								<TextField 
+									name='matricula'
+									id="outlined-basic" 
+									label="Matricula" 
+									variant="outlined" 
+									fullWidth 
+									disabled
+									value={matriculaVehiculo}
+									onChange={handleChangeAvf}
+									InputLabelProps={{ shrink: true }}
+									type="text"
+									size="small"
+								/>
 
-						<FormInputDiv>
-							<div>
-								<label htmlFor="marcaVehiculo" className="main-font">Marca</label>
-							</div>
-							<select
+							</FormInputDiv>
+
+							<FormInputDiv>
+							<TextField
 								name="marcaVehiculo"
 								form="marcaVehiculoForm"
-								onChange={handleChangeAvf}
+								label="Marca"
+								variant="outlined" 
+								fullWidth 
 								value={avf.marcaVehiculo}
+								select
+								onChange={handleChangeAvf}
 								defaultValue=""
 								required
-								className="form-input"
-							>
-								<option value="" disabled>
-									Seleccionar Marca
-								</option>
+								margin="dense"
+								size="small"
+								color="success"
+								>
 								{marcasVehiculos.map((element, index) => (
-									<option value={element} key={Math.random()}>
-										{element}
-									</option>
-								))}
-							</select>
-						</FormInputDiv>
+									<MenuItem key={Math.random()} value={element}>
+								{element}
+								</MenuItem>
 
-						<FormInputText
-							htmlFor="modelo"
-							label="Modelo"
-							name="modelo"
-							onChangeHandler={handleChangeAvf}
-							inputValue= {avf.modelo}//{selectedItemData?.modelo || ""}
-							isValid={avf.modelo?.length > 0}
-							invalidText={"El modelo no puede estar vacío"}
-							firstTime={firstTimeInput.modelo}
-							handleFirstTime={handleFirstTimeInput}
-						/>
+							))}
+							</TextField>
+								
+							</FormInputDiv>
 
-						<FormInputNumber
-							htmlFor="peso"
-							label="Peso"
-							name="peso"
-							step="0.01"
-							onChangeHandler={handleChangeAvf}
-							inputValue={avf.peso}//{selectedItemData?.peso || ""}
-							isValid={avf.peso?.length > 0}
-							invalidText={"El peso no puede estar vacío"}
-							firstTime={firstTimeInput.peso}
-							handleFirstTime={handleFirstTimeInput}
-						/>
+							<FormInputText
+								htmlFor="modelo"
+								label="Modelo"
+								name="modelo"
+								onChangeHandler={handleChangeAvf}
+								inputValue= {avf.modelo}//{selectedItemData?.modelo || ""}
+								isValid={avf.modelo?.length > 0}
+								invalidText={"El modelo no puede estar vacío"}
+								firstTime={firstTimeInput.modelo}
+								handleFirstTime={handleFirstTimeInput}
+							/>
 
-						<FormInputNumber
-							htmlFor="capacidad"
-							label="Capacidad"
-							name="capacidad"
-							step="0.01"
-							onChangeHandler={handleChangeAvf}
-							inputValue={avf.capacidad}//{selectedItemData?.capacidad || ""}
-							isValid={avf.capacidad?.length > 0}
-							invalidText={"La capacidad no puede estar vacía"}
-							firstTime={firstTimeInput.capacidad}
-							handleFirstTime={handleFirstTimeInput}
-						/>
+							<FormInputNumber
+								htmlFor="peso"
+								label="Peso"
+								name="peso"
+								step="0.01"
+								onChangeHandler={handleChangeAvf}
+								inputValue={avf.peso}//{selectedItemData?.peso || ""}
+								isValid={avf.peso?.length > 0}
+								invalidText={"El peso no puede estar vacío"}
+								firstTime={firstTimeInput.peso}
+								handleFirstTime={handleFirstTimeInput}
+							/>
 
-						<FormInputDate
-							htmlFor="vencimientoITV"
-							label="Fecha vencimiento ITV"
-							type="date"
-							name="vencimientoITV"
-							min={new Date().toISOString().split("T")[0]}
-							onChangeHandler={handleChangeAvf}
-							inputValue={avf.vencimientoITV}//{selectedItemData?.vencimientoITV || ""}
-							isValid={avf.vencimientoITV?.length > 0}
-							invalidText={
-								"La fecha de vencimiento de la ITV no puede ser vacía"
-							}
-							firstTime={firstTimeInput.vencimientoITV}
-							handleFirstTime={handleFirstTimeInput}
-						/>
+							<FormInputNumber
+								htmlFor="capacidad"
+								label="Capacidad"
+								name="capacidad"
+								step="0.01"
+								onChangeHandler={handleChangeAvf}
+								inputValue={avf.capacidad}//{selectedItemData?.capacidad || ""}
+								isValid={avf.capacidad?.length > 0}
+								invalidText={"La capacidad no puede estar vacía"}
+								firstTime={firstTimeInput.capacidad}
+								handleFirstTime={handleFirstTimeInput}
+							/>
 
-						<p className="dialog-subtitle">Permiso de Circulacion</p>
+							<FormInputDate
+								htmlFor="vencimientoITV"
+								label="Fecha vencimiento ITV"
+								type="date"
+								name="vencimientoITV"
+								min={new Date().toISOString().split("T")[0]}
+								onChangeHandler={handleChangeAvf}
+								inputValue={avf.vencimientoITV}//{selectedItemData?.vencimientoITV || ""}
+								isValid={avf.vencimientoITV?.length > 0}
+								invalidText={
+									"La fecha de vencimiento de la ITV no puede ser vacía"
+								}
+								firstTime={firstTimeInput.vencimientoITV}
+								handleFirstTime={handleFirstTimeInput}
+							/>
 
-						<FormInputNumber
-							htmlFor="numero"
-							label="Número"
-							name="numero"
-							onChangeHandler={handleChangeDtpnc}
-							inputValue={avf.permisoCirculacion.numero}//{selectedItemData?.permisoCirculacion.numero || ""}
-							isValid={dtpnc.numero?.length > 0}
-							invalidText={
-								"El número de permiso no puede estar vacío"
-							}
-							firstTime={firstTimeInput.numero}
-							handleFirstTime={handleFirstTimeInput}
-						/>
+							<p className="dialog-subtitle">Permiso de Circulacion</p>
 
-						<FormInputDate
-							htmlFor="fechaEmision"
-							label="Fecha de Emision"
-							type="date"
-							name="fechaEmision"
-							max={new Date().toISOString().split("T")[0]}
-							onChangeHandler={handleChangeDtpnc}
-							inputValue={avf.permisoCirculacion.fechaEmision}//{selectedItemData?.permisoCirculacion.fechaEmision || ""}
-							isValid={dtpnc.fechaEmision?.length > 0}
-							invalidText={
-								"La fecha de emisión no puede ser vacía"
-							}
-							firstTime={firstTimeInput.fechaEmision}
-							handleFirstTime={handleFirstTimeInput}
-						/>
+							<FormInputNumber
+								htmlFor="numero"
+								label="Número"
+								name="numero"
+								onChangeHandler={handleChangeDtpnc}
+								inputValue={avf.permisoCirculacion.numero}//{selectedItemData?.permisoCirculacion.numero || ""}
+								isValid={dtpnc.numero?.length > 0}
+								invalidText={
+									"El número de permiso no puede estar vacío"
+								}
+								firstTime={firstTimeInput.numero}
+								handleFirstTime={handleFirstTimeInput}
+							/>
 
-						<FormInputDate
-							htmlFor="fechaVencimiento"
-							label="Fecha de Vencimiento"
-							type="date"
-							name="fechaVencimiento"
-							min={new Date().toISOString().split("T")[0]}
-							onChangeHandler={handleChangeDtpnc}
-							inputValue={avf.permisoCirculacion.fechaVencimiento}//{selectedItemData?.permisoCirculacion.fechaVencimiento || ""}
-							isValid={dtpnc.fechaVencimiento?.length > 0}
-							invalidText={
-								"La fecha de vencimiento no puede ser vacía"
-							}
-							firstTime={firstTimeInput.fechaVencimiento}
-							handleFirstTime={handleFirstTimeInput}
-						/>
+							<FormInputDate
+								htmlFor="fechaEmision"
+								label="Fecha de Emision"
+								type="date"
+								name="fechaEmision"
+								max={new Date().toISOString().split("T")[0]}
+								onChangeHandler={handleChangeDtpnc}
+								inputValue={avf.permisoCirculacion.fechaEmision}//{selectedItemData?.permisoCirculacion.fechaEmision || ""}
+								isValid={dtpnc.fechaEmision?.length > 0}
+								invalidText={
+									"La fecha de emisión no puede ser vacía"
+								}
+								firstTime={firstTimeInput.fechaEmision}
+								handleFirstTime={handleFirstTimeInput}
+							/>
 
-					</>
-			</FormDiv>
-			
-          </DialogContent>
-		  <DialogActions>
-			<Button 
-				type="submit" 
-				variant="contained" 
-				size="medium" 
-				className="dialog-confirm-btn" 
-				startIcon={loading ? <CircularProgress size={20} /> : <CheckIcon />} 
-				disabled={loading}
-				form="editar-vehiculo-form"
-			>
-				EDITAR
-			</Button>
-			<Button 
-				variant="outlined" 
-				size="medium" 
-				className="dialog-close-btn" 
-				startIcon={<CloseIcon /> } 
-				onClick={handleCloseDialog}
-			>
-				CERRAR
-			</Button>
-		</DialogActions>						
+							<FormInputDate
+								htmlFor="fechaVencimiento"
+								label="Fecha de Vencimiento"
+								type="date"
+								name="fechaVencimiento"
+								min={new Date().toISOString().split("T")[0]}
+								onChangeHandler={handleChangeDtpnc}
+								inputValue={avf.permisoCirculacion.fechaVencimiento}//{selectedItemData?.permisoCirculacion.fechaVencimiento || ""}
+								isValid={dtpnc.fechaVencimiento?.length > 0}
+								invalidText={
+									"La fecha de vencimiento no puede ser vacía"
+								}
+								firstTime={firstTimeInput.fechaVencimiento}
+								handleFirstTime={handleFirstTimeInput}
+							/>
 
-
-        </Dialog>
-      )}	
-	</Container>
+						</>
+				</FormDiv>
+				
+			</DialogContent>
+			<DialogActions>
+				<Button 
+					type="submit" 
+					variant="contained" 
+					size="medium" 
+					className="dialog-confirm-btn" 
+					startIcon={loading ? <CircularProgress size={20} /> : <CheckIcon />} 
+					disabled={loading}
+					form="editar-vehiculo-form"
+				>
+					EDITAR
+				</Button>
+				<Button 
+					variant="outlined" 
+					size="medium" 
+					className="dialog-close-btn" 
+					startIcon={<CloseIcon /> } 
+					onClick={handleCloseDialog}
+				>
+					CERRAR
+				</Button>
+			</DialogActions>						
+			</Dialog>
+		)}	
+		</Container>
 
 	);
 };

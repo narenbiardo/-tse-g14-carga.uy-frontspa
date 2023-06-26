@@ -1,17 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import Button from "@mui/material/Button";
-import cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { RESTEndpoints } from "../Services/RestService";
 import "react-autocomplete-input/dist/bundle.css";
-import { DtPermisoNacionalCirculacion, AgregarVehiculoForm } from "../classes";
 import { fti, columnsEmpresasFull } from "../constants";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormInputText } from "../Utilities/FormInputText";
-import { FormInputNumber } from "../Utilities/FormInputNumber";
-import { FormH2 } from "../Utilities/FormH2";
-import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
 import { DataGrid } from "@mui/x-data-grid";
@@ -27,6 +21,8 @@ import Swal from "sweetalert2";
 import CheckIcon from "@mui/icons-material/Check";
 import CloseIcon from "@mui/icons-material/Close";
 import CircularProgress from "@mui/material/CircularProgress";
+import TextField from '@mui/material/TextField';
+
 
 export const ConsultarEmpresa = () => {
 	const [loading, setLoading] = useState(false);
@@ -73,7 +69,7 @@ export const ConsultarEmpresa = () => {
 			.then(response => {
 				Swal.fire({
 					title: "Borrado!",
-					text: "El vehiculo fue borrado",
+					text: "La empresa fue borrada",
 					icon: "success",
 					willClose: () => {
 						setLoading(false);
@@ -90,7 +86,7 @@ export const ConsultarEmpresa = () => {
 					"jakarta.transaction.RollbackException: ARJUNA016053: Could not commit transaction."
 				) {
 					errorMessage =
-						"El vehiculo se encuentra asociado a una guia de viaje, no puede ser eliminado";
+						"La empresa se encuentra asociado a una guia de viaje, no puede ser eliminada";
 				}
 
 				Swal.fire({
@@ -112,7 +108,7 @@ export const ConsultarEmpresa = () => {
 			.catch(error => {
 				if (
 					error.response.data ===
-					"No existen vehiculos registrados en el sistema"
+					"No existen empresas registradas en el sistema"
 				)
 					setEmpresas([]);
 				console.log(error);
@@ -293,23 +289,22 @@ export const ConsultarEmpresa = () => {
 					<DialogTitle className="dialog-title">Editar Empresa</DialogTitle>
 					<DialogContent className="dialog">
 						<p className="dialog-subtitle">Datos Empresa</p>
-						<FormDiv onSubmit={handlePostEmpresa} id="editar-vehiculo-form">
+						<FormDiv onSubmit={handlePostEmpresa} id="editar-empresa-form">
 							<>
-								<FormInputDiv>
-									<div>
-										<label htmlFor="nroEmpresa" className="main-font">
-											Nº Empresa
-										</label>
-									</div>
-									<input
-										type="text"
-										name="nroEmpresa"
-										onChangeHandler={handleChangeEf}
-										value={ef.nroEmpresa}
-										disabled
-										className="form-input"
-									/>
-								</FormInputDiv>
+							<FormInputDiv>
+								<TextField 
+									name='nroEmpresa'
+									label="Nº Empresa" 
+									variant="outlined" 
+									fullWidth 
+									disabled
+									value={ef.nroEmpresa}
+									onChange={handleChangeEf}
+									InputLabelProps={{ shrink: true }}
+									type="text"
+									size="small"
+								/>
+							</FormInputDiv>
 
 								<FormInputText
 									htmlFor="nombreEmpresa"
@@ -373,33 +368,33 @@ export const ConsultarEmpresa = () => {
 									handleFirstTime={handleFirstTimeInput}
 								/>
 
-								<DialogActions>
-									<Button
-										type="submit"
-										variant="contained"
-										size="medium"
-										className="dialog-confirm-btn"
-										startIcon={
-											loading ? <CircularProgress size={20} /> : <CheckIcon />
-										}
-										disabled={loading}
-										id="editar-vehiculo-form"
-									>
-										EDITAR
-									</Button>
-									<Button
-										variant="outlined"
-										size="medium"
-										className="dialog-close-btn"
-										startIcon={<CloseIcon />}
-										onClick={handleCloseDialog}
-									>
-										CERRAR
-									</Button>
-								</DialogActions>
 							</>
 						</FormDiv>
 					</DialogContent>
+					<DialogActions>
+						<Button
+							type="submit"
+							variant="contained"
+							size="medium"
+							className="dialog-confirm-btn"
+							startIcon={
+								loading ? <CircularProgress size={20} /> : <CheckIcon />
+							}
+							disabled={loading}
+							form="editar-empresa-form"
+						>
+							EDITAR
+						</Button>
+						<Button
+							variant="outlined"
+							size="medium"
+							className="dialog-close-btn"
+							startIcon={<CloseIcon />}
+							onClick={handleCloseDialog}
+						>
+							CERRAR
+						</Button>
+					</DialogActions>
 				</Dialog>
 			)}
 		</Container>

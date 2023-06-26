@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { mainColor } from "../constants";
 import { FormInputDiv } from "./FormInputDiv";
+import TextField from '@mui/material/TextField';
 
 export const FormInputNumber = ({
 	htmlFor,
@@ -16,24 +15,25 @@ export const FormInputNumber = ({
 }) => {
 	return (
 		<FormInputDiv>
-			<div>
-				<label htmlFor={htmlFor} className="main-font">{label}</label>
-			</div>
-			<input
-				type="number"
+			<TextField
 				name={name}
-				step={step}
-				required
-				min={0}
-				onChange={onChangeHandler}
+				label={label}
+				variant="outlined" 
+				fullWidth 
 				value={inputValue}
+				type="number"
+				onChange={onChangeHandler}
+				required
+				margin="dense"
+				size="small"
 				onBlur={handleFirstTime}
-				className={isValid || firstTime ? 'form-input' : 'form-input invalid'}
+				error={!isValid && !firstTime}
+				helperText={!isValid && !firstTime ? invalidText : ""}		
+				step={step}
+				min={0}
+				color="success"
+				
 			/>
-			{/* {console.log("FirstTime:" + firstTime + "  IsValida: " + isValid)} */}
-			{!isValid && !firstTime && (
-				<p style={{ color: "red", marginTop: "5px" }}>{invalidText}</p>
-			)}
 		</FormInputDiv>
 	);
 };

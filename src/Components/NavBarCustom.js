@@ -124,6 +124,8 @@ export const NavBarCustom = () => {
 											>
 												Añadir Empresa
 											</NavLink>
+										</NavDropdown.Item>
+										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/ConsultarEmpresa"
 												className="nav-link item ps-2 px-md-2"
