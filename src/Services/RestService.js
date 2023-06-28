@@ -53,6 +53,9 @@ export const RESTEndpoints = {
 		/*NEW*/ listEmpresas: serverURL + "api/funcionarioService/listEmpresas",
 		/*NEW*/ modEmpresa: serverURL + "api/funcionarioService/modEmpresa",
 		/*NEW*/ delEmpresa: serverURL + "api/funcionarioService/delEmpresa/",
+		/*NEW*/ fiscalizacion: serverURL + "api/funcionarioService/fiscalizacion",
+		/*NEW*/ modificarVencimientoITV:
+			serverURL + "api/funcionarioService/modificarVencimientoITV/",
 	},
 };
 
