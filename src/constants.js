@@ -8,6 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 
+//export const serverURL = "https://carga-uy-back.web.elasticloud.uy/";
 export const serverURL = "http://localhost:8080/";
 
 export const mainColor = "#16b7b9";
@@ -133,6 +134,23 @@ export const columnsVehiculosFull = [
 		width: 8,
 		renderCell: params => {
 			return <DeleteIcon className="delete-icon" />;
+		},
+	},
+];
+
+export const columnsVehiculosITV = [
+	{ field: "nroEmpresa", headerName: "Nº Empesa", width: 90 },
+	{ field: "nombreEmpresa", headerName: "Nombre Empesa", width: 120 },
+	{ field: "matricula", headerName: "Matricula", width: 110 },
+	{ field: "marcaVehiculo", headerName: "Marca", width: 110 },
+	{ field: "modelo", headerName: "Modelo", width: 110 },
+	{ field: "vencimientoITV", headerName: "ITV Venc.", width: 120 },
+	{
+		field: "edit",
+		headerName: "",
+		width: 8,
+		renderCell: params => {
+			return <EditIcon className="edit-icon" />;
 		},
 	},
 ];
