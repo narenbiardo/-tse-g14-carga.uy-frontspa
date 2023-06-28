@@ -8,8 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 
-//export const serverURL = "https://carga-uy-back.web.elasticloud.uy/";
-export const serverURL = "http://localhost:8080/";
+export const serverURL = "https://carga-uy-back.web.elasticloud.uy/";
 
 export const mainColor = "#16b7b9";
 export const dark = "#212529";
