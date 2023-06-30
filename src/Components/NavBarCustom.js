@@ -64,7 +64,7 @@ export const NavBarCustom = () => {
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/ingresarGuiaDeViaje"
-												className="nav-link item ps-2 px-md-2"
+												className="nav-link ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(0)}
 												onMouseLeave={handleNavLinkLeave}
 											>
@@ -75,7 +75,7 @@ export const NavBarCustom = () => {
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/asignarGuiaDeViaje"
-												className="nav-link item ps-2 px-md-2"
+												className="nav-link ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(1)}
 												onMouseLeave={handleNavLinkLeave}
 											>
@@ -87,7 +87,7 @@ export const NavBarCustom = () => {
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/agregarVehiculo"
-												className="nav-link item ps-2 px-md-2"
+												className="nav-link ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(2)}
 												onMouseLeave={handleNavLinkLeave}
 											>
@@ -98,7 +98,7 @@ export const NavBarCustom = () => {
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/consultarVehiculos"
-												className="nav-link item ps-2 px-md-2"
+												className="nav-link ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(3)}
 												onMouseLeave={handleNavLinkLeave}
 											>
@@ -118,7 +118,7 @@ export const NavBarCustom = () => {
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/añadirEmpresa"
-												className="nav-link item ps-2 px-md-2"
+												className="nav-link ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(5)}
 												onMouseLeave={handleNavLinkLeave}
 											>
@@ -128,7 +128,7 @@ export const NavBarCustom = () => {
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/ConsultarEmpresa"
-												className="nav-link item ps-2 px-md-2"
+												className="nav-link ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(6)}
 												onMouseLeave={handleNavLinkLeave}
 											>
@@ -156,7 +156,7 @@ export const NavBarCustom = () => {
 									<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 										<NavLink
 											to="/perfil"
-											className="nav-link item ps-2 px-md-2"
+											className="nav-link ps-2 px-md-2"
 											onMouseEnter={() => handleNavLinkEnter(0)}
 											onMouseLeave={handleNavLinkLeave}
 										>
