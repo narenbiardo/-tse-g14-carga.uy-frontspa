@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import OAuth2Login from "react-simple-oauth2-login";
 import ErrorAlert from "./ErrorAlert";
 import {

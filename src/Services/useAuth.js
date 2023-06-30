@@ -28,23 +28,22 @@ export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(initialUser);
 
 	const login = code => {
-		cookies.set("code", code);
 		setIsAuthenticated(true);
 		axiosHeadersAuth(code);
+		console.log(user)
 
-		if (
-			jwt_decode(cookies.get("code")).rol.find(
-				role => role === "EncargadoEmpresa"
-			)
-		) {
+		if (jwt_decode(code).rol[1] === "EncargadoEmpresa") {
+			cookies.set("code", code);
 			setUser(1);
-		} else if (
-			jwt_decode(cookies.get("code")).rol.find(role => role === "Funcionario")
-		) {
+		} 
+		else if (jwt_decode(code).rol[1] === "Funcionario") {
+			cookies.set("code", code);
 			setUser(2);
-		} else {
+		} 
+		else {
 			setUser(0);
 		}
+
 	};
 
 	const logout = () => {
