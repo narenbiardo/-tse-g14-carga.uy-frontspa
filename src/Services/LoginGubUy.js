@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import OAuth2Login from "react-simple-oauth2-login";
 import ErrorAlert from "./ErrorAlert";
-import { useMediaQuery } from "@material-ui/core";
+import { useMediaQuery } from '@mui/material';
 import {
 	authorizationUrl,
 	responseType,
