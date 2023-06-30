@@ -142,9 +142,9 @@ export const NavBarCustom = () => {
 								</>
 							)}
 					</Nav>
-					<Nav className="ms-auto">
-						{!isAuthenticated && <Login />}
-						{isAuthenticated && (user === 1 || user === 2) && (
+					<Nav className="ms-auto">					
+						{/* {!isAuthenticated && <Login />} */}
+						{isAuthenticated && (user === 1 || user === 2) ? (
 							<>
 								<NavDropdown
 									title={`Bienvenido, ${
@@ -175,6 +175,8 @@ export const NavBarCustom = () => {
 									</Avatar>
 								</div>
 							</>
+							) : (
+								<Login />
 						)}
 					</Nav>
 				</Navbar.Collapse>
