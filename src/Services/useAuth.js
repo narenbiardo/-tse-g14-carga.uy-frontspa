@@ -28,10 +28,6 @@ export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(initialUser);
 
 	const login = code => {
-		setIsAuthenticated(true);
-		axiosHeadersAuth(code);
-		console.log(user)
-
 		if (jwt_decode(code).rol[1] === "EncargadoEmpresa") {
 			cookies.set("code", code);
 			setUser(1);
@@ -43,6 +39,10 @@ export const AuthProvider = ({ children }) => {
 		else {
 			setUser(0);
 		}
+
+		setIsAuthenticated(true);
+		axiosHeadersAuth(code);
+		console.log(user)
 
 	};
 
