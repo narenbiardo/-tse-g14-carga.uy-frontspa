@@ -268,9 +268,13 @@
 	font-weight: 400;
 }
 
+
 .nav-link {
 	color: white !important;
 	font-family: quicksand, sans-serif !important;
+	background-color: #212529 !important;
+	border: none;
+	
 }
 
 .nav-link:hover {
@@ -283,6 +287,15 @@
 
 .nav-link.item:hover{
 	background-color: #ebebeb;
+}
+
+.dropdown-menu{
+	--bs-dropdown-bg: #212529;
+	border: none;
+}
+
+.dropdown-menu .active{
+	color: #cacacaef !important;
 }
 
 .striped-row-even {

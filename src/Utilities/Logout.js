@@ -11,5 +11,5 @@ export const Logout = () => {
 		navigate("/");
 	};
 
-	return <a className="nav-link item" onClick={handleClick}> Cerrar sesión </a>;
+	return <a className="nav-link ps-2 px-md-2" onClick={handleClick}> Cerrar sesión </a>;
 };
