@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import cookies from "js-cookie";
-import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { RESTEndpoints } from "../Services/RestService";
 import "react-autocomplete-input/dist/bundle.css";
@@ -8,16 +6,16 @@ import { AñadirEmpresaForm, DireccionEmpresa } from "../classes";
 import { ftiaef } from "../constants";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormInputText } from "../Utilities/FormInputText";
-import { FormH2 } from "../Utilities/FormH2";
-import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormH4 } from "../Utilities/FromH4";
-import { FormInputDiv } from "../Utilities/FormInputDiv";
-import { Button, Container } from "react-bootstrap";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Swal from "sweetalert2";
 import { animateScroll as scroll } from "react-scroll";
 import { useRef } from "react";
 import "react-toastify/dist/ReactToastify.css";
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 export const AñadirEmpresa = () => {
 	const [aef, setaef] = useState(new AñadirEmpresaForm());
@@ -99,7 +97,7 @@ export const AñadirEmpresa = () => {
 	}, [de]);
 
 	return (
-		<Container className="py-4 bg-white rounded-4 border border-secondary-subtle">
+		<Container className="form-container shadow-dreamy" maxWidth="md">
 			<FormDiv referencia={formRefAñadirEmpresa} onSubmit={handlePostEmpresa}>
 				<FormH4 text="Añadir Empresa" />
 
@@ -170,20 +168,17 @@ export const AñadirEmpresa = () => {
 				/>
 
 				<Button
-					type="submit"
-					className={
-						loading
-							? "btn-principal submit mt-2 mb-2 btn-disabled"
-							: "btn-principal submit mt-2 mb-2"
-					}
-					disabled={loading ? true : false}
+					type="submit" 
+						variant="contained"
+						className="btn-principal submit"
+						fullWidth
+						size="medium" 
+						endIcon={loading ? <CircularProgress size={20} /> : null} 
+						disabled={loading}
 				>
-					{loading ? (
-						<AiOutlineLoading3Quarters className="loading-icon" />
-					) : (
-						"Enviar"
-					)}
+					Enviar
 				</Button>
+
 			</FormDiv>
 		</Container>
 	);

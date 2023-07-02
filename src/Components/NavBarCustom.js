@@ -145,7 +145,11 @@ export const NavBarCustom = () => {
 											</NavLink>
 										</NavDropdown.Item>
 									</NavDropdown>
-									<NavLink to="/vehiculos" className="nav-link">
+									<NavLink 
+										to="/vehiculos" 
+										className="nav-link"
+										onClick={handleCollapse}
+									>
 										Vehículos
 									</NavLink>
 								</>
