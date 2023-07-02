@@ -42,7 +42,7 @@ export const NavBarCustom = () => {
 		<Navbar
 			bg="dark"
 			expand="lg"
-			className="shadow-sm fixed-top"
+			className="shadow-sm fixed-top z-index-100"
 			variant="dark"
 		>
 			<Container className="mt-2 mb-1">
