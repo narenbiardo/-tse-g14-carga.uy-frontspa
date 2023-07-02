@@ -9,18 +9,19 @@ import { fti } from "../constants";
 import { FormDiv } from "../Utilities/FormDiv";
 import { FormInputText } from "../Utilities/FormInputText";
 import { FormInputNumber } from "../Utilities/FormInputNumber";
-import { FormH2 } from "../Utilities/FormH2";
 import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
-import { Button, Container } from "react-bootstrap";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Swal from "sweetalert2";
 import { animateScroll as scroll } from "react-scroll";
 import { useRef } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 
 export const AgregarVehiculo = () => {
@@ -136,7 +137,7 @@ export const AgregarVehiculo = () => {
 	}, []);
 
 	return (
-		<Container className="form-container shadow-dreamy">
+		<Container className="form-container shadow-dreamy" maxWidth="md">
 			<FormDiv
 				referencia={formRefAgregarVehiculo}
 				onSubmit={handlePostVehiculo}
@@ -147,6 +148,7 @@ export const AgregarVehiculo = () => {
 					htmlFor="matricula"
 					label="Matricula"
 					name="matricula"
+					required={true}
 					onChangeHandler={handleChangeAvf}
 					isValid={avf.matricula?.length > 0}
 					invalidText={"La matricula no puede estar vacia"}
@@ -189,6 +191,7 @@ export const AgregarVehiculo = () => {
 					htmlFor="modelo"
 					label="Modelo"
 					name="modelo"
+					required={true}
 					onChangeHandler={handleChangeAvf}
 					isValid={avf.modelo?.length > 0}
 					invalidText={"El modelo no puede estar vacío"}
@@ -273,20 +276,17 @@ export const AgregarVehiculo = () => {
 				/>
 
 				<Button
-					type="submit"
-					className={
-						loading
-							? "btn-principal submit mt-2 mb-2 btn-disabled"
-							: "btn-principal submit mt-2 mb-2"
-					}
-					disabled={loading ? true : false}
+					type="submit" 
+						variant="contained"
+						className="btn-principal submit"
+						fullWidth
+						size="medium" 
+						endIcon={loading ? <CircularProgress size={20} /> : null} 
+						disabled={loading}
 				>
-					{loading ? (
-						<AiOutlineLoading3Quarters className="loading-icon" />
-					) : (
-						"Enviar"
-					)}
+					Enviar
 				</Button>
+
 			</FormDiv>
 		</Container>
 	);

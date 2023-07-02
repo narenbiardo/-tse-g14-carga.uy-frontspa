@@ -95,6 +95,7 @@ export const EditarEmpresa = ({ empresa, handleEditEmpresa }) => {
 					htmlFor="nombreEmpresa"
 					label="Nombre"
 					name="nombreEmpresa"
+					required={true}
 					onChangeHandler={handleChangeEdto}
 					inputValue={edto.nombreEmpresa || ""}
 					isValid={edto.nroEmpresa !== ""}
@@ -121,6 +122,7 @@ export const EditarEmpresa = ({ empresa, handleEditEmpresa }) => {
 					htmlFor="calle"
 					label="Calle"
 					name="calle"
+					required={true}
 					onChangeHandler={handleChangeEdto}
 					inputValue={edto.direccionEmpresa.calle || ""}
 					isValid={edto.direccionEmpresa.calle !== ""}
@@ -135,20 +137,18 @@ export const EditarEmpresa = ({ empresa, handleEditEmpresa }) => {
 					name="km"
 					onChangeHandler={handleChangeEdto}
 					inputValue={edto.direccionEmpresa.km || ""}
-					isValid={edto.direccionEmpresa.km !== ""}
-					invalidText={"El kilómetro no puede ser vacío"}
+					isValid={true}
 					firstTime={edto.km}
 					handleFirstTime={handleFirstTimeInput}
 				/>
 
-				<FormInputNumber
+				<FormInputText
 					htmlFor="nroPuerta"
 					label="Número de puerta"
 					name="nroPuerta"
 					onChangeHandler={handleChangeEdto}
 					inputValue={edto.direccionEmpresa.nroPuerta || ""}
-					isValid={edto.direccionEmpresa.nroPuerta !== ""}
-					invalidText={"El número de puerta no puede ser vacío"}
+					isValid={true}
 					firstTime={firstTimeInput.nroPuerta}
 					handleFirstTime={handleFirstTimeInput}
 				/>

@@ -58,37 +58,37 @@ export const Perfil = () => {
             <MDBCard className="mb-4">
               <MDBCardBody>
                 <MDBRow>
-                  <MDBCol sm="3">
+                  <MDBCol >
                     <MDBCardText>Nombre</MDBCardText>
                   </MDBCol>
-                  <MDBCol sm="9" className="text-center">
+                  <MDBCol className="text-center">
                     <MDBCardText className="text-muted">{nombre}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
 								<MDBRow>
-                  <MDBCol sm="3">
+                  <MDBCol >
                     <MDBCardText>Apellido</MDBCardText>
                   </MDBCol>
-                  <MDBCol sm="9" className="text-center">
+                  <MDBCol className="text-center">
                     <MDBCardText className="text-muted">{apellido}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
                 <MDBRow>
-                  <MDBCol sm="3">
+                  <MDBCol >
                     <MDBCardText>Email</MDBCardText>
                   </MDBCol>
-                  <MDBCol sm="9" className="text-center">
+                  <MDBCol className="text-center">
                     <MDBCardText className="text-muted">{email}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
                 <MDBRow>
-                  <MDBCol sm="3">
+                  <MDBCol >
                     <MDBCardText>Telefono</MDBCardText>
                   </MDBCol>
-                  <MDBCol sm="9" className="text-center">
+                  <MDBCol className="text-center">
                     <MDBCardText className="text-muted">(+598) 098 342 435</MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -96,10 +96,10 @@ export const Perfil = () => {
 								{user === 1 && (
 									<>
 										<MDBRow>
-											<MDBCol sm="3">
+											<MDBCol >
 												<MDBCardText>Empresa</MDBCardText>
 											</MDBCol>
-											<MDBCol sm="9" className="text-center">
+											<MDBCol className="text-center">
 												<MDBCardText className="text-muted">{nroEmpresa}</MDBCardText>
 											</MDBCol>
 										</MDBRow>
@@ -107,20 +107,20 @@ export const Perfil = () => {
 									</>
 								)}
                 <MDBRow>
-                  <MDBCol sm="3">
+                  <MDBCol >
                     <MDBCardText>Cedula</MDBCardText>
                   </MDBCol>
-                  <MDBCol sm="9" className="text-center">
+                  <MDBCol className="text-center">
                     <MDBCardText className="text-muted">{cedula}</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
 
                 <MDBRow>
-                  <MDBCol sm="3">
+                  <MDBCol >
                     <MDBCardText>Direccion</MDBCardText>
                   </MDBCol>
-                  <MDBCol sm="9" className="text-center">
+                  <MDBCol className="text-center">
                     <MDBCardText className="text-muted">Av. Gonzalo Ramirez 3818</MDBCardText>
                   </MDBCol>
                 </MDBRow>
