@@ -356,6 +356,7 @@ export const ConsultarVehiculo = () => {
 								htmlFor="modelo"
 								label="Modelo"
 								name="modelo"
+								required={true}
 								onChangeHandler={handleChangeAvf}
 								inputValue= {avf.modelo}//{selectedItemData?.modelo || ""}
 								isValid={avf.modelo?.length > 0}

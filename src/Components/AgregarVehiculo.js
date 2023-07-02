@@ -148,6 +148,7 @@ export const AgregarVehiculo = () => {
 					htmlFor="matricula"
 					label="Matricula"
 					name="matricula"
+					required={true}
 					onChangeHandler={handleChangeAvf}
 					isValid={avf.matricula?.length > 0}
 					invalidText={"La matricula no puede estar vacia"}
@@ -190,6 +191,7 @@ export const AgregarVehiculo = () => {
 					htmlFor="modelo"
 					label="Modelo"
 					name="modelo"
+					required={true}
 					onChangeHandler={handleChangeAvf}
 					isValid={avf.modelo?.length > 0}
 					invalidText={"El modelo no puede estar vacío"}

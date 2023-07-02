@@ -105,6 +105,7 @@ export const AñadirEmpresa = () => {
 					htmlFor="nroEmpresa"
 					label="Número"
 					name="nroEmpresa"
+					required={true}
 					onChangeHandler={handleChangeAef}
 					isValid={aef.nroEmpresa?.length > 0}
 					invalidText={"El número no puede ser vacío"}
@@ -116,6 +117,7 @@ export const AñadirEmpresa = () => {
 					htmlFor="razonSocial"
 					label="Razón Social"
 					name="razonSocial"
+					required={true}
 					onChangeHandler={handleChangeAef}
 					isValid={aef.razonSocial?.length > 0}
 					invalidText={"La razón social no puede ser vacía"}
@@ -127,6 +129,7 @@ export const AñadirEmpresa = () => {
 					htmlFor="nombreEmpresa"
 					label="Nombre"
 					name="nombreEmpresa"
+					required={true}
 					onChangeHandler={handleChangeAef}
 					isValid={aef.nombreEmpresa?.length > 0}
 					invalidText={"El nombre no puede estar vacío"}
@@ -138,6 +141,7 @@ export const AñadirEmpresa = () => {
 					htmlFor="calle"
 					label="Calle"
 					name="calle"
+					required={true}
 					onChangeHandler={handleChangeDe}
 					isValid={de.calle?.length > 0}
 					invalidText={"La calle no puede ser vacía"}
@@ -150,8 +154,7 @@ export const AñadirEmpresa = () => {
 					label="Número de puerta"
 					name="nroPuerta"
 					onChangeHandler={handleChangeDe}
-					isValid={de.nroPuerta?.length > 0}
-					invalidText={"El número de peurta no puede estar vacío"}
+					isValid={true}
 					firstTime={firstTimeInput.nroPuerta}
 					handleFirstTime={handleFirstTimeInput}
 				/>
@@ -161,8 +164,7 @@ export const AñadirEmpresa = () => {
 					label="Km"
 					name="km"
 					onChangeHandler={handleChangeDe}
-					isValid={de.km?.length > 0}
-					invalidText={"El Km no ser vacío"}
+					isValid={true}
 					firstTime={firstTimeInput.km}
 					handleFirstTime={handleFirstTimeInput}
 				/>

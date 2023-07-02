@@ -205,6 +205,7 @@ export const IngresarGuiaDeViaje = () => {
 					htmlFor="calleOrigen"
 					label="Calle"
 					name="calleOrigen"
+					required={true}
 					onChangeHandler={handleChangeDtddpo}
 					isValid={dtddpo.calle?.length > 0}
 					invalidText={"La calle del origen no puede ser vacía"}
@@ -217,8 +218,7 @@ export const IngresarGuiaDeViaje = () => {
 					label="Número de Puerta"
 					name="nroPuertaOrigen"
 					onChangeHandler={handleChangeDtddpo}
-					isValid={dtddpo.nroPuerta?.length > 0}
-					invalidText={"El número de puerta del origen no puede ser vacío"}
+					isValid={true}
 					firstTime={firstTimeInput.nroPuertaOrigen}
 					handleFirstTime={handleFirstTimeInput}
 				/>
@@ -228,8 +228,7 @@ export const IngresarGuiaDeViaje = () => {
 					label="Kilómetro"
 					name="kmOrigen"
 					onChangeHandler={handleChangeDtddpo}
-					isValid={dtddpo.km?.length > 0}
-					invalidText={"El kilómetro del origen no puede ser vacío"}
+					isValid={true}
 					firstTime={firstTimeInput.kmOrigen}
 					handleFirstTime={handleFirstTimeInput}
 				/>
@@ -240,6 +239,7 @@ export const IngresarGuiaDeViaje = () => {
 					htmlFor="calleDestino"
 					label="Calle"
 					name="calleDestino"
+					required={true}
 					onChangeHandler={handleChangeDtddpd}
 					isValid={dtddpd.calle?.length > 0}
 					invalidText={"La calle del destino no puede ser vacía"}
@@ -252,8 +252,7 @@ export const IngresarGuiaDeViaje = () => {
 					label="Número de Puerta"
 					name="nroPuertaDestino"
 					onChangeHandler={handleChangeDtddpd}
-					isValid={dtddpd.nroPuerta?.length > 0}
-					invalidText={"El número de puerta del destino no puede ser vacío"}
+					isValid={true}
 					firstTime={firstTimeInput.nroPuertaDestino}
 					handleFirstTime={handleFirstTimeInput}
 				/>
@@ -263,8 +262,7 @@ export const IngresarGuiaDeViaje = () => {
 					label="Kilómetro"
 					name="kmDestino"
 					onChangeHandler={handleChangeDtddpd}
-					isValid={dtddpd.km?.length > 0}
-					invalidText={"El kilómetro del destino no puede ser vacío"}
+					isValid={true}
 					firstTime={firstTimeInput.kmDestino}
 					handleFirstTime={handleFirstTimeInput}
 				/>
