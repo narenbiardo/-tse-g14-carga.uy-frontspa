@@ -144,7 +144,7 @@ function App() {
 								}
 							/>
 							<Route
-								path="AñadirEmpresa"
+								path="/añadirEmpresa"
 								element={
 									<ProtectedRouteFuncionario>
 										<AñadirEmpresa />
@@ -152,7 +152,7 @@ function App() {
 								}
 							/>
 							<Route
-								path="ConsultarEmpresa"
+								path="/consultarEmpresa"
 								element={
 									<ProtectedRouteFuncionario>
 										<ConsultarEmpresa />
@@ -160,10 +160,18 @@ function App() {
 								}
 							/>
 							<Route
-								path="vehiculos"
+								path="/vehiculos"
 								element={
 									<ProtectedRouteFuncionario>
 										<PermisosVehiculos />
+									</ProtectedRouteFuncionario>
+								}
+							/>
+							<Route
+								path="/consultarPesajesViajes"
+								element={
+									<ProtectedRouteFuncionario>
+										<></>
 									</ProtectedRouteFuncionario>
 								}
 							/>
