@@ -6,20 +6,21 @@ import { RESTEndpoints } from "../Services/RestService";
 import { IngresarGuiaViajeForm, DtDireccionPostal } from "../classes";
 import { ftiigv } from "../constants";
 import { FormDiv } from "../Utilities/FormDiv";
-import { FormH2 } from "../Utilities/FormH2";
 import { FormInputNumber } from "../Utilities/FormInputNumber";
 import { FormInputDate } from "../Utilities/FormInputDate";
 import { FormInputText } from "../Utilities/FormInputText";
 import { FormH4 } from "../Utilities/FromH4";
 import { FormInputDiv } from "../Utilities/FormInputDiv";
 import "react-toastify/dist/ReactToastify.css";
-import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { useRef } from "react";
 import { animateScroll as scroll } from "react-scroll";
 import Swal from "sweetalert2";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 
 export const IngresarGuiaDeViaje = () => {
@@ -140,7 +141,7 @@ export const IngresarGuiaDeViaje = () => {
 	}, []);
 
 	return (
-		<Container className="form-container shadow-dreamy">
+		<Container className="form-container shadow-dreamy" maxWidth="md">
 			<FormDiv referencia={formRef} onSubmit={handlePostGuiaDeViaje}>
 				<FormH4 text="Ingresar Guía de Viaje" />
 
@@ -204,6 +205,7 @@ export const IngresarGuiaDeViaje = () => {
 					htmlFor="calleOrigen"
 					label="Calle"
 					name="calleOrigen"
+					required={true}
 					onChangeHandler={handleChangeDtddpo}
 					isValid={dtddpo.calle?.length > 0}
 					invalidText={"La calle del origen no puede ser vacía"}
@@ -216,8 +218,7 @@ export const IngresarGuiaDeViaje = () => {
 					label="Número de Puerta"
 					name="nroPuertaOrigen"
 					onChangeHandler={handleChangeDtddpo}
-					isValid={dtddpo.nroPuerta?.length > 0}
-					invalidText={"El número de puerta del origen no puede ser vacío"}
+					isValid={true}
 					firstTime={firstTimeInput.nroPuertaOrigen}
 					handleFirstTime={handleFirstTimeInput}
 				/>
@@ -227,8 +228,7 @@ export const IngresarGuiaDeViaje = () => {
 					label="Kilómetro"
 					name="kmOrigen"
 					onChangeHandler={handleChangeDtddpo}
-					isValid={dtddpo.km?.length > 0}
-					invalidText={"El kilómetro del origen no puede ser vacío"}
+					isValid={true}
 					firstTime={firstTimeInput.kmOrigen}
 					handleFirstTime={handleFirstTimeInput}
 				/>
@@ -239,6 +239,7 @@ export const IngresarGuiaDeViaje = () => {
 					htmlFor="calleDestino"
 					label="Calle"
 					name="calleDestino"
+					required={true}
 					onChangeHandler={handleChangeDtddpd}
 					isValid={dtddpd.calle?.length > 0}
 					invalidText={"La calle del destino no puede ser vacía"}
@@ -251,8 +252,7 @@ export const IngresarGuiaDeViaje = () => {
 					label="Número de Puerta"
 					name="nroPuertaDestino"
 					onChangeHandler={handleChangeDtddpd}
-					isValid={dtddpd.nroPuerta?.length > 0}
-					invalidText={"El número de puerta del destino no puede ser vacío"}
+					isValid={true}
 					firstTime={firstTimeInput.nroPuertaDestino}
 					handleFirstTime={handleFirstTimeInput}
 				/>
@@ -262,26 +262,21 @@ export const IngresarGuiaDeViaje = () => {
 					label="Kilómetro"
 					name="kmDestino"
 					onChangeHandler={handleChangeDtddpd}
-					isValid={dtddpd.km?.length > 0}
-					invalidText={"El kilómetro del destino no puede ser vacío"}
+					isValid={true}
 					firstTime={firstTimeInput.kmDestino}
 					handleFirstTime={handleFirstTimeInput}
 				/>
 
 				<Button
-					type="submit"
-					className={
-						loading
-							? "btn-principal submit mt-2 mb-2 btn-disabled"
-							: "btn-principal submit mt-2 mb-2"
-					}
-					disabled={loading ? true : false}
+					type="submit" 
+						variant="contained"
+						className="btn-principal submit"
+						fullWidth
+						size="medium" 
+						endIcon={loading ? <CircularProgress size={20} /> : null} 
+						disabled={loading}
 				>
-					{loading ? (
-						<AiOutlineLoading3Quarters className="loading-icon" />
-					) : (
-						"Ingresar"
-					)}
+					Ingresar
 				</Button>
 			</FormDiv>
 		</Container>

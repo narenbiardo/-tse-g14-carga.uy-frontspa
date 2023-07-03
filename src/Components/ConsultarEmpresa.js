@@ -310,6 +310,7 @@ export const ConsultarEmpresa = () => {
 									htmlFor="nombreEmpresa"
 									label="Nombre"
 									name="nombreEmpresa"
+									required={true}
 									onChangeHandler={handleChangeEf}
 									inputValue={ef.nombreEmpresa}
 									isValid={ef.nombreEmpresa?.length > 0}
@@ -322,6 +323,7 @@ export const ConsultarEmpresa = () => {
 									htmlFor="razonSocial"
 									label="Razón Social"
 									name="razonSocial"
+									required={true}
 									onChangeHandler={handleChangeEf}
 									inputValue={ef.razonSocial}
 									isValid={ef.razonSocial?.length > 0}
@@ -336,6 +338,7 @@ export const ConsultarEmpresa = () => {
 									htmlFor="calle"
 									label="Calle"
 									name="calle"
+									required={true}
 									onChangeHandler={handleChangeDireccion}
 									inputValue={ef.direccionEmpresa.calle}
 									isValid={ef.direccionEmpresa.calle?.length > 0}
@@ -350,8 +353,7 @@ export const ConsultarEmpresa = () => {
 									name="km"
 									onChangeHandler={handleChangeDireccion}
 									inputValue={ef.direccionEmpresa.km}
-									isValid={ef.direccionEmpresa.km?.length > 0}
-									invalidText={"El Km no puede ser vacío"}
+									isValid={true}
 									//firstTime={firstTimeInput.modelo}
 									handleFirstTime={handleFirstTimeInput}
 								/>
@@ -362,8 +364,7 @@ export const ConsultarEmpresa = () => {
 									name="nroPuerta"
 									onChangeHandler={handleChangeDireccion}
 									inputValue={ef.direccionEmpresa.nroPuerta}
-									isValid={ef.direccionEmpresa.nroPuerta?.length > 0}
-									invalidText={"El Nº Puerta no puede ser vacío"}
+									isValid={true}
 									//firstTime={firstTimeInput.modelo}
 									handleFirstTime={handleFirstTimeInput}
 								/>

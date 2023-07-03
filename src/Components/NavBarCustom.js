@@ -13,17 +13,7 @@ import Avatar from "@mui/material/Avatar";
 export const NavBarCustom = () => {
 	const { isAuthenticated } = useAuth();
 	const { user } = useAuth();
-	const [dropdownHovered, setDropdownHovered] = useState(null);
 	const [navLinkHovered, setNavLinkHovered] = useState(null);
-	const [isOpen, setIsOpen] = useState(false);
-
-	const openDialog = () => {
-		setIsOpen(true);
-	};
-
-	const closeDialog = () => {
-		setIsOpen(false);
-	};
 
 	const navigate = useNavigate();
 
@@ -39,11 +29,20 @@ export const NavBarCustom = () => {
 		setNavLinkHovered(null);
 	};
 
+	const handleCollapse = () => {
+		console.log("handleCollapse");
+		var nav = document.getElementById("basic-navbar-nav");
+		var btn = document.getElementById("navbarBtn");
+		nav.classList.remove("show");
+		btn.classList.add("collapsed");
+	  };
+
+
 	return (
 		<Navbar
 			bg="dark"
 			expand="lg"
-			className="shadow-sm fixed-top"
+			className="shadow-sm fixed-top z-index-100"
 			variant="dark"
 		>
 			<Container className="mt-2 mb-1">
@@ -54,7 +53,7 @@ export const NavBarCustom = () => {
 				>
 					<SvgLogo color={mainColor} dataName="Layer 1" />
 				</Navbar.Brand>
-				<Navbar.Toggle aria-controls="basic-navbar-nav" />
+				<Navbar.Toggle aria-controls="basic-navbar-nav" id="navbarBtn"/>
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="me-auto">
 						{isAuthenticated &&
@@ -64,9 +63,10 @@ export const NavBarCustom = () => {
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/ingresarGuiaDeViaje"
-												className="nav-link item ps-2 px-md-2"
+												className="nav-link ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(0)}
 												onMouseLeave={handleNavLinkLeave}
+												onClick={handleCollapse}
 											>
 												Ingresar Guía de Viaje
 											</NavLink>
@@ -75,9 +75,10 @@ export const NavBarCustom = () => {
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/asignarGuiaDeViaje"
-												className="nav-link item ps-2 px-md-2"
+												className="nav-link ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(1)}
 												onMouseLeave={handleNavLinkLeave}
+												onClick={handleCollapse}
 											>
 												Asignar Guía de Viaje
 											</NavLink>
@@ -87,9 +88,10 @@ export const NavBarCustom = () => {
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/agregarVehiculo"
-												className="nav-link item ps-2 px-md-2"
+												className="nav-link ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(2)}
 												onMouseLeave={handleNavLinkLeave}
+												onClick={handleCollapse}
 											>
 												Agregar Vehiculo
 											</NavLink>
@@ -98,15 +100,20 @@ export const NavBarCustom = () => {
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/consultarVehiculos"
-												className="nav-link item ps-2 px-md-2"
+												className="nav-link ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(3)}
 												onMouseLeave={handleNavLinkLeave}
+												onClick={handleCollapse}
 											>
 												Consultar Vehiculo
 											</NavLink>
 										</NavDropdown.Item>
 									</NavDropdown>
-									<NavLink to="/empresa" className="nav-link">
+									<NavLink 
+										to="/empresa" 
+										className="nav-link" 
+										onClick={handleCollapse}
+									>
 										Empresa
 									</NavLink>
 								</>
@@ -118,9 +125,10 @@ export const NavBarCustom = () => {
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/añadirEmpresa"
-												className="nav-link item ps-2 px-md-2"
+												className="nav-link ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(5)}
 												onMouseLeave={handleNavLinkLeave}
+												onClick={handleCollapse}
 											>
 												Añadir Empresa
 											</NavLink>
@@ -128,23 +136,28 @@ export const NavBarCustom = () => {
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
 												to="/ConsultarEmpresa"
-												className="nav-link item ps-2 px-md-2"
+												className="nav-link ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(6)}
 												onMouseLeave={handleNavLinkLeave}
+												onClick={handleCollapse}
 											>
 												Consultar Empresa
 											</NavLink>
 										</NavDropdown.Item>
 									</NavDropdown>
-									<NavLink to="/vehiculos" className="nav-link">
+									<NavLink 
+										to="/vehiculos" 
+										className="nav-link"
+										onClick={handleCollapse}
+									>
 										Vehículos
 									</NavLink>
 								</>
 							)}
 					</Nav>
-					<Nav className="ms-auto">
-						{!isAuthenticated && <Login />}
-						{isAuthenticated && (user === 1 || user === 2) && (
+					<Nav className="ms-auto">					
+						{/* {!isAuthenticated && <Login />} */}
+						{isAuthenticated && (user === 1 || user === 2) ? (
 							<>
 								<NavDropdown
 									title={`Bienvenido, ${
@@ -156,9 +169,10 @@ export const NavBarCustom = () => {
 									<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 										<NavLink
 											to="/perfil"
-											className="nav-link item ps-2 px-md-2"
+											className="nav-link ps-2 px-md-2"
 											onMouseEnter={() => handleNavLinkEnter(0)}
 											onMouseLeave={handleNavLinkLeave}
+											onClick={handleCollapse}
 										>
 											Perfil
 										</NavLink>
@@ -175,6 +189,8 @@ export const NavBarCustom = () => {
 									</Avatar>
 								</div>
 							</>
+							) : (
+								<Login />
 						)}
 					</Nav>
 				</Navbar.Collapse>

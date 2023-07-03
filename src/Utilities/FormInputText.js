@@ -11,6 +11,7 @@ export const FormInputText = ({
 	invalidText,
 	firstTime,
 	handleFirstTime,
+	required
 }) => {
 	return (
 		<FormInputDiv>
@@ -22,7 +23,7 @@ export const FormInputText = ({
 				value={inputValue}
 				type="text"
 				onChange={onChangeHandler}
-				required
+				required={required}
 				onBlur={handleFirstTime}
 				margin="dense"
 				size="small"

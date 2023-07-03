@@ -156,7 +156,7 @@ export const AsignarGuiaDeViaje = () => {
 				})
 				.catch(error => {
 					let errorMessage =
-						"Ha ocurrido un error al ingresar el vehiculo, vuelva a intentarlo";
+						"Ha ocurrido un error al ingresar la guia, vuelva a intentarlo";
 
 					if (error.response && error.response.data) {
 						errorMessage = `${error.response.data}`;
@@ -167,6 +167,7 @@ export const AsignarGuiaDeViaje = () => {
 						title: "Error",
 						icon: "error",
 						confirmButtonText: "Aceptar",
+
 					});
 					console.log(error);
 					setLoading(false);
@@ -259,11 +260,10 @@ export const AsignarGuiaDeViaje = () => {
 					onClose={handleCloseDialog}
 					maxWidth="md"
 					fullWidth
-					className="z-index-0"
+					className="z-index-200"
 					classes={{ paper: "border-14" }}
 				>
 					<DialogTitle className="dialog-title">
-						{" "}
 						Asignar Guia de Viaje
 					</DialogTitle>
 					<DialogContent className="dialog">

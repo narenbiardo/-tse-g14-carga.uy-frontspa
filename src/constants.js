@@ -8,8 +8,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 
-//export const serverURL = "https://carga-uy-back.web.elasticloud.uy/";
-export const serverURL = "http://localhost:8080/";
+export const serverURL = "https://carga-uy-back.web.elasticloud.uy/";
+//export const serverURL = "http://localhost:8080/";
 
 export const mainColor = "#16b7b9";
 export const dark = "#212529";
@@ -60,25 +60,25 @@ export const ftiaef = new FirstTimeInputAñadirEmpresaForm( //used to check if t
 );
 
 export const columnsVehiculos = [
-	{ field: "matricula", headerName: "Matricula", flex: 1 },
-	{ field: "marca", headerName: "Marca", flex: 1 },
-	{ field: "modelo", headerName: "Modelo", flex: 1 },
-	{ field: "capacidad", headerName: "Capacidad", flex: 1 },
+	{ field: "matricula", headerName: "Matricula", width: 110 },
+	{ field: "marca", headerName: "Marca", width: 110 },
+	{ field: "modelo", headerName: "Modelo", width: 110 },
+	{ field: "capacidad", headerName: "Capacidad", width: 110 },
 ];
 
 export const columnsGuiasDeViaje = [
-	{ field: "id", headerName: "Id", flex: 1 },
-	{ field: "rubro", headerName: "Rubro", flex: 1 },
-	{ field: "origen", headerName: "Origen", flex: 1 },
-	{ field: "destino", headerName: "Destino", flex: 1 },
-	{ field: "fecha", headerName: "Fecha", flex: 1 },
-	{ field: "hora", headerName: "Hora", flex: 1 },
-	{ field: "estadoViaje", headerName: "Estado", flex: 1 },
-	{ field: "volumenCarga", headerName: "Volumen Carga", flex: 1 },
+	{ field: "id", headerName: "Id", width: 110 },
+	{ field: "rubro", headerName: "Rubro", width: 150 },
+	{ field: "origen", headerName: "Origen", width: 140 },
+	{ field: "destino", headerName: "Destino", width: 140 },
+	{ field: "fecha", headerName: "Fecha", width: 110 },
+	{ field: "hora", headerName: "Hora", width: 110 },
+	{ field: "estadoViaje", headerName: "Estado", width: 110 },
+	{ field: "volumenCarga", headerName: "Volumen Carga", width: 110 },
 	{
 		field: "asignar",
 		headerName: "",
-		flex: 1,
+		width: 110,
 		renderCell: params => (
 			<Button variant="text" className="asignar-btn">
 				ASIGNAR
@@ -88,11 +88,11 @@ export const columnsGuiasDeViaje = [
 ];
 
 export const columnsChoferes = [
-	{ field: "nombre", headerName: "Nombre", flex: 1 },
-	{ field: "apellido", headerName: "Apellido", flex: 1 },
-	{ field: "cedula", headerName: "Cedula", flex: 1 },
-	{ field: "email", headerName: "Email", flex: 1 },
-	{ field: "vencimientoLicencia", headerName: "Venc. Licencia", flex: 1 },
+	{ field: "nombre", headerName: "Nombre", width: 110 },
+	{ field: "apellido", headerName: "Apellido", width: 110 },
+	{ field: "cedula", headerName: "Cedula", width: 110 },
+	{ field: "email", headerName: "Email", width: 110 },
+	{ field: "vencimientoLicencia", headerName: "Venc. Licencia", width: 110 },
 ];
 
 export const columnsVehiculosFull = [

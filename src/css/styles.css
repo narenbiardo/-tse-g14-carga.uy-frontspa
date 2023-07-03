@@ -11,15 +11,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #16b7b9;
+	background-color: #16b7b9 !important;
 	border: none;
 	border-radius: 10px;
 	min-width: 100px;
 	height: 35px;
-	font-size: medium;
+	font-size: medium !important;
 	color: white;
 	font-weight: 400;
-	font-family: quicksand, sans-serif;
+	font-family: quicksand, sans-serif !important;
 	cursor: pointer;
 }
 
@@ -33,12 +33,7 @@
 }
 
 .btn-principal.submit {
-	padding: 0;
-	width: 400px;
-	font-size: 20px;
-	height: 40px;
-	font-weight: 500;
-	margin-top: 20px !important;
+	margin-top: 5px !important;
 }
 .btn-disabled {
 	background-color: #cfcfcf !important;
@@ -154,7 +149,8 @@
 
   /* width */
 ::-webkit-scrollbar {
-	width: 7px;
+	width: 8px;
+	height: 8px;
   }
   
   /* Track */
@@ -202,8 +198,14 @@
 	font-family: quicksand, sans-serif !important;
 }
 
-.z-index-0{
-	z-index: 0 !important;
+.z-index-100{
+	z-index: 100 !important;
+}
+.z-index-200{
+	z-index: 200 !important;
+}
+.z-index-300{
+	z-index: 300 !important;
 }
 
 .shadow-dreamy {
@@ -268,9 +270,13 @@
 	font-weight: 400;
 }
 
+
 .nav-link {
 	color: white !important;
 	font-family: quicksand, sans-serif !important;
+	background-color: #212529 !important;
+	border: none;
+	
 }
 
 .nav-link:hover {
@@ -283,6 +289,15 @@
 
 .nav-link.item:hover{
 	background-color: #ebebeb;
+}
+
+.dropdown-menu{
+	--bs-dropdown-bg: #212529;
+	border: none;
+}
+
+.dropdown-menu .active{
+	color: #cacacaef !important;
 }
 
 .striped-row-even {
@@ -299,7 +314,9 @@
  .edit-icon{
 	cursor: pointer;
 	color: #212529;
-	
+ }
+ .edit-icon.empresa{
+	margin: 41px 0px 0px 5px;
  }
 
  .edit-icon:hover{

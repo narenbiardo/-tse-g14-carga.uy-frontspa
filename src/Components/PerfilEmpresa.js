@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { RESTEndpoints } from "../Services/RestService";
 import { EmpresaDto, DtDireccionEmpresa } from "../classes";
-import { Container } from "react-bootstrap";
+import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import { EditarEmpresa } from "./EditarEmpresa";
 import {
@@ -84,19 +84,19 @@ export const PerfilEmpresa = () => {
 	}, [loading]);
 
 	return (
-		<Container className="form-container shadow-dreamy align-items-start">
+		<Container className="form-container shadow-dreamy" maxWidth="md">
 			<div className="d-inline-flex">
 				<FormH4 text={"Empresa"} />
-				<EditIcon onClick={() => setIsOpen(true)} className="mt-5 mx-3 edit-icon"/>
+				<EditIcon onClick={() => setIsOpen(true)} className="edit-icon empresa"/>
 			</div>
 			<MDBCol lg="12">
 				<MDBCard className="mb-4">
 					<MDBCardBody>
 						<MDBRow>
-							<MDBCol sm="3">
+							<MDBCol>
 								<MDBCardText>Número</MDBCardText>
 							</MDBCol>
-							<MDBCol sm="9" className="text-center">
+							<MDBCol className="text-center">
 								<MDBCardText className="text-muted">
 									{empresa.nroEmpresa}
 								</MDBCardText>
@@ -104,10 +104,10 @@ export const PerfilEmpresa = () => {
 						</MDBRow>
 						<hr />
 						<MDBRow>
-							<MDBCol sm="3">
+							<MDBCol>
 								<MDBCardText>Nombre</MDBCardText>
 							</MDBCol>
-							<MDBCol sm="9" className="text-center">
+							<MDBCol className="text-center">
 								<MDBCardText className="text-muted">
 									{empresa.nombreEmpresa}
 								</MDBCardText>
@@ -115,10 +115,10 @@ export const PerfilEmpresa = () => {
 						</MDBRow>
 						<hr />
 						<MDBRow>
-							<MDBCol sm="3">
+							<MDBCol>
 								<MDBCardText>Razón social</MDBCardText>
 							</MDBCol>
-							<MDBCol sm="9" className="text-center">
+							<MDBCol className="text-center">
 								<MDBCardText className="text-muted">
 									{empresa.razonSocial}
 								</MDBCardText>
@@ -126,10 +126,10 @@ export const PerfilEmpresa = () => {
 						</MDBRow>
 						<hr />
 						<MDBRow>
-							<MDBCol sm="3">
+							<MDBCol>
 								<MDBCardText>Calle</MDBCardText>
 							</MDBCol>
-							<MDBCol sm="9" className="text-center">
+							<MDBCol className="text-center">
 								<MDBCardText className="text-muted">
 									{empresa.direccionEmpresa.calle}
 								</MDBCardText>
@@ -137,10 +137,10 @@ export const PerfilEmpresa = () => {
 						</MDBRow>
 						<hr />
 						<MDBRow>
-							<MDBCol sm="3">
+							<MDBCol>
 								<MDBCardText>Kilómetro</MDBCardText>
 							</MDBCol>
-							<MDBCol sm="9" className="text-center">
+							<MDBCol className="text-center">
 								<MDBCardText className="text-muted">
 									{empresa.direccionEmpresa.km}
 								</MDBCardText>
@@ -148,10 +148,10 @@ export const PerfilEmpresa = () => {
 						</MDBRow>
 						<hr />
 						<MDBRow>
-							<MDBCol sm="3">
+							<MDBCol>
 								<MDBCardText>Número de puerta</MDBCardText>
 							</MDBCol>
-							<MDBCol sm="9" className="text-center">
+							<MDBCol className="text-center">
 								<MDBCardText className="text-muted">
 									{empresa.direccionEmpresa.nroPuerta}
 								</MDBCardText>
