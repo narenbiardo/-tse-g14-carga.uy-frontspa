@@ -72,8 +72,8 @@ export const AsignarGuiaDeViaje = () => {
 					gdv.push({
 						id: guia.idGuiaViaje,
 						rubro: guia.rubro.nombre,
-						origen: `${guia.origen.calle} ${guia.origen.nroPuerta}, km ${guia.origen.km}`,
-						destino: `${guia.destino.calle} ${guia.destino.nroPuerta}, km ${guia.destino.km} `,
+						origen: `${guia.origen.calle} ${guia.origen.nroPuerta ?? ""} ${guia.destino.km !== undefined ? ", km " + guia.destino.km : ""}`,
+						destino: `${guia.destino.calle} ${guia.destino.nroPuerta ?? ""} ${guia.destino.km !== undefined ? ", km " + guia.destino.km : ""} `,
 						fecha: new Date(guia.fechaHora).toLocaleDateString(),
 						hora: new Date(guia.fechaHora).toLocaleTimeString(),
 						estadoViaje: guia.estadoViaje,
