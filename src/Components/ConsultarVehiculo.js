@@ -128,8 +128,8 @@ export const ConsultarVehiculo = () => {
 							vehiculo.matricula,
 							vehiculo.marcaVehiculo.nombre,
 							vehiculo.modelo,
-							vehiculo.capacidad.toString(),
 							vehiculo.peso.toString(),
+							vehiculo.capacidad.toString(),
 							permisoCirculacion,
 							vehiculo.vencimientoITV
 						);
