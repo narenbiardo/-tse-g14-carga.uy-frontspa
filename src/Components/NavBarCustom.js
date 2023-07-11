@@ -35,8 +35,7 @@ export const NavBarCustom = () => {
 		var btn = document.getElementById("navbarBtn");
 		nav.classList.remove("show");
 		btn.classList.add("collapsed");
-	  };
-
+	};
 
 	return (
 		<Navbar
@@ -53,7 +52,7 @@ export const NavBarCustom = () => {
 				>
 					<SvgLogo color={mainColor} dataName="Layer 1" />
 				</Navbar.Brand>
-				<Navbar.Toggle aria-controls="basic-navbar-nav" id="navbarBtn"/>
+				<Navbar.Toggle aria-controls="basic-navbar-nav" id="navbarBtn" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="me-auto">
 						{isAuthenticated &&
@@ -109,9 +108,9 @@ export const NavBarCustom = () => {
 											</NavLink>
 										</NavDropdown.Item>
 									</NavDropdown>
-									<NavLink 
-										to="/empresa" 
-										className="nav-link" 
+									<NavLink
+										to="/empresa"
+										className="nav-link"
 										onClick={handleCollapse}
 									>
 										Empresa
@@ -135,7 +134,7 @@ export const NavBarCustom = () => {
 										</NavDropdown.Item>
 										<NavDropdown.Item className="nav-link item ps-2 px-md-2">
 											<NavLink
-												to="/ConsultarEmpresa"
+												to="/consultarEmpresa"
 												className="nav-link ps-2 px-md-2"
 												onMouseEnter={() => handleNavLinkEnter(6)}
 												onMouseLeave={handleNavLinkLeave}
@@ -145,17 +144,24 @@ export const NavBarCustom = () => {
 											</NavLink>
 										</NavDropdown.Item>
 									</NavDropdown>
-									<NavLink 
-										to="/vehiculos" 
+									<NavLink
+										to="/vehiculos"
 										className="nav-link"
 										onClick={handleCollapse}
 									>
 										Vehículos
 									</NavLink>
+									<NavLink
+										to="/consultarPesajesViajes"
+										className="nav-link"
+										onClick={handleCollapse}
+									>
+										Viajes
+									</NavLink>
 								</>
 							)}
 					</Nav>
-					<Nav className="ms-auto">					
+					<Nav className="ms-auto">
 						{/* {!isAuthenticated && <Login />} */}
 						{isAuthenticated && (user === 1 || user === 2) ? (
 							<>
@@ -189,8 +195,8 @@ export const NavBarCustom = () => {
 									</Avatar>
 								</div>
 							</>
-							) : (
-								<Login />
+						) : (
+							<Login />
 						)}
 					</Nav>
 				</Navbar.Collapse>

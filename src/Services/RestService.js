@@ -56,6 +56,10 @@ export const RESTEndpoints = {
 		/*NEW*/ fiscalizacion: serverURL + "api/funcionarioService/fiscalizacion",
 		/*NEW*/ modificarVencimientoITV:
 			serverURL + "api/funcionarioService/modificarVencimientoITV/",
+		/*NEW*/ monitoreoViajes:
+			serverURL + "api/funcionarioService/monitoreoViajes",
+		/*NEW*/ monitoreoPesajes:
+			serverURL + "api/funcionarioService/monitoreoPesajes/",
 	},
 };
 
