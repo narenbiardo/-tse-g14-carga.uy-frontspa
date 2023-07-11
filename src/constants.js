@@ -6,6 +6,7 @@ import {
 } from "./classes";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import Button from "@mui/material/Button";
 
 export const serverURL = "https://carga-uy-back.web.elasticloud.uy/";
@@ -210,7 +211,7 @@ export const columnsViajes = [
 		headerName: "",
 		width: 8,
 		renderCell: params => {
-			return <EditIcon className="edit-icon" />;
+			return <VisibilityIcon className="edit-icon" />;
 		},
 	},
 ];
