@@ -199,6 +199,28 @@ export const columnsEmpresasFull = [
 	},
 ];
 
+export const columnsViajes = [
+	{ field: "id", headerName: "Id", width: 50 },
+	{ field: "choferCedula", headerName: "CI Chofer", width: 100 },
+	{ field: "matriculaVehiculo", headerName: "Matricula V.", width: 100 },
+	{ field: "fechaHoraInicio", headerName: "Fecha Ini.", width: 150 },
+	{ field: "fechaHoraFin", headerName: "Fecha Fin", width: 150 },
+	{
+		field: "edit",
+		headerName: "",
+		width: 8,
+		renderCell: params => {
+			return <EditIcon className="edit-icon" />;
+		},
+	},
+];
+
+export const columnsPesajes = [
+	{ field: "id", headerName: "Id", width: 50 },
+	{ field: "fecha", headerName: "Fecha", width: 150 },
+	{ field: "peso", headerName: "Peso", width: 200 },
+];
+
 /*
 const permisoCirculacion = new DtPermisoNacionalCirculacion(
 	vehiculo.permisoCirculacion.numero,

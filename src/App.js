@@ -28,6 +28,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { ConsultarEmpresa } from "./Components/ConsultarEmpresa";
+import { ConsultarPesajesViajes } from "./Components/ConsultarPesajesViajes";
 
 axiosHeadersAuth();
 axiosHeadersAccept();
@@ -171,7 +172,7 @@ function App() {
 								path="/consultarPesajesViajes"
 								element={
 									<ProtectedRouteFuncionario>
-										<></>
+										<ConsultarPesajesViajes />
 									</ProtectedRouteFuncionario>
 								}
 							/>
